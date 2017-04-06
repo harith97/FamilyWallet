@@ -2,7 +2,7 @@ package ccpe001.familywallet;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
-
+/*this is  family wallet project*/
 public class MainActivity extends AppCompatActivity {
 
     // Used to load the 'native-lib' library on application startup.
