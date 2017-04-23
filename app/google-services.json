@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "30963101489",
+    "firebase_url": "https://familywallet-b45b7.firebaseio.com",
+    "project_id": "familywallet-b45b7",
+    "storage_bucket": "familywallet-b45b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30963101489:android:f16c3437fa216361",
+        "android_client_info": {
+          "package_name": "ccpe001.familywallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30963101489-scq2a25jbclu28nf7pp0bv3m21ugpdsr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ccpe001.familywallet",
+            "certificate_hash": "82abb7e35e89a64d43aec05eeaec0d110cd70735"
+          }
+        },
+        {
+          "client_id": "30963101489-kh3143r9nn8kr4jvmdsa7mo8nraa9mvg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgL78M1xWaM2duoeEGkx7yGcleKfI4f9k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30963101489-kh3143r9nn8kr4jvmdsa7mo8nraa9mvg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
