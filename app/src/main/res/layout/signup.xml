@@ -1,7 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent" android:weightSum="1">
 
+    <EditText
+            android:hint="Email Address"
+            android:drawableStart="@mipmap/xhdpi"
+            android:drawablePadding="15px"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/emailTxt"/>
+
+    <EditText
+            android:hint="Password"
+            android:drawableStart="@mipmap/xhdpi"
+            android:drawablePadding="15px"
+            android:inputType="textPassword"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/passwordTxt"/>
+
+
+    <Button
+            android:text="Sign up via Email"
+            android:gravity="center_vertical"
+            android:drawablePadding="90px"
+            android:background="@drawable/roundbutton"
+            android:clickable="false"
+            android:layout_width="match_parent"
+            android:textAllCaps="false"
+            android:textAlignment="center"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+
+            android:layout_marginBottom="20px"
+
+            android:layout_height="wrap_content" android:id="@+id/signupBtn"/>
+
+    <Button
+            android:text="Sign up via Google+"
+            android:background="@drawable/roundbutton"
+            android:drawableLeft="@mipmap/gxxxdhdpi"
+            android:gravity="center_vertical"
+            android:textAlignment="center"
+
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:layout_width="match_parent"
+            android:textAllCaps="false"
+            android:layout_height="wrap_content" android:id="@+id/googleOptBtn"/>
+    <Button
+            android:text="Sign up via Facebook"
+            android:gravity="center_vertical"
+            android:textAlignment="center"
+            android:background="@drawable/round"
+            android:drawableLeft="@mipmap/xxxhdpi"
+            android:layout_width="match_parent"
+            android:textAllCaps="false"
+            android:focusable="true"
+
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:layout_marginTop="300px"
+            android:layout_marginBottom="20px"
+
+            android:layout_height="wrap_content" android:id="@+id/fbOptBtn"/>
+    <Button
+            android:text="Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/button"/>
 </LinearLayout>

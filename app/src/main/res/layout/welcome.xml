@@ -9,7 +9,7 @@
 <Button
         android:text="New to Family Wallet"
         android:textAllCaps="false"
-        android:background="@drawable/roundbutton"
+        android:background="@drawable/round"
         android:layout_width="368dp"
         android:layout_height="77dp" tools:layout_editor_absoluteY="337dp"
         tools:layout_editor_absoluteX="8dp" android:id="@+id/signupBtn" tools:ignore="MissingConstraints"/>
@@ -17,7 +17,7 @@
 <Button
         android:text="Already using Family Wallet"
         android:textAllCaps="false"
-        android:background="@drawable/roundbutton"
+        android:background="@drawable/round"
         android:layout_width="368dp"
         android:layout_height="77dp" tools:layout_editor_absoluteY="418dp"
         tools:layout_editor_absoluteX="8dp" android:id="@+id/signinBtn" tools:ignore="MissingConstraints"/>
