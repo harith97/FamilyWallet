@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false">
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="60dp"
+        android:layout_y="15dp"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
+    <RadioButton
+        android:id="@+id/radioButtonExpense"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_x="229dp"
+        android:layout_y="82dp"
+        android:checked="false"
+        android:text="Income" />
+
+    <RadioButton
+        android:id="@+id/radioButtonIncome"
+        android:layout_width="122dp"
+        android:layout_height="wrap_content"
+        android:layout_x="76dp"
+        android:layout_y="83dp"
+        android:checked="true"
+        android:text="Expense" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="88dp"
+        android:layout_height="42dp"
+        android:layout_x="280dp"
+        android:layout_y="15dp" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="98dp"
+        android:layout_y="148dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Title"
+        android:textAlignment="center" />
+
+</AbsoluteLayout>
