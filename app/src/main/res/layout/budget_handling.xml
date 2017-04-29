@@ -1,9 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ccpe001.familywallet.budget.BudgetHandling">
+    tools:context="ccpe001.familywallet.budget.BudgetHandling"
+    android:weightSum="1">
 
-</android.support.constraint.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/startDate"
+        android:layout_width="362dp"
+        android:layout_height="wrap_content"
+        android:layout_x="15dp"
+        android:layout_y="116dp"
+        android:ems="10"
+        android:hint="Start Date"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/endDate"
+        android:layout_width="362dp"
+        android:layout_height="wrap_content"
+        android:layout_x="17dp"
+        android:layout_y="177dp"
+        android:ems="10"
+        android:hint="End Date"
+        android:inputType="date" />
+
+    <Spinner
+        android:id="@+id/catSpin"
+        android:layout_width="362dp"
+        android:layout_height="wrap_content"
+        android:layout_x="13dp"
+        android:layout_y="237dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown" />
+
+    <EditText
+        android:id="@+id/txtAmount"
+        android:layout_width="362dp"
+        android:layout_height="wrap_content"
+        android:layout_x="13dp"
+        android:layout_y="301dp"
+        android:ems="10"
+        android:hint="Amount"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtbudName"
+        android:layout_width="362dp"
+        android:layout_height="56dp"
+        android:layout_weight="0.21"
+        android:layout_x="14dp"
+        android:layout_y="42dp"
+        android:ems="10"
+        android:hint="Budget Name"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnForecast"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_x="15dp"
+        android:layout_y="360dp"
+        android:text="Forecast" />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_x="199dp"
+        android:layout_y="360dp"
+        android:text="Submit" />
+
+</AbsoluteLayout>
