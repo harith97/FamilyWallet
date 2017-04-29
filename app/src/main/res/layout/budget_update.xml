@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ccpe001.familywallet.budget.budgetUpdate">
+
+    <EditText
+        android:id="@+id/startDup"
+        android:layout_width="362dp"
+        android:layout_height="wrap_content"
+        android:layout_x="15dp"
+        android:layout_y="116dp"
+        android:ems="10"
+        android:hint="Start Date"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/endDup"
+        android:layout_width="362dp"
+        android:layout_height="wrap_content"
+        android:layout_x="17dp"
+        android:layout_y="177dp"
+        android:ems="10"
+        android:hint="End Date"
+        android:inputType="date" />
+
+    <Spinner
+        android:id="@+id/catSpinup"
+        android:layout_width="362dp"
+        android:layout_height="wrap_content"
+        android:layout_x="13dp"
+        android:layout_y="237dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown" />
+
+    <EditText
+        android:id="@+id/txtAmountup"
+        android:layout_width="362dp"
+        android:layout_height="wrap_content"
+        android:layout_x="13dp"
+        android:layout_y="301dp"
+        android:ems="10"
+        android:hint="Amount"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtupName"
+        android:layout_width="362dp"
+        android:layout_height="56dp"
+        android:layout_weight="0.21"
+        android:layout_x="14dp"
+        android:layout_y="42dp"
+        android:ems="10"
+        android:hint="Budget Name"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_x="199dp"
+        android:layout_y="360dp"
+        android:text="Update" />
+
+    <Button
+        android:id="@+id/btnDel"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_x="16dp"
+        android:layout_y="360dp"
+        android:text="Delete" />
+
+
+</AbsoluteLayout>
