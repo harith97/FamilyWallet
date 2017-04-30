@@ -14,7 +14,8 @@
         android:layout_y="116dp"
         android:ems="10"
         android:hint="Start Date"
-        android:inputType="date" />
+        android:inputType="date"
+        android:singleLine="true" />
 
     <EditText
         android:id="@+id/endDup"

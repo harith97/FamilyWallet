@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import ccpe001.familywallet.summary.summarymain;
+import ccpe001.familywallet.summary.sumMain;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            summarymain summarymainFragment = new summarymain();
+            sumMain summarymainFragment = new sumMain();
             fragmentTransaction.replace(R.id.fragmentContainer1,summarymainFragment);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_slideshow) {
