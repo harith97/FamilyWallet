@@ -5,7 +5,8 @@
               android:layout_height="match_parent">
 
     <TextView
-            android:text="TextView"
+            android:text="Budget"
             android:layout_width="match_parent"
+            android:layout_marginTop="300dp"
             android:layout_height="wrap_content" android:id="@+id/sample_text"/>
 </LinearLayout>

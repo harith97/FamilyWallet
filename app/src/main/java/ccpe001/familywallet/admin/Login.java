@@ -2,6 +2,8 @@ package ccpe001.familywallet.admin;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+import android.view.WindowManager;
 import ccpe001.familywallet.R;
 
 /**
@@ -18,17 +20,6 @@ public class Login extends AppCompatActivity {
     }
 
     private void init() {
+
     }
 }
-
-/*<activity android:name=".MainActivity"
-        android:windowSoftInputMode="adjustPan">
-<intent-filter>
-<action android:name="android.intent.action.MAIN" />
-
-<category android:name="android.intent.category.LAUNCHER" />
-</intent-filter>
-</activity>*/
-
-//<action android:name="ccpe001.familywallet.LOGIN" />
-//<category android:name="android.intent.category.DEFAULT" />
