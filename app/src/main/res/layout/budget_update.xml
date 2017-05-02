@@ -1,77 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ccpe001.familywallet.budget.budgetUpdate">
+    android:orientation="vertical"
+    tools:context="ccpe001.familywallet.budget.BudgetHandling"
+    android:weightSum="1">
 
     <EditText
-        android:id="@+id/startDup"
-        android:layout_width="362dp"
+        android:id="@+id/txtBname"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:layout_x="15dp"
-        android:layout_y="116dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:hint="Budget Name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/startDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/txtBname"
+        android:layout_alignStart="@+id/txtBname"
+        android:layout_below="@+id/txtBname"
+        android:layout_marginTop="25dp"
         android:ems="10"
         android:hint="Start Date"
-        android:inputType="date"
-        android:singleLine="true" />
+        android:inputType="date" />
 
     <EditText
-        android:id="@+id/endDup"
-        android:layout_width="362dp"
+        android:id="@+id/endDate"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="17dp"
-        android:layout_y="177dp"
+        android:layout_above="@+id/catSelect"
+        android:layout_alignEnd="@+id/startDate"
+        android:layout_alignStart="@+id/startDate"
+        android:layout_marginBottom="25dp"
         android:ems="10"
         android:hint="End Date"
         android:inputType="date" />
 
     <Spinner
-        android:id="@+id/catSpinup"
-        android:layout_width="362dp"
-        android:layout_height="wrap_content"
-        android:layout_x="13dp"
-        android:layout_y="237dp"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown" />
+        android:id="@+id/catSelect"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/endDate"
+        android:layout_alignEnd="@+id/endDate" />
 
     <EditText
-        android:id="@+id/txtAmountup"
-        android:layout_width="362dp"
+        android:id="@+id/txtAmount"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="13dp"
-        android:layout_y="301dp"
+        android:layout_alignEnd="@+id/catSelect"
+        android:layout_alignStart="@+id/catSelect"
+        android:layout_below="@+id/catSelect"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Amount"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
-    <EditText
-        android:id="@+id/txtupName"
-        android:layout_width="362dp"
-        android:layout_height="56dp"
-        android:layout_weight="0.21"
-        android:layout_x="14dp"
-        android:layout_y="42dp"
-        android:ems="10"
-        android:hint="Budget Name"
-        android:inputType="textPersonName" />
+    <ToggleButton
+        android:id="@+id/notiBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="ToggleButton"
+        android:layout_below="@+id/txtAmount"
+        android:layout_alignEnd="@+id/txtAmount"
+        android:layout_marginEnd="17dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="250dp"
+        android:layout_height="36dp"
+        android:layout_alignBaseline="@+id/notiBtn"
+        android:layout_alignBottom="@+id/notiBtn"
+        android:layout_alignStart="@+id/txtAmount"
+        android:text="Notification"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnForecast"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:text="Forecast"
+        android:layout_below="@+id/notiBtn"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginStart="13dp" />
 
     <Button
         android:id="@+id/btnSubmit"
-        android:layout_width="160dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_x="199dp"
-        android:layout_y="360dp"
-        android:text="Update" />
+        android:text="Submit"
+        android:layout_alignBaseline="@+id/btnForecast"
+        android:layout_alignBottom="@+id/btnForecast"
+        android:layout_alignEnd="@+id/notiBtn" />
 
-    <Button
-        android:id="@+id/btnDel"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_x="16dp"
-        android:layout_y="360dp"
-        android:text="Delete" />
-
-
-</AbsoluteLayout>
+</RelativeLayout>

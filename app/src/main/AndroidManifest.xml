@@ -1,56 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="ccpe001.familywallet">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="ccpe001.familywallet">
 
     <application
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            tools:ignore="ManifestResource">
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="ManifestResource">
         <activity
-                android:name=".admin.SignUp"
-                android:screenOrientation="portrait"
-                android:windowSoftInputMode="adjustResize">
+            android:name=".admin.SignUp"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.LOGIN"/>
+                <action android:name="ccpe001.familywallet.LOGIN" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-                android:name=".admin.GetInfo"
-                android:parentActivityName=".admin.SignUp"
-                android:screenOrientation="portrait"
-                android:windowSoftInputMode="adjustResize">
+            android:name=".admin.GetInfo"
+            android:parentActivityName=".admin.SignUp"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.GETINFO"/>
+                <action android:name="ccpe001.familywallet.GETINFO" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-                android:name=".admin.SignIn"
-                android:screenOrientation="portrait"
-                android:parentActivityName=".admin.SignUp"
-                android:windowSoftInputMode="adjustResize">
+            android:name=".admin.SignIn"
+            android:parentActivityName=".admin.SignUp"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.SIGNIN"/>
+                <action android:name="ccpe001.familywallet.SIGNIN" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-                android:name=".Splash"
-                android:screenOrientation="portrait"
-                android:theme="@style/AppTheme.NoActionBar">
+            android:name=".Splash"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".budget.budgetTrack"></activity>
+        <activity
+            android:name=".budget.BudgetHandling"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="ccpe001.familywallet.BudgetHandling" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>
