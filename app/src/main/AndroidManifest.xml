@@ -3,7 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ccpe001.familywallet">
 
+    <uses-feature android:name="android.hardware.camera" android:required="true"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"/>
     <application
+<<<<<<< HEAD
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,6 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="ManifestResource">
+=======
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+
+            android:theme="@style/AppTheme"
+            tools:ignore="ManifestResource">
+>>>>>>> origin/master
         <activity
             android:name=".admin.SignUp"
             android:screenOrientation="portrait"
