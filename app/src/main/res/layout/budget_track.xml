@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,21 +8,94 @@
     tools:context="ccpe001.familywallet.budget.budgetTrack">
 
 
-    <ProgressBar
-        android:id="@+id/bProg"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="300dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="29dp"
-        android:layout_below="@+id/bName"
-        android:layout_alignStart="@+id/bName" />
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:layout_x="55dp"
+        android:layout_y="373dp"
+        android:background="@android:color/holo_green_dark"
+        android:text="Spent history" />
 
     <TextView
-        android:id="@+id/bName"
-        android:layout_width="300dp"
-        android:layout_height="66dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="43dp" />
-</RelativeLayout>
+        android:id="@+id/budName"
+        android:layout_width="244dp"
+        android:layout_height="32dp"
+        android:layout_x="20dp"
+        android:layout_y="38dp"
+        android:text=" Budget Name"
+        android:textSize="18sp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="347dp"
+        android:layout_height="49dp"
+        android:layout_x="23dp"
+        android:layout_y="102dp" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="294dp"
+        android:layout_height="58dp"
+        android:layout_x="45dp"
+        android:layout_y="300dp"
+        android:text="Notification" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="133dp"
+        android:layout_height="31dp"
+        android:layout_x="41dp"
+        android:layout_y="218dp"
+        android:text="Spent so far" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="134dp"
+        android:layout_height="26dp"
+        android:layout_x="39dp"
+        android:layout_y="252dp"
+        android:text="Transcation" />
+
+    <TextView
+        android:id="@+id/spentNum"
+        android:layout_width="144dp"
+        android:layout_height="28dp"
+        android:layout_x="196dp"
+        android:layout_y="220dp" />
+
+    <TextView
+        android:id="@+id/budAmount"
+        android:layout_width="144dp"
+        android:layout_height="28dp"
+        android:layout_x="199dp"
+        android:layout_y="254dp" />
+
+    <TextView
+        android:id="@+id/strDate"
+        android:layout_width="138dp"
+        android:layout_height="36dp"
+        android:layout_x="27dp"
+        android:layout_y="154dp"
+        android:text="Start Date" />
+
+    <TextView
+        android:id="@+id/endDate"
+        android:layout_width="140dp"
+        android:layout_height="37dp"
+        android:layout_x="233dp"
+        android:layout_y="156dp"
+        android:text="End Date" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:layout_x="206dp"
+        android:layout_y="375dp"
+        android:background="@color/colorAccent"
+        android:elevation="0dp"
+        android:text="Delete" />
+
+</AbsoluteLayout>
