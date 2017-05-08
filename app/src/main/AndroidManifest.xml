@@ -18,14 +18,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="ManifestResource">
+
         <activity
-            android:name=".admin.SignUp"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
+                android:name=".Dashboard"
+                android:theme="@style/AppTheme.NoActionBar"
+
+                android:label="@string/title_activity_navigation_drawer">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.LOGIN" />
+
+                <action android:name="ccpe001.familywallet.DASHBOARD"/>
 
                 <category android:name="android.intent.category.DEFAULT" />
+
             </intent-filter>
         </activity>
         <activity
@@ -41,11 +45,21 @@
         </activity>
         <activity
             android:name=".admin.SignIn"
-            android:parentActivityName=".admin.SignUp"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="ccpe001.familywallet.SIGNIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".admin.SignUp"
+                android:screenOrientation="portrait"
+                android:parentActivityName="ccpe001.familywallet.admin.SignIn"
+                android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="ccpe001.familywallet.SIGNUP" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

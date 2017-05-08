@@ -29,7 +29,7 @@ public class Splash extends AppCompatActivity{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Intent intent = new Intent("ccpe001.familywallet.LOGIN");
+                Intent intent = new Intent("ccpe001.familywallet.SIGNIN");
                 startActivity(intent);
                 overridePendingTransition(R.animator.transition1,R.animator.transition2);//for animations(shoul have 2 files)
                 finish();

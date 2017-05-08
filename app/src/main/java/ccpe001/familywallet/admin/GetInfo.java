@@ -25,8 +25,8 @@ public class GetInfo extends AppCompatActivity implements View.OnClickListener{
 
     private static final int RQ_CAPTURE = 1;
     private static final int RQ_GALLERY_REQUEST = 2;
-     private at.markushi.ui.CircleButton imageButton;
-
+    private at.markushi.ui.CircleButton imageButton;
+    private Button signUpButton;
 
 
     @Override
@@ -38,6 +38,8 @@ public class GetInfo extends AppCompatActivity implements View.OnClickListener{
 
     private void init() {
         imageButton = (at.markushi.ui.CircleButton) findViewById(R.id.imageButton);
+        signUpButton = (Button) findViewById(R.id.signUPGetInfo);
+        signUpButton.setOnClickListener(this);
         imageButton.setOnClickListener(this);
         if(!hasCamera()){
             imageButton.setEnabled(false);
@@ -47,11 +49,29 @@ public class GetInfo extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.imageButton){
-            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(cameraIntent,RQ_CAPTURE);
+            String [] optArr ={"Take a Photo","Select from Gallery"};
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Select Option");
+            builder.setItems(optArr, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int opt) {
+                    //Toast.makeText(GetInfo.this,String.valueOf(i),Toast.LENGTH_LONG).show();
+                    if(opt==0){
+                        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(cameraIntent,RQ_CAPTURE);
+                    }else if(opt==1){
+                        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(galleryIntent,RQ_GALLERY_REQUEST);
+                    }
+                }
+            });
 
-            //Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            //startActivityForResult(galleryIntent,RQ_GALLERY_REQUEST);
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
+        }else if(view.getId()==R.id.signUPGetInfo){
+            Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
+            startActivity(intent);
         }
     }
 
@@ -66,7 +86,6 @@ public class GetInfo extends AppCompatActivity implements View.OnClickListener{
             Bitmap rawImage  = (Bitmap)extras.get("data");
             imageButton.setImageBitmap(rawImage);
         }else if(requestCode==RQ_GALLERY_REQUEST&&resultCode==RESULT_OK){
-            Toast.makeText(this, "Unable to Open file.", Toast.LENGTH_SHORT).show();
             Uri imageUri = data.getData();
             imageButton.setImageURI(imageUri);
         }
