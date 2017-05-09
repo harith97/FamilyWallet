@@ -36,14 +36,13 @@
         android:id="@+id/spinner"
         android:layout_width="88dp"
         android:layout_height="42dp"
-        android:layout_x="280dp"
+        android:layout_x="281dp"
         android:layout_y="15dp" />
-
     <EditText
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="98dp"
+        android:layout_x="100dp"
         android:layout_y="148dp"
         android:ems="10"
         android:inputType="textPersonName"

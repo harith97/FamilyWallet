@@ -13,8 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import ccpe001.familywallet.summary.sumMain;
+import ccpe001.familywallet.transaction.transactionMain;
 
-public class MainActivity extends AppCompatActivity
+public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Toolbar toolbar = null;
@@ -37,11 +38,11 @@ public class MainActivity extends AppCompatActivity
         });
 
         //initialize dashboard fragment 1st
-        /*android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        budgetmain galleyFragment = new budgetmain();
-        fragmentTransaction.replace(R.id.fragmentContainer1,galleyFragment);
-        fragmentTransaction.commit();*/
+        transactionMain transaction = new transactionMain();
+        fragmentTransaction.replace(R.id.fragmentContainer1,transaction);
+        fragmentTransaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -91,26 +92,30 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            /*android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        if (id == R.id.transactionFrag) {
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            budgetmain galleyFragment = new budgetmain();
-            fragmentTransaction.replace(R.id.fragmentContainer1,galleyFragment);
-            fragmentTransaction.commit();*/
+            transactionMain transaction = new transactionMain();
+            fragmentTransaction.replace(R.id.fragmentContainer1,transaction);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_gallery) {
             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            sumMain summarymainFragment = new sumMain();
-            fragmentTransaction.replace(R.id.fragmentContainer1,summarymainFragment);
+            sumMain summary = new sumMain();
+            fragmentTransaction.replace(R.id.fragmentContainer1,summary);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            sumMain summary = new sumMain();
+            fragmentTransaction.replace(R.id.fragmentContainer1,summary);
+            fragmentTransaction.commit();
+        }else if (id == R.id.nav_slideshow) {
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Settings setting = new Settings();
+            fragmentTransaction.replace(R.id.fragmentContainer1,setting);
+            fragmentTransaction.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

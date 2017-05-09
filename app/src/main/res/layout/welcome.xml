@@ -4,7 +4,7 @@
                                              xmlns:tools="http://schemas.android.com/tools"
                                              android:layout_width="match_parent"
                                              android:layout_height="match_parent"
-                                             tools:context="ccpe001.familywallet.MainActivity">
+                                             tools:context="ccpe001.familywallet.Dashboard">
 
 <Button
         android:text="New to Family Wallet"
