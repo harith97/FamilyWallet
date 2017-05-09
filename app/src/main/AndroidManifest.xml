@@ -80,7 +80,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".budget.forecast"></activity>
+        <activity android:name=".budget.forecast" />
         <activity
             android:name=".budget.budgetTrack"
             android:screenOrientation="portrait"
@@ -91,6 +91,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".budget.budgetList" />
+        <activity android:name=".budget.addAccount"></activity>
     </application>
 
 </manifest>
