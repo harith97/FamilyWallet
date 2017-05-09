@@ -92,7 +92,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".budget.budgetList" />
-        <activity android:name=".budget.addAccount"></activity>
+        <activity android:name=".budget.addAccount" />
+        <activity android:name=".budget.accUpdate"></activity>
     </application>
 
 </manifest>

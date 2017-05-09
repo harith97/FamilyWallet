@@ -1,9 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ccpe001.familywallet.budget.addAccount">
 
-</android.support.constraint.ConstraintLayout>
+    <EditText
+        android:id="@+id/editText7"
+        android:layout_width="330dp"
+        android:layout_height="40dp"
+        android:layout_x="26dp"
+        android:layout_y="88dp"
+        android:ems="10"
+        android:hint="Available Amount"
+        android:inputType="numberDecimal"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="83dp" />
+
+    <Switch
+        android:id="@+id/swcPrivate"
+        android:layout_width="159dp"
+        android:layout_height="51dp"
+        android:layout_x="25dp"
+        android:layout_y="231dp"
+        android:text="Is private"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="230dp" />
+
+    <Switch
+        android:id="@+id/swtNotify"
+        android:layout_width="159dp"
+        android:layout_height="51dp"
+        android:layout_x="199dp"
+        android:layout_y="230dp"
+        android:text="Notification"
+        tools:layout_editor_absoluteX="211dp"
+        tools:layout_editor_absoluteY="230dp" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="330dp"
+        android:layout_height="40dp"
+        android:layout_x="24dp"
+        android:layout_y="26dp"
+        android:ems="10"
+        android:hint="Account Name"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <Spinner
+        android:id="@+id/spinType"
+        android:layout_width="330dp"
+        android:layout_height="40dp"
+        android:layout_x="30dp"
+        android:layout_y="150dp"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="146dp" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:layout_x="112dp"
+        android:layout_y="309dp"
+        android:text="Submit" />
+
+</AbsoluteLayout>

@@ -98,4 +98,12 @@
         android:elevation="0dp"
         android:text="Delete" />
 
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="196dp"
+        android:layout_height="38dp"
+        android:layout_x="100dp"
+        android:layout_y="437dp"
+        android:text="Update" />
+
 </AbsoluteLayout>

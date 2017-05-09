@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ccpe001.familywallet.budget.accUpdate">
+
+    <Button
+        android:id="@+id/transfer"
+        android:layout_width="197dp"
+        android:layout_height="wrap_content"
+        android:layout_x="73dp"
+        android:layout_y="401dp"
+        android:text="Transfer" />
+
+    <Spinner
+        android:id="@+id/transTo"
+        android:layout_width="332dp"
+        android:layout_height="46dp"
+        android:layout_x="26dp"
+        android:layout_y="334dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="42dp" />
+
+    <EditText
+        android:id="@+id/accAmount"
+        android:layout_width="335dp"
+        android:layout_height="wrap_content"
+        android:layout_x="29dp"
+        android:layout_y="84dp"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/accOwn"
+        android:layout_width="227dp"
+        android:layout_height="31dp"
+        android:layout_x="29dp"
+        android:layout_y="151dp"
+        android:text="Transfer From"
+        android:textAlignment="textStart"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tranAmount"
+        android:layout_width="227dp"
+        android:layout_height="31dp"
+        android:layout_x="29dp"
+        android:layout_y="43dp"
+        android:text="Amount"
+        android:textAlignment="textStart"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/accOther"
+        android:layout_width="227dp"
+        android:layout_height="31dp"
+        android:layout_x="35dp"
+        android:layout_y="281dp"
+        android:text="Transfer to"
+        android:textAlignment="textStart"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/transFrom"
+        android:layout_width="332dp"
+        android:layout_height="45dp"
+        android:layout_x="23dp"
+        android:layout_y="198dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="42dp" />
+</AbsoluteLayout>
