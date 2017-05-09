@@ -18,18 +18,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="ManifestResource">
-
         <activity
-                android:name=".Dashboard"
-                android:theme="@style/AppTheme.NoActionBar"
-
-                android:label="@string/title_activity_navigation_drawer">
+            android:name=".Dashboard"
+            android:label="@string/title_activity_navigation_drawer"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-
-                <action android:name="ccpe001.familywallet.DASHBOARD"/>
+                <action android:name="ccpe001.familywallet.DASHBOARD" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-
             </intent-filter>
         </activity>
         <activity
@@ -54,10 +50,10 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".admin.SignUp"
-                android:screenOrientation="portrait"
-                android:parentActivityName="ccpe001.familywallet.admin.SignIn"
-                android:windowSoftInputMode="adjustResize">
+            android:name=".admin.SignUp"
+            android:parentActivityName=".admin.SignIn"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="ccpe001.familywallet.SIGNUP" />
 
@@ -94,7 +90,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".budget.forecast"></activity>
+        <activity android:name=".budget.forecast" />
         <activity
             android:name=".budget.budgetTrack"
             android:screenOrientation="portrait"
@@ -105,6 +101,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".summary.pieChart"></activity>
     </application>
 
 </manifest>

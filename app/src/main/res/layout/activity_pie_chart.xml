@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ccpe001.familywallet.summary.sumMain">
+    tools:context="ccpe001.familywallet.summary.pieChart">
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
 </android.support.constraint.ConstraintLayout>
