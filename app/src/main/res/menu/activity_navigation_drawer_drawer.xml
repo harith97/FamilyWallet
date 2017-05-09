@@ -3,21 +3,30 @@
 
     <group android:checkableBehavior="single">
         <item
-                android:id="@+id/nav_camera"
+                android:id="@+id/nav_manage"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Add member"/>
+        <item
+                android:id="@+id/transactionFrag"
                 android:icon="@drawable/ic_menu_camera"
-                android:title="Import"/>
+                android:title="Transaction"/>
         <item
                 android:id="@+id/nav_gallery"
                 android:icon="@drawable/ic_menu_gallery"
-                android:title="Gallery"/>
+                android:title="Reports"/>
         <item
                 android:id="@+id/nav_slideshow"
                 android:icon="@drawable/ic_menu_slideshow"
-                android:title="Slideshow"/>
+                android:title="Categories"/>
         <item
-                android:id="@+id/nav_manage"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="Tools"/>
+                android:id="@+id/nav_slideshow3"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="Add Wallet"/>
+        <item
+                android:id="@+id/nav_slideshow8"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="Recurring transactions"/>
+
     </group>
 
     <item android:title="Communicate">
@@ -25,11 +34,19 @@
             <item
                     android:id="@+id/nav_share"
                     android:icon="@drawable/ic_menu_share"
-                    android:title="Share"/>
+                    android:title="Budgets"/>
             <item
                     android:id="@+id/nav_send"
                     android:icon="@drawable/ic_menu_send"
-                    android:title="Send"/>
+                    android:title="Backup"/>
+            <item
+                    android:id="@+id/nav_send3"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Settings"/>
+            <item
+                    android:id="@+id/nav_send4"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Help and Manual"/>
         </menu>
     </item>
 
