@@ -13,19 +13,19 @@
                 android:title="Reports"/>
 
         <item
-                android:id="@+id/nav_slideshow8"
+                android:id="@+id/recurringFrag"
                 android:icon="@drawable/ic_menu_slideshow"
                 android:title="Recurring transactions"/>
 
         <item
-                android:id="@+id/nav_slideshow"
+                android:id="@+id/categoryFrag"
                 android:icon="@drawable/ic_menu_slideshow"
                 android:title="Categories"/>
 
 
 
         <item
-                android:id="@+id/nav_sharedf2"
+                android:id="@+id/transferFrag"
                 android:icon="@drawable/ic_menu_share"
                 android:title="Transfer money"/>
 
@@ -34,21 +34,22 @@
     <item android:title="Preferences">
         <menu>
             <item
-                    android:id="@+id/nav_sharedf"
+                    android:id="@+id/budgetFrag"
                     android:icon="@drawable/ic_menu_share"
                     android:title="Budgets"/>
 
             <item
-                    android:id="@+id/nav_slideshow3"
+                    android:id="@+id/walletFrag"
                     android:icon="@drawable/ic_menu_slideshow"
                     android:title="Add Wallet"/>
 
-
-                    android:id="@+id/nav_send3"
+            <item
+                    android:id="@+id/settingFrag"
                     android:icon="@drawable/ic_menu_send"
                     android:title="Settings"/>
+
             <item
-                    android:id="@+id/nav_send4"
+                    android:id="@+id/helpFrag"
                     android:icon="@drawable/ic_menu_send"
                     android:title="Help and Manual"/>
         </menu>
@@ -57,7 +58,7 @@
     <item android:title="Preferences">
         <menu>
             <item
-                    android:id="@+id/nav_send"
+                    android:id="@+id/backupFrag"
                     android:icon="@drawable/ic_menu_send"
                     android:title="Backup"/>
         </menu>

@@ -13,8 +13,7 @@ import android.view.ViewGroup;
 public class Settings extends AppCompatActivity {
 
 
-    public void onCreate(
-                             Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         super.onCreate(savedInstanceState);

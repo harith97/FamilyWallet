@@ -15,6 +15,9 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import ccpe001.familywallet.budget.accUpdate;
+import ccpe001.familywallet.budget.addAccount;
+import ccpe001.familywallet.budget.budgetList;
 import ccpe001.familywallet.summary.sumMain;
 import ccpe001.familywallet.transaction.transactionMain;
 
@@ -104,29 +107,35 @@ public class Dashboard extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.transactionFrag) {
-            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            transactionMain transaction = new transactionMain();
-            fragmentTransaction.replace(R.id.fragmentContainer1,transaction);
-            fragmentTransaction.commit();
-        } else if (id == R.id.transactionFrag) {
-            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            sumMain summary = new sumMain();
-            fragmentTransaction.replace(R.id.fragmentContainer1,summary);
-            fragmentTransaction.commit();
-        } else if (id == R.id.nav_slideshow) {
-            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            sumMain summary = new sumMain();
-            fragmentTransaction.replace(R.id.fragmentContainer1,summary);
-            fragmentTransaction.commit();
-        }else if (id == R.id.nav_slideshow) {
             /*android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            Settings setting = new Settings();
-            fragmentTransaction.replace(R.id.fragmentContainer1,setting);
+            Dashboard dashboard = new Dashboard();
+            fragmentTransaction.replace(R.id.fragmentContainer1,dashboard);
             fragmentTransaction.commit();*/
+        } else if (id == R.id.reportsFrag) {
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            sumMain summary = new sumMain();
+            fragmentTransaction.replace(R.id.fragmentContainer1,summary);
+            fragmentTransaction.commit();
+        } else if (id == R.id.transferFrag) {
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            accUpdate transmoney = new accUpdate();
+            fragmentTransaction.replace(R.id.fragmentContainer1,transmoney);
+            fragmentTransaction.commit();
+        }else if (id == R.id.budgetFrag) {
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            budgetList budget = new budgetList();
+            fragmentTransaction.replace(R.id.fragmentContainer1,budget);
+            fragmentTransaction.commit();
+        }else if (id == R.id.walletFrag) {
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            addAccount addwallet = new addAccount();
+            fragmentTransaction.replace(R.id.fragmentContainer1,addwallet);
+            fragmentTransaction.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
