@@ -3,11 +3,11 @@ package ccpe001.familywallet.summary;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.github.mikephil.charting.charts.PieChart;
+/*import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.ColorTemplate;*/
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class pieChart extends AppCompatActivity {
     }
 
     private void setupPieChart(){
-        List<PieEntry> pieEntries=new ArrayList<>();
+        /*List<PieEntry> pieEntries=new ArrayList<>();
 
         for( i = 0; i < transaction.length; i++){}
         pieEntries.add(new PieEntry(transaction[i], category[i]));
@@ -41,7 +41,7 @@ public class pieChart extends AppCompatActivity {
 
         PieChart chart = (PieChart) findViewById(R.id.chart);
         chart.setData(data);
-        chart.invalidate();
+        chart.invalidate();*/
 
     }
 }

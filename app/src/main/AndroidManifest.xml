@@ -19,8 +19,56 @@
         android:theme="@style/AppTheme"
         tools:ignore="ManifestResource">
         <activity
+                android:name=".budget.BudgetHandling"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="ccpe001.familywallet.BudgetHandling" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".budget.budgetUpdate"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="ccpe001.familywallet.budget.budgetUpdate" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".budget.forecast" />
+        <activity
+                android:name=".budget.budgetTrack"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="ccpe001.familywallet.budget.budgetTrack" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".budget.budgetList" />
+        <activity android:name=".budget.addAccount" />
+        <activity android:name=".budget.accUpdate"></activity>
+        <activity
+                android:name=".Dashboard"
+                android:theme="@style/AppTheme.NoActionBar"
+
+                android:label="@string/title_activity_navigation_drawer">
+            <intent-filter>
+
+                <action android:name="ccpe001.familywallet.DASHBOARD"/>
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".admin.SignUp"
             android:screenOrientation="portrait"
+            android:parentActivityName=".admin.SignIn"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="ccpe001.familywallet.LOGIN" />
@@ -39,9 +87,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".admin.SignIn"
-            android:parentActivityName=".admin.SignUp"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -61,39 +109,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".budget.BudgetHandling"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
+                android:name=".Settings"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.BudgetHandling" />
+                <action android:name="ccpe001.familywallet.SETTINGS" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".budget.budgetUpdate"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="ccpe001.familywallet.budget.budgetUpdate" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".budget.forecast" />
-        <activity
-            android:name=".budget.budgetTrack"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="ccpe001.familywallet.budget.budgetTrack" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".budget.budgetList" />
-        <activity android:name=".budget.addAccount" />
-        <activity android:name=".budget.accUpdate"></activity>
     </application>
 
 </manifest>
