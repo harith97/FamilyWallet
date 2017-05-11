@@ -49,9 +49,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".budget.budgetList" />
-        <activity android:name=".budget.addAccount" />
-        <activity android:name=".budget.accUpdate"></activity>
         <activity
                 android:name=".Dashboard"
                 android:theme="@style/AppTheme.NoActionBar"

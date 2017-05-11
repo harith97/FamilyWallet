@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import at.markushi.ui.CircleButton;
 import ccpe001.familywallet.budget.accUpdate;
 import ccpe001.familywallet.budget.addAccount;
 import ccpe001.familywallet.budget.budgetList;
@@ -62,7 +63,7 @@ public class Dashboard extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header_navigation_drawer);
-        Button img = (Button)headerView.findViewById(R.id.loggedUsrImg);
+        CircleButton img = (CircleButton)headerView.findViewById(R.id.loggedUsrImg);
         img.setOnClickListener(this);
 
 
@@ -152,6 +153,7 @@ public class Dashboard extends AppCompatActivity
             AddMember addmember = new AddMember();
             fragmentTransaction.replace(R.id.fragmentContainer1,addmember);
             fragmentTransaction.commit();
+            //Close nav drawer here
         }
     }
 }

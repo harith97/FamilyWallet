@@ -9,13 +9,15 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import ccpe001.familywallet.R;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 /**
  * Created by harithaperera on 4/30/17.
  */
 public class SignIn extends AppCompatActivity implements View.OnClickListener{
 
-    private Button signIn;
+    private Button signIn,scannerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,9 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
     private void init() {
         getSupportActionBar().setTitle(R.string.signin_title);
         signIn= (Button)findViewById(R.id.signInBtn);
+        scannerBtn= (Button)findViewById(R.id.qrscannerBtn);
         signIn.setOnClickListener(this);
+        scannerBtn.setOnClickListener(this);
     }
 
     @Override
@@ -50,9 +54,29 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if(view.getId()== R.id.signInBtn){
-            Toast.makeText(this,"sdfsdf",Toast.LENGTH_LONG).show();
             Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
             startActivity(intent);
+        }else if(view.getId()== R.id.qrscannerBtn){
+            IntentIntegrator intentIntegrator = new IntentIntegrator(this);
+            intentIntegrator.setDesiredBarcodeFormats(intentIntegrator.QR_CODE_TYPES);
+            intentIntegrator.setPrompt("Scan");
+            intentIntegrator.setCameraId(0);
+            intentIntegrator.setOrientationLocked(true);
+            intentIntegrator.setBeepEnabled(false);
+            intentIntegrator.setBarcodeImageEnabled(false);
+            intentIntegrator.initiateScan();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
+        if(result != null){
+            if (result.getContents()== null){
+                Toast.makeText(this,"You cancelled..!",Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(this,result.getContents(),Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
