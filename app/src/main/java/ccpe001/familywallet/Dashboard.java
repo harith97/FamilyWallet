@@ -92,11 +92,11 @@ public class Dashboard extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.transactionFrag) {
-            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            /*android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             transactionMain12 transaction = new transactionMain12();
             fragmentTransaction.replace(R.id.fragmentContainer1,transaction);
-            fragmentTransaction.commit();
+            fragmentTransaction.commit();*/
         } else if (id == R.id.nav_gallery) {
             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

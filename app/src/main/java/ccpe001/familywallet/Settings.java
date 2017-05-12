@@ -10,14 +10,17 @@ import android.view.ViewGroup;
 /**
  * Created by harithaperera on 5/8/17.
  */
-public class Settings extends AppCompatActivity {
+public class Settings extends Fragment {
 
 
-    public void onCreate(Bundle savedInstanceState) {
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.setting, container, false);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.setting);
+
     }
+
 
 }
