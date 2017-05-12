@@ -64,21 +64,9 @@
             android:layout_marginBottom="20dp"
             android:layout_marginTop="10dp"
             android:layout_height="47dp"
-            android:id="@+id/signInBtn"/>
-    <Button
-            android:text="Join the family"
-            android:gravity="center_vertical"
+            android:id="@+id/signInBtn"
+            android:onClick="openTransaction"/>
 
-            android:background="@drawable/roundbutton"
-            android:layout_width="match_parent"
-            android:textAllCaps="false"
-            android:textAlignment="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="47dp"
-            android:id="@+id/qrscannerBtn"/>
 
 
 </LinearLayout>

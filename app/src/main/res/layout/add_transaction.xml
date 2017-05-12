@@ -1,52 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:baselineAligned="false">
+    tools:context="ccpe001.familywallet.transaction.add_transaction">
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="60dp"
-        android:layout_y="15dp"
-        android:ems="10"
-        android:inputType="numberDecimal" />
+    <AbsoluteLayout
+        android:layout_width="418dp"
+        android:layout_height="514dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="-2dp">
 
-    <RadioButton
-        android:id="@+id/radioButtonExpense"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_x="229dp"
-        android:layout_y="82dp"
-        android:checked="false"
-        android:text="Income" />
+        <Spinner
+            android:id="@+id/spinner7"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:layout_x="251dp"
+            android:layout_y="24dp"
+            android:entries="@array/spinnerCurrency"
+            tools:layout_editor_absoluteX="246dp"
+            tools:layout_editor_absoluteY="37dp" />
 
-    <RadioButton
-        android:id="@+id/radioButtonIncome"
-        android:layout_width="122dp"
-        android:layout_height="wrap_content"
-        android:layout_x="76dp"
-        android:layout_y="83dp"
-        android:checked="true"
-        android:text="Expense" />
+        <Spinner
+            android:id="@+id/spinner8"
+            android:layout_width="325dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:layout_x="21dp"
+            android:layout_y="229dp"
+            android:entries="@array/spinnerAccount"
+            android:gravity="center"
+            tools:layout_editor_absoluteX="30dp"
+            tools:layout_editor_absoluteY="258dp" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="88dp"
-        android:layout_height="42dp"
-        android:layout_x="281dp"
-        android:layout_y="15dp" />
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="100dp"
-        android:layout_y="148dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Title"
-        android:textAlignment="center" />
+        <EditText
+            android:id="@+id/editText9"
+            android:layout_width="203dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_x="47dp"
+            android:layout_y="24dp"
+            android:ems="10"
+            android:gravity="right"
+            android:inputType="numberDecimal"
+            android:text="1500.00"
+            tools:layout_editor_absoluteX="30dp"
+            tools:layout_editor_absoluteY="37dp" />
 
-</AbsoluteLayout>
+        <RadioButton
+            android:id="@+id/radioButton5"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_x="217dp"
+            android:layout_y="90dp"
+            android:checked="false"
+            android:text="Income"
+            tools:layout_editor_absoluteX="197dp"
+            tools:layout_editor_absoluteY="117dp" />
+
+        <RadioButton
+            android:id="@+id/radioButton6"
+            android:layout_width="122dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_x="64dp"
+            android:layout_y="91dp"
+            android:checked="true"
+            android:text="Expense"
+            tools:layout_editor_absoluteX="58dp"
+            tools:layout_editor_absoluteY="117dp" />
+
+        <EditText
+            android:id="@+id/editText10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_x="88dp"
+            android:layout_y="157dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Title"
+            android:textAlignment="center"
+            tools:layout_editor_absoluteX="85dp"
+            tools:layout_editor_absoluteY="185dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="159dp"
+            android:layout_height="31dp"
+            android:layout_weight="1"
+            android:layout_x="92dp"
+            android:layout_y="286dp"
+            android:text="Category"
+            tools:layout_editor_absoluteX="103dp"
+            tools:layout_editor_absoluteY="333dp" />
+    </AbsoluteLayout>
+</android.support.constraint.ConstraintLayout>

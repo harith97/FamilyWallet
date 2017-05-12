@@ -11,4 +11,17 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="signin_title">Sign in Account</string>
     <string name="title_activity_get_info">GetInfo</string>
+
+    <string-array name="spinnerCurrency">
+        <item>LKR</item>
+        <item>USD</item>
+    </string-array>
+
+    <string-array name="spinnerAccount">
+        <item>Account 1</item>
+        <item>Account 2</item>
+    </string-array>
+    <string name="title_activity_transaction_main">transaction_main</string>
+    <string name="hello_round">Hello Round World!</string>
+    <string name="hello_square">Hello Square World!</string>
 </resources>
