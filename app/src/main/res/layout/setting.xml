@@ -10,36 +10,11 @@
                       android:orientation="vertical">
 
             <Switch
-                    android:text="Switch"
+                    android:text="Local "
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/switch3"/>
 
-            <Switch
-                    android:text="Switch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/switDFch3"/>
 
-            <Switch
-                    android:text="Switch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/swiFDtch3"/>
-            <Switch
-                    android:text="Switch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/switFGch3"/>
-            <Switch
-                    android:text="Switch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/GF"/>
-            <Switch
-                    android:text="Switch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/switDFcGFh3"/>
-
-            <Switch
-                    android:text="Switch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/switcGFGh3"/>
 
 
         </LinearLayout>

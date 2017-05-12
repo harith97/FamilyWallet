@@ -1,5 +1,6 @@
 package ccpe001.familywallet.admin;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -36,8 +38,10 @@ public class GetInfo extends AppCompatActivity implements View.OnClickListener{
         init();
     }
 
+
+
     private void init() {
-        imageButton = (at.markushi.ui.CircleButton) findViewById(R.id.imageButton);
+        imageButton = (at.markushi.ui.CircleButton) getWindow().getDecorView().getRootView().findViewById(R.id.imageButton);
         signUpButton = (Button) findViewById(R.id.signUPGetInfo);
         signUpButton.setOnClickListener(this);
         imageButton.setOnClickListener(this);
