@@ -1,20 +1,14 @@
 package ccpe001.familywallet.admin;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.*;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import ccpe001.familywallet.R;
-import ccpe001.familywallet.Splash;
-import ccpe001.familywallet.transaction.transaction_main;
-
-
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -23,24 +17,21 @@ import com.google.zxing.integration.android.IntentResult;
  */
 public class SignIn extends AppCompatActivity implements View.OnClickListener{
 
-    private Button signIn,scannerBtn,btn;
+    private Button signIn,scannerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin);
         init();
-
     }
 
     private void init() {
         getSupportActionBar().setTitle(R.string.signin_title);
         signIn= (Button)findViewById(R.id.signInBtn);
         scannerBtn= (Button)findViewById(R.id.qrscannerBtn);
-        btn= (Button) findViewById(R.id.button3);
         signIn.setOnClickListener(this);
         scannerBtn.setOnClickListener(this);
-        btn.setOnClickListener(this);
     }
 
     @Override
@@ -74,11 +65,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
             intentIntegrator.setBeepEnabled(false);
             intentIntegrator.setBarcodeImageEnabled(false);
             intentIntegrator.initiateScan();
-        }else if(view.getId()== R.id.button3){
-            Intent intent1 = new Intent( "ccpe001.familywallet.transaction_main");
-            startActivity(intent1);
         }
-
     }
 
     @Override
@@ -93,5 +80,5 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
-
+    
 }

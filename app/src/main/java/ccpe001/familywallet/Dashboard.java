@@ -26,6 +26,7 @@ public class Dashboard extends AppCompatActivity
 
     Toolbar toolbar = null;
     NavigationView navigationView = null;
+    DrawerLayout drawerLayout = null;
 
 
     @Override
@@ -60,6 +61,7 @@ public class Dashboard extends AppCompatActivity
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header_navigation_drawer);
         CircleButton img = (CircleButton)headerView.findViewById(R.id.loggedUsrImg);
@@ -138,8 +140,8 @@ public class Dashboard extends AppCompatActivity
             fragmentTransaction.commit();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -153,6 +155,7 @@ public class Dashboard extends AppCompatActivity
             fragmentTransaction.replace(R.id.fragmentContainer1,addmember);
             fragmentTransaction.commit();
             //Close nav drawer here
+            drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
 }
