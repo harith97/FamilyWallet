@@ -22,15 +22,16 @@
 
     <AbsoluteLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="551dp"
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="324dp"
-            android:layout_y="512dp"
+            android:id="@+id/btnAddTransaction"
+            android:onClick="addTransaction"
+            android:layout_width="65dp"
+            android:layout_height="63dp"
+            android:layout_x="287dp"
+            android:layout_y="470dp"
             android:background="@mipmap/add_transaction" />
     </AbsoluteLayout>
 
