@@ -80,10 +80,5 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
-    public void openTransaction(View view){
-
-    Intent newInt = new Intent(SignIn.this, ccpe001.familywallet.transaction.transaction_main.class);
-        startActivity(newInt);
-
-    }
+    
 }
