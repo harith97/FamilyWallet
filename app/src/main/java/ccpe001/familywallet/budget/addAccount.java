@@ -17,6 +17,8 @@ public class addAccount extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Toast.makeText(getContext(),"Add wallet",Toast.LENGTH_LONG).show();
-        return inflater.inflate(R.layout.add_member, container, false);
+
+        View view = inflater.inflate(R.layout.add_account,container, false);
+        return view;
     }
 }

@@ -17,7 +17,7 @@ public class accUpdate extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Toast.makeText(getContext(),"transfer money",Toast.LENGTH_LONG).show();
-
-        return inflater.inflate(R.layout.add_member, container, false);
+        View view = inflater.inflate(R.layout.acc_update, container, false);
+        return view;
     }
 }
