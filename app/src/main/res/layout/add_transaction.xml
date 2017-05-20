@@ -6,60 +6,138 @@
     android:layout_height="match_parent"
     tools:context="ccpe001.familywallet.transaction.add_transaction">
 
-    <AbsoluteLayout
-        android:layout_width="418dp"
-        android:layout_height="514dp"
-        android:minHeight="179dp"
-        android:orientation="horizontal"
+    <RelativeLayout
+        android:layout_width="370dp"
+        android:layout_height="527dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.333"
-        tools:layout_editor_absoluteX="2dp">
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="264dp"
+            android:layout_height="49dp"
+            android:layout_weight="1"
+            android:layout_x="84dp"
+            android:layout_y="408dp"
+            android:text="TextView"
+            android:layout_alignTop="@+id/imageView29"
+            android:layout_alignStart="@+id/editText20" />
+
+        <ImageView
+            android:id="@+id/imageView29"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_x="16dp"
+            android:layout_y="408dp"
+            app:srcCompat="@mipmap/location"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/editText20"
+            android:layout_width="96dp"
+            android:layout_height="56dp"
+            android:layout_alignStart="@+id/spinner8"
+            android:layout_alignTop="@+id/imgCalender"
+            android:layout_weight="1"
+            android:layout_x="84dp"
+            android:layout_y="341dp"
+            android:editable="false"
+            android:hint="Set Date"
+            android:textAlignment="center"
+            android:layout_alignBottom="@+id/imgCalender" />
+
+        <ImageView
+            android:id="@+id/imgCalender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/imgCategory"
+            android:layout_marginTop="27dp"
+            android:layout_x="16dp"
+            android:layout_y="349dp"
+            app:srcCompat="@mipmap/calander" />
+
+        <EditText
+            android:id="@+id/editText21"
+            android:layout_width="134dp"
+            android:layout_height="51dp"
+            android:layout_weight="1"
+            android:layout_x="201dp"
+            android:layout_y="345dp"
+            android:editable="false"
+            android:hint="Set Time"
+            android:textAlignment="center"
+            android:layout_alignBottom="@+id/editText20"
+            android:layout_alignEnd="@+id/textView14"
+            android:layout_alignTop="@+id/editText20" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="195dp"
+            android:layout_height="43dp"
+            android:layout_alignBottom="@+id/imgCategory"
+            android:layout_alignEnd="@+id/editText19"
+            android:layout_alignStart="@+id/editText19"
+            android:layout_alignTop="@+id/imgCategory"
+            android:layout_weight="3"
+            android:layout_x="72dp"
+            android:layout_y="280dp"
+            android:text="Category"
+            tools:layout_editor_absoluteX="103dp"
+            tools:layout_editor_absoluteY="333dp" />
+
+        <ImageView
+            android:id="@+id/imgCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="51dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/imgAccount"
+            android:layout_marginTop="28dp"
+            android:layout_x="11dp"
+            android:layout_y="280dp"
+            app:srcCompat="@mipmap/category" />
 
         <Spinner
-            android:id="@+id/spinner7"
-            android:layout_width="wrap_content"
-            android:layout_height="42dp"
+            android:id="@+id/spinner8"
+            android:layout_width="287dp"
+            android:layout_height="38dp"
+            android:layout_alignBottom="@+id/imgAccount"
+            android:layout_alignStart="@+id/radioButton7"
+            android:layout_alignTop="@+id/imgAccount"
             android:layout_weight="1"
-            android:layout_x="251dp"
-            android:layout_y="24dp"
-            android:entries="@array/spinnerCurrency"
-            tools:layout_editor_absoluteX="246dp"
-            tools:layout_editor_absoluteY="37dp" />
-
-        <EditText
-            android:id="@+id/editText9"
-            android:layout_width="186dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_x="64dp"
-            android:layout_y="24dp"
-            android:ems="10"
-            android:gravity="right"
-            android:inputType="numberDecimal"
-            android:text="1500.00"
+            android:layout_x="72dp"
+            android:layout_y="221dp"
+            android:entries="@array/spinnerAccount"
+            android:gravity="center"
             tools:layout_editor_absoluteX="30dp"
-            tools:layout_editor_absoluteY="37dp" />
+            tools:layout_editor_absoluteY="258dp" />
 
-        <RadioButton
-            android:id="@+id/radioButton5"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_x="217dp"
-            android:layout_y="90dp"
-            android:checked="false"
-            android:text="Income"
-            tools:layout_editor_absoluteX="197dp"
-            tools:layout_editor_absoluteY="117dp" />
-
-        <EditText
-            android:id="@+id/editText10"
+        <ImageView
+            android:id="@+id/imgAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_x="88dp"
-            android:layout_y="157dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/imgNote"
+            android:layout_marginTop="27dp"
+            android:layout_x="3dp"
+            android:layout_y="216dp"
+            app:srcCompat="@mipmap/account" />
+
+        <EditText
+            android:id="@+id/editText19"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/radioButton7"
+            android:layout_alignTop="@+id/imgNote"
+            android:layout_marginLeft="34dp"
+            android:layout_marginStart="16dp"
+            android:layout_x="96dp"
+            android:layout_y="146dp"
             android:ems="10"
             android:hint="Title"
             android:inputType="textPersonName"
@@ -67,142 +145,105 @@
             tools:layout_editor_absoluteX="85dp"
             tools:layout_editor_absoluteY="185dp" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="246dp"
-            android:layout_height="31dp"
-            android:layout_weight="1"
-            android:layout_x="92dp"
-            android:layout_y="286dp"
-            android:text="Category"
-            tools:layout_editor_absoluteX="103dp"
-            tools:layout_editor_absoluteY="333dp" />
-
-        <Spinner
-            android:id="@+id/spinner8"
-            android:layout_width="268dp"
-            android:layout_height="38dp"
-            android:layout_weight="1"
-            android:layout_x="78dp"
-            android:layout_y="228dp"
-            android:entries="@array/spinnerAccount"
-            android:gravity="center"
-            tools:layout_editor_absoluteX="30dp"
-            tools:layout_editor_absoluteY="258dp" />
+        <ImageView
+            android:id="@+id/imgNote"
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/imgType"
+            android:layout_below="@+id/imgType"
+            android:layout_marginTop="30dp"
+            android:layout_x="16dp"
+            android:layout_y="144dp"
+            app:srcCompat="@mipmap/note" />
 
         <RadioButton
-            android:id="@+id/radioButton6"
-            android:layout_width="122dp"
+            android:id="@+id/radioButton7"
+            android:layout_width="96dp"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/editText18"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="41dp"
+            android:layout_toEndOf="@+id/imgType"
             android:layout_weight="1"
-            android:layout_x="80dp"
+            android:layout_x="206dp"
             android:layout_y="90dp"
             android:checked="true"
             android:text="Expense"
             tools:layout_editor_absoluteX="58dp"
             tools:layout_editor_absoluteY="117dp" />
 
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
+        <RadioButton
+            android:id="@+id/radioButton8"
+            android:layout_width="109dp"
             android:layout_height="wrap_content"
-            android:layout_x="292dp"
-            android:layout_y="747dp"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/txtLocation"
-            android:layout_width="244dp"
-            android:layout_height="36dp"
-            android:layout_x="95dp"
-            android:layout_y="414dp"
-            android:text="TextView" />
-
-        <EditText
-            android:id="@+id/txtTime"
-            android:layout_width="wrap_content"
-            android:layout_height="51dp"
-            android:layout_x="241dp"
-            android:layout_y="350dp"
-            android:editable="false"
-            android:text="Set Time"
-            android:textAlignment="center" />
-
-        <EditText
-            android:id="@+id/txtDate"
-            android:layout_width="112dp"
-            android:layout_height="56dp"
-            android:layout_x="100dp"
-            android:layout_y="347dp"
-            android:editable="false"
-            android:hint="Set Date"
-            android:textAlignment="center" />
-
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="103dp"
-            android:layout_y="452dp"
-            android:text="Button" />
+            android:layout_alignBaseline="@+id/radioButton7"
+            android:layout_alignBottom="@+id/radioButton7"
+            android:layout_alignEnd="@+id/editText19"
+            android:layout_marginEnd="20dp"
+            android:layout_marginLeft="46dp"
+            android:layout_weight="1"
+            android:layout_x="56dp"
+            android:layout_y="87dp"
+            android:checked="false"
+            android:text="Income"
+            tools:layout_editor_absoluteX="197dp"
+            tools:layout_editor_absoluteY="117dp" />
 
         <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="59dp"
-            android:layout_height="65dp"
-            android:layout_x="6dp"
-            android:layout_y="16dp"
+            android:id="@+id/imgValue"
+            android:layout_width="68dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/imgType"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="13dp"
+            android:layout_x="7dp"
+            android:layout_y="12dp"
             app:srcCompat="@mipmap/price" />
 
+        <EditText
+            android:id="@+id/editText18"
+            android:layout_width="204dp"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:layout_weight="1"
+            android:layout_x="75dp"
+            android:layout_y="14dp"
+            android:ems="10"
+            android:gravity="right"
+            android:inputType="numberDecimal"
+            android:text="1500.00"
+            tools:layout_editor_absoluteX="30dp"
+            tools:layout_editor_absoluteY="37dp"
+            android:layout_alignBottom="@+id/imgValue"
+            android:layout_toEndOf="@+id/imgValue"
+            android:layout_marginStart="12dp" />
+
         <ImageView
-            android:id="@+id/imageView11"
+            android:id="@+id/imgType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="14dp"
-            android:layout_y="85dp"
-            app:srcCompat="@mipmap/income_expense" />
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/radioButton7"
+            android:layout_x="4dp"
+            android:layout_y="76dp"
+            app:srcCompat="@mipmap/income_expense"
+            tools:layout_editor_absoluteX="-64dp"
+            tools:layout_editor_absoluteY="116dp" />
 
-        <ImageView
-            android:id="@+id/imageView9"
+        <Spinner
+            android:id="@+id/spinner7"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="15dp"
-            android:layout_y="151dp"
-            app:srcCompat="@mipmap/note1" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="67dp"
-            android:layout_height="wrap_content"
-            android:layout_x="5dp"
-            android:layout_y="219dp"
-            app:srcCompat="@mipmap/account" />
-
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="35dp"
-            android:layout_height="38dp"
-            android:layout_x="21dp"
-            android:layout_y="350dp"
-            app:srcCompat="@mipmap/calander" />
-
-        <ImageView
-            android:id="@+id/imageView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="14dp"
-            android:layout_y="290dp"
-            app:srcCompat="@mipmap/category" />
-
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="16dp"
-            android:layout_y="408dp"
-            app:srcCompat="@mipmap/location" />
-
-    </AbsoluteLayout>
+            android:layout_height="42dp"
+            android:layout_alignBottom="@+id/editText18"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/editText18"
+            android:layout_weight="1"
+            android:layout_x="275dp"
+            android:layout_y="14dp"
+            android:entries="@array/spinnerCurrency"
+            tools:layout_editor_absoluteX="246dp"
+            tools:layout_editor_absoluteY="37dp" />
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
