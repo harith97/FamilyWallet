@@ -17,6 +17,12 @@
         <item>USD</item>
     </string-array>
 
+    <string-array name="spinnerLanguage">
+        <item>Sinhala</item>
+        <item>English</item>
+    </string-array>
+
+
     <string-array name="spinnerAccount">
         <item>Account 1</item>
         <item>Account 2</item>

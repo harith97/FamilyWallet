@@ -10,11 +10,28 @@
                       android:orientation="vertical">
 
             <Switch
-                    android:text="Local "
+                    android:text="Local mode"
+                    android:layout_marginTop="55dp"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/switch3"/>
 
-
+            <Switch
+                    android:text="App notifications"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/switch2"/>
+            <Spinner
+                    android:layout_width="match_parent"
+                    android:entries="@array/spinnerCurrency"
+                    android:layout_height="wrap_content" android:id="@+id/spinner"/>
+            <Spinner
+                    android:layout_width="match_parent"
+                    android:entries="@array/spinnerLanguage"
+                    android:layout_height="wrap_content" android:id="@+id/spinner2"/>
+            <Button
+                    android:text="Sign out"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/button"/>
 
 
         </LinearLayout>

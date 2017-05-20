@@ -1,8 +1,9 @@
 package ccpe001.familywallet;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,40 +13,36 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Toast;
 import at.markushi.ui.CircleButton;
 import ccpe001.familywallet.budget.accUpdate;
 import ccpe001.familywallet.budget.addAccount;
 import ccpe001.familywallet.budget.budgetList;
 import ccpe001.familywallet.summary.sumMain;
+import com.hitomi.cmlibrary.CircleMenu;
+import com.hitomi.cmlibrary.OnMenuSelectedListener;
 
 public class Dashboard extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener{
+        implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener,OnMenuSelectedListener{
 
     Toolbar toolbar = null;
     NavigationView navigationView = null;
     DrawerLayout drawerLayout = null;
-
+    private CircleMenu circleMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        circleMenu = (CircleMenu) findViewById(R.id.circleMenuBtn);
 
-
+        circleMenu.setMainMenu(Color.parseColor("#CDCDCD"),R.mipmap.amount,R.mipmap.calander);
+        circleMenu.addSubMenu(Color.parseColor("#CDCDCD"),R.mipmap.amount)
+                  .addSubMenu(Color.parseColor("#CDCDCD"),R.mipmap.amount)
+                  .addSubMenu(Color.parseColor("#CDCDCD"),R.mipmap.amount);
+        circleMenu.setOnMenuSelectedListener(this);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         //initialize dashboard fragment 1st
         /*android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
@@ -111,7 +108,7 @@ public class Dashboard extends AppCompatActivity
         if (id == R.id.transactionFrag) {
              /*android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
              android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-             Dashboard dashboard = new Dashboard();
+             transaction_main dashboard = new transaction_main();
              fragmentTransaction.replace(R.id.fragmentContainer1,dashboard);
              fragmentTransaction.commit();*/
         } else if (id == R.id.reportsFrag) {
@@ -138,6 +135,12 @@ public class Dashboard extends AppCompatActivity
             addAccount addwallet = new addAccount();
             fragmentTransaction.replace(R.id.fragmentContainer1,addwallet);
             fragmentTransaction.commit();
+        }else if (id == R.id.settingFrag) {
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Settings setting = new Settings();
+            fragmentTransaction.replace(R.id.fragmentContainer1,setting);
+            fragmentTransaction.commit();
         }
 
 
@@ -156,6 +159,14 @@ public class Dashboard extends AppCompatActivity
             fragmentTransaction.commit();
             //Close nav drawer here
             drawerLayout.closeDrawer(GravityCompat.START);
+        }
+    }
+
+    @Override
+    public void onMenuSelected(int i) {
+        if(i==0) {
+            Intent newInt = new Intent("ccpe001.familywallet.add_transaction");
+            startActivity(newInt);
         }
     }
 }
