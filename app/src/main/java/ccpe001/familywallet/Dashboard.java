@@ -36,10 +36,10 @@ public class Dashboard extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         circleMenu = (CircleMenu) findViewById(R.id.circleMenuBtn);
 
-        circleMenu.setMainMenu(Color.parseColor("#CDCDCD"),R.mipmap.amount,R.mipmap.calander);
-        circleMenu.addSubMenu(Color.parseColor("#CDCDCD"),R.mipmap.amount)
-                  .addSubMenu(Color.parseColor("#CDCDCD"),R.mipmap.amount)
-                  .addSubMenu(Color.parseColor("#CDCDCD"),R.mipmap.amount);
+        circleMenu.setMainMenu(Color.parseColor("#CDCDCD"),R.mipmap.price,R.mipmap.calander);
+        circleMenu.addSubMenu(Color.parseColor("#CDCDCD"),R.mipmap.price)
+                  .addSubMenu(Color.parseColor("#CDCDCD"),R.mipmap.price)
+                  .addSubMenu(Color.parseColor("#CDCDCD"),R.mipmap.price);
         circleMenu.setOnMenuSelectedListener(this);
         setSupportActionBar(toolbar);
 

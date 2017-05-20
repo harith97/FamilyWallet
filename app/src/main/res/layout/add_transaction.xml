@@ -14,31 +14,32 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.333">
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/txtLocation"
             android:layout_width="264dp"
             android:layout_height="49dp"
+            android:layout_alignStart="@+id/txtDate"
+            android:layout_alignTop="@+id/imageView29"
             android:layout_weight="1"
             android:layout_x="84dp"
             android:layout_y="408dp"
             android:text="TextView"
-            android:layout_alignTop="@+id/imageView29"
-            android:layout_alignStart="@+id/editText20" />
+            android:textSize="13dp"/>
 
         <ImageView
             android:id="@+id/imageView29"
             android:layout_width="wrap_content"
             android:layout_height="52dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
             android:layout_x="16dp"
             android:layout_y="408dp"
-            app:srcCompat="@mipmap/location"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true" />
+            app:srcCompat="@mipmap/location" />
 
         <EditText
-            android:id="@+id/editText20"
+            android:id="@+id/txtDate"
             android:layout_width="96dp"
             android:layout_height="56dp"
             android:layout_alignStart="@+id/spinner8"
@@ -48,8 +49,7 @@
             android:layout_y="341dp"
             android:editable="false"
             android:hint="Set Date"
-            android:textAlignment="center"
-            android:layout_alignBottom="@+id/imgCalender" />
+            android:textAlignment="center" />
 
         <ImageView
             android:id="@+id/imgCalender"
@@ -63,18 +63,18 @@
             app:srcCompat="@mipmap/calander" />
 
         <EditText
-            android:id="@+id/editText21"
+            android:id="@+id/txtTime"
             android:layout_width="134dp"
             android:layout_height="51dp"
+            android:layout_alignBottom="@+id/txtDate"
+            android:layout_alignEnd="@+id/textView14"
+            android:layout_alignTop="@+id/txtDate"
             android:layout_weight="1"
             android:layout_x="201dp"
             android:layout_y="345dp"
             android:editable="false"
             android:hint="Set Time"
-            android:textAlignment="center"
-            android:layout_alignBottom="@+id/editText20"
-            android:layout_alignEnd="@+id/textView14"
-            android:layout_alignTop="@+id/editText20" />
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/textView14"
@@ -204,8 +204,11 @@
             android:id="@+id/editText18"
             android:layout_width="204dp"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imgValue"
             android:layout_column="0"
+            android:layout_marginStart="12dp"
             android:layout_row="1"
+            android:layout_toEndOf="@+id/imgValue"
             android:layout_weight="1"
             android:layout_x="75dp"
             android:layout_y="14dp"
@@ -214,10 +217,7 @@
             android:inputType="numberDecimal"
             android:text="1500.00"
             tools:layout_editor_absoluteX="30dp"
-            tools:layout_editor_absoluteY="37dp"
-            android:layout_alignBottom="@+id/imgValue"
-            android:layout_toEndOf="@+id/imgValue"
-            android:layout_marginStart="12dp" />
+            tools:layout_editor_absoluteY="37dp" />
 
         <ImageView
             android:id="@+id/imgType"
