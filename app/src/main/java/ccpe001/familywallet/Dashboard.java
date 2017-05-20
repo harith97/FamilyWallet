@@ -138,6 +138,12 @@ public class Dashboard extends AppCompatActivity
             addAccount addwallet = new addAccount();
             fragmentTransaction.replace(R.id.fragmentContainer1,addwallet);
             fragmentTransaction.commit();
+        }else if (id == R.id.settingFrag) {
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Settings setting = new Settings();
+            fragmentTransaction.replace(R.id.fragmentContainer1,setting);
+            fragmentTransaction.commit();
         }
 
 

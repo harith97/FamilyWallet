@@ -52,7 +52,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        -
+
         <activity
             android:name=".Dashboard"
             android:label="@string/title_activity_navigation_drawer"

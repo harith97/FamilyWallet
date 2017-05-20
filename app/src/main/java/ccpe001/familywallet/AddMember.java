@@ -17,13 +17,19 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import java.util.Random;
+
+import static com.google.zxing.BarcodeFormat.QR_CODE;
+
 /**
  * Created by harithaperera on 5/10/17.
  */
-public class AddMember extends Fragment {
+public class AddMember extends Fragment  implements View.OnClickListener{
 
     private ImageView qrImage;
-    private TextView cautionText;
+    private TextView cautionText,regenerateQr;
+    private Random random;
+    private String randomNo;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,22 +40,35 @@ public class AddMember extends Fragment {
     }
 
     private void init(View v) {
-        String randomNo = "fgdfgdfgdfhdfgdfgdfgdfg";
-
+        random = new Random();//security problems
+        randomNo = String.valueOf(random.nextInt(1000000));
         cautionText = (TextView) v.findViewById(R.id.editText10);
-
+        regenerateQr = (TextView) v.findViewById(R.id.editText2);
+        regenerateQr.setOnClickListener(this);
         qrImage = (ImageView) v.findViewById(R.id.qrCodeImage);
+        setQr();
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.editText2) {
+            random = new Random();
+            randomNo = String.valueOf(random.nextInt(1000000));
+            setQr();
+        }
+    }
+
+    private void setQr(){
         MultiFormatWriter mfw = new MultiFormatWriter();
         try {
-            BitMatrix bitMatrix = mfw.encode(randomNo, BarcodeFormat.QR_CODE,200, 200);
+            BitMatrix bitMatrix = mfw.encode(randomNo, BarcodeFormat.QR_CODE, 600, 600);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
             qrImage.setImageBitmap(bitmap);
         } catch (WriterException e) {
             e.printStackTrace();
         }
+        Toast.makeText(getContext(),"Try now",Toast.LENGTH_SHORT).show();
     }
-
-
-
 }

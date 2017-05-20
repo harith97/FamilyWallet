@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import ccpe001.familywallet.R;
 
 public class accUpdate extends Fragment {
@@ -15,6 +16,8 @@ public class accUpdate extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Toast.makeText(getContext(),"transfer money",Toast.LENGTH_LONG).show();
+
         return inflater.inflate(R.layout.add_member, container, false);
     }
 }

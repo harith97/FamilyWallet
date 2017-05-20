@@ -5,21 +5,30 @@
               android:layout_height="match_parent">
 
 
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:layout_marginTop="55dp"
+
+            android:text="Go to other members mobile and scan the QR code..!"
+            android:id="@+id/editText10"/>
     <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="300dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="-30dp"
             android:id="@+id/qrCodeImage"/>
 
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-    android:textAlignment="center"
-            android:text="Scan QR to add member..!"
-            android:id="@+id/editText10"/>
-
+            android:text="Can't scan QR code?"
+            android:clickable="true"
+            android:layout_marginBottom="-5dp"
+            android:ems="10"
+            android:id="@+id/editText2"/>
 
 
 </LinearLayout>
