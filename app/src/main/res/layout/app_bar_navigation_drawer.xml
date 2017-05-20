@@ -29,12 +29,15 @@
 
     </FrameLayout>
 
-    <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
+
+    <com.hitomi.cmlibrary.CircleMenu
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
+            android:layout_centerInParent="true"
+            android:id="@+id/circleMenuBtn"
             android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@android:drawable/ic_dialog_email"/>
+
+            android:layout_gravity="bottom|end"
+    />
 
 </android.support.design.widget.CoordinatorLayout>

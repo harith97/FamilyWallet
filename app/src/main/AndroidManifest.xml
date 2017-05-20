@@ -105,16 +105,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".transaction.transaction_main"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="ccpe001.familywallet.transaction_main" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity android:name=".transaction.add_transaction">
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
