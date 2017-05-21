@@ -67,7 +67,7 @@
             android:layout_width="134dp"
             android:layout_height="51dp"
             android:layout_alignBottom="@+id/txtDate"
-            android:layout_alignEnd="@+id/textView14"
+            android:layout_alignEnd="@+id/txtCategory"
             android:layout_alignTop="@+id/txtDate"
             android:layout_weight="1"
             android:layout_x="201dp"
@@ -77,7 +77,7 @@
             android:textAlignment="center" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/txtCategory"
             android:layout_width="195dp"
             android:layout_height="43dp"
             android:layout_alignBottom="@+id/imgCategory"

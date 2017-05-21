@@ -30,4 +30,6 @@
     <string name="title_activity_transaction_main">transaction_main</string>
     <string name="hello_round">Hello Round World!</string>
     <string name="hello_square">Hello Square World!</string>
+    <string name="title_activity_transaction_category">transaction_category</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

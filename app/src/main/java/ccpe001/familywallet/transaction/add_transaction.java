@@ -18,7 +18,7 @@ import ccpe001.familywallet.R;
 public class add_transaction extends AppCompatActivity {
 
 
-    private TextView txtLocation;
+    private TextView txtLocation,txtCategory;
     int PLACE_PICKER_REQUEST=1;
 
     @Override
@@ -32,6 +32,15 @@ public class add_transaction extends AppCompatActivity {
                 startPlacePickerActivity();
             }
         });
+        txtCategory = (TextView)findViewById(R.id.txtCategory);
+        txtCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newInt = new Intent("ccpe001.familywallet.transaction.transaction_category");
+                startActivity(newInt);
+            }
+        });
+
     }
 
 
@@ -64,6 +73,9 @@ public class add_transaction extends AppCompatActivity {
         }
     }
 
+
+
+
     public void onStart(){
         super.onStart();
         TextView txtDate = (TextView) findViewById(R.id.txtDate);
@@ -89,5 +101,9 @@ public class add_transaction extends AppCompatActivity {
                 }
             }
         });
+
+
+
     }
+
 }
