@@ -61,8 +61,8 @@
             android:textAlignment="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
             android:layout_height="47dp"
             android:id="@+id/signInBtn"/>
          <Button
@@ -75,12 +75,16 @@
                 android:textAlignment="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="10dp"
+
+
                 android:layout_height="47dp"
                 android:id="@+id/qrscannerBtn"/>
-
-
+    <TextView
+            android:text="Not a member?"
+            android:clickable="true"
+            android:layout_gravity="bottom|end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/textView2"/>
 
 
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import ccpe001.familywallet.R;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -18,6 +19,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class SignIn extends AppCompatActivity implements View.OnClickListener{
 
     private Button signIn,scannerBtn;
+    private TextView toSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,25 +32,13 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         getSupportActionBar().setTitle(R.string.signin_title);
         signIn= (Button)findViewById(R.id.signInBtn);
         scannerBtn= (Button)findViewById(R.id.qrscannerBtn);
+        toSignUp = (TextView)findViewById(R.id.textView2);
         signIn.setOnClickListener(this);
         scannerBtn.setOnClickListener(this);
+        toSignUp.setOnClickListener(this);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem m) {
-        if(m.getItemId()== R.id.nav_next){
-            startActivity(new Intent(this,SignUp.class));//this to sign in
-        }
-        return super.onOptionsItemSelected(m);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuItem inflater;
-        getMenuInflater().inflate(R.menu.sign_menu,menu);
-        inflater = menu.findItem(R.id.nav_next);
-        return true;
-    }
 
 
     @Override
@@ -65,6 +55,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
             intentIntegrator.setBeepEnabled(false);
             intentIntegrator.setBarcodeImageEnabled(false);
             intentIntegrator.initiateScan();
+        }else if(view.getId()== R.id.textView2){
+            startActivity(new Intent(this,SignUp.class));//this to sign in
         }
     }
 

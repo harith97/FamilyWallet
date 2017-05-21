@@ -11,13 +11,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:showDividers="middle"
-            android:dividerHeight="3px"
+            android:divider="@color/colorAccent"
+            android:dividerHeight="3dp"
             android:padding="15dp"
             android:stretchColumns="*"
             android:orientation="horizontal">
-        <TableRow android:layout_weight="1"
-
-        >
+        <TableRow>
 
         <Switch
                 android:text="Local mode"
@@ -26,38 +25,26 @@
                 android:layout_height="wrap_content" android:id="@+id/switch3"/>
         </TableRow>
 
-        <TableRow android:layout_weight="1"
-
-        >
+        <TableRow>
         <Switch
                 android:text="App notifications"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/switch2"/>
 
         </TableRow>
-        <TableRow  android:layout_weight="1"
-        >
-        <TextView
-                android:text="Select language"
+        <TableRow>
+        <Spinner
                 android:layout_width="match_parent"
+                android:entries="@array/spinnerCurrency"
                 android:layout_height="wrap_content" android:id="@+id/spinner"/>
         </TableRow>
-        <TableRow android:layout_weight="1"
-        >
-        <TextView
-                android:text="Select currency"
+        <TableRow>
+        <Spinner
                 android:layout_width="match_parent"
+                android:entries="@array/spinnerLanguage"
                 android:layout_height="wrap_content" android:id="@+id/spinner2"/>
         </TableRow>
-        <TableRow android:layout_weight="1"
-        >
-            <TextView
-                    android:text="Select date format"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/spinner3"/>
-        </TableRow>
-        <TableRow android:layout_weight="1"
-        >
+        <TableRow>
         <CheckBox
                 android:text="Password set"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
@@ -66,8 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/checkBox"/>
         </TableRow>
-
-        <TableRow android:layout_weight="1">
+        <TableRow>
         <CheckBox
                 android:button="@null"
                 android:text="Automatic backup"
@@ -75,15 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/checkBox2"/>
         </TableRow>
-        <TableRow android:layout_weight="1">
-            <CheckBox
-                    android:button="@null"
-                    android:text="Show icon in status bar"
-                    android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/checkBox3"/>
-        </TableRow>
-        <TableRow android:layout_weight="1">
+        <TableRow>
         <Button
 
                 android:text="Sign out"
