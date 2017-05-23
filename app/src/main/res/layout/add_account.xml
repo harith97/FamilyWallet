@@ -6,24 +6,21 @@
     android:layout_height="match_parent"
     tools:context="ccpe001.familywallet.budget.addAccount">
 
-    <EditText
-        android:id="@+id/editText7"
+    <Spinner
+        android:id="@+id/spinType"
         android:layout_width="330dp"
         android:layout_height="40dp"
-        android:layout_x="26dp"
-        android:layout_y="88dp"
-        android:ems="10"
-        android:hint="Available Amount"
-        android:inputType="numberDecimal"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="83dp" />
+        android:layout_x="32dp"
+        android:layout_y="236dp"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="146dp" />
 
     <Switch
         android:id="@+id/swcPrivate"
         android:layout_width="159dp"
         android:layout_height="51dp"
-        android:layout_x="25dp"
-        android:layout_y="231dp"
+        android:layout_x="29dp"
+        android:layout_y="317dp"
         android:text="Is private"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="230dp" />
@@ -32,39 +29,42 @@
         android:id="@+id/swtNotify"
         android:layout_width="159dp"
         android:layout_height="51dp"
-        android:layout_x="199dp"
-        android:layout_y="230dp"
+        android:layout_x="203dp"
+        android:layout_y="316dp"
         android:text="Notification"
         tools:layout_editor_absoluteX="211dp"
         tools:layout_editor_absoluteY="230dp" />
 
     <EditText
+        android:id="@+id/editText7"
+        android:layout_width="330dp"
+        android:layout_height="40dp"
+        android:layout_x="30dp"
+        android:layout_y="174dp"
+        android:ems="10"
+        android:hint="Available Amount"
+        android:inputType="numberDecimal"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="83dp" />
+
+    <EditText
         android:id="@+id/editText5"
         android:layout_width="330dp"
         android:layout_height="40dp"
-        android:layout_x="24dp"
-        android:layout_y="26dp"
+        android:layout_x="28dp"
+        android:layout_y="112dp"
         android:ems="10"
         android:hint="Account Name"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="16dp" />
 
-    <Spinner
-        android:id="@+id/spinType"
-        android:layout_width="330dp"
-        android:layout_height="40dp"
-        android:layout_x="30dp"
-        android:layout_y="150dp"
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="146dp" />
-
     <Button
         android:id="@+id/btnAdd"
         android:layout_width="152dp"
         android:layout_height="wrap_content"
-        android:layout_x="112dp"
-        android:layout_y="309dp"
+        android:layout_x="119dp"
+        android:layout_y="397dp"
         android:text="Submit" />
 
 </AbsoluteLayout>

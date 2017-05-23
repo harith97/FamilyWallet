@@ -41,7 +41,7 @@ public class TimeDialog extends DialogFragment implements TimePickerDialog.OnTim
         txtTime.setText(time1);
     }
 
-    public String pad(int input)
+    public static String pad(int input)
     {
 
         String str = "";

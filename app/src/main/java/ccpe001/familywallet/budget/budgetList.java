@@ -16,8 +16,6 @@ public class budgetList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Toast.makeText(getContext(),"Budget",Toast.LENGTH_LONG).show();
-
-
         View view = inflater.inflate(R.layout.budget_list, container, false);
         return view;
     }

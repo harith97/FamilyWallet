@@ -15,6 +15,13 @@
     <string-array name="spinnerCurrency">
         <item>LKR</item>
         <item>USD</item>
+        <item>Rs(Convert)</item>
+    </string-array>
+
+    <string-array name="spinnerDateFor">
+        <item>2001/03/14</item>
+        <item>14/03/2001</item>
+        <item>March 14, 2001</item>
     </string-array>
 
     <string-array name="Category">

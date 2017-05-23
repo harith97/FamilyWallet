@@ -6,29 +6,22 @@
     android:layout_height="match_parent"
     tools:context="ccpe001.familywallet.budget.accUpdate">
 
-    <Button
-        android:id="@+id/transfer"
-        android:layout_width="197dp"
-        android:layout_height="wrap_content"
-        android:layout_x="73dp"
-        android:layout_y="401dp"
-        android:text="Transfer" />
-
-    <Spinner
-        android:id="@+id/transTo"
-        android:layout_width="332dp"
-        android:layout_height="46dp"
-        android:layout_x="26dp"
-        android:layout_y="334dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="42dp" />
+    <TextView
+        android:id="@+id/tranAmount"
+        android:layout_width="227dp"
+        android:layout_height="31dp"
+        android:layout_x="30dp"
+        android:layout_y="63dp"
+        android:text="Amount"
+        android:textAlignment="textStart"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/accAmount"
         android:layout_width="335dp"
         android:layout_height="wrap_content"
-        android:layout_x="29dp"
-        android:layout_y="84dp"
+        android:layout_x="30dp"
+        android:layout_y="102dp"
         android:ems="10"
         android:inputType="numberDecimal" />
 
@@ -36,29 +29,9 @@
         android:id="@+id/accOwn"
         android:layout_width="227dp"
         android:layout_height="31dp"
-        android:layout_x="29dp"
-        android:layout_y="151dp"
+        android:layout_x="30dp"
+        android:layout_y="169dp"
         android:text="Transfer From"
-        android:textAlignment="textStart"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tranAmount"
-        android:layout_width="227dp"
-        android:layout_height="31dp"
-        android:layout_x="29dp"
-        android:layout_y="43dp"
-        android:text="Amount"
-        android:textAlignment="textStart"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/accOther"
-        android:layout_width="227dp"
-        android:layout_height="31dp"
-        android:layout_x="35dp"
-        android:layout_y="281dp"
-        android:text="Transfer to"
         android:textAlignment="textStart"
         android:textStyle="bold" />
 
@@ -66,8 +39,44 @@
         android:id="@+id/transFrom"
         android:layout_width="332dp"
         android:layout_height="45dp"
-        android:layout_x="23dp"
-        android:layout_y="198dp"
+        android:layout_x="24dp"
+        android:layout_y="216dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="42dp" />
+
+    <TextView
+        android:id="@+id/accOther"
+        android:layout_width="227dp"
+        android:layout_height="31dp"
+        android:layout_x="36dp"
+        android:layout_y="291dp"
+        android:text="Transfer to"
+        android:textAlignment="textStart"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/transTo"
+        android:layout_width="332dp"
+        android:layout_height="46dp"
+        android:layout_x="32dp"
+        android:layout_y="333dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="42dp" />
+
+    <Button
+        android:id="@+id/transfer"
+        android:layout_width="225dp"
+        android:layout_height="wrap_content"
+        android:layout_x="81dp"
+        android:layout_y="390dp"
+        android:text="Transfer" />
+
+    <Button
+        android:id="@+id/btnDtl"
+        android:layout_width="228dp"
+        android:layout_height="wrap_content"
+        android:layout_x="79dp"
+        android:layout_y="441dp"
+        android:text="Delete"
+        android:onClick="toDelete"/>
 </AbsoluteLayout>
