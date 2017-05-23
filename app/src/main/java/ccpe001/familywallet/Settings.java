@@ -1,26 +1,21 @@
 package ccpe001.familywallet;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-import ccpe001.familywallet.transaction.DateDialog;
-import ccpe001.familywallet.transaction.TimeDialog;
 
+import com.github.orangegangsters.lollipin.lib.managers.AppLock;
+import com.github.orangegangsters.lollipin.lib.managers.LockManager;
 import net.rdrei.android.dirchooser.DirectoryChooserActivity;
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 import net.rdrei.android.dirchooser.DirectoryChooserFragment;
@@ -35,10 +30,10 @@ import static ccpe001.familywallet.transaction.TimeDialog.pad;
 /**
  * Created by harithaperera on 5/8/17.
  */
-public class Settings extends Fragment implements View.OnClickListener,Switch.OnCheckedChangeListener{
+public class Settings extends Fragment implements View.OnClickListener,Switch.OnCheckedChangeListener,DirectoryChooserFragment.OnFragmentInteractionListener{
 
-    private Switch localMode,statusIcon,autoSync,autoBackUp,appNotySwitch;
-    private Button signOutBtn;
+    private Switch localMode,statusIcon,autoSync,autoBackUp,appNotySwitch,enDisPinSwitch;
+    private Button signOutBtn,setPinBtn;
     private TextView langText,currText,dateForText,dailyRemText,backupLocText,appPwText;
     private AlertDialog.Builder langBuilder,currBuilder,dateForBuilder,enterPinBuilder;
     private TableRow langRow,currRow,dateForRow,dailyRemRow,backupLocRow,appPassRow;
@@ -47,7 +42,11 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     private File root;
     private File currentFolder;
     private DirectoryChooserFragment mDialog;
-    private static final int RQ_CODE = 0;
+    private static final int SET_PIN = 0;
+    private static final int ENABLE_PIN = 1;
+    private static final int DIR_CHOOSER = 2;
+
+
     private String[] langArr,currArr,dateForArr;
     private EditText confPwTxt,newTxt,oldPwTxt;
 
@@ -97,7 +96,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         appPassRow.setOnClickListener(this);
         appPwText = (TextView) v.findViewById(R.id.statusAppPw);
         signOutBtn = (Button) v.findViewById(R.id.signOutBtn);
-
+        signOutBtn.setOnClickListener(this);
 
         langBuilder = new AlertDialog.Builder(getContext());
         langBuilder.setTitle("Language");
@@ -164,15 +163,15 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
                 }
             },c.get(Calendar.HOUR_OF_DAY),c.get(Calendar.MINUTE),false).show();
         }else if(view.getId()==R.id.backupLocRow) {
-            Intent intent = new Intent(getContext(), DirectoryChooserActivity.class);
+
             final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
                     .newDirectoryName("dfdff")
-                    .allowReadOnlyDirectory(true)
-                    .allowNewDirectoryNameModification(true)
                     .build();
 
-            intent.putExtra(DirectoryChooserActivity.EXTRA_CONFIG,config);
-            startActivityForResult(intent,RQ_CODE);
+            mDialog = DirectoryChooserFragment.newInstance(config);
+            mDialog.show(getActivity().getFragmentManager(),null);
+
+
         }else if(view.getId()==R.id.appPasswordRow){
             enterPinBuilder = new AlertDialog.Builder(getActivity());
             enterPinBuilder.setTitle("Enter PIN");
@@ -180,40 +179,35 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
             View alertDiaView = inflater.inflate(R.layout.passwordsetter,null);
             enterPinBuilder.setView(alertDiaView);
 
-            confPwTxt = (EditText) alertDiaView.findViewById(R.id.passwordConfTxt);
-            newTxt = (EditText) alertDiaView.findViewById(R.id.passwordTxt);
-            oldPwTxt = (EditText) alertDiaView.findViewById(R.id.oldPasswordTxt);
-
-
+            setPinBtn = (Button) alertDiaView.findViewById(R.id.setPinBtn);
+            enDisPinSwitch = (Switch) alertDiaView.findViewById(R.id.enDisPinSwitch);
+            setPinBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getContext(),CustomPinActivity.class);
+                    intent.putExtra(AppLock.EXTRA_TYPE,AppLock.ENABLE_PINLOCK);
+                    getActivity().startActivityForResult(intent,SET_PIN);
+                }
+            });
+            enDisPinSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    Intent intent = new Intent(getContext(),CustomPinActivity.class);
+                    if(b){
+                        Toast.makeText(getContext(),"dfdfdf",Toast.LENGTH_LONG).show();
+                        LockManager<CustomPinActivity> lockManager = LockManager.getInstance();
+                        lockManager.enableAppLock(getContext(),CustomPinActivity.class);
+                        startActivityForResult(intent, ENABLE_PIN);
+                    }else{
+                        LockManager<CustomPinActivity> lockManager = LockManager.getInstance();
+                        lockManager.disableAppLock();
+                    }
+                }
+            });
             enterPinBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.dismiss();
-                }
-            });
-            enterPinBuilder.setPositiveButton("Set", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    final String newPw = newTxt.getText().toString();
-                    final String oldPw = oldPwTxt.getText().toString();
-                    final String confPw = confPwTxt.getText().toString();
-
-                    if(Validate.confPassword(newPw,confPw,getContext())){
-                            pinStatus = true;
-                            pin = newPw;
-                            storePWSharedPref();
-                            appPwText.setText(String.valueOf(pinStatus));
-                    }else{
-                        pinStatus = false;
-                        storePWSharedPref();
-                        appPwText.setText(String.valueOf(pinStatus));
-                    }
-                }
-            });
-            enterPinBuilder.setNeutralButton("Change", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-
                 }
             });
 
@@ -221,15 +215,22 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         }
 
 
-
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == RQ_CODE){
+        if (requestCode == 34){
             if (resultCode == DirectoryChooserActivity.RESULT_CODE_DIR_SELECTED){
                 data.getStringExtra(DirectoryChooserActivity.RESULT_SELECTED_DIR);
             }
+        }else if(requestCode == ENABLE_PIN){
+            Toast.makeText(getContext(),"enabled pin",Toast.LENGTH_LONG).show();
+
+        }
+        else if(requestCode == SET_PIN){
+            Toast.makeText(getContext(),"set pin",Toast.LENGTH_LONG).show();
+
         }
     }
 
@@ -373,6 +374,17 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     }
 
 
-}
 
+
+    @Override
+    public void onSelectDirectory(@NonNull String path) {
+        mDialog.setTargetFragment(getActivity().getFragmentManager().findFragmentById(R.id.settingFrag),DIR_CHOOSER);
+        mDialog.show(getActivity().getFragmentManager(),null);
+    }
+
+    @Override
+    public void onCancelChooser() {
+        mDialog.dismiss();
+    }
+}
 

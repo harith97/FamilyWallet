@@ -14,7 +14,7 @@ public class Validate {
     public static boolean confPassword(String newPw, String confPw,Context context) {
         if(newPw.equals(confPw))
         {
-            if((!newPw.isEmpty())&&(!confPw.isEmpty()))
+            if((!newPw.isEmpty())||(!confPw.isEmpty()))
             {
                 return true;
             }
@@ -32,4 +32,29 @@ public class Validate {
     }
 
 
+    public static boolean confChangePassword(String newPw, String confPw, String eteredOldPw,String pin, Context context) {
+        if (pin.equals(eteredOldPw)){
+            if(newPw.equals(confPw))
+            {
+                if((!newPw.isEmpty())||(!confPw.isEmpty())||(!eteredOldPw.isEmpty()))
+                {
+                    return true;
+                }
+                else
+                {
+                    Toast.makeText(context,"Password fields empty.",Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            }
+            else
+            {
+                Toast.makeText(context,"Password not matching.",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }else{
+            Toast.makeText(context,"Old password not correct",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+    }
 }
