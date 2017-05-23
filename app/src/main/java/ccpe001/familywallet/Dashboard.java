@@ -3,7 +3,6 @@ package ccpe001.familywallet;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,13 +11,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.hitomi.cmlibrary.CircleMenu;
+import com.hitomi.cmlibrary.OnMenuSelectedListener;
+
 import at.markushi.ui.CircleButton;
+import ccpe001.familywallet.budget.BudgetHandling;
 import ccpe001.familywallet.budget.accUpdate;
 import ccpe001.familywallet.budget.addAccount;
 import ccpe001.familywallet.budget.budgetList;
 import ccpe001.familywallet.summary.sumMain;
-import com.hitomi.cmlibrary.CircleMenu;
-import com.hitomi.cmlibrary.OnMenuSelectedListener;
 
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener,OnMenuSelectedListener{
@@ -166,6 +169,10 @@ public class Dashboard extends AppCompatActivity
         if(i==0) {
             Intent newInt = new Intent("ccpe001.familywallet.add_transaction");
             startActivity(newInt);
+        }
+        if(i==1){
+            Intent newInt1 = new Intent(this,BudgetHandling.class);
+            startActivity(newInt1);
         }
     }
 }

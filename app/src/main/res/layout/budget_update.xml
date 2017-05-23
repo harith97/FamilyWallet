@@ -65,45 +65,33 @@
         android:layout_alignStart="@+id/txtBname"
         android:layout_alignEnd="@+id/txtBname" />
 
-    <ToggleButton
-        android:id="@+id/notiBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ToggleButton"
-        android:layout_alignBaseline="@+id/textView3"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="250dp"
-        android:layout_height="36dp"
-        android:text="Notification"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_below="@+id/catSelect"
-        android:layout_alignStart="@+id/catSelect"
-        android:layout_marginTop="20dp" />
-
     <Button
         android:id="@+id/btnForecast"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Forecast"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="20dp"
         android:layout_alignBaseline="@+id/btnSubmit"
         android:layout_alignBottom="@+id/btnSubmit"
-        android:layout_alignStart="@+id/textView3" />
+        android:layout_alignStart="@+id/catSelect" />
 
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Submit"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/notiBtn"
-        android:layout_alignEnd="@+id/notiBtn" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/catSelect"
+        android:layout_marginBottom="75dp" />
+
+    <Switch
+        android:id="@+id/switch4"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_marginBottom="11dp"
+        android:text="Notification"
+        android:layout_above="@+id/btnSubmit"
+        android:layout_alignStart="@+id/catSelect"
+        android:layout_alignEnd="@+id/btnSubmit" />
 
 </RelativeLayout>

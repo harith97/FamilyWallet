@@ -118,6 +118,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".transaction.transaction_category"
             android:label="@string/title_activity_transaction_category"
@@ -130,10 +131,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDwIsPHS1-FJer8-92cEOyZ9VERehechRg" />
+
     </application>
 
 </manifest>
