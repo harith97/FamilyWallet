@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/txtDate"
+        android:layout_marginStart="7dp"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/round" />
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/img"
+        android:layout_alignEnd="@+id/txtCategory"
+        android:layout_marginEnd="16dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/txtDate"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:layout_alignBaseline="@+id/txtCategory"
+        android:layout_alignBottom="@+id/txtCategory"
+        android:layout_marginStart="33dp"
+        android:layout_toEndOf="@+id/txtCategory"
+        android:ems="10"
+        android:inputType="date" />
+
+    <TextView
+        android:id="@+id/txtCategory"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/img"
+        android:text="TextView"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txtAmount"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_above="@+id/txtTitle"
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@+id/txtDate"
+        android:text="TextView" />
+</RelativeLayout>

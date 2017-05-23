@@ -1,15 +1,11 @@
 package ccpe001.familywallet.transaction;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
+
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
@@ -90,7 +86,7 @@ public class add_transaction extends AppCompatActivity {
             }
         });
 
-        TextView txtTime = (TextView) findViewById(R.id.txtTime);
+        TextView txtTime = (TextView) findViewById(R.id.txtDate);
         txtTime.setOnFocusChangeListener(new View.OnFocusChangeListener(){
             @Override
             public void onFocusChange(View v, boolean hasFocus){

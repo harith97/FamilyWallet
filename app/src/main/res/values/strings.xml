@@ -17,6 +17,15 @@
         <item>USD</item>
     </string-array>
 
+    <string-array name="Category">
+        <item>FOOD</item>
+        <item>CAR</item>
+        <item>ENTERTAINMENT</item>
+        <item>WORK</item>
+        <item>ELECTRONICS</item>
+        <item>HOME</item>
+    </string-array>
+
     <string-array name="spinnerLanguage">
         <item>Sinhala</item>
         <item>English</item>

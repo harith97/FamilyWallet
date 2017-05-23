@@ -67,6 +67,7 @@ public class transaction_category extends AppCompatActivity {
             }
         });
 
+
         categoryToolbar = (Toolbar) findViewById(R.id.categoryToolbar);
         categoryToolbar.setTitle("Category");
 
@@ -119,7 +120,7 @@ public class transaction_category extends AppCompatActivity {
                     CategoryTab02 tab2 = new CategoryTab02();
                     return  tab2;
                 case 2:
-                    CategoryTab03 tab3 = new CategoryTab03();
+                    Transaction_main tab3 = new Transaction_main();
                     return tab3;
                 default:
                     return null;

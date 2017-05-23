@@ -1,249 +1,347 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="ccpe001.familywallet.transaction.add_transaction">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="370dp"
-        android:layout_height="527dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/txtLocation"
-            android:layout_width="264dp"
-            android:layout_height="49dp"
-            android:layout_alignStart="@+id/txtDate"
-            android:layout_alignTop="@+id/imageView29"
-            android:layout_weight="1"
-            android:layout_x="84dp"
-            android:layout_y="408dp"
-            android:text="TextView"
-            android:textSize="13dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/imageView29"
-            android:layout_width="wrap_content"
-            android:layout_height="52dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_x="16dp"
-            android:layout_y="408dp"
-            app:srcCompat="@mipmap/location" />
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tableLayout">
 
-        <EditText
-            android:id="@+id/txtDate"
-            android:layout_width="96dp"
-            android:layout_height="56dp"
-            android:layout_alignStart="@+id/spinner8"
-            android:layout_alignTop="@+id/imgCalender"
-            android:layout_weight="1"
-            android:layout_x="84dp"
-            android:layout_y="341dp"
-            android:editable="false"
-            android:hint="Set Date"
-            android:textAlignment="center" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="right">
 
-        <ImageView
-            android:id="@+id/imgCalender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/imgCategory"
-            android:layout_marginTop="27dp"
-            android:layout_x="16dp"
-            android:layout_y="349dp"
-            app:srcCompat="@mipmap/calander" />
+                    <Button
+                        android:id="@+id/button3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Button" />
+                </TableRow>
+            </TableLayout>
 
-        <EditText
-            android:id="@+id/txtTime"
-            android:layout_width="134dp"
-            android:layout_height="51dp"
-            android:layout_alignBottom="@+id/txtDate"
-            android:layout_alignEnd="@+id/txtCategory"
-            android:layout_alignTop="@+id/txtDate"
-            android:layout_weight="1"
-            android:layout_x="201dp"
-            android:layout_y="345dp"
-            android:editable="false"
-            android:hint="Set Time"
-            android:textAlignment="center" />
+            <TableLayout
+                android:id="@+id/tableLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tableLayout3"
+                android:layout_below="@+id/tableLayout3">
 
-        <TextView
-            android:id="@+id/txtCategory"
-            android:layout_width="195dp"
-            android:layout_height="43dp"
-            android:layout_alignBottom="@+id/imgCategory"
-            android:layout_alignEnd="@+id/editText19"
-            android:layout_alignStart="@+id/editText19"
-            android:layout_alignTop="@+id/imgCategory"
-            android:layout_weight="3"
-            android:layout_x="72dp"
-            android:layout_y="280dp"
-            android:text="Category"
-            tools:layout_editor_absoluteX="103dp"
-            tools:layout_editor_absoluteY="333dp" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/imgCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="51dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/imgAccount"
-            android:layout_marginTop="28dp"
-            android:layout_x="11dp"
-            android:layout_y="280dp"
-            app:srcCompat="@mipmap/category" />
+                    <ImageView
+                        android:id="@+id/imageView29"
+                        android:layout_width="41dp"
+                        android:layout_height="41dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_x="16dp"
+                        android:layout_y="408dp"
+                        app:srcCompat="@mipmap/location" />
 
-        <Spinner
-            android:id="@+id/spinner8"
-            android:layout_width="287dp"
-            android:layout_height="38dp"
-            android:layout_alignBottom="@+id/imgAccount"
-            android:layout_alignStart="@+id/radioButton7"
-            android:layout_alignTop="@+id/imgAccount"
-            android:layout_weight="1"
-            android:layout_x="72dp"
-            android:layout_y="221dp"
-            android:entries="@array/spinnerAccount"
-            android:gravity="center"
-            tools:layout_editor_absoluteX="30dp"
-            tools:layout_editor_absoluteY="258dp" />
+                    <TextView
+                        android:id="@+id/txtLocation"
+                        android:layout_width="256dp"
+                        android:layout_height="42dp"
+                        android:layout_alignStart="@+id/txtDate"
+                        android:layout_alignTop="@+id/imageView29"
+                        android:layout_weight="1"
+                        android:layout_x="84dp"
+                        android:layout_y="408dp"
+                        android:gravity="center"
+                        android:hint="Tap To Set Location"
+                        android:textSize="13dp" />
 
-        <ImageView
-            android:id="@+id/imgAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/imgNote"
-            android:layout_marginTop="27dp"
-            android:layout_x="3dp"
-            android:layout_y="216dp"
-            app:srcCompat="@mipmap/account" />
+                </TableRow>
 
-        <EditText
-            android:id="@+id/editText19"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/radioButton7"
-            android:layout_alignTop="@+id/imgNote"
-            android:layout_marginLeft="34dp"
-            android:layout_marginStart="16dp"
-            android:layout_x="96dp"
-            android:layout_y="146dp"
-            android:ems="10"
-            android:hint="Title"
-            android:inputType="textPersonName"
-            android:textAlignment="center"
-            tools:layout_editor_absoluteX="85dp"
-            tools:layout_editor_absoluteY="185dp" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-        <ImageView
-            android:id="@+id/imgNote"
-            android:layout_width="66dp"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/imgType"
-            android:layout_below="@+id/imgType"
-            android:layout_marginTop="30dp"
-            android:layout_x="16dp"
-            android:layout_y="144dp"
-            app:srcCompat="@mipmap/note" />
+            </TableLayout>
 
-        <RadioButton
-            android:id="@+id/radioButton7"
-            android:layout_width="96dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editText18"
-            android:layout_marginStart="37dp"
-            android:layout_marginTop="41dp"
-            android:layout_toEndOf="@+id/imgType"
-            android:layout_weight="1"
-            android:layout_x="206dp"
-            android:layout_y="90dp"
-            android:checked="true"
-            android:text="Expense"
-            tools:layout_editor_absoluteX="58dp"
-            tools:layout_editor_absoluteY="117dp" />
+            <TableLayout
+                android:id="@+id/tableLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/tableLayout1"
+                android:layout_marginLeft="8dp"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tableLayout1">
 
-        <RadioButton
-            android:id="@+id/radioButton8"
-            android:layout_width="109dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/radioButton7"
-            android:layout_alignBottom="@+id/radioButton7"
-            android:layout_alignEnd="@+id/editText19"
-            android:layout_marginEnd="20dp"
-            android:layout_marginLeft="46dp"
-            android:layout_weight="1"
-            android:layout_x="56dp"
-            android:layout_y="87dp"
-            android:checked="false"
-            android:text="Income"
-            tools:layout_editor_absoluteX="197dp"
-            tools:layout_editor_absoluteY="117dp" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/imgValue"
-            android:layout_width="68dp"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/imgType"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="13dp"
-            android:layout_x="7dp"
-            android:layout_y="12dp"
-            app:srcCompat="@mipmap/price" />
+                    <ImageView
+                        android:id="@+id/imgAccount"
+                        android:layout_width="40dp"
+                        android:layout_height="41dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/imgNote"
+                        android:layout_x="3dp"
+                        android:layout_y="216dp"
+                        app:srcCompat="@mipmap/account" />
 
-        <EditText
-            android:id="@+id/editText18"
-            android:layout_width="204dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imgValue"
-            android:layout_column="0"
-            android:layout_marginStart="12dp"
-            android:layout_row="1"
-            android:layout_toEndOf="@+id/imgValue"
-            android:layout_weight="1"
-            android:layout_x="75dp"
-            android:layout_y="14dp"
-            android:ems="10"
-            android:gravity="right"
-            android:inputType="numberDecimal"
-            android:text="1500.00"
-            tools:layout_editor_absoluteX="30dp"
-            tools:layout_editor_absoluteY="37dp" />
+                    <Spinner
+                        android:id="@+id/spinner8"
+                        android:layout_width="263dp"
+                        android:layout_height="41dp"
+                        android:layout_alignTop="@+id/imgAccount"
+                        android:layout_weight="1"
+                        android:layout_x="72dp"
+                        android:layout_y="221dp"
+                        android:entries="@array/spinnerAccount"
+                        android:gravity="center"
+                        android:textAlignment="center" />
+                </TableRow>
 
-        <ImageView
-            android:id="@+id/imgType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/radioButton7"
-            android:layout_x="4dp"
-            android:layout_y="76dp"
-            app:srcCompat="@mipmap/income_expense"
-            tools:layout_editor_absoluteX="-64dp"
-            tools:layout_editor_absoluteY="116dp" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
 
-        <Spinner
-            android:id="@+id/spinner7"
-            android:layout_width="wrap_content"
-            android:layout_height="42dp"
-            android:layout_alignBottom="@+id/editText18"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/editText18"
-            android:layout_weight="1"
-            android:layout_x="275dp"
-            android:layout_y="14dp"
-            android:entries="@array/spinnerCurrency"
-            tools:layout_editor_absoluteX="246dp"
-            tools:layout_editor_absoluteY="37dp" />
-    </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/imgCategory"
+                        android:layout_width="41dp"
+                        android:layout_height="41dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/imgAccount"
+                        android:layout_x="11dp"
+                        android:layout_y="280dp"
+                        app:srcCompat="@mipmap/category" />
 
-</android.support.constraint.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/txtCategory"
+                        android:layout_width="263dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="3"
+                        android:layout_x="72dp"
+                        android:layout_y="280dp"
+                        android:gravity="center"
+                        android:text="Category"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/imgNote"
+                        android:layout_width="41dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_weight="0"
+                        android:layout_x="16dp"
+                        android:layout_y="144dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:srcCompat="@mipmap/note" />
+
+                    <EditText
+                        android:id="@+id/editText19"
+                        android:layout_width="match_parent"
+                        android:layout_height="41dp"
+                        android:layout_alignTop="@+id/imgNote"
+                        android:layout_weight="5"
+                        android:layout_x="96dp"
+                        android:layout_y="146dp"
+                        android:ems="10"
+                        android:hint="Title"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp" />
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/tableLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/imgValue"
+                        android:layout_width="40dp"
+                        android:layout_height="41dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_weight="0"
+                        android:layout_x="7dp"
+                        android:layout_y="12dp"
+                        app:srcCompat="@mipmap/price" />
+
+                    <EditText
+                        android:id="@+id/editText18"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/imgValue"
+                        android:layout_column="0"
+                        android:layout_row="1"
+                        android:layout_span="0"
+                        android:layout_toEndOf="@+id/imgValue"
+                        android:layout_weight="1"
+                        android:layout_x="75dp"
+                        android:layout_y="14dp"
+                        android:ems="10"
+                        android:gravity="right"
+                        android:inputType="numberDecimal"
+                        android:text="1500.00" />
+
+                    <Spinner
+                        android:id="@+id/spinner7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/editText18"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@+id/editText18"
+                        android:layout_span="1"
+                        android:layout_weight=".6"
+                        android:layout_x="275dp"
+                        android:layout_y="14dp"
+                        android:entries="@array/spinnerCurrency" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/tableLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/tableLayout2"
+                android:layout_marginLeft="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/tableLayout4"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
+                app:layout_constraintVertical_bias="0.0">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/imgCalender"
+                        android:layout_width="41dp"
+                        android:layout_height="41dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/imgCategory"
+                        android:layout_x="16dp"
+                        android:layout_y="349dp"
+                        app:srcCompat="@mipmap/calander" />
+
+                    <EditText
+                        android:id="@+id/txtDate"
+                        android:layout_width="115dp"
+                        android:layout_height="41dp"
+                        android:layout_alignBottom="@+id/txtDate"
+                        android:layout_alignEnd="@+id/txtCategory"
+                        android:layout_alignTop="@+id/txtDate"
+                        android:layout_weight="1"
+                        android:layout_x="201dp"
+                        android:layout_y="345dp"
+                        android:editable="false"
+                        android:hint="Set Time"
+                        android:textAlignment="center"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/txtDate"
+                        android:layout_width="104dp"
+                        android:layout_height="40dp"
+                        android:layout_alignStart="@+id/spinner8"
+                        android:layout_alignTop="@+id/imgCalender"
+                        android:layout_weight="1"
+                        android:layout_x="84dp"
+                        android:layout_y="341dp"
+                        android:editable="false"
+                        android:hint="Set Date"
+                        android:textAlignment="center"
+                        android:textSize="18sp" />
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tableLayout4"
+                android:layout_below="@+id/tableLayout4">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:padding="10dp">
+
+                    <CheckBox
+                        android:id="@+id/checkBox6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Save As Template" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:padding="10dp">
+
+                    <CheckBox
+                        android:id="@+id/checkBox7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recurring Payment" />
+                </TableRow>
+            </TableLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
