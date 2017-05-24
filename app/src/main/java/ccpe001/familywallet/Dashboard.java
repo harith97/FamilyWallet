@@ -13,10 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.hitomi.cmlibrary.CircleMenu;
-import com.hitomi.cmlibrary.OnMenuSelectedListener;
-
 import at.markushi.ui.CircleButton;
+import ccpe001.familywallet.transaction.Transaction_main;
+
 import ccpe001.familywallet.budget.BudgetHandling;
 import ccpe001.familywallet.budget.accUpdate;
 import ccpe001.familywallet.budget.addAccount;
@@ -24,12 +23,11 @@ import ccpe001.familywallet.budget.budgetList;
 import ccpe001.familywallet.summary.sumMain;
 
 public class Dashboard extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener,OnMenuSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener{
 
     Toolbar toolbar = null;
     NavigationView navigationView = null;
     DrawerLayout drawerLayout = null;
-    private CircleMenu circleMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,22 +36,14 @@ public class Dashboard extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        circleMenu = (CircleMenu) findViewById(R.id.circleMenuBtn);
-
-        circleMenu.setMainMenu(Color.parseColor("#CDCDCD"),R.mipmap.price,R.mipmap.calander);
-        circleMenu.addSubMenu(Color.parseColor("#CDCDCD"),R.mipmap.price)
-                  .addSubMenu(Color.parseColor("#CDCDCD"),R.mipmap.price)
-                  .addSubMenu(Color.parseColor("#CDCDCD"),R.mipmap.price);
-        circleMenu.setOnMenuSelectedListener(this);
-        setSupportActionBar(toolbar);
 
 
         //initialize dashboard fragment 1st
-        /*android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        transactionMain transaction = new transactionMain();
+        Transaction_main transaction = new Transaction_main();
         fragmentTransaction.replace(R.id.fragmentContainer1,transaction);
-        fragmentTransaction.commit();*/
+        fragmentTransaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -110,11 +100,11 @@ public class Dashboard extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.transactionFrag) {
-             /*android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-             android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-             transaction_main dashboard = new transaction_main();
-             fragmentTransaction.replace(R.id.fragmentContainer1,dashboard);
-             fragmentTransaction.commit();*/
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Transaction_main transaction = new Transaction_main();
+            fragmentTransaction.replace(R.id.fragmentContainer1,transaction);
+            fragmentTransaction.commit();
         } else if (id == R.id.reportsFrag) {
             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -166,15 +156,5 @@ public class Dashboard extends AppCompatActivity
         }
     }
 
-    @Override
-    public void onMenuSelected(int i) {
-        if(i==0) {
-            Intent newInt = new Intent("ccpe001.familywallet.add_transaction");
-            startActivity(newInt);
-        }
-        if(i==1){
-            Intent newInt1 = new Intent(this,BudgetHandling.class);
-            startActivity(newInt1);
-        }
-    }
+
 }

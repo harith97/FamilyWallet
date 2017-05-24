@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -42,7 +43,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     private Button signOutBtn,setPinBtn;
     private TextView langText,currText,dateForText,dailyRemText,backupLocText,appPwText;
     private AlertDialog.Builder langBuilder,currBuilder,dateForBuilder,enterPinBuilder;
-    private TableRow langRow,currRow,dateForRow,dailyRemRow,backupLocRow,appPassRow;
+    private TableRow langRow,currRow,dateForRow,dailyRemRow,backupLocRow,appPassRow,feedBackRow,rateRow;
     private Calendar c;
     private DirectoryChooserFragment mDialog;
     private static final int SET_PIN = 0;
@@ -66,7 +67,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     }
 
     private void init(View v){
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Settings");
+        //((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Settings");
         c = Calendar.getInstance();
         langArr = getActivity().getResources().getStringArray(R.array.spinnerLanguage);
         currArr = getActivity().getResources().getStringArray(R.array.spinnerCurrency);
@@ -102,6 +103,10 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         appPwText = (TextView) v.findViewById(R.id.statusAppPw);
         signOutBtn = (Button) v.findViewById(R.id.signOutBtn);
         signOutBtn.setOnClickListener(this);
+        feedBackRow = (TableRow) v.findViewById(R.id.feedbackRow);
+        feedBackRow.setOnClickListener(this);
+        rateRow = (TableRow) v.findViewById(R.id.rateRow);
+        rateRow.setOnClickListener(this);
 
         langBuilder = new AlertDialog.Builder(getContext());
         langBuilder.setTitle("Language");
@@ -223,6 +228,17 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
             });
 
             enterPinBuilder.show();
+
+        }else if(view.getId()==R.id.feedbackRow){
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setData(Uri.parse("mailto:"));
+            intent.putExtra(Intent.EXTRA_EMAIL,"ccpe_001@gmail.com");
+            intent.putExtra(Intent.EXTRA_SUBJECT,"Customer Feedback");
+            intent.setType("message/rfc882");
+            intent.createChooser(intent,"Send email");
+            startActivity(intent);
+        }else if(view.getId()==R.id.rateRow){
+
         }
 
 
