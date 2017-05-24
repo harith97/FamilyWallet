@@ -20,8 +20,6 @@ public class CategoryTab01 extends Fragment {
     GridView grid;
 
 
-
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
