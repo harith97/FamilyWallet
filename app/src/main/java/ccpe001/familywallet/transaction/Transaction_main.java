@@ -1,12 +1,20 @@
 package ccpe001.familywallet.transaction;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -22,6 +30,10 @@ import ccpe001.familywallet.R;
 public class Transaction_main extends Fragment {
 
     ListView list;
+    FloatingActionButton fab_income,fab_expence,fab_main;
+    Animation fabOpen, fabClose, fabClockwise, fabAntiClockwise;
+    boolean isOpen = false;
+    CoordinatorLayout layout;
 
     public Transaction_main() {
         // Required empty public constructor
@@ -32,7 +44,66 @@ public class Transaction_main extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         View view = inflater.inflate(R.layout.transaction_main, container, false);
+
+        layout = (CoordinatorLayout) view.findViewById(R.id.layout);
+        fab_main = (FloatingActionButton) view.findViewById(R.id.fabMain);
+        fab_expence = (FloatingActionButton) view.findViewById(R.id.fabExpense);
+        fab_income = (FloatingActionButton) view.findViewById(R.id.fabIncome);
+        fabOpen = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.fab_open);
+        fabClose = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.fab_close);
+        fabClockwise = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.rotate_clockwise);
+        fabAntiClockwise = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.rotate_anticlockwise);
+        fab_main.startAnimation(fabOpen);
+        fab_main.setVisibility(view.VISIBLE);
+        fab_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isOpen){
+                    fab_income.startAnimation(fabClose);
+                    fab_expence.startAnimation(fabClose);
+                    fab_income.setClickable(false);
+                    fab_expence.setClickable(false);
+                    isOpen = false;
+                }
+                else {
+                    fab_income.startAnimation(fabOpen);
+                    fab_expence.startAnimation(fabOpen);
+                    fab_income.setClickable(true);
+                    fab_expence.setClickable(true);
+                    fab_main.startAnimation(fabClose);
+                    fab_main.setVisibility(view.GONE);
+                    isOpen = true;
+                    fab_income.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent("ccpe001.familywallet.add_transaction");
+                            startActivity(intent);
+                        }
+                    });
+
+
+                }
+
+            }
+        });
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isOpen){
+                    fab_income.startAnimation(fabClose);
+                    fab_expence.startAnimation(fabClose);
+                    fab_income.setClickable(false);
+                    fab_expence.setClickable(false);
+                    fab_main.startAnimation(fabOpen);
+                    fab_main.setVisibility(v.VISIBLE);
+                    isOpen = false;
+                }
+            }
+        });
+
+
 
 
         final String[] Title = {
@@ -103,5 +174,7 @@ public class Transaction_main extends Fragment {
         });
         return view;
     }
+
+
 
 }

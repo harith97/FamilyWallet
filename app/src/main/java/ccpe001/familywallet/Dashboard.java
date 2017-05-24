@@ -22,6 +22,7 @@ import ccpe001.familywallet.budget.accUpdate;
 import ccpe001.familywallet.budget.addAccount;
 import ccpe001.familywallet.budget.budgetList;
 import ccpe001.familywallet.summary.sumMain;
+import ccpe001.familywallet.transaction.Transaction_main;
 
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener,OnMenuSelectedListener{
@@ -29,7 +30,6 @@ public class Dashboard extends AppCompatActivity
     Toolbar toolbar = null;
     NavigationView navigationView = null;
     DrawerLayout drawerLayout = null;
-    private CircleMenu circleMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,22 +38,16 @@ public class Dashboard extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        circleMenu = (CircleMenu) findViewById(R.id.circleMenuBtn);
 
-        circleMenu.setMainMenu(Color.parseColor("#CDCDCD"),R.mipmap.price,R.mipmap.calander);
-        circleMenu.addSubMenu(Color.parseColor("#CDCDCD"),R.mipmap.price)
-                  .addSubMenu(Color.parseColor("#CDCDCD"),R.mipmap.price)
-                  .addSubMenu(Color.parseColor("#CDCDCD"),R.mipmap.price);
-        circleMenu.setOnMenuSelectedListener(this);
         setSupportActionBar(toolbar);
 
 
         //initialize dashboard fragment 1st
-        /*android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        transactionMain transaction = new transactionMain();
+        Transaction_main transaction = new Transaction_main();
         fragmentTransaction.replace(R.id.fragmentContainer1,transaction);
-        fragmentTransaction.commit();*/
+        fragmentTransaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -65,8 +59,6 @@ public class Dashboard extends AppCompatActivity
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header_navigation_drawer);
-        CircleButton img = (CircleButton)headerView.findViewById(R.id.loggedUsrImg);
-        img.setOnClickListener(this);
 
 
     }
@@ -110,11 +102,11 @@ public class Dashboard extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.transactionFrag) {
-             /*android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
              android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-             transaction_main dashboard = new transaction_main();
+            Transaction_main dashboard = new Transaction_main();
              fragmentTransaction.replace(R.id.fragmentContainer1,dashboard);
-             fragmentTransaction.commit();*/
+             fragmentTransaction.commit();
         } else if (id == R.id.reportsFrag) {
             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
