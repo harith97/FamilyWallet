@@ -1,25 +1,28 @@
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="ccpe001.familywallet.transaction.Transaction_main"
-        android:orientation="horizontal">
+    android:id="@+id/layout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context="ccpe001.familywallet.transaction.Transaction_main">
 
     <ListView
         android:id="@+id/transactionList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentBottom="false"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignBottom="@+id/transactionList"
+        android:layout_alignEnd="@+id/transactionList"
+        android:layout_gravity="bottom|end">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabIncome"
@@ -43,7 +46,7 @@
             android:layout_marginRight="85dp"
             android:src="@mipmap/minus"
             android:visibility="invisible"
-            app:backgroundTint="@color/zxing_viewfinder_laser"
+            app:backgroundTint="@color/warning_color"
             app:pressedTranslationZ="12dp" />
 
         <android.support.design.widget.FloatingActionButton
@@ -54,7 +57,6 @@
             android:layout_margin="@dimen/fab_margin"
             android:scaleType="center"
             android:src="@mipmap/add_transaction"
-            android:visibility="visible"
             app:backgroundTint="@color/zxing_custom_viewfinder_laser"
             app:pressedTranslationZ="12dp" />
 

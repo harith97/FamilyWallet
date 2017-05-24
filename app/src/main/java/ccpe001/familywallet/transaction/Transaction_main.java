@@ -2,6 +2,8 @@ package ccpe001.familywallet.transaction;
 
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +31,6 @@ public class Transaction_main extends Fragment {
     Animation fabOpen, fabClose, fabClockwise, fabAntiClockwise;
     TextView txtIncome,txtExpense;
     boolean isOpen = false;
-    CoordinatorLayout layout;
 
     public Transaction_main() {
         // Required empty public constructor
@@ -43,7 +45,6 @@ public class Transaction_main extends Fragment {
         View view = inflater.inflate(R.layout.transaction_main, container, false);
         txtExpense = (TextView) view.findViewById(R.id.txtExpense);
         txtIncome = (TextView) view.findViewById(R.id.txtIncome);
-        layout = (CoordinatorLayout) view.findViewById(R.id.layout);
         fab_main = (FloatingActionButton) view.findViewById(R.id.fabMain);
         fab_expense = (FloatingActionButton) view.findViewById(R.id.fabExpense);
         fab_income = (FloatingActionButton) view.findViewById(R.id.fabIncome);
@@ -51,28 +52,30 @@ public class Transaction_main extends Fragment {
         fabClose = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.fab_close);
         fabClockwise = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.rotate_clockwise);
         fabAntiClockwise = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.rotate_anticlockwise);
-        fab_main.startAnimation(fabOpen);
-        fab_main.setVisibility(view.VISIBLE);
         fab_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(isOpen){
+                    fab_income.startAnimation(fabClose);
+                    fab_expense.startAnimation(fabClose);
+                    fab_main.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#1976d2")));
+                    fab_main.setScaleType(ImageView.ScaleType.CENTER);
+                    fab_main.setImageResource(R.mipmap.add_transaction);
+                    fab_income.setClickable(false);
+                    fab_expense.setClickable(false);
+                    isOpen = false;
 
                 }
                 else {
                     fab_income.startAnimation(fabOpen);
                     fab_expense.startAnimation(fabOpen);
+                    fab_main.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffcc0000")));
+                    fab_main.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                    fab_main.setImageResource(R.mipmap.cancel);
                     fab_income.setClickable(true);
                     fab_expense.setClickable(true);
-                    fab_main.startAnimation(fabClose);
-                    fab_main.setVisibility(view.GONE);
-                    txtExpense.setVisibility(view.VISIBLE);
-                    txtIncome.setVisibility(view.VISIBLE);
                     isOpen = true;
-
-
-
                 }
 
                 if (isOpen) {
@@ -90,26 +93,11 @@ public class Transaction_main extends Fragment {
                             startActivity(intent);
                         }
                     });
-                    layout.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (isOpen) {
-                                fab_income.startAnimation(fabClose);
-                                fab_expense.startAnimation(fabClose);
-                                fab_income.setClickable(false);
-                                fab_expense.setClickable(false);
-                                fab_main.startAnimation(fabOpen);
-                                fab_main.setVisibility(v.VISIBLE);
-                                txtExpense.setVisibility(v.GONE);
-                                txtIncome.setVisibility(v.GONE);
-                                isOpen = false;
-                            }
-                        }
-                    });
                 }
 
             }
         });
+
 
 
             final String[] Title = {
@@ -168,16 +156,18 @@ public class Transaction_main extends Fragment {
             list = (ListView) view.findViewById(R.id.transactionList);
             list.setAdapter(adapter);
 
-            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view,
-                                        int position, long id) {
-                    // TODO Auto-generated method stub
-                    Toast.makeText(getActivity(), "Hello", Toast.LENGTH_SHORT).show();
 
-                }
-            });
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // TODO Auto-generated method stub
+                Toast.makeText(getActivity(), "Hello", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
             return view;
         }
 

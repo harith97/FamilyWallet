@@ -12,7 +12,10 @@
         android:layout_alignTop="@+id/txtDate"
         android:layout_marginStart="7dp"
         android:layout_weight="1"
-        app:srcCompat="@drawable/round" />
+        app:srcCompat="@drawable/round"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <TextView
         android:id="@+id/txtTitle"
@@ -21,7 +24,10 @@
         android:layout_alignBottom="@+id/img"
         android:layout_alignEnd="@+id/txtCategory"
         android:layout_marginEnd="16dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <TextView
         android:id="@+id/txtDate"
@@ -32,7 +38,10 @@
         android:layout_marginStart="33dp"
         android:layout_toEndOf="@+id/txtCategory"
         android:ems="10"
-        android:inputType="date" />
+        android:inputType="date"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <TextView
         android:id="@+id/txtCategory"
@@ -41,7 +50,10 @@
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/img"
         android:text="TextView"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <TextView
         android:id="@+id/txtAmount"
@@ -50,5 +62,8 @@
         android:layout_above="@+id/txtTitle"
         android:layout_marginStart="12dp"
         android:layout_toEndOf="@+id/txtDate"
-        android:text="TextView" />
+        android:text="TextView"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 </RelativeLayout>
