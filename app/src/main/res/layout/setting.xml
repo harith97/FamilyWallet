@@ -1,277 +1,442 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <HorizontalScrollView android:layout_width="match_parent"
-                          android:fillViewport="true"
-                          android:layout_height="match_parent">
-
-    <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:showDividers="middle"
-            android:divider="#7393"
-            android:dividerHeight="3px"
-            android:padding="15dp"
-            android:shrinkColumns="*"
-            android:stretchColumns="*"
-            android:orientation="horizontal">
-
-        <TableRow
-                android:layout_width="match_parent"
-                android:layout_marginTop="55dp"
-
+    <ScrollView android:layout_width="match_parent"
+                android:layout_marginTop="50dp"
                 android:layout_height="match_parent">
-            <TextView
-                    android:text="Language and formatting"
-                    android:background="#242"
-                    android:layout_marginBottom="10dp"
-                    android:layout_span="3"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-        </TableRow>
-        <TableRow android:layout_weight="1" >
 
-            <Switch
-                    android:text="Local mode"
-                    android:layout_span="3"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/localModeSwitch"/>
-        </TableRow>
-        <TableRow  android:layout_weight="1"
-                   android:orientation="vertical"
-                   android:id="@+id/selectLangRow"
-                   android:clickable="true">
-
-            <TextView
-                    android:text="Select language"
-                    android:clickable="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            <TextView
-                    android:text="TextView"
-                    android:layout_span="2"
-                    android:textAlignment="viewEnd"
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content" android:id="@+id/statusLang"/>
-        </TableRow>
-        <TableRow android:layout_weight="1"
-                  android:orientation="vertical"
-                  android:id="@+id/selectDateRow"
-                  android:clickable="true">
-            <TextView
-                    android:text="Select date format"
-                    android:clickable="true"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            <TextView
-                    android:text="TextView"
-                    android:layout_span="2"
-                    android:textAlignment="viewEnd"
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content" android:id="@+id/statusDateFor"/>
-        </TableRow>
-        <TableRow  android:layout_weight="1"
-                   android:orientation="vertical"
-                   android:id="@+id/selectCurrRow"
-                   android:layout_marginBottom="10dp"
-
-                   android:clickable="true">
-            <TextView
-                    android:text="Select currency"
-                    android:clickable="true"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            <TextView
-                    android:text="TextView"
-                    android:layout_span="2"
-                    android:textAlignment="viewEnd"
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content" android:id="@+id/statusCurr"/>
-        </TableRow>
-
-
-        <TableRow
+        <RelativeLayout
                 android:layout_width="match_parent"
 
-                android:layout_height="match_parent">
-            <TextView
-                    android:text="Notification"
-                    android:gravity="center"
-                    android:layout_span="3"
-                    android:background="#242"
-                    android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content">
 
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-        </TableRow>
-        <TableRow android:layout_weight="1">
-            <Switch
-                    android:text="App notifications"
-                    android:layout_span="3"
-
+            <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/appNotySwitch"/>
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/imageHead"
+                    android:layout_height="match_parent">
 
+                <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp">
+                    <ImageView
+                            android:src="@mipmap/image"
+                            android:scaleType="fitXY"
+                            android:textAlignment="center"
+                            android:layout_width="350dp"
+                            android:layout_height="125dp" />
+                </TableRow>
+            </TableLayout>
 
-        </TableRow>
-        <TableRow android:layout_weight="1"
-                  >
-            <Switch
-                    android:text="Show icon in status bar"
-                    android:layout_span="3"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/statusIconSwitch"/>
-        </TableRow>
-        <TableRow android:layout_weight="1"
-                  android:orientation="vertical"
-                  android:id="@+id/remTimeRow"
-                  android:layout_marginBottom="10dp"
-                  android:clickable="true" >
-
-
-            <TextView
-                    android:text="Daily reminder time"
-                    android:clickable="true"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            <TextView
-                    android:text="TextView"
-                    android:layout_span="2"
-                    android:textAlignment="viewEnd"
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content" android:id="@+id/startRem"/>
-        </TableRow>
-
-
-
-
-        <TableRow
+        <TableLayout
                 android:layout_width="match_parent"
-
+                android:id="@+id/head1"
+                android:layout_below="@+id/imageHead"
                 android:layout_height="match_parent">
-            <TextView
-                    android:text="System"
-                    android:background="#242"
-                    android:layout_marginBottom="10dp"
 
-                    android:layout_span="3"
-
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-        </TableRow>
-
-
-        <TableRow android:layout_weight="1" >
-
-            <Switch
-                    android:text="Auto sync"
-                    android:layout_span="3"
-
+            <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/autoSyncSwitch"/>
-        </TableRow>
-        <TableRow android:layout_weight="1">
-            <Switch
-                    android:text="Auto backups"
-                    android:layout_span="3"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+                <TextView
+                        android:text="Language and formatting"
+                        android:textColor="#CC3"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+            </TableRow>
+        </TableLayout>
 
+        <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/localModeRow"
+                android:layout_below="@+id/head1">
+
+            <TableRow android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:padding="10dp" >
+
+                <Switch
+                        android:text="Local mode"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/localModeSwitch"/>
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/LangRowLay"
+                android:layout_below="@+id/localModeRow">
+
+            <TableRow android:id="@+id/selectLangRow"
+                      android:clickable="true"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:padding="10dp">
+
+                <TextView
+                        android:text="Select language"
+                        android:clickable="true"
+                        android:layout_weight="12"
+                        android:id="@+id/selectLang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                <TextView
+                        android:text="TextView"
+                        android:layout_weight="1"
+                        android:layout_width="fill_parent"
+
+                        android:layout_height="wrap_content" android:id="@+id/statusLang"/>
+            </TableRow>
+        </TableLayout>
+
+            <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/autoBackUpSwitch"/>
+                    android:id="@+id/statusDateForLay"
+                    android:layout_below="@+id/LangRowLay"
+                    android:layout_height="match_parent">
 
+                <TableRow android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:padding="10dp"
+                          android:id="@+id/selectDateRow"
+                          android:clickable="true">
 
-        </TableRow>
-        <TableRow  android:layout_weight="1"
-                   android:orientation="vertical"
-                   android:id="@+id/backupLocRow"
-                   android:clickable="true">
-            <TextView
-                    android:text="Backup location"
-                    android:clickable="true"
+                    <TextView
+                            android:text="Select date format"
+                            android:clickable="true"
+                            android:layout_weight="12"
 
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    <TextView
+                            android:text="TextView"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+
+                            android:layout_height="wrap_content" android:id="@+id/statusDateFor"/>
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_below="@+id/statusDateForLay"
+                    android:id="@+id/statusCurrLay"
+                    android:layout_height="match_parent">
 
-            <TextView
-                    android:text="TextView"
+                <TableRow  android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:padding="10dp"
+                           android:id="@+id/selectCurrRow"
+                           android:clickable="true">
+                    <TextView
+                            android:text="Select currency"
+                            android:clickable="true"
+                            android:layout_weight="12"
 
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    <TextView
+                            android:text="TextView"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content" android:id="@+id/statusCurr"/>
+                </TableRow>
+            </TableLayout>
+
+        <TableLayout
+                android:layout_width="match_parent"
+                android:id="@+id/head2"
+                android:layout_below="@+id/statusCurrLay"
+                android:layout_height="match_parent">
+
+            <TableRow
                     android:layout_width="match_parent"
-                    android:layout_span="2"
-                    android:textAlignment="viewEnd"
-                    android:layout_height="wrap_content" android:id="@+id/statusBackUpLoc"/>
-        </TableRow>
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+                <TextView
+                        android:text="Notification"
+                        android:textColor="#CC3"
 
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+            </TableRow>
+        </TableLayout>
 
-
-        <TableRow
-                  android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:id="@+id/appPasswordRow"
-            android:clickable="true">
-
-            <TextView
-                    android:text="App password"
-                    android:clickable="true"
-                    android:id="@+id/checkBox"
+            <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_below="@+id/head2"
+                    android:id="@+id/appNotySwitchLay"
+                    android:layout_height="match_parent">
 
-            <TextView
-                    android:text="TextView"
+                <TableRow android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:padding="10dp">
+                    <Switch
+                            android:text="App notifications"
 
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/appNotySwitch"/>
+
+
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_span="2"
-                    android:textAlignment="viewEnd"
-                    android:layout_height="wrap_content" android:id="@+id/statusAppPw"/>
+                    android:layout_below="@+id/appNotySwitchLay"
+                    android:id="@+id/statusIconSwitchLay"
+                    android:layout_height="match_parent">
 
+                <TableRow android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:padding="10dp">
+                    <Switch
+                            android:text="Show icon in status bar"
 
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/statusIconSwitch"/>
 
-        </TableRow>
+                </TableRow>
+            </TableLayout>
 
-
-
-
-
-
-
-        <TableRow android:layout_weight="1">
-            <Button
-
-                    android:text="Sign out"
-                    android:layout_span="3"
-
+            <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/signOutBtn"/>
-        </TableRow>
+                    android:layout_below="@+id/statusIconSwitchLay"
+                    android:id="@+id/startRemLay"
+                    android:layout_height="match_parent">
+
+                <TableRow android:id="@+id/remTimeRow"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:padding="10dp"
+                          android:clickable="true" >
+
+
+                    <TextView
+                            android:text="Daily reminder time"
+                            android:clickable="true"
+                            android:layout_weight="12"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    <TextView
+                            android:text="TextView"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+
+                            android:layout_height="wrap_content" android:id="@+id/startRem"/>
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/startRemLay"
+                    android:id="@+id/head5"
+                    android:layout_height="match_parent">
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+                    <TextView
+                            android:text="System"
+                            android:textColor="#CC3"
+                            android:layout_marginBottom="10dp"
+
+
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/head5"
+                    android:id="@+id/autoSyncSwitchLay"
+                    android:layout_height="match_parent">
+
+                <TableRow android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:padding="10dp" >
+
+                    <Switch
+                            android:text="Auto sync"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/autoSyncSwitch"/>
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                    android:layout_below="@+id/autoSyncSwitchLay"
+                    android:id="@+id/autoBackUpSwitchLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TableRow android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:padding="10dp" >
+
+                    <Switch
+                            android:text="Auto backups"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/autoBackUpSwitch"/>
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                    android:layout_below="@+id/autoBackUpSwitchLay"
+                    android:id="@+id/statusBackUpLocLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TableRow  android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:padding="10dp"
+                           android:id="@+id/backupLocRow"
+                           android:clickable="true">
+                    <TextView
+                            android:text="Backup location"
+                            android:clickable="true"
+                            android:layout_weight="12"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    <TextView
+                            android:text="TextView"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/statusBackUpLoc"/>
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                    android:layout_below="@+id/statusBackUpLocLay"
+                    android:id="@+id/statusAppPwLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:id="@+id/appPasswordRow"
+                        android:clickable="true">
+
+                    <TextView
+                            android:text="App password"
+                            android:clickable="true"
+                            android:layout_weight="12"
+                            android:id="@+id/checkBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    <TextView
+                            android:text="TextView"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/statusAppPw"/>
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/head9"
+                    android:layout_below="@+id/statusAppPwLay"
+                    android:layout_height="match_parent">
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+                    <TextView
+                            android:text="About"
+                            android:textColor="#CC3"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/feedbackTxt1"
+                    android:layout_below="@+id/head9"
+                    android:layout_height="match_parent">
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:clickable="true"
+                        android:id="@+id/feedbackRow"
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+                    <TextView
+                            android:text="Send feedback"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/rateTxt"
+                    android:layout_below="@+id/feedbackTxt1"
+                    android:layout_height="match_parent">
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:id="@+id/rateRow"
+
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+                    <TextView
+                            android:text="Rate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                    android:layout_below="@+id/rateTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TableRow
+                        android:clickable="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+                    <Button
+
+                            android:text="Sign out"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/signOutBtn"/>
+                </TableRow>
+            </TableLayout>
 
 
 
-    </TableLayout>
-    </HorizontalScrollView>
-</LinearLayout>
+        </RelativeLayout>
+
+    </ScrollView>
+</RelativeLayout>
 
 
