@@ -18,16 +18,16 @@
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabIncome"
             android:layout_width="394dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginBottom="85dp"
+            android:layout_marginRight="35dp"
             android:scaleType="center"
             android:src="@mipmap/add_transaction"
             android:visibility="invisible"
@@ -39,8 +39,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="70dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginRight="85dp"
             android:src="@mipmap/minus"
             android:visibility="invisible"
             app:backgroundTint="@color/zxing_viewfinder_laser"
@@ -57,6 +57,26 @@
             android:visibility="visible"
             app:backgroundTint="@color/zxing_custom_viewfinder_laser"
             app:pressedTranslationZ="12dp" />
+
+        <TextView
+            android:id="@+id/txtIncome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="95dp"
+            android:layout_marginRight="90dp"
+            android:text="Income"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/txtExpense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="35dp"
+            android:layout_marginRight="140dp"
+            android:text="Expense"
+            android:visibility="invisible" />
 
 
     </android.support.design.widget.CoordinatorLayout>

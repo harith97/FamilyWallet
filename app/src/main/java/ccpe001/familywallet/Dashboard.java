@@ -13,8 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.hitomi.cmlibrary.CircleMenu;
-import com.hitomi.cmlibrary.OnMenuSelectedListener;
 
 import at.markushi.ui.CircleButton;
 import ccpe001.familywallet.budget.BudgetHandling;
@@ -25,7 +23,7 @@ import ccpe001.familywallet.summary.sumMain;
 import ccpe001.familywallet.transaction.Transaction_main;
 
 public class Dashboard extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener,OnMenuSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener{
 
     Toolbar toolbar = null;
     NavigationView navigationView = null;
@@ -158,7 +156,7 @@ public class Dashboard extends AppCompatActivity
         }
     }
 
-    @Override
+
     public void onMenuSelected(int i) {
         if(i==0) {
             Intent newInt = new Intent("ccpe001.familywallet.add_transaction");
