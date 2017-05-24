@@ -33,6 +33,8 @@ public class Dashboard extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //getSupportActionBar().setTitle("Dashboard");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer);
         toolbar = (Toolbar) findViewById(R.id.toolbar);

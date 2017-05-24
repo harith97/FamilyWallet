@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class AddMember extends Fragment  implements View.OnClickListener{
     }
 
     private void init(View v) {
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Add member");
         random = new Random();//security problems
         randomNo = String.valueOf(random.nextInt(1000000));
         cautionText = (TextView) v.findViewById(R.id.editText10);

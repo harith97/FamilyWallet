@@ -19,7 +19,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class SignIn extends AppCompatActivity implements View.OnClickListener{
 
     private Button signIn,scannerBtn;
-    private TextView toSignUp;
+    private TextView toSignUp,forgotTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +33,11 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         signIn= (Button)findViewById(R.id.signInBtn);
         scannerBtn= (Button)findViewById(R.id.qrscannerBtn);
         toSignUp = (TextView)findViewById(R.id.textView2);
+        forgotTxt = (TextView)findViewById(R.id.textView);;
         signIn.setOnClickListener(this);
         scannerBtn.setOnClickListener(this);
         toSignUp.setOnClickListener(this);
+        forgotTxt.setOnClickListener(this);
     }
 
 
@@ -57,6 +59,9 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
             intentIntegrator.initiateScan();
         }else if(view.getId()== R.id.textView2){
             startActivity(new Intent(this,SignUp.class));//this to sign in
+        }else if(view.getId()== R.id.textView){
+            Toast.makeText(this,"Forgot..!",Toast.LENGTH_LONG).show();
+
         }
     }
 

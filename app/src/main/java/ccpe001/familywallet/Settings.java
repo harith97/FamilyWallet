@@ -1,14 +1,20 @@
 package ccpe001.familywallet;
 
+import android.*;
+import android.Manifest;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,17 +44,16 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     private AlertDialog.Builder langBuilder,currBuilder,dateForBuilder,enterPinBuilder;
     private TableRow langRow,currRow,dateForRow,dailyRemRow,backupLocRow,appPassRow;
     private Calendar c;
-    private List<String> fileList = new ArrayList<>();
-    private File root;
-    private File currentFolder;
     private DirectoryChooserFragment mDialog;
     private static final int SET_PIN = 0;
     private static final int ENABLE_PIN = 1;
     private static final int DIR_CHOOSER = 2;
+    private static final int EXTERNAL_READ_PERMIT = 3;
+    private static final int EXTERNAL_WRITE_PERMIT = 4;
+
 
 
     private String[] langArr,currArr,dateForArr;
-    private EditText confPwTxt,newTxt,oldPwTxt;
 
     private boolean pinStatus,mode,appNoty,appIcon,appSync,appBackUp;
     private String pin,preferedLang,preferedDateFor,preferedCurr,remTime,appbackUpPath;
@@ -61,7 +66,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     }
 
     private void init(View v){
-
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Settings");
         c = Calendar.getInstance();
         langArr = getActivity().getResources().getStringArray(R.array.spinnerLanguage);
         currArr = getActivity().getResources().getStringArray(R.array.spinnerCurrency);
@@ -164,13 +169,19 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
             },c.get(Calendar.HOUR_OF_DAY),c.get(Calendar.MINUTE),false).show();
         }else if(view.getId()==R.id.backupLocRow) {
 
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED||
+                    ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},EXTERNAL_READ_PERMIT);
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},EXTERNAL_WRITE_PERMIT);
+            }
+
             final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
-                    .newDirectoryName("dfdff")
+                    .allowNewDirectoryNameModification(true)
+                    .newDirectoryName("FamilyWallet Backups")
                     .build();
 
             mDialog = DirectoryChooserFragment.newInstance(config);
             mDialog.show(getActivity().getFragmentManager(),null);
-
 
         }else if(view.getId()==R.id.appPasswordRow){
             enterPinBuilder = new AlertDialog.Builder(getActivity());
@@ -194,7 +205,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     Intent intent = new Intent(getContext(),CustomPinActivity.class);
                     if(b){
-                        Toast.makeText(getContext(),"dfdfdf",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"FamilyWallet Backups",Toast.LENGTH_LONG).show();
                         LockManager<CustomPinActivity> lockManager = LockManager.getInstance();
                         lockManager.enableAppLock(getContext(),CustomPinActivity.class);
                         startActivityForResult(intent, ENABLE_PIN);
@@ -298,7 +309,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         remTime = prefs.getString("appDailyRem","09:00 AM");
         appSync = prefs.getBoolean("appSync",true);
         appBackUp = prefs.getBoolean("appBackUp",false);
-        appbackUpPath = prefs.getString("appBackUpPath","test path");
+        appbackUpPath = prefs.getString("appBackUpPath","/storage/emulated/0");
 
 
         localMode.setChecked(mode);
@@ -347,7 +358,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         remTime = "09:00 AM";
         appBackUp = false;
         appSync = true;
-        appbackUpPath = "test path";
+        appbackUpPath = "/storage/emulated/0";
         pinStatus = false;
 
         localMode.setChecked(mode);
@@ -380,6 +391,10 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     public void onSelectDirectory(@NonNull String path) {
         mDialog.setTargetFragment(getActivity().getFragmentManager().findFragmentById(R.id.settingFrag),DIR_CHOOSER);
         mDialog.show(getActivity().getFragmentManager(),null);
+
+        appbackUpPath = path;
+        storePWSharedPref();
+        backupLocText.setText(path);
     }
 
     @Override

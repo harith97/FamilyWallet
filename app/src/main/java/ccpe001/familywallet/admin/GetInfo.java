@@ -41,6 +41,7 @@ public class GetInfo extends AppCompatActivity implements View.OnClickListener{
 
 
     private void init() {
+        getSupportActionBar().setTitle("Enter details");
         imageButton = (at.markushi.ui.CircleButton) getWindow().getDecorView().getRootView().findViewById(R.id.imageButton);
         signUpButton = (Button) findViewById(R.id.signUPGetInfo);
         signUpButton.setOnClickListener(this);
