@@ -59,6 +59,10 @@ public class Transaction_main extends Fragment {
                 if(isOpen){
                     fab_income.startAnimation(fabClose);
                     fab_expense.startAnimation(fabClose);
+                    txtExpense.setAnimation(fabClose);
+                    txtIncome.setAnimation(fabClose);
+                    txtExpense.setClickable(false);
+                    txtIncome.setClickable(false);
                     fab_main.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#1976d2")));
                     fab_main.setScaleType(ImageView.ScaleType.CENTER);
                     fab_main.setImageResource(R.mipmap.add_transaction);
@@ -70,6 +74,10 @@ public class Transaction_main extends Fragment {
                 else {
                     fab_income.startAnimation(fabOpen);
                     fab_expense.startAnimation(fabOpen);
+                    txtExpense.setAnimation(fabOpen);
+                    txtIncome.setAnimation(fabOpen);
+                    txtExpense.setClickable(true);
+                    txtIncome.setClickable(true);
                     fab_main.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffcc0000")));
                     fab_main.setScaleType(ImageView.ScaleType.FIT_CENTER);
                     fab_main.setImageResource(R.mipmap.cancel);
