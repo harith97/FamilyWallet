@@ -1,10 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context="ccpe001.familywallet.summary.sumMain">
 
 
-</android.support.constraint.ConstraintLayout>
+    <EditText
+        android:id="@+id/startdt"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:hint="Start Date"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp" />
+
+    <EditText
+        android:id="@+id/enddt"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:hint="End Date"
+        android:layout_alignStart="@+id/startdt"
+        android:layout_below="@+id/startdt"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="date"/>
+
+    <RadioButton
+        android:id="@+id/rdbtnexpns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/enddt"
+        android:layout_below="@+id/enddt"
+        android:layout_marginTop="34dp"
+        android:checked="true"
+        android:text="Expense" />
+
+    <RadioButton
+        android:id="@+id/rdbtnincm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/rdbtnexpns"
+        android:layout_marginStart="23dp"
+        android:layout_toEndOf="@+id/rdbtnexpns"
+        android:text="Income" />
+
+    <Button
+        android:id="@+id/ldbtn"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/rdbtnexpns"
+        android:layout_marginBottom="38dp"
+        android:background="?attr/actionModeSplitBackground"
+        android:text="Load Chart" />
+
+</RelativeLayout>
