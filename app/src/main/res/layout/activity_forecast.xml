@@ -1,11 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="ccpe001.familywallet.budget.budgetTrack">
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="ccpe001.familywallet.budget.forecast"
+              android:weightSum="1">
 
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/forecastChart"
+        android:layout_width="match_parent"
+        android:layout_height="333dp">
 
-</RelativeLayout>
+    </com.github.mikephil.charting.charts.LineChart>
+
+    <TextView
+        android:id="@+id/viAvg"
+        android:layout_width="144dp"
+        android:layout_height="65dp"
+        android:layout_x="25dp"
+        android:layout_y="414dp"
+        android:text="Average Spend"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/viAvg1"
+        android:layout_width="166dp"
+        android:layout_height="69dp"
+        android:layout_x="187dp"
+        android:layout_y="413dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/viCat"
+        android:layout_width="159dp"
+        android:layout_height="39dp"
+        android:layout_x="99dp"
+        android:layout_y="364dp"
+        android:text="Catagory"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"/>
+
+</AbsoluteLayout>

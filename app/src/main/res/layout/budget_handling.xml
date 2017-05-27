@@ -73,7 +73,8 @@
         android:layout_alignBaseline="@+id/btnSubmit"
         android:layout_alignBottom="@+id/btnSubmit"
         android:layout_toStartOf="@+id/btnSubmit"
-        android:layout_marginEnd="19dp" />
+        android:layout_marginEnd="19dp"
+        android:onClick="nxtForecast"/>
 
     <Button
         android:id="@+id/btnSubmit"
