@@ -9,7 +9,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/txtDate"
+        android:layout_alignTop="@+id/txtTime"
         android:layout_marginStart="7dp"
         android:layout_weight="1"
         app:srcCompat="@drawable/round"
@@ -30,7 +30,7 @@
         android:focusableInTouchMode="false"/>
 
     <TextView
-        android:id="@+id/txtDate"
+        android:id="@+id/txtTime"
         android:layout_width="80dp"
         android:layout_height="20dp"
         android:layout_alignBaseline="@+id/txtCategory"
@@ -61,7 +61,7 @@
         android:layout_height="30dp"
         android:layout_above="@+id/txtTitle"
         android:layout_marginStart="12dp"
-        android:layout_toEndOf="@+id/txtDate"
+        android:layout_toEndOf="@+id/txtTime"
         android:text="TextView"
         android:clickable="false"
         android:focusable="false"

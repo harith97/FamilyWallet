@@ -91,6 +91,7 @@ public class Transaction_main extends Fragment {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent("ccpe001.familywallet.add_transaction");
+                            intent.putExtra("category","income");
                             startActivity(intent);
                         }
                     });
@@ -98,6 +99,7 @@ public class Transaction_main extends Fragment {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent("ccpe001.familywallet.add_transaction");
+                            intent.putExtra("category","expense");
                             startActivity(intent);
                         }
                     });

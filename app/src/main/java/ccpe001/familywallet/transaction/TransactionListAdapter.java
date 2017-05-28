@@ -43,7 +43,7 @@ public class TransactionListAdapter extends ArrayAdapter<String> {
 
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txtTitle);
         TextView txtCategory = (TextView) rowView.findViewById(R.id.txtCategory);
-        TextView txtDate = (TextView) rowView.findViewById(R.id.txtDate);
+        TextView txtDate = (TextView) rowView.findViewById(R.id.txtTime);
         TextView txtAmount = (TextView) rowView.findViewById(R.id.txtAmount);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
 

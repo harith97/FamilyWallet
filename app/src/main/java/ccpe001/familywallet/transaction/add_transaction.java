@@ -29,6 +29,8 @@ public class add_transaction extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_transaction);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txtLocation = (TextView)findViewById(R.id.txtLocation);
         txtLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +57,8 @@ public class add_transaction extends AppCompatActivity {
         } else {
             newString= (String) savedInstanceState.getSerializable("category");
         }
-        txtCategory.setText(newString );
+        txtCategory.setText(newString);
+
     }
 
 
@@ -96,26 +99,25 @@ public class add_transaction extends AppCompatActivity {
     public void onStart(){
         super.onStart();
         TextView txtDate = (TextView) findViewById(R.id.txtDate);
-        txtDate.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+        txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus){
-                if(hasFocus){
+            public void onClick(View v) {
+
                     DateDialog dialog = new DateDialog(v);
                     android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
                     dialog.show(ft,"DatePicker");
-                }
+
             }
         });
 
-        TextView txtTime = (TextView) findViewById(R.id.txtDate);
-        txtTime.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+        TextView txtTime = (TextView) findViewById(R.id.txtTime);
+        txtTime.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus){
-                if(hasFocus){
-                    TimeDialog dialog = new TimeDialog(v);
-                    android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    dialog.show(ft,"TimePicker");
-                }
+            public void onClick(View v) {
+                TimeDialog dialog = new TimeDialog(v);
+                android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+                dialog.show(ft,"TimePicker");
+
             }
         });
 

@@ -63,6 +63,7 @@ public class transaction_category extends AppCompatActivity {
         categoryToolbar = (Toolbar) findViewById(R.id.categoryToolbar);
         categoryToolbar.setTitle("Category");
 
+
     }
 
 
