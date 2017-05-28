@@ -12,7 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="false"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
         android:clickable="false"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
         android:focusable="false"
         android:focusableInTouchMode="false" />
 
