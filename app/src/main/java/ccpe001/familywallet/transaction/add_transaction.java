@@ -1,21 +1,29 @@
 package ccpe001.familywallet.transaction;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
 import ccpe001.familywallet.R;
 
+import static android.R.attr.data;
+
 public class add_transaction extends AppCompatActivity {
 
 
     private TextView txtLocation,txtCategory;
     int PLACE_PICKER_REQUEST=1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +40,28 @@ public class add_transaction extends AppCompatActivity {
         txtCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newInt = new Intent("ccpe001.familywallet.transaction.transaction_category");
-                startActivity(newInt);
+                Intent newInt = new Intent(add_transaction.this,ccpe001.familywallet.transaction.transaction_category.class);
+                startActivityForResult(newInt,1);
             }
         });
-
+        String newString;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                newString= null;
+            } else {
+                newString= extras.getString("category");
+            }
+        } else {
+            newString= (String) savedInstanceState.getSerializable("category");
+        }
+        txtCategory.setText(newString );
     }
+
 
 
     private void startPlacePickerActivity() {
         PlacePicker.IntentBuilder intentBuilder = new PlacePicker.IntentBuilder();
-        // this would only work if you have your Google Places API working
 
         try {
             Intent intent = intentBuilder.build(this);
@@ -64,9 +83,11 @@ public class add_transaction extends AppCompatActivity {
 
     @Override
     protected  void onActivityResult(int requestCode, int resultCode, Intent data) {
+        txtCategory = (TextView)findViewById(R.id.txtCategory);
         if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK) {
             displaySelectedPlaceFromPlacePicker(data);
         }
+
     }
 
 
@@ -101,5 +122,10 @@ public class add_transaction extends AppCompatActivity {
 
 
     }
+
+
+
+
+
 
 }

@@ -1,5 +1,6 @@
 package ccpe001.familywallet.transaction;
 
+import android.app.ActionBar;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -30,11 +31,11 @@ public class transaction_category extends AppCompatActivity {
     private ViewPager mViewPager;
     private Toolbar categoryToolbar;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.transaction_category);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,7 +63,6 @@ public class transaction_category extends AppCompatActivity {
         categoryToolbar = (Toolbar) findViewById(R.id.categoryToolbar);
         categoryToolbar.setTitle("Category");
 
-
     }
 
 
@@ -75,16 +75,17 @@ public class transaction_category extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
 
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

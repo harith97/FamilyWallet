@@ -13,23 +13,20 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        tools:replace="android:theme"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="ManifestResource">
-        <activity android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity"/>
-
+        tools:ignore="ManifestResource"
+        tools:replace="android:theme">
+        <activity android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity" />
         <activity
-                android:name=".CustomPinActivity"
-                android:screenOrientation="portrait"
-                android:windowSoftInputMode="adjustResize">
+            android:name=".CustomPinActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="ccpe001.familywallet.CUSTOMPINACTIVITY" />
 
@@ -128,7 +125,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".transaction.transaction_category"
             android:label="@string/title_activity_transaction_category"
@@ -140,6 +136,10 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".transaction.add_transaction"/>
         </activity>
 
         <meta-data
