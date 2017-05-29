@@ -1,6 +1,5 @@
 package ccpe001.familywallet;
 
-import android.*;
 import android.Manifest;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -13,9 +12,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +24,7 @@ import net.rdrei.android.dirchooser.DirectoryChooserActivity;
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 import net.rdrei.android.dirchooser.DirectoryChooserFragment;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import static ccpe001.familywallet.transaction.TimeDialog.pad;
 
@@ -51,13 +45,19 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     private static final int DIR_CHOOSER = 2;
     private static final int EXTERNAL_READ_PERMIT = 3;
     private static final int EXTERNAL_WRITE_PERMIT = 4;
-
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
 
     private String[] langArr,currArr,dateForArr;
 
     private boolean pinStatus,mode,appNoty,appIcon,appSync,appBackUp;
-    private String pin,preferedLang,preferedDateFor,preferedCurr,remTime,appbackUpPath;
+    private String pin;
+    private String preferedLang;
+    private String preferedDateFor;
+    private String preferedCurr;
+    private String remTime;
+    private String appbackUpPath;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.setting, container, false);
@@ -151,8 +151,8 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.signOutBtn){
-            SharedPreferences pref = getContext().getSharedPreferences("First Time",Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = pref.edit();
+            prefs = getContext().getSharedPreferences("First Time",Context.MODE_PRIVATE);
+            editor = prefs.edit();
             editor.putBoolean("isFirst",true);
             editor.commit();
             Intent intent = new Intent("ccpe001.familywallet.SIGNIN");
@@ -314,7 +314,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     }
 
     private void retrievePWSharedPref(){
-        SharedPreferences prefs = getContext().getSharedPreferences("App Settings",Context.MODE_PRIVATE);
+        prefs = getContext().getSharedPreferences("App Settings",Context.MODE_PRIVATE);
 
         pin = prefs.getString("appPass","123");
         pinStatus = prefs.getBoolean("appPinStatus",false);
@@ -328,7 +328,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         remTime = prefs.getString("appDailyRem","09:00 AM");
         appSync = prefs.getBoolean("appSync",true);
         appBackUp = prefs.getBoolean("appBackUp",false);
-        appbackUpPath = prefs.getString("appBackUpPath","/storage/emulated/0");
+        appbackUpPath = prefs.getString("appBackUpPath","/storage/emulated/0/");
 
 
         localMode.setChecked(mode);
@@ -345,8 +345,8 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     }
 
     private void storePWSharedPref(){
-        SharedPreferences prefs = getContext().getSharedPreferences("App Settings",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
+        prefs = getContext().getSharedPreferences("App Settings",Context.MODE_PRIVATE);
+        editor = prefs.edit();
 
         editor.putString("appPass",pin);
         editor.putBoolean("appPinStatus",pinStatus);
@@ -360,7 +360,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         editor.putString("appDailyRem",remTime);
         editor.putBoolean("appSync",appSync);
         editor.putBoolean("appBackUp",appBackUp);
-        editor.putString("appBackUpPath",appbackUpPath);
+        editor.putString("appBackUpPath", appbackUpPath);
 
 
 
@@ -377,7 +377,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         remTime = "09:00 AM";
         appBackUp = false;
         appSync = true;
-        appbackUpPath = "/storage/emulated/0";
+        appbackUpPath = "/storage/emulated/0/";
         pinStatus = false;
 
         localMode.setChecked(mode);
@@ -420,5 +420,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     public void onCancelChooser() {
         mDialog.dismiss();
     }
+
+
 }
 

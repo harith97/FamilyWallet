@@ -1,6 +1,7 @@
 package ccpe001.familywallet;
 
 import android.content.Context;
+import android.text.Editable;
 import android.widget.Toast;
 
 /**
@@ -59,6 +60,13 @@ public class Validate {
     }
 
     public static boolean anyValidMail() {
+        return false;
+    }
+
+    public static boolean fileValidate(Editable text) {
+        if(!text.toString().isEmpty()){
+            return true;
+        }
         return false;
     }
 }
