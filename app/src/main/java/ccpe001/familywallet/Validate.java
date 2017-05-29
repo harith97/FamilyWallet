@@ -57,4 +57,8 @@ public class Validate {
         }
 
     }
+
+    public static boolean anyValidMail() {
+        return false;
+    }
 }

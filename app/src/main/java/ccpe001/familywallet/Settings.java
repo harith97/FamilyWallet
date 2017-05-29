@@ -151,6 +151,10 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.signOutBtn){
+            SharedPreferences pref = getContext().getSharedPreferences("First Time",Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean("isFirst",true);
+            editor.commit();
             Intent intent = new Intent("ccpe001.familywallet.SIGNIN");
             startActivity(intent);
         }else if(view.getId()==R.id.selectLangRow){
@@ -238,7 +242,6 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
             intent.createChooser(intent,"Send email");
             startActivity(intent);
         }else if(view.getId()==R.id.rateRow){
-
         }
 
 

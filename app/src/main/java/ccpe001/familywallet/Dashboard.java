@@ -135,6 +135,12 @@ public class Dashboard extends AppCompatActivity
             Settings setting = new Settings();
             fragmentTransaction.replace(R.id.fragmentContainer1,setting);
             fragmentTransaction.commit();
+        }else if (id == R.id.backupFrag) {
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            ExportData backup = new ExportData();
+            fragmentTransaction.replace(R.id.fragmentContainer1,backup);
+            fragmentTransaction.commit();
         }
 
 

@@ -24,6 +24,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.signin);
         init();
     }
@@ -60,8 +62,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         }else if(view.getId()== R.id.textView2){
             startActivity(new Intent(this,SignUp.class));//this to sign in
         }else if(view.getId()== R.id.textView){
-            Toast.makeText(this,"Forgot..!",Toast.LENGTH_LONG).show();
-
+            Intent intent = new Intent("ccpe001.familywallet.FORGOT");
+            startActivity(intent);
         }
     }
 

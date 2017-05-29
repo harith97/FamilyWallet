@@ -56,6 +56,21 @@
                 android:id="@+id/editText4"/>
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+        >
+                <EditText
+                        android:hint="E-mail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:ems="10"
+                        android:maxLines="1"
+                        android:id="@+id/editText5"/>
+        </android.support.design.widget.TextInputLayout>
+
 
         <Button
                 android:text="Sign Up"
