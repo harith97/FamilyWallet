@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ccpe001.familywallet.budget.budListView">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/block"
+        android:backgroundTintMode="src_over"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/budStat"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_above="@+id/budName"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@+id/txtTime"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text="TextView" />
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/txtTime"
+            android:layout_marginStart="7dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            app:srcCompat="@drawable/round" />
+
+        <TextView
+            android:id="@+id/budName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/img"
+            android:layout_alignEnd="@+id/budCat"
+            android:layout_marginEnd="16dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/budCat"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/img"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text="TextView"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtTime"
+            android:layout_width="80dp"
+            android:layout_height="20dp"
+            android:layout_alignBaseline="@+id/budCat"
+            android:layout_alignBottom="@+id/budCat"
+            android:layout_marginStart="33dp"
+            android:layout_toEndOf="@+id/budCat"
+            android:clickable="false"
+            android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:inputType="date" />
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

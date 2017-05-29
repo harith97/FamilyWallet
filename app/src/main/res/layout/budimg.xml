@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ccpe001.familywallet.budget.budImg">
+
+    <ImageView
+        android:id="@+id/budimg1"
+        android:layout_width="75dp"
+        android:layout_height="70dp"
+        app:srcCompat="@drawable/check"
+        tools:layout_editor_absoluteX="6dp"
+        tools:layout_editor_absoluteY="4dp"/>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="78dp"
+        android:layout_height="80dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteY="4dp"
+        tools:layout_editor_absoluteX="6dp"/>
+</RelativeLayout>

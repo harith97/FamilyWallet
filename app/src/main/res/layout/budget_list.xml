@@ -4,33 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ccpe001.familywallet.budget.accUpdate">
+    tools:context="ccpe001.familywallet.budget.budgetList">
 
-    <Spinner
-        android:id="@+id/spinner3"
-        android:layout_width="270dp"
-        android:layout_height="53dp"
-        android:layout_x="16dp"
-        android:layout_y="90dp" />
-
-    <Button
-        android:id="@+id/btnFilter"
-        android:layout_width="98dp"
-        android:layout_height="53dp"
-        android:layout_x="291dp"
-        android:layout_y="90dp"
-        android:text="Filter" />
-
-    <ScrollView
+    <ListView
+        android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="358dp"
-        android:layout_x="2dp"
-        android:layout_y="151dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
-    </ScrollView>
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="false"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_x="4dp"
+        android:layout_y="83dp"
+        android:clickable="false"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
 </AbsoluteLayout>
