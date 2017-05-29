@@ -12,7 +12,7 @@
     >
 
         <EditText
-                android:hint="Backup filename"
+                android:hint="Backup filenames"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
 
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content" android:id="@+id/exelCheck" />
 
     <Switch
-            android:text="Send mail?"
+            android:text="Send files via mail?"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_width="match_parent"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content" android:id="@+id/sendBackMail"/>
 
     <Button
-            android:text="Create file"
+            android:text="Create files"
             android:textAllCaps="false"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"

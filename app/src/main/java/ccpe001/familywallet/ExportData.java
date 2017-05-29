@@ -68,6 +68,7 @@ public class ExportData extends Fragment implements View.OnClickListener,CheckBo
                         Toast.makeText(getContext(),"Check at least one option",Toast.LENGTH_SHORT).show();
                     }else {
                         export();
+                        Toast.makeText(getContext(),"Backups created",Toast.LENGTH_SHORT).show();
                         if (mailChecked) {
                             createMail();
                         }
@@ -125,14 +126,12 @@ public class ExportData extends Fragment implements View.OnClickListener,CheckBo
             sheet1.setColumnWidth(0,(15*500));
             sheet1.setColumnWidth(1,(15*500));
 
-            File file = new File(getContext().getExternalFilesDir(null),filename);
+            File file = new File(finalLoc+".xls");
             FileOutputStream fOut = null;
 
             try {
                 fOut = new FileOutputStream(file);
                 wb.write(fOut);
-                Toast.makeText(getContext(),"cretaed",Toast.LENGTH_SHORT).show();
-
             }catch (Exception e){
 
             }finally {
@@ -143,14 +142,23 @@ public class ExportData extends Fragment implements View.OnClickListener,CheckBo
     }
 
     private void createMail(){
-        String attches[] = {(finalLoc+".csv"),("df")};
+        String attchArr[] = {(finalLoc+".csv"),(finalLoc+".xls")};
+
+        ArrayList<Uri> uriArr = new ArrayList<>();
+        for(String file : attchArr){
+            File fIn = new File(file);
+            if(fIn.exists()) {
+                Uri uri = Uri.fromFile(fIn);
+                uriArr.add(uri);
+            }
+        }
+
+
         Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_EMAIL,"ccpe_001@gmail.com");
         intent.putExtra(Intent.EXTRA_SUBJECT,"Family Wallet Backup");
-        Toast.makeText(getContext(),(finalLoc+".csv"),Toast.LENGTH_SHORT).show();
-
-        intent.putExtra(Intent.EXTRA_STREAM,attches);
+        intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM,uriArr);
         intent.createChooser(intent,"Send email");
         startActivity(intent);
     }
