@@ -4,19 +4,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/txt1"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="72dp"
-        android:layout_toEndOf="@+id/img1"
-        android:layout_x="18dp"
-        android:layout_y="55dp"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textSize="12sp" />
-
     <ImageView
         android:id="@+id/img1"
         android:layout_width="wrap_content"
@@ -24,8 +11,22 @@
         android:layout_alignParentStart="false"
         android:layout_centerVertical="false"
         android:layout_marginStart="19dp"
-        android:layout_x="26dp"
+        android:layout_x="12dp"
         android:layout_y="7dp"
+        android:scaleType="fitEnd"
         app:srcCompat="@mipmap/calander" />
+
+    <TextView
+        android:id="@+id/txt1"
+        android:layout_width="98dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="72dp"
+        android:layout_toEndOf="@+id/img1"
+        android:layout_x="3dp"
+        android:layout_y="79dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="10sp" />
 
 </AbsoluteLayout>

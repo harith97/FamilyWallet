@@ -18,6 +18,28 @@
         <item>Rs(Convert)</item>
     </string-array>
 
+    <string-array name="IncomeCategory">
+        <item>Car</item>
+        <item>Travel</item>
+        <item>Food &amp; Drinks</item>
+        <item>Transportation</item>
+        <item>Bill</item>
+        <item>Entertainment</item>
+        <item>Home</item>
+        <item>Utilities</item>
+        <item>Shopping</item>
+        <item>Accommodation</item>
+        <item>Healthcare</item>
+        <item>Clothing</item>
+        <item>Groceries</item>
+        <item>Drinks</item>
+        <item>Pets</item>
+        <item>Education</item>
+        <item>Cinema</item>
+        <item>Kids</item>
+        <item>Gifts</item>
+    </string-array>
+
     <string-array name="spinnerDateFor">
         <item>2001/03/14</item>
         <item>14/03/2001</item>
