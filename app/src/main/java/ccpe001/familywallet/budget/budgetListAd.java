@@ -23,7 +23,7 @@ public class budgetListAd extends ArrayAdapter<String> {
 
 
     public budgetListAd(Activity context,String[]title, String[]catName, String[]status,Integer[]imgid){
-        super(context, R.layout.budimg, title);
+        super(context, R.layout.bud_list_view, title);
         this.context=context;
         this.title=title;
         this.catName=catName;

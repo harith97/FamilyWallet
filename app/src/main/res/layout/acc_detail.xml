@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ccpe001.familywallet.budget.accDetail">
+
+    <TextView
+        android:id="@+id/accId"
+        android:layout_width="116dp"
+        android:layout_height="45dp"
+        android:layout_x="40dp"
+        android:layout_y="174dp"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_alignBaseline="@+id/textView7"
+        android:layout_alignBottom="@+id/textView7"
+        android:layout_alignEnd="@+id/spinner"/>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="116dp"
+        android:layout_height="45dp"
+        android:layout_x="41dp"
+        android:layout_y="47dp"
+        android:text="Account ID"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_below="@+id/accName"
+        android:layout_alignStart="@+id/accName"
+        android:layout_marginTop="26dp"/>
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="116dp"
+        android:layout_height="45dp"
+        android:layout_x="41dp"
+        android:layout_y="113dp"
+        android:text="Available Amount"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_below="@+id/textView7"
+        android:layout_alignStart="@+id/textView7"
+        android:layout_marginTop="19dp"/>
+
+    <TextView
+        android:id="@+id/accAmount"
+        android:layout_width="116dp"
+        android:layout_height="45dp"
+        android:layout_x="45dp"
+        android:layout_y="237dp"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_alignBaseline="@+id/textView9"
+        android:layout_alignBottom="@+id/textView9"
+        android:layout_alignStart="@+id/accId"/>
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="116dp"
+        android:layout_height="45dp"
+        android:layout_x="194dp"
+        android:layout_y="237dp"
+        android:text="Status"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="31dp"/>
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="116dp"
+        android:layout_height="45dp"
+        android:layout_x="191dp"
+        android:layout_y="180dp"
+        android:text="Add Date"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_alignBaseline="@+id/accDate"
+        android:layout_alignBottom="@+id/accDate"
+        android:layout_alignStart="@+id/textView11"/>
+
+    <TextView
+        android:id="@+id/accStat"
+        android:layout_width="116dp"
+        android:layout_height="45dp"
+        android:layout_x="187dp"
+        android:layout_y="48dp"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_alignTop="@+id/textView11"
+        android:layout_alignStart="@+id/accAmount"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/accDate"
+        android:layout_width="116dp"
+        android:layout_height="45dp"
+        android:layout_x="188dp"
+        android:layout_y="116dp"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_marginTop="19dp"
+        android:layout_below="@+id/accStat"
+        android:layout_alignStart="@+id/accStat"/>
+
+    <Button
+        android:id="@+id/btnDel"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:text="Delete"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="44dp"/>
+
+    <TextView
+        android:id="@+id/accName"
+        android:layout_width="116dp"
+        android:layout_height="45dp"
+        android:text="Account Name"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textView11"
+        android:layout_marginTop="43dp"/>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/accName"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="37dp"/>
+
+
+</RelativeLayout>

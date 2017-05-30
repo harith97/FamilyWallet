@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import ccpe001.familywallet.R;
 
-public class budImg extends AppCompatActivity {
+public class accDetail extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.budimg);
+        setContentView(R.layout.acc_detail);
     }
 }

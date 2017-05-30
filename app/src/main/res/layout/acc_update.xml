@@ -69,7 +69,8 @@
         android:layout_height="wrap_content"
         android:layout_x="81dp"
         android:layout_y="390dp"
-        android:text="Transfer" />
+        android:background="@color/success_color"
+        android:text="Transfer"/>
 
     <Button
         android:id="@+id/btnDtl"
@@ -77,6 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_x="79dp"
         android:layout_y="441dp"
-        android:text="Delete"
-        android:onClick="toDelete"/>
+        android:background="@color/colorAccent"
+        android:onClick="toDelete"
+        android:text="Delete"/>
 </AbsoluteLayout>
