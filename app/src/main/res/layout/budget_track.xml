@@ -9,16 +9,16 @@
 
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/spent"
         android:layout_width="196dp"
         android:layout_height="30dp"
+        android:layout_below="@+id/btnUpdate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
         android:layout_x="55dp"
         android:layout_y="373dp"
         android:background="@android:color/holo_green_dark"
-        android:text="Spent history"
-        android:layout_below="@+id/button4"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"/>
+        android:text="Spent history"/>
 
     <TextView
         android:id="@+id/budName"
@@ -117,7 +117,7 @@
         android:layout_alignEnd="@+id/progressBar3"/>
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnDudDel"
         android:layout_width="136dp"
         android:layout_height="50dp"
         android:layout_x="206dp"
@@ -125,10 +125,10 @@
         android:background="@color/colorAccent"
         android:elevation="0dp"
         android:text="Delete"
-        android:layout_marginStart="22dp"
         android:layout_marginTop="16dp"
         android:layout_below="@+id/switch1"
-        android:layout_alignStart="@+id/switch1"/>
+        android:layout_toStartOf="@+id/btnUpdate"
+        android:layout_marginEnd="23dp"/>
 
     <Button
         android:id="@+id/btnUpdate"
@@ -138,8 +138,8 @@
         android:layout_y="437dp"
         android:text="Update"
         android:onClick="updateBudget"
-        android:layout_alignBaseline="@+id/button4"
-        android:layout_alignBottom="@+id/button4"
+        android:layout_alignBaseline="@+id/btnDudDel"
+        android:layout_alignBottom="@+id/btnDudDel"
         android:layout_alignEnd="@+id/switch1"
         android:layout_marginEnd="23dp"/>
 

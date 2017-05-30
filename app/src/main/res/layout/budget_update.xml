@@ -74,7 +74,8 @@
         android:text="Forecast"
         android:layout_below="@+id/switch4"
         android:layout_alignStart="@+id/catSelect"
-        android:layout_marginTop="12dp"/>
+        android:layout_marginTop="12dp"
+        android:onClick="toForecast"/>
 
     <Button
         android:id="@+id/btnSubmit"
@@ -95,6 +96,7 @@
         android:layout_below="@+id/catSelect"
         android:layout_alignStart="@+id/catSelect"
         android:layout_marginTop="14dp"
-        android:layout_alignEnd="@+id/catSelect"/>
+        android:layout_alignEnd="@+id/catSelect"
+        android:onClick="updateBudget"/>
 
 </RelativeLayout>

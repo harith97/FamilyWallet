@@ -137,16 +137,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".budget.accDelete"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="ccpe001.familywallet.budget.accDelete"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".Splash"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -157,16 +147,24 @@
             </intent-filter>
         </activity>
         <activity
-        android:name=".IntoductionPage"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme.NoActionBar">
-        <intent-filter>
-            <action android:name="ccpe001.familywallet.INTRODUCTIONPAGE"/>
+            android:name=".IntoductionPage"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="ccpe001.familywallet.INTRODUCTIONPAGE"/>
 
-            <category android:name="android.intent.category.DEFAULT"/>
-        </intent-filter>
-    </activity>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".budget.accDetail"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="ccpe001.familywallet.budget.accDetail"/>
 
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".transaction.add_transaction">
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -203,8 +201,7 @@
 
         <activity android:name=".budget.budListView">
         </activity>
-        <activity android:name=".budget.budImg">
-        </activity>
+
     </application>
 
 </manifest>

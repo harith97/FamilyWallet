@@ -26,8 +26,8 @@ public class accUpdate extends Fragment {
         btnDel.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newInt1 = new Intent("ccpe001.familywallet.budget.accDelete");
-                startActivity(newInt1);
+                Intent newInt2 = new Intent("ccpe001.familywallet.budget.accDetail");
+                startActivity(newInt2);
             }
         });
         btltran.setOnClickListener(new OnClickListener() {
