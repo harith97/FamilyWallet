@@ -176,7 +176,7 @@ public class Transaction_main extends Fragment {
                 Toast.makeText(getActivity(), "Hello", Toast.LENGTH_SHORT).show();
 
             }
-        });
+        });//
 
             return view;
         }
