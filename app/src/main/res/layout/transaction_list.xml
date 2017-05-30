@@ -7,17 +7,18 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/block"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/transaction_main_block"
         android:backgroundTintMode="src_over">
 
         <TextView
             android:id="@+id/txtAmount"
             android:layout_width="100dp"
             android:layout_height="30dp"
-            android:layout_above="@+id/txtTitle"
-            android:layout_marginStart="12dp"
-            android:layout_toEndOf="@+id/txtTime"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/txtTime"
             android:clickable="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
@@ -27,52 +28,55 @@
             android:id="@+id/img"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/txtTime"
-            android:layout_marginStart="7dp"
+            android:layout_marginStart="19dp"
             android:layout_weight="1"
             android:clickable="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            app:srcCompat="@drawable/round" />
+            app:srcCompat="@drawable/round"
+            android:layout_alignTop="@+id/txtTime"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/txtTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/img"
-            android:layout_alignEnd="@+id/txtCategory"
-            android:layout_marginEnd="16dp"
             android:clickable="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:text="TextView" />
+            android:text="TextView"
+            android:layout_below="@+id/img"
+            android:layout_alignStart="@+id/txtCategory"
+            android:layout_marginStart="25dp" />
 
         <TextView
             android:id="@+id/txtCategory"
             android:layout_width="150dp"
             android:layout_height="30dp"
             android:layout_alignParentTop="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="15dp"
             android:layout_toEndOf="@+id/img"
             android:clickable="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:text="TextView"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtTime"
             android:layout_width="80dp"
             android:layout_height="20dp"
-            android:layout_alignBaseline="@+id/txtCategory"
-            android:layout_alignBottom="@+id/txtCategory"
-            android:layout_marginStart="33dp"
-            android:layout_toEndOf="@+id/txtCategory"
+            android:layout_marginStart="21dp"
             android:clickable="false"
             android:ems="10"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:inputType="date" />
+            android:inputType="date"
+            android:layout_alignBaseline="@+id/txtCategory"
+            android:layout_alignBottom="@+id/txtCategory"
+            android:layout_toEndOf="@+id/txtCategory" />
     </RelativeLayout>
 
 </RelativeLayout>

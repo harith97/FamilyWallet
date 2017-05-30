@@ -152,14 +152,14 @@ public class Transaction_main extends Fragment {
             };
 
             Integer[] imgid = {
-                    R.mipmap.ic_launcher,
-                    R.mipmap.ic_launcher,
-                    R.mipmap.ic_launcher,
-                    R.mipmap.ic_launcher,
-                    R.mipmap.ic_launcher,
-                    R.mipmap.ic_launcher,
-                    R.mipmap.ic_launcher,
-                    R.mipmap.ic_launcher,
+                    R.drawable.cat3,
+                    R.drawable.cat1,
+                    R.drawable.cat18,
+                    R.drawable.cat13,
+                    R.drawable.cat2,
+                    R.drawable.cat10,
+                    R.drawable.cat9,
+                    R.drawable.cat4,
             };
 
             TransactionListAdapter adapter = new TransactionListAdapter(getActivity(), Title, Category, Date, Amount, imgid);
