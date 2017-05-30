@@ -31,6 +31,7 @@ public class Transaction_main extends Fragment {
     Animation fabOpen, fabClose, fabClockwise, fabAntiClockwise;
     TextView txtIncome,txtExpense;
     boolean isOpen = false;
+    String categoryID, categoryName, title, date, amount;
 
     public Transaction_main() {
         // Required empty public constructor
@@ -41,8 +42,66 @@ public class Transaction_main extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         View view = inflater.inflate(R.layout.transaction_main, container, false);
+        if (savedInstanceState == null) {
+            Bundle extras = getActivity().getIntent().getExtras();
+            if(extras == null) {
+                categoryName = null;
+                categoryID = null;
+                title = null;
+                date = null;
+                amount = null;
+            } else {
+                categoryName = extras.getString("categoryName");
+                categoryID = extras.getString("categoryID");
+                title = extras.getString("title");
+                date = extras.getString("date");
+                amount = extras.getString("amount");
+
+                final String[] Title = {
+                        title
+                };
+                final String[] Category = {
+                        categoryName
+                };
+                final String[] Date = {
+                        date
+                };
+                final String[] Amount = {
+                        amount
+                };
+
+                Integer[] imgid = {
+                        Integer.parseInt(categoryID)
+                };
+
+
+                TransactionListAdapter adapter = new TransactionListAdapter(getActivity(), Title, Category, Date, Amount, imgid);
+                list = (ListView) view.findViewById(R.id.transactionList);
+                list.setAdapter(adapter);
+            }
+        } else {
+            categoryName = (String) savedInstanceState.getSerializable("categoryName");
+            categoryID = (String) savedInstanceState.getSerializable("categoryID");
+            title = (String) savedInstanceState.getSerializable("title");
+            date = (String) savedInstanceState.getSerializable("date");
+            amount = (String) savedInstanceState.getSerializable("amount");
+
+
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    // TODO Auto-generated method stub
+                    Toast.makeText(getActivity(), "Hello", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+        }
+
+
         txtExpense = (TextView) view.findViewById(R.id.txtExpense);
         txtIncome = (TextView) view.findViewById(R.id.txtIncome);
         fab_main = (FloatingActionButton) view.findViewById(R.id.fabMain);
@@ -110,73 +169,7 @@ public class Transaction_main extends Fragment {
 
 
 
-            final String[] Title = {
-                    "Lunch",
-                    "Repair",
-                    "Movie",
-                    "Denim",
-                    "Vacation",
-                    "Shoes",
-                    "Electric",
-                    "Table"
-            };
-            final String[] Category = {
-                    "Food",
-                    "Car",
-                    "Entertainment",
-                    "Clothes",
-                    "Travel",
-                    "Shopping",
-                    "Bill",
-                    "Furniture"
-            };
-            final String[] Date = {
-                    "2017/02/01",
-                    "2017/02/02",
-                    "2017/02/03",
-                    "2017/02/04",
-                    "2017/02/05",
-                    "2017/02/06",
-                    "2017/02/07",
-                    "2017/02/08"
-            };
-            final String[] Amount = {
-                    "Rs.500",
-                    "Rs.1500",
-                    "Rs.800",
-                    "Rs.600",
-                    "Rs.400",
-                    "Rs.700",
-                    "Rs.2500",
-                    "Rs.4500"
-            };
 
-            Integer[] imgid = {
-                    R.drawable.cat3,
-                    R.drawable.cat1,
-                    R.drawable.cat18,
-                    R.drawable.cat13,
-                    R.drawable.cat2,
-                    R.drawable.cat10,
-                    R.drawable.cat9,
-                    R.drawable.cat4,
-            };
-
-            TransactionListAdapter adapter = new TransactionListAdapter(getActivity(), Title, Category, Date, Amount, imgid);
-            list = (ListView) view.findViewById(R.id.transactionList);
-            list.setAdapter(adapter);
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                // TODO Auto-generated method stub
-                Toast.makeText(getActivity(), "Hello", Toast.LENGTH_SHORT).show();
-
-            }
-        });//
 
             return view;
         }

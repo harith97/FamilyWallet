@@ -87,7 +87,7 @@
                         app:srcCompat="@mipmap/account" />
 
                     <Spinner
-                        android:id="@+id/spinner8"
+                        android:id="@+id/spinAccount"
                         android:layout_width="263dp"
                         android:layout_height="41dp"
                         android:layout_alignTop="@+id/imgAccount"
@@ -122,7 +122,7 @@
                         android:layout_x="72dp"
                         android:layout_y="280dp"
                         android:gravity="center"
-                        android:text="Category"
+                        android:text="Tap to Set Category"
                         android:textSize="18sp" />
 
                 </TableRow>
@@ -145,7 +145,7 @@
                         app:srcCompat="@mipmap/note" />
 
                     <EditText
-                        android:id="@+id/editText19"
+                        android:id="@+id/txtTitle"
                         android:layout_width="match_parent"
                         android:layout_height="41dp"
                         android:layout_alignTop="@+id/imgNote"
@@ -194,6 +194,19 @@
                         android:layout_y="12dp"
                         app:srcCompat="@mipmap/price" />
 
+                    <Spinner
+                        android:id="@+id/spinCurrency"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/txtAmount"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@+id/txtAmount"
+                        android:layout_span="1"
+                        android:layout_weight=".6"
+                        android:layout_x="275dp"
+                        android:layout_y="14dp"
+                        android:entries="@array/spinnerCurrency" />
+
                     <EditText
                         android:id="@+id/txtAmount"
                         android:layout_width="0dp"
@@ -212,19 +225,6 @@
                         android:inputType="numberDecimal"
                         android:textAlignment="center"
                         android:textStyle="bold" />
-
-                    <Spinner
-                        android:id="@+id/spinner7"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/txtAmount"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignTop="@+id/txtAmount"
-                        android:layout_span="1"
-                        android:layout_weight=".6"
-                        android:layout_x="275dp"
-                        android:layout_y="14dp"
-                        android:entries="@array/spinnerCurrency" />
 
                 </TableRow>
 
@@ -279,7 +279,7 @@
                         android:id="@+id/txtDate"
                         android:layout_width="104dp"
                         android:layout_height="40dp"
-                        android:layout_alignStart="@+id/spinner8"
+                        android:layout_alignStart="@+id/spinAccount"
                         android:layout_alignTop="@+id/imgCalender"
                         android:layout_weight="1"
                         android:layout_x="84dp"
@@ -341,9 +341,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
+                    android:clickable="true"
+                    android:onClick="saveTransaction"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@mipmap/check"
-                    android:clickable="true"/>
+                    app:srcCompat="@mipmap/check" />
             </LinearLayout>
 
         </RelativeLayout>

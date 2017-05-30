@@ -13,7 +13,7 @@
     <string name="title_activity_get_info">GetInfo</string>
 
     <string-array name="spinnerCurrency">
-        <item>LKR</item>
+        <item>Rs.</item>
         <item>USD</item>
         <item>Rs(Convert)</item>
     </string-array>
@@ -23,6 +23,7 @@
         <item>Travel</item>
         <item>Food &amp; Drinks</item>
         <item>Transportation</item>
+        <item>Gifts</item>
         <item>Bill</item>
         <item>Entertainment</item>
         <item>Home</item>
@@ -37,7 +38,6 @@
         <item>Education</item>
         <item>Cinema</item>
         <item>Kids</item>
-        <item>Gifts</item>
     </string-array>
 
     <string-array name="spinnerDateFor">

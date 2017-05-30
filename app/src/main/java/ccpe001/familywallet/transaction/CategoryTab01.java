@@ -55,10 +55,10 @@ public class CategoryTab01 extends Fragment {
                 txtCategory = (TextView) view.findViewById(R.id.txtCategory);
 
                 String category = itemname[+position];
+                String categoryID = Integer.toString(imgid[+position]);
                 Intent intent = new Intent("ccpe001.familywallet.add_transaction");
-                intent.putExtra("category",category);
-                intent.putExtra("categoryID",imgid[+position]);
-                Log.d("knight",""+R.drawable.cat1);
+                intent.putExtra("categoryName",category);
+                intent.putExtra("categoryID",categoryID);
                 getActivity().finish();
                 startActivity(intent);
 

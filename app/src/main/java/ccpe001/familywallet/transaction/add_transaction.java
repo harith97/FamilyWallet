@@ -1,16 +1,15 @@
 package ccpe001.familywallet.transaction;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
-import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,50 +21,101 @@ import java.util.regex.Pattern;
 
 import ccpe001.familywallet.R;
 
-import static android.R.attr.data;
-
 public class add_transaction extends AppCompatActivity {
 
 
     private TextView txtLocation,txtCategory;
+    private Spinner spinCurrency, spinAccount;
     int PLACE_PICKER_REQUEST=1;
-    private EditText txtAmount;
-
-
+    private EditText txtAmount, txtDate, txtTime, txtTitle;
+    String categoryName, categoryID, title, date, amount,currency,account,time,location;
+    Long currencyIndex, accountIndex;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_transaction);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txtAmount =(EditText)findViewById(R.id.txtAmount);
-        txtLocation = (TextView)findViewById(R.id.txtLocation);
+        txtDate = (EditText) findViewById(R.id.txtDate);
+        txtTime = (EditText) findViewById(R.id.txtTime);
+        txtTitle = (EditText) findViewById(R.id.txtTitle);
+        txtLocation = (TextView) findViewById(R.id.txtLocation);
+        txtCategory = (TextView) findViewById(R.id.txtCategory);
+        spinCurrency = (Spinner) findViewById(R.id.spinCurrency);
+        spinAccount = (Spinner) findViewById(R.id.spinAccount);
+
         txtLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startPlacePickerActivity();
             }
         });
-        txtCategory = (TextView)findViewById(R.id.txtCategory);
+
+        if (savedInstanceState == null) {
+            Bundle extras = this.getIntent().getExtras();
+            if(extras == null) {
+                categoryName = null;
+                categoryID = null;
+                title = null;
+                date = null;
+                amount = null;
+            } else {
+                categoryName = extras.getString("categoryName");
+                categoryID = extras.getString("categoryID");
+                title = extras.getString("title");
+                date = extras.getString("date");
+                amount = extras.getString("amount");
+            }
+        } else {
+            categoryName = (String) savedInstanceState.getSerializable("categoryName");
+            categoryID = (String) savedInstanceState.getSerializable("categoryID");
+            title = (String) savedInstanceState.getSerializable("title");
+            date = (String) savedInstanceState.getSerializable("date");
+            amount = (String) savedInstanceState.getSerializable("amount");
+            txtTitle.setText(title);
+
+        }
+
         txtCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newInt = new Intent(add_transaction.this,ccpe001.familywallet.transaction.transaction_category.class);
-                startActivityForResult(newInt,1);
+                amount = txtAmount.getText().toString();
+                date = txtDate.getText().toString();
+                time = txtTime.getText().toString();
+                title = txtTitle.getText().toString();
+                currencyIndex = spinCurrency.getSelectedItemId();
+                accountIndex = spinCurrency.getSelectedItemId();
+                location = txtLocation.getText().toString();
+                Intent intent = new Intent(add_transaction.this,ccpe001.familywallet.transaction.transaction_category.class);
+                intent.putExtra("title",title);
+                intent.putExtra("amount",amount);
+                intent.putExtra("date",date);
+                intent.putExtra("time",time);
+                intent.putExtra("currencyIndex",currencyIndex);
+                intent.putExtra("accountIndex",accountIndex);
+                startActivity(intent);
             }
         });
-        String newString;
+
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
-                newString= null;
+                categoryName = null;
+                categoryID = null;
             } else {
-                newString= extras.getString("categoryID");
+                categoryName = extras.getString("categoryName");
+                categoryID = extras.getString("categoryID");
             }
         } else {
-            newString= (String) savedInstanceState.getSerializable("categoryID");
+            categoryName = (String) savedInstanceState.getSerializable("categoryName");
+            categoryID = (String) savedInstanceState.getSerializable("categoryID");
         }
-        txtCategory.setText(newString);
+
+        if (categoryName!=null){
+            txtCategory.setText(categoryName);
+        }
+
+
         txtAmount.setFilters(new InputFilter[] {new CurrencyFormatInputFilter()});
     }
 
@@ -106,18 +156,11 @@ public class add_transaction extends AppCompatActivity {
         Pattern mPattern = Pattern.compile("(0|[1-9]+[0-9]*)?(\\.[0-9]{0,2})?");
 
         @Override
-        public CharSequence filter(
-                CharSequence source,
-                int start,
-                int end,
-                Spanned dest,
-                int dstart,
-                int dend) {
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest,
+                int dstart, int dend) {
 
             String result =
-                    dest.subSequence(0, dstart)
-                            + source.toString()
-                            + dest.subSequence(dend, dest.length());
+                    dest.subSequence(0, dstart) + source.toString() + dest.subSequence(dend, dest.length());
 
             Matcher matcher = mPattern.matcher(result);
 
@@ -157,9 +200,18 @@ public class add_transaction extends AppCompatActivity {
 
     }
 
-
-
-
-
+    public void saveTransaction(View view){
+        amount = txtAmount.getText().toString();
+        date = txtDate.getText().toString();
+        title = txtTitle.getText().toString();
+        currency = spinCurrency.getSelectedItem().toString();
+        Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
+        intent.putExtra("categoryID",categoryID);
+        intent.putExtra("categoryName",categoryName);
+        intent.putExtra("title",title);
+        intent.putExtra("amount",currency+" "+amount);
+        intent.putExtra("date",date);
+        startActivity(intent);
+    }
 
 }
