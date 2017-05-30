@@ -4,69 +4,44 @@ import android.content.Context;
 import android.text.Editable;
 import android.widget.Toast;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by harithaperera on 5/22/17.
  */
 public class Validate {
 
     //kalin project wala validate function thyenawa nm daapalla meekata
-
-
-    public static boolean confPassword(String newPw, String confPw,Context context) {
-        if(newPw.equals(confPw))
-        {
-            if((!newPw.isEmpty())||(!confPw.isEmpty()))
-            {
-                return true;
-            }
-            else
-            {
-                Toast.makeText(context,"Password fields empty.",Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        }
-        else
-        {
-            Toast.makeText(context,"Password not matching.",Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }
-
-
-    public static boolean confChangePassword(String newPw, String confPw, String eteredOldPw,String pin, Context context) {
-        if (pin.equals(eteredOldPw)){
-            if(newPw.equals(confPw))
-            {
-                if((!newPw.isEmpty())||(!confPw.isEmpty())||(!eteredOldPw.isEmpty()))
-                {
-                    return true;
-                }
-                else
-                {
-                    Toast.makeText(context,"Password fields empty.",Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-            }
-            else
-            {
-                Toast.makeText(context,"Password not matching.",Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        }else{
-            Toast.makeText(context,"Old password not correct",Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-    }
-
-    public static boolean anyValidMail() {
-        return false;
-    }
-
     public static boolean fileValidate(Editable text) {
-        if(!text.toString().isEmpty()){
+        /*if(!text.toString().isEmpty()){
             return true;
         }
-        return false;
+        return false;*/
+        return true;
+    }
+
+    public static boolean anyValidPass(String pw) {
+        /*if (!pw.isEmpty()){
+            if (pw.length()>6){
+                return true;
+            }
+        }
+        return false;*/
+        return true;
+    }
+
+    public static boolean anyValidMail(String email) { //email
+        /*String str = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        Pattern pattern = Pattern.compile(str);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();*/
+        return true;
+    }
+
+    //Only letters
+    public static boolean ContainOnlyLetters(String name) {
+        /*return name.matches("[a-zA-Z]+");*/
+        return true;
     }
 }

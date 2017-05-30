@@ -15,26 +15,26 @@
 
 
 
-    <at.markushi.ui.CircleButton
-            android:src="@mipmap/email"
-                android:layout_width="125dp"
-                android:layout_gravity="center"
-                app:cb_color="#444"
-                android:clickable="true"
-                android:layout_marginBottom="-15dp"
-                app:cb_pressedRingWidth="16dp"
-                android:layout_centerInParent="true"
-                android:layout_height="125dp"
-            android:id="@+id/loggedUsrImg"
-    />
+
+
+    <android.support.design.widget.FloatingActionButton
+            android:layout_width="125dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="-15dp"
+            android:layout_centerInParent="true"
+
+            android:layout_height="125dp"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@android:drawable/ic_input_add"
+            android:id="@+id/loggedUsrImg"/>
+
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textAlignment="center"
             android:text="User Name"
-            />
-
-
+    />
 
 </LinearLayout>

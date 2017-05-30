@@ -32,13 +32,11 @@ public class Forgot extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         if(view.getId()==R.id.sendMail){
 
-            if(Validate.anyValidMail()){
-                sendBtn.setClickable(true);
+            if(Validate.anyValidMail(textForTxt.getText().toString())){
                 //send mail func
                 Toast.makeText(this,"Reset successful",Toast.LENGTH_SHORT).show();
             }else {
                 textForTxt.setError("Invalid email");
-                sendBtn.setClickable(false);
             }
 
         }

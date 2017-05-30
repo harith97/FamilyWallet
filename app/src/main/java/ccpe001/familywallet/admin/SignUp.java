@@ -7,12 +7,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import ccpe001.familywallet.R;
+import ccpe001.familywallet.Validate;
 
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
     private Button signUpBtn,fbUpBtn,googleUpBtn;
+    private EditText emailTxt,passTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
         signUpBtn= (Button)findViewById(R.id.signupBtn);
         fbUpBtn= (Button)findViewById(R.id.fbOptBtn);
+        emailTxt= (EditText)findViewById(R.id.emailTxt);
+        passTxt= (EditText)findViewById(R.id.passwordTxt);
         googleUpBtn= (Button)findViewById(R.id.googleOptBtn);
         signUpBtn.setOnClickListener(this);
         fbUpBtn.setOnClickListener(this);
@@ -37,8 +42,16 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if(view.getId()== R.id.signupBtn){
-            Intent intent = new Intent("ccpe001.familywallet.GETINFO");
-            startActivity(intent);
+            if(Validate.anyValidMail(emailTxt.getText().toString())) {
+                if(Validate.anyValidPass(passTxt.getText().toString())){
+                    Intent intent = new Intent("ccpe001.familywallet.GETINFO");
+                    startActivity(intent);
+                }else{
+                    passTxt.setError("Invalid password");
+                }
+            }else {
+                emailTxt.setError("Invalid email");
+            }
         }else if(view.getId()== R.id.fbOptBtn) {
             Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
             startActivity(intent);

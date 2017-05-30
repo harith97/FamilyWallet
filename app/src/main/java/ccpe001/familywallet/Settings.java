@@ -191,6 +191,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
 
             mDialog = DirectoryChooserFragment.newInstance(config);
             mDialog.show(getActivity().getFragmentManager(),null);
+            mDialog.setDirectoryChooserListener(this);
 
         }else if(view.getId()==R.id.appPasswordRow){
             enterPinBuilder = new AlertDialog.Builder(getActivity());
@@ -409,7 +410,8 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     @Override
     public void onSelectDirectory(@NonNull String path) {
         mDialog.setTargetFragment(getActivity().getFragmentManager().findFragmentById(R.id.settingFrag),DIR_CHOOSER);
-        mDialog.show(getActivity().getFragmentManager(),null);
+        //mDialog.show(getActivity().getFragmentManager(),null);
+        mDialog.dismiss();
 
         appbackUpPath = path;
         storePWSharedPref();

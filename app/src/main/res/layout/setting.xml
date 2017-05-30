@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
+        xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -64,7 +64,7 @@
 
                 <Switch
                         android:text="Local mode"
-
+                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/localModeSwitch"/>
             </TableRow>
@@ -93,9 +93,11 @@
                 <TextView
                         android:text="TextView"
                         android:layout_weight="1"
+                        android:textAlignment="textEnd"
+                        android:gravity="center"
                         android:layout_width="fill_parent"
 
-                        android:layout_height="wrap_content" android:id="@+id/statusLang"/>
+                        android:layout_height="wrap_content" android:id="@+id/statusLang" tools:ignore="RtlCompat"/>
             </TableRow>
         </TableLayout>
 
@@ -121,9 +123,12 @@
                     <TextView
                             android:text="TextView"
                             android:layout_weight="1"
+                            android:textAlignment="textEnd"
+                            android:gravity="center"
                             android:layout_width="match_parent"
 
-                            android:layout_height="wrap_content" android:id="@+id/statusDateFor"/>
+                            android:layout_height="wrap_content" android:id="@+id/statusDateFor"
+                            tools:ignore="RtlCompat"/>
                 </TableRow>
             </TableLayout>
 
@@ -150,6 +155,8 @@
                             android:text="TextView"
                             android:layout_width="match_parent"
                             android:layout_weight="1"
+                            android:textAlignment="textEnd"
+                            android:gravity="center"
                             android:layout_height="wrap_content" android:id="@+id/statusCurr"/>
                 </TableRow>
             </TableLayout>
@@ -185,6 +192,7 @@
                           android:padding="10dp">
                     <Switch
                             android:text="App notifications"
+                            android:layout_weight="1"
 
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" android:id="@+id/appNotySwitch"/>
@@ -204,6 +212,7 @@
                           android:padding="10dp">
                     <Switch
                             android:text="Show icon in status bar"
+                            android:layout_weight="1"
 
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" android:id="@+id/statusIconSwitch"/>
@@ -236,7 +245,8 @@
                             android:text="TextView"
                             android:layout_width="match_parent"
                             android:layout_weight="1"
-
+                            android:textAlignment="textEnd"
+                            android:gravity="center"
                             android:layout_height="wrap_content" android:id="@+id/startRem"/>
                 </TableRow>
             </TableLayout>
@@ -276,6 +286,7 @@
 
                     <Switch
                             android:text="Auto sync"
+                            android:layout_weight="1"
 
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" android:id="@+id/autoSyncSwitch"/>
@@ -294,6 +305,7 @@
 
                     <Switch
                             android:text="Auto backups"
+                            android:layout_weight="1"
 
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" android:id="@+id/autoBackUpSwitch"/>
@@ -320,6 +332,9 @@
 
                     <TextView
                             android:text="TextView"
+                            android:textAlignment="textEnd"
+                            android:gravity="center"
+                            android:maxLines="2"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" android:id="@+id/statusBackUpLoc"/>
@@ -350,6 +365,8 @@
                     <TextView
                             android:text="TextView"
                             android:layout_weight="1"
+                            android:textAlignment="textEnd"
+                            android:gravity="center"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/statusAppPw"/>
@@ -424,6 +441,7 @@
                         android:layout_height="match_parent"
                         android:padding="10dp">
                     <Button
+                            android:layout_weight="1"
 
                             android:text="Sign out"
                             android:layout_width="match_parent"

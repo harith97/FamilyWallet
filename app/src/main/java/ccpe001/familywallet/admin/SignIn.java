@@ -5,11 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.*;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import ccpe001.familywallet.R;
+import ccpe001.familywallet.Validate;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -20,12 +18,11 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
 
     private Button signIn,scannerBtn;
     private TextView toSignUp,forgotTxt;
+    private EditText emailTxt,passTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.signin);
         init();
     }
@@ -35,7 +32,10 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         signIn= (Button)findViewById(R.id.signInBtn);
         scannerBtn= (Button)findViewById(R.id.qrscannerBtn);
         toSignUp = (TextView)findViewById(R.id.textView2);
-        forgotTxt = (TextView)findViewById(R.id.textView);;
+        forgotTxt = (TextView)findViewById(R.id.textView);
+        emailTxt = (EditText)findViewById(R.id.emailTxt);
+        passTxt = (EditText)findViewById(R.id.passwordTxt);
+
         signIn.setOnClickListener(this);
         scannerBtn.setOnClickListener(this);
         toSignUp.setOnClickListener(this);
@@ -48,8 +48,16 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if(view.getId()== R.id.signInBtn){
-            Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
-            startActivity(intent);
+            if(Validate.anyValidMail(emailTxt.getText().toString())) {
+                if(Validate.anyValidPass(passTxt.getText().toString())){
+                    Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
+                    startActivity(intent);
+                }else{
+                    passTxt.setError("Invalid password");
+                }
+            }else {
+                emailTxt.setError("Invalid email");
+            }
         }else if(view.getId()== R.id.qrscannerBtn){
             IntentIntegrator intentIntegrator = new IntentIntegrator(this);
             intentIntegrator.setDesiredBarcodeFormats(intentIntegrator.QR_CODE_TYPES);
