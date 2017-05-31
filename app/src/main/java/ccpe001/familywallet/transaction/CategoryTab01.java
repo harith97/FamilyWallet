@@ -26,7 +26,8 @@ public class CategoryTab01 extends Fragment {
 
     GridView grid;
     TextView txtCategory;
-
+    String categoryID, categoryName, title, date, time, amount;
+    int currencyIndex, accountIndex;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -54,11 +55,28 @@ public class CategoryTab01 extends Fragment {
                                     int position, long id) {
                 txtCategory = (TextView) view.findViewById(R.id.txtCategory);
 
+                Bundle extras = getActivity().getIntent().getExtras();
+
+                categoryName = extras.getString("categoryName");
+                categoryID = extras.getString("categoryID");
+                title = extras.getString("title");
+                date = extras.getString("date");
+                time = extras.getString("time");
+                amount = extras.getString("amount");
+                currencyIndex = extras.getInt("currencyIndex");
+                accountIndex = extras.getInt("accountIndex");
+
                 String category = itemname[+position];
                 String categoryID = Integer.toString(imgid[+position]);
                 Intent intent = new Intent("ccpe001.familywallet.add_transaction");
                 intent.putExtra("categoryName",category);
                 intent.putExtra("categoryID",categoryID);
+                intent.putExtra("title",title);
+                intent.putExtra("amount",amount);
+                intent.putExtra("date",date);
+                intent.putExtra("time",time);
+                intent.putExtra("currencyIndex",currencyIndex);
+                intent.putExtra("accountIndex",accountIndex);
                 getActivity().finish();
                 startActivity(intent);
 

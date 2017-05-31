@@ -205,7 +205,8 @@
                         android:layout_weight=".6"
                         android:layout_x="275dp"
                         android:layout_y="14dp"
-                        android:entries="@array/spinnerCurrency" />
+                        android:entries="@array/spinnerCurrency"
+                        android:textAlignment="textEnd" />
 
                     <EditText
                         android:id="@+id/txtAmount"

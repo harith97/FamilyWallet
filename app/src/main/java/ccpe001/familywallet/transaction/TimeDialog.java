@@ -28,6 +28,8 @@ public class TimeDialog extends DialogFragment implements TimePickerDialog.OnTim
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
+        int am_pm = c.get(Calendar.AM_PM);
+
         return new TimePickerDialog(getActivity(), this, hour, minute, false);
 
     }
@@ -35,6 +37,11 @@ public class TimeDialog extends DialogFragment implements TimePickerDialog.OnTim
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute) {
         String am_pm = (hour < 12) ? "AM" : "PM";
+
+        if (hour>12){
+            hour=hour-12;
+        }
+
         if (hour==0)
             hour=12;
         String time1 = pad(hour) + ":" + pad(minute)+" "+am_pm;

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
+import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,7 +30,7 @@ public class add_transaction extends AppCompatActivity {
     int PLACE_PICKER_REQUEST=1;
     private EditText txtAmount, txtDate, txtTime, txtTitle;
     String categoryName, categoryID, title, date, amount,currency,account,time,location;
-    Long currencyIndex, accountIndex;
+    Integer currencyIndex, accountIndex;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,12 +60,24 @@ public class add_transaction extends AppCompatActivity {
                 title = null;
                 date = null;
                 amount = null;
+                time = null;
+                currencyIndex = null;
+                accountIndex = null;
             } else {
                 categoryName = extras.getString("categoryName");
                 categoryID = extras.getString("categoryID");
                 title = extras.getString("title");
                 date = extras.getString("date");
+                time = extras.getString("time");
                 amount = extras.getString("amount");
+                currencyIndex = extras.getInt("currencyIndex");
+                accountIndex = extras.getInt("accountIndex");
+                txtTitle.setText(title);
+                txtAmount.setText(amount);
+                txtDate.setText(date);
+                txtTime.setText(time);
+                spinAccount.setSelection(accountIndex);
+                spinCurrency.setSelection(currencyIndex);
             }
         } else {
             categoryName = (String) savedInstanceState.getSerializable("categoryName");
@@ -72,7 +85,10 @@ public class add_transaction extends AppCompatActivity {
             title = (String) savedInstanceState.getSerializable("title");
             date = (String) savedInstanceState.getSerializable("date");
             amount = (String) savedInstanceState.getSerializable("amount");
-            txtTitle.setText(title);
+            currencyIndex = (Integer) savedInstanceState.getSerializable("currencyIndex");
+            accountIndex = (Integer) savedInstanceState.getSerializable("accountIndex");
+
+
 
         }
 
@@ -83,8 +99,8 @@ public class add_transaction extends AppCompatActivity {
                 date = txtDate.getText().toString();
                 time = txtTime.getText().toString();
                 title = txtTitle.getText().toString();
-                currencyIndex = spinCurrency.getSelectedItemId();
-                accountIndex = spinCurrency.getSelectedItemId();
+                currencyIndex = spinCurrency.getSelectedItemPosition();
+                accountIndex = spinCurrency.getSelectedItemPosition();
                 location = txtLocation.getText().toString();
                 Intent intent = new Intent(add_transaction.this,ccpe001.familywallet.transaction.transaction_category.class);
                 intent.putExtra("title",title);
@@ -117,6 +133,20 @@ public class add_transaction extends AppCompatActivity {
 
 
         txtAmount.setFilters(new InputFilter[] {new CurrencyFormatInputFilter()});
+
+        if (date==null){
+            long Cdate = System.currentTimeMillis();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+            String dateString = sdf.format(Cdate);
+            txtDate.setText(dateString);
+        }
+        if (time==null){
+            long Cdate = System.currentTimeMillis();
+            SimpleDateFormat stf = new SimpleDateFormat("h:mm a");
+            String timeString = stf.format(Cdate);
+            txtTime.setText(timeString);
+        }
+
     }
 
 
@@ -171,6 +201,7 @@ public class add_transaction extends AppCompatActivity {
     }
 
 
+
     public void onStart(){
         super.onStart();
         TextView txtDate = (TextView) findViewById(R.id.txtDate);
@@ -200,18 +231,25 @@ public class add_transaction extends AppCompatActivity {
 
     }
 
-    public void saveTransaction(View view){
+
+
+    public void saveTransaction(View view) {
         amount = txtAmount.getText().toString();
         date = txtDate.getText().toString();
         title = txtTitle.getText().toString();
         currency = spinCurrency.getSelectedItem().toString();
-        Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
-        intent.putExtra("categoryID",categoryID);
-        intent.putExtra("categoryName",categoryName);
-        intent.putExtra("title",title);
-        intent.putExtra("amount",currency+" "+amount);
-        intent.putExtra("date",date);
-        startActivity(intent);
+        if (amount.isEmpty()) {
+            Toast.makeText(this, "Set the Amount first", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
+            intent.putExtra("categoryID", categoryID);
+            intent.putExtra("categoryName", categoryName);
+            intent.putExtra("title", title);
+            intent.putExtra("amount", currency + " " + amount);
+            intent.putExtra("date", date);
+            startActivity(intent);
+        }
     }
 
 }
