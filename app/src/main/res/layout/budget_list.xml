@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,15 +10,31 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="false"
-        android:layout_marginEnd="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_x="2dp"
-        android:layout_y="85dp"
+        android:layout_x="-1dp"
+        android:layout_y="69dp"
         android:clickable="false"
         android:divider="@android:color/transparent"
         android:dividerHeight="10.0sp"
         android:focusable="false"
-        android:focusableInTouchMode="false"/>
+        android:focusableInTouchMode="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="56dp"/>
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</AbsoluteLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_action_create"
+            app:fabSize="normal"
+            android:id="@+id/fab1"
+            android:onClick="addbudget"
+            />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</RelativeLayout>

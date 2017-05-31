@@ -69,22 +69,24 @@
         android:id="@+id/btnForecast"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="17dp"
+        android:background="@color/colorPrimary"
+        android:onClick="nxtForecast"
         android:text="Forecast"
         android:layout_alignBaseline="@+id/btnSubmit"
         android:layout_alignBottom="@+id/btnSubmit"
-        android:layout_toStartOf="@+id/btnSubmit"
-        android:layout_marginEnd="19dp"
-        android:onClick="nxtForecast"/>
+        android:layout_toStartOf="@+id/btnSubmit"/>
 
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:background="@color/success_color"
         android:text="Submit"
-        android:layout_marginTop="13dp"
         android:layout_below="@+id/switch4"
         android:layout_alignEnd="@+id/catSelect"
-        android:layout_marginEnd="18dp" />
+        android:layout_marginTop="42dp"/>
 
     <Switch
         android:id="@+id/switch4"

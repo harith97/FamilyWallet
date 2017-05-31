@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,7 +13,11 @@
         android:layout_x="32dp"
         android:layout_y="236dp"
         tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="146dp" />
+        tools:layout_editor_absoluteY="146dp"
+        android:layout_below="@+id/editText7"
+        android:layout_alignStart="@+id/editText7"
+        android:layout_marginTop="26dp"
+        android:layout_alignParentEnd="true"/>
 
     <Switch
         android:id="@+id/swcPrivate"
@@ -23,7 +27,11 @@
         android:layout_y="317dp"
         android:text="Is private"
         tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="230dp" />
+        tools:layout_editor_absoluteY="230dp"
+        android:layout_marginTop="49dp"
+        android:layout_below="@+id/spinType"
+        android:layout_toEndOf="@+id/swtNotify"
+        android:layout_marginStart="21dp"/>
 
     <Switch
         android:id="@+id/swtNotify"
@@ -33,7 +41,10 @@
         android:layout_y="316dp"
         android:text="Notification"
         tools:layout_editor_absoluteX="211dp"
-        tools:layout_editor_absoluteY="230dp" />
+        tools:layout_editor_absoluteY="230dp"
+        android:layout_above="@+id/btnAdd"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"/>
 
     <EditText
         android:id="@+id/editText7"
@@ -45,7 +56,11 @@
         android:hint="Available Amount"
         android:inputType="numberDecimal"
         tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="83dp" />
+        tools:layout_editor_absoluteY="83dp"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/editText5"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"/>
 
     <EditText
         android:id="@+id/editText5"
@@ -57,7 +72,11 @@
         android:hint="Account Name"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:layout_editor_absoluteY="16dp"
+        android:layout_marginTop="126dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"/>
 
     <Button
         android:id="@+id/btnAdd"
@@ -65,6 +84,10 @@
         android:layout_height="wrap_content"
         android:layout_x="119dp"
         android:layout_y="397dp"
-        android:text="Submit" />
+        android:background="@color/success_color"
+        android:text="Submit"
+        android:layout_below="@+id/swcPrivate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"/>
 
-</AbsoluteLayout>
+</RelativeLayout>

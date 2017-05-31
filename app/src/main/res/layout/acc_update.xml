@@ -10,74 +10,77 @@
         android:id="@+id/tranAmount"
         android:layout_width="227dp"
         android:layout_height="31dp"
-        android:layout_x="30dp"
-        android:layout_y="63dp"
+        android:layout_x="32dp"
+        android:layout_y="119dp"
         android:text="Amount"
-        android:textAlignment="textStart"
-        android:textStyle="bold" />
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/accAmount"
-        android:layout_width="335dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_x="30dp"
-        android:layout_y="102dp"
+        android:layout_x="-2dp"
+        android:layout_y="158dp"
         android:ems="10"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"/>
 
     <TextView
         android:id="@+id/accOwn"
         android:layout_width="227dp"
         android:layout_height="31dp"
         android:layout_x="30dp"
-        android:layout_y="169dp"
+        android:layout_y="227dp"
         android:text="Transfer From"
-        android:textAlignment="textStart"
-        android:textStyle="bold" />
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"/>
 
     <Spinner
         android:id="@+id/transFrom"
-        android:layout_width="332dp"
+        android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_x="24dp"
-        android:layout_y="216dp"
+        android:layout_x="-2dp"
+        android:layout_y="274dp"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="42dp" />
+        tools:layout_editor_absoluteY="42dp"/>
 
     <TextView
         android:id="@+id/accOther"
         android:layout_width="227dp"
         android:layout_height="31dp"
         android:layout_x="36dp"
-        android:layout_y="291dp"
+        android:layout_y="349dp"
         android:text="Transfer to"
-        android:textAlignment="textStart"
-        android:textStyle="bold" />
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"/>
 
     <Spinner
         android:id="@+id/transTo"
-        android:layout_width="332dp"
+        android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:layout_x="32dp"
-        android:layout_y="333dp"
+        android:layout_x="0dp"
+        android:layout_y="391dp"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="42dp" />
+        tools:layout_editor_absoluteY="42dp"/>
 
     <Button
         android:id="@+id/transfer"
-        android:layout_width="225dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_x="81dp"
-        android:layout_y="390dp"
+        android:layout_x="39dp"
+        android:layout_y="468dp"
         android:background="@color/success_color"
         android:text="Transfer"/>
 
     <Button
         android:id="@+id/btnDtl"
-        android:layout_width="228dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_x="79dp"
-        android:layout_y="441dp"
+        android:layout_x="211dp"
+        android:layout_y="469dp"
         android:background="@color/colorAccent"
         android:onClick="toDelete"
         android:text="Delete"/>
