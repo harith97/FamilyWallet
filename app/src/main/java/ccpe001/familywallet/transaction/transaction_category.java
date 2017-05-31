@@ -112,9 +112,6 @@ public class transaction_category extends AppCompatActivity {
                 case 1:
                     CategoryTab02 tab2 = new CategoryTab02();
                     return  tab2;
-                case 2:
-                    CategoryTab03 tab3 = new CategoryTab03();
-                    return tab3;
                 default:
                     return null;
             }
@@ -123,19 +120,17 @@ public class transaction_category extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 2 total pages.
+            return 2;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "RECENT";
-                case 1:
-                    return "FAVOURITES";
-                case 2:
                     return "ALL";
+                case 1:
+                    return "RECENT";
             }
             return null;
         }

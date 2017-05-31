@@ -44,6 +44,7 @@ public class TimeDialog extends DialogFragment implements TimePickerDialog.OnTim
 
         if (hour==0)
             hour=12;
+
         String time1 = pad(hour) + ":" + pad(minute)+" "+am_pm;
         txtTime.setText(time1);
     }

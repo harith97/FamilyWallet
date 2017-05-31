@@ -1,5 +1,6 @@
 package ccpe001.familywallet.transaction;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -23,26 +24,12 @@ public class CategoryTab02 extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.category_tab02, container, false);
 
-        final String[] itemname = {
-                "Food",
-                "Car",
-                "Entertainment",
-                "Clothes",
-                "Travel",
-                "Shopping",
-                "Bill",
-                "Holiday"
-        };
+        Resources res = getResources();
+        final String[] itemname = res.getStringArray(R.array.ExpenseCategory);
 
-        Integer[] imgid = {
-                R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher,
+        final Integer[] imgid = {
+                R.drawable.cat100,R.drawable.cat101,R.drawable.cat102,R.drawable.cat103,
+                R.drawable.cat104,R.drawable.cat_other,
         };
 
         CategoryAdapter adapter = new CategoryAdapter(getActivity(), itemname, imgid);

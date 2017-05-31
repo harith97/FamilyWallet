@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
@@ -29,7 +30,7 @@ public class add_transaction extends AppCompatActivity {
     private Spinner spinCurrency, spinAccount;
     int PLACE_PICKER_REQUEST=1;
     private EditText txtAmount, txtDate, txtTime, txtTitle;
-    String categoryName, categoryID, title, date, amount,currency,account,time,location;
+    String categoryName, categoryID, title, date, amount,currency,time,location;
     Integer currencyIndex, accountIndex;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class add_transaction extends AppCompatActivity {
                 time = null;
                 currencyIndex = null;
                 accountIndex = null;
+                location = null;
             } else {
                 categoryName = extras.getString("categoryName");
                 categoryID = extras.getString("categoryID");
@@ -70,12 +72,14 @@ public class add_transaction extends AppCompatActivity {
                 date = extras.getString("date");
                 time = extras.getString("time");
                 amount = extras.getString("amount");
+                location = extras.getString("location");
                 currencyIndex = extras.getInt("currencyIndex");
                 accountIndex = extras.getInt("accountIndex");
                 txtTitle.setText(title);
                 txtAmount.setText(amount);
                 txtDate.setText(date);
                 txtTime.setText(time);
+                txtLocation.setText(location);
                 spinAccount.setSelection(accountIndex);
                 spinCurrency.setSelection(currencyIndex);
             }
@@ -85,6 +89,7 @@ public class add_transaction extends AppCompatActivity {
             title = (String) savedInstanceState.getSerializable("title");
             date = (String) savedInstanceState.getSerializable("date");
             amount = (String) savedInstanceState.getSerializable("amount");
+            location = (String) savedInstanceState.getSerializable("location");
             currencyIndex = (Integer) savedInstanceState.getSerializable("currencyIndex");
             accountIndex = (Integer) savedInstanceState.getSerializable("accountIndex");
 
@@ -107,6 +112,7 @@ public class add_transaction extends AppCompatActivity {
                 intent.putExtra("amount",amount);
                 intent.putExtra("date",date);
                 intent.putExtra("time",time);
+                intent.putExtra("location",location);
                 intent.putExtra("currencyIndex",currencyIndex);
                 intent.putExtra("accountIndex",accountIndex);
                 startActivity(intent);
@@ -238,6 +244,13 @@ public class add_transaction extends AppCompatActivity {
         date = txtDate.getText().toString();
         title = txtTitle.getText().toString();
         currency = spinCurrency.getSelectedItem().toString();
+        location = txtLocation.getText().toString();
+
+        if (categoryName==null){
+            categoryName = "Other";
+            categoryID = Integer.toString(R.drawable.cat_other);
+        }
+
         if (amount.isEmpty()) {
             Toast.makeText(this, "Set the Amount first", Toast.LENGTH_SHORT).show();
         }
@@ -248,6 +261,7 @@ public class add_transaction extends AppCompatActivity {
             intent.putExtra("title", title);
             intent.putExtra("amount", currency + " " + amount);
             intent.putExtra("date", date);
+            intent.putExtra("location",location);
             startActivity(intent);
         }
     }

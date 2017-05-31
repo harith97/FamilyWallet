@@ -1,22 +1,17 @@
 package ccpe001.familywallet.transaction;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import ccpe001.familywallet.R;
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by Knight on 5/21/2017.
@@ -26,7 +21,7 @@ public class CategoryTab01 extends Fragment {
 
     GridView grid;
     TextView txtCategory;
-    String categoryID, categoryName, title, date, time, amount;
+    String categoryID, categoryName, title, date, time, amount, location;
     int currencyIndex, accountIndex;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +37,7 @@ public class CategoryTab01 extends Fragment {
                 R.drawable.cat5,R.drawable.cat6,R.drawable.cat7,R.drawable.cat8,R.drawable.cat9,
                 R.drawable.cat10,R.drawable.cat11,R.drawable.cat12,R.drawable.cat13,R.drawable.cat14,
                 R.drawable.cat15,R.drawable.cat16,R.drawable.cat17,R.drawable.cat18,R.drawable.cat19,
+                R.drawable.cat_other,
         };
 
         CategoryAdapter adapter = new CategoryAdapter(getActivity(), itemname, imgid);
@@ -63,6 +59,7 @@ public class CategoryTab01 extends Fragment {
                 date = extras.getString("date");
                 time = extras.getString("time");
                 amount = extras.getString("amount");
+                location = extras.getString("location");
                 currencyIndex = extras.getInt("currencyIndex");
                 accountIndex = extras.getInt("accountIndex");
 
@@ -75,6 +72,7 @@ public class CategoryTab01 extends Fragment {
                 intent.putExtra("amount",amount);
                 intent.putExtra("date",date);
                 intent.putExtra("time",time);
+                intent.putExtra("location",location);
                 intent.putExtra("currencyIndex",currencyIndex);
                 intent.putExtra("accountIndex",accountIndex);
                 getActivity().finish();

@@ -38,6 +38,16 @@
         <item>Education</item>
         <item>Cinema</item>
         <item>Kids</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="ExpenseCategory">
+    <item>Loan</item>
+    <item>Business</item>
+    <item>Gift</item>
+    <item>Salary</item>
+    <item>Extra Income</item>
+    <item>Other</item>
     </string-array>
 
     <string-array name="spinnerDateFor">
