@@ -26,7 +26,7 @@ public class budgetList extends Fragment {
         final String[] title = {"First", "Second"};
         final String[] catName = {"Food", "Travel"};
         final String[] status = {"Expired", "Ongoing"};
-        final Integer[] imgId = {R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
+        final Integer[] imgId = {R.mipmap.ic_launcher, R.mipmap.ic_launcher};
         budgetListAd addList = new budgetListAd(getActivity(), title, catName, status, imgId);
         ListView budList = (ListView) view.findViewById(R.id.list);
         budList.setAdapter(addList);
