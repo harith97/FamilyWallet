@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import java.util.Calendar;
 
@@ -15,16 +17,23 @@ import ccpe001.familywallet.R;
 public class BudgetHandling extends AppCompatActivity implements View.OnClickListener {
     EditText strDt,endDt;
     private  int day,mon,yr;
-
+    private String[] arraySpinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.arraySpinner = new String[] {
+                "Food", "Travel"
+        };
+
         setContentView(R.layout.budget_handling);
         strDt=(EditText)findViewById(R.id.startDate);
         endDt=(EditText)findViewById(R.id.endDate);
         strDt.setOnClickListener(this);
         endDt.setOnClickListener(this);
-
+        Spinner s = (Spinner) findViewById(R.id.catSelect);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, arraySpinner);
+        s.setAdapter(adapter);
     }
 
 

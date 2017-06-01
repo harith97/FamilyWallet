@@ -9,13 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import ccpe001.familywallet.R;
 
 public class accUpdate extends Fragment {
     Button btnDel,btltran;
+    private String[] arraySpinner;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -23,6 +26,11 @@ public class accUpdate extends Fragment {
         View v = inflater.inflate(R.layout.acc_update, container, false);
         btnDel=(Button)v.findViewById(R.id.btnDtl);
         btltran=(Button)v.findViewById(R.id.transfer);
+
+        this.arraySpinner = new String[] {
+                "1234", "2345"
+        };
+
         btnDel.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +74,14 @@ public class accUpdate extends Fragment {
 
             }
         });
+        Spinner s = (Spinner) v.findViewById(R.id.transFrom);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),
+                android.R.layout.simple_dropdown_item_1line, arraySpinner);
+        s.setAdapter(adapter);
+        Spinner c = (Spinner) v.findViewById(R.id.transTo);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this.getActivity(),
+                android.R.layout.simple_dropdown_item_1line, arraySpinner);
+        c.setAdapter(adapter2);
         return v;
         }
     }

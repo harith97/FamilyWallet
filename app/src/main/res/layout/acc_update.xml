@@ -37,15 +37,6 @@
         android:textAllCaps="true"
         android:textStyle="bold"/>
 
-    <Spinner
-        android:id="@+id/transFrom"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_x="-2dp"
-        android:layout_y="274dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="42dp"/>
-
     <TextView
         android:id="@+id/accOther"
         android:layout_width="227dp"
@@ -84,4 +75,13 @@
         android:background="@color/colorAccent"
         android:onClick="toDelete"
         android:text="Delete"/>
+
+    <Spinner
+        android:id="@+id/transFrom"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_x="0dp"
+        android:layout_y="275dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="42dp"/>
 </AbsoluteLayout>
