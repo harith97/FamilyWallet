@@ -97,6 +97,6 @@
         android:layout_alignStart="@+id/catSelect"
         android:layout_marginTop="14dp"
         android:layout_alignEnd="@+id/catSelect"
-        android:onClick="updateBudget"/>
+        />
 
 </RelativeLayout>
