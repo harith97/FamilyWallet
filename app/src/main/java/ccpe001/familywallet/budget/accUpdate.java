@@ -53,6 +53,16 @@ public class accUpdate extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         Toast.makeText(getActivity(), "Transfer:DONE", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+                builder.setNegativeButton("NO | View History", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        Toast.makeText(getActivity(), "Transfer:Cancel", Toast.LENGTH_LONG).show();
                         AlertDialog.Builder builderSingle = new AlertDialog.Builder(getContext());
                         builderSingle.setIcon(R.drawable.ic_launcher);
                         builderSingle.setTitle("Transfer History[Date]");
@@ -85,15 +95,6 @@ public class accUpdate extends Fragment {
                         builderSingle.show();
 
 
-                    }
-                });
-
-                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        Toast.makeText(getActivity(), "Transfer:Cancel", Toast.LENGTH_LONG).show();
                     }
                 });
 
