@@ -18,7 +18,8 @@
         android:textStyle="bold"
         android:layout_alignBaseline="@+id/textView7"
         android:layout_alignBottom="@+id/textView7"
-        android:layout_alignEnd="@+id/spinner"/>
+        android:layout_alignEnd="@+id/spinner"
+        android:layout_alignStart="@+id/spinner"/>
 
     <TextView
         android:id="@+id/textView7"
@@ -47,19 +48,6 @@
         android:layout_below="@+id/textView7"
         android:layout_alignStart="@+id/textView7"
         android:layout_marginTop="19dp"/>
-
-    <TextView
-        android:id="@+id/accAmount"
-        android:layout_width="116dp"
-        android:layout_height="45dp"
-        android:layout_x="45dp"
-        android:layout_y="237dp"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        android:layout_alignBaseline="@+id/textView9"
-        android:layout_alignBottom="@+id/textView9"
-        android:layout_alignStart="@+id/accId"/>
 
     <TextView
         android:id="@+id/textView11"
@@ -98,9 +86,10 @@
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textStyle="bold"
+        android:layout_marginTop="13dp"
         android:layout_alignTop="@+id/textView11"
         android:layout_alignStart="@+id/accAmount"
-        android:layout_marginTop="15dp"/>
+        android:layout_alignEnd="@+id/accAmount"/>
 
     <TextView
         android:id="@+id/accDate"
@@ -113,7 +102,8 @@
         android:textStyle="bold"
         android:layout_marginTop="19dp"
         android:layout_below="@+id/accStat"
-        android:layout_alignStart="@+id/accStat"/>
+        android:layout_alignStart="@+id/accStat"
+        android:layout_alignEnd="@+id/accAmount"/>
 
     <Button
         android:id="@+id/btnDel"
@@ -121,9 +111,9 @@
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
         android:text="Delete"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="44dp"/>
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/accDate"
+        android:layout_alignEnd="@+id/accDate"/>
 
     <TextView
         android:id="@+id/accName"
@@ -144,6 +134,27 @@
         android:layout_alignTop="@+id/accName"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="37dp"/>
+
+    <EditText
+        android:id="@+id/accAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView9"
+        android:layout_alignEnd="@+id/accId"
+        android:layout_alignStart="@+id/accId"
+        android:ems="10"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@color/success_color"
+        android:text="Update"
+        android:layout_alignBaseline="@+id/btnDel"
+        android:layout_alignBottom="@+id/btnDel"
+        android:layout_alignStart="@+id/textView10"
+        android:layout_marginStart="20dp"/>
 
 
 </RelativeLayout>

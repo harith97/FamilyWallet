@@ -53,8 +53,36 @@ public class accUpdate extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         Toast.makeText(getActivity(), "Transfer:DONE", Toast.LENGTH_LONG).show();
-                        Intent newInt1 = new Intent("ccpe001.familywallet.budget.tranHistory");
-                        startActivity(newInt1);
+                        AlertDialog.Builder builderSingle = new AlertDialog.Builder(getContext());
+                        builderSingle.setIcon(R.drawable.ic_launcher);
+                        builderSingle.setTitle("Transfer History[Date]");
+                        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.select_dialog_singlechoice);
+                        final ArrayAdapter<String> arrayAddate = new ArrayAdapter<String>(getContext(), android.R.layout.select_dialog_singlechoice);
+                        arrayAdapter.add("Transfer $500 from account 1 to account 2 on Date ");
+                        arrayAddate.add("2017/06/01");
+                        builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        builderSingle.setAdapter(arrayAddate, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String strName = arrayAdapter.getItem(which);
+                                AlertDialog.Builder builderInner = new AlertDialog.Builder(getContext());
+                                builderInner.setMessage(strName);
+                                builderInner.setTitle("Transfer Detail :");
+                                builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog,int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                builderInner.show();
+                            }
+                        });
+                        builderSingle.show();
 
 
                     }

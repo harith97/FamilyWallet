@@ -8,18 +8,6 @@
     tools:context="ccpe001.familywallet.budget.budgetTrack">
 
 
-    <Button
-        android:id="@+id/spent"
-        android:layout_width="196dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/btnUpdate"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
-        android:layout_x="55dp"
-        android:layout_y="373dp"
-        android:background="@android:color/holo_green_dark"
-        android:text="Spent history"/>
-
     <TextView
         android:id="@+id/budName"
         android:layout_width="244dp"

@@ -74,7 +74,7 @@
         android:layout_y="469dp"
         android:background="@color/colorAccent"
         android:onClick="toDelete"
-        android:text="Delete"/>
+        android:text="Update"/>
 
     <Spinner
         android:id="@+id/transFrom"
