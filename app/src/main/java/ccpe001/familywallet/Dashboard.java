@@ -2,6 +2,7 @@ package ccpe001.familywallet;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -21,14 +22,22 @@ import ccpe001.familywallet.budget.addAccount;
 import ccpe001.familywallet.budget.budgetList;
 import ccpe001.familywallet.summary.sumMain;
 import ccpe001.familywallet.transaction.Transaction_main;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
+import com.github.amlcurran.showcaseview.targets.Target;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener{
 
-    Toolbar toolbar = null;
-    NavigationView navigationView = null;
-    DrawerLayout drawerLayout = null;
+    private Toolbar toolbar = null;
+    private NavigationView navigationView = null;
+    private DrawerLayout drawerLayout = null;
     private FloatingActionButton circleButton;
+    private ShowcaseView showcaseView;
+
+    int count;
+    private Target t1,t2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +48,6 @@ public class Dashboard extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
-
 
         //initialize dashboard fragment 1st
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
@@ -60,6 +68,17 @@ public class Dashboard extends AppCompatActivity
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header_navigation_drawer);
         circleButton = (FloatingActionButton) headerView.findViewById(R.id.loggedUsrImg);
         circleButton.setOnClickListener(this);
+
+        /*Point ts = ;
+        showcaseView = new ShowcaseView.Builder(this)
+                .setTarget(new Target(headerView.findViewById(R.id.loggedUsrImg)).getPoint())
+                .setContentTitle("Help Menu")
+                .setContentText("descdf")
+                .hideOnTouchOutside()
+                .build();
+        showcaseView.setButtonText("Next");
+
+        //t1 =headerView.findViewById(R.id.loggedUsrImg)*/
     }
 
     @Override
@@ -161,6 +180,8 @@ public class Dashboard extends AppCompatActivity
             //Close nav drawer here
             drawerLayout.closeDrawer(GravityCompat.START);
         }
+
+
     }
 
 }
