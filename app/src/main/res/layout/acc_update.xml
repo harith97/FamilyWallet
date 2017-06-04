@@ -82,6 +82,5 @@
         android:layout_x="190dp"
         android:layout_y="468dp"
         android:background="@color/colorAccent"
-        android:onClick="toDelete"
         android:text="Update"/>
 </AbsoluteLayout>
