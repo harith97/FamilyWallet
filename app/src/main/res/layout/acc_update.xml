@@ -66,16 +66,6 @@
         android:background="@color/success_color"
         android:text="Transfer"/>
 
-    <Button
-        android:id="@+id/btnDtl"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_x="211dp"
-        android:layout_y="469dp"
-        android:background="@color/colorAccent"
-        android:onClick="toDelete"
-        android:text="Update"/>
-
     <Spinner
         android:id="@+id/transFrom"
         android:layout_width="match_parent"
@@ -84,4 +74,14 @@
         android:layout_y="275dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="42dp"/>
+
+    <Button
+        android:id="@+id/btnDtl"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_x="190dp"
+        android:layout_y="468dp"
+        android:background="@color/colorAccent"
+        android:onClick="toDelete"
+        android:text="Update"/>
 </AbsoluteLayout>

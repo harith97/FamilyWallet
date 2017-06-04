@@ -34,7 +34,7 @@ public class accUpdate extends Fragment {
         btnDel.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newInt2 = new Intent("ccpe001.familywallet.budget.accDetail");
+                Intent newInt2 = new Intent(getContext(),accDetail.class);
                 startActivity(newInt2);
             }
         });
@@ -111,6 +111,7 @@ public class accUpdate extends Fragment {
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this.getActivity(),
                 android.R.layout.simple_dropdown_item_1line, arraySpinner);
         c.setAdapter(adapter2);
+
         return v;
         }
     }
