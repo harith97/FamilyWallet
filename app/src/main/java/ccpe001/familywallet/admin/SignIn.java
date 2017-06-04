@@ -40,6 +40,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         scannerBtn.setOnClickListener(this);
         toSignUp.setOnClickListener(this);
         forgotTxt.setOnClickListener(this);
+        emailTxt.setText("hariyhhdfhjdf@gmail.com");
+        passTxt.setText("19970fee");
     }
 
 

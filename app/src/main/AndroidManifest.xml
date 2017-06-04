@@ -150,12 +150,12 @@
         </activity>
         <activity android:name=".transaction.add_transaction">
             android:screenOrientation="portrait"
+            android:parentActivityName=".ccpe001.familywallet.DASHBOARD"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="ccpe001.familywallet.add_transaction" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-                android:parentActivityName=".ccpe001.familywallet.DASHBOARD">
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ccpe001.familywallet.DASHBOARD"/>

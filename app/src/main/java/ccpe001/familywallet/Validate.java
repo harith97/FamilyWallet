@@ -1,6 +1,8 @@
 package ccpe001.familywallet;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.text.Editable;
 import android.widget.Toast;
 
@@ -13,6 +15,7 @@ import java.util.regex.Pattern;
 public class Validate {
 
     //kalin project wala validate function thyenawa nm daapalla meekata
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public static boolean fileValidate(Editable text) {
         if(!text.toString().isEmpty()){
             return true;
@@ -20,6 +23,7 @@ public class Validate {
         return false;
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public static boolean anyValidPass(String pw) {
         if (!pw.isEmpty()){
             if (pw.length()>6){
