@@ -46,7 +46,8 @@ public class budgetList extends Fragment {
                 Toast toast = Toast.makeText(getContext(), "Add new budget", Toast.LENGTH_SHORT);
                 toast.show();
                 //Intent newInt3 = new Intent("ccpe001.familywallet.budget.BudgetHandling");
-               // startActivity(newInt3);
+                Intent newInt3 = new Intent(getContext(),BudgetHandling.class);
+               startActivity(newInt3);
             }
         });
 
