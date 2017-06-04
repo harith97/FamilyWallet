@@ -1,5 +1,6 @@
 package ccpe001.familywallet.transaction;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class add_transaction extends AppCompatActivity {
     private EditText txtAmount, txtDate, txtTime, txtTitle;
     String categoryName, categoryID, title, date, amount,currency,time,location;
     Integer currencyIndex, accountIndex;
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +84,11 @@ public class add_transaction extends AppCompatActivity {
                 txtLocation.setText(location);
                 spinAccount.setSelection(accountIndex);
                 spinCurrency.setSelection(currencyIndex);
+
+
+
             }
+
         } else {
             categoryName = (String) savedInstanceState.getSerializable("categoryName");
             categoryID = (String) savedInstanceState.getSerializable("categoryID");
