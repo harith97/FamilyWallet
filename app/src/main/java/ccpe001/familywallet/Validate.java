@@ -14,34 +14,30 @@ public class Validate {
 
     //kalin project wala validate function thyenawa nm daapalla meekata
     public static boolean fileValidate(Editable text) {
-        /*if(!text.toString().isEmpty()){
+        if(!text.toString().isEmpty()){
             return true;
         }
-        return false;*/
-        return true;
+        return false;
     }
 
     public static boolean anyValidPass(String pw) {
-        /*if (!pw.isEmpty()){
+        if (!pw.isEmpty()){
             if (pw.length()>6){
                 return true;
             }
         }
-        return false;*/
-        return true;
+        return false;
     }
 
     public static boolean anyValidMail(String email) { //email
-        /*String str = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        String str = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         Pattern pattern = Pattern.compile(str);
         Matcher matcher = pattern.matcher(email);
-        return matcher.matches();*/
-        return true;
+        return matcher.matches();
     }
 
     //Only letters
     public static boolean ContainOnlyLetters(String name) {
-        /*return name.matches("[a-zA-Z]+");*/
-        return true;
+        return name.matches("[a-zA-Z]+");
     }
 }
