@@ -34,6 +34,7 @@ public class accUpdate extends Fragment {
         btnDel.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent newInt2 = new Intent(getContext(),accDetail.class);
                 startActivity(newInt2);
             }
