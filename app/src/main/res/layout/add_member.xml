@@ -9,7 +9,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="60dp"
 
             android:text="Go to other members mobile and scan the QR code..!"
             android:id="@+id/editText10"/>
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginTop="-30dp"
+            android:layout_marginTop="30dp"
             android:id="@+id/qrCodeImage"/>
 
     <TextView
