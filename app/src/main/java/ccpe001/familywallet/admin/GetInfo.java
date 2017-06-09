@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import android.widget.*;
 import ccpe001.familywallet.R;
 import ccpe001.familywallet.Validate;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -35,15 +37,19 @@ import static android.app.Activity.RESULT_OK;
 
 public class GetInfo extends AppCompatActivity implements View.OnClickListener{
 
-  private static final int RQ_CAPTURE = 1;
-  private static final int RQ_GALLERY_REQUEST = 2;
+
   private FloatingActionButton imageButton;
   private Button signUpButton;
   private EditText fnameTxt,lnameTxt;
   private final static int CAMERA_PERMIT = 0;
   private final static int MANAGE_DOC_PERMIT = 1;
   private final static int READ_EX_PERMIT = 2;
-
+    private static final int RQ_CAPTURE = 4;
+    private static final int RQ_GALLERY_REQUEST = 5;
+  private RoundedBitmapDrawable round;
+  private Uri sendProPicURI;
+  private Bitmap sendBitmap;
+  private int selectOpt;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +86,9 @@ public class GetInfo extends AppCompatActivity implements View.OnClickListener{
         public void onClick(DialogInterface dialogInterface, int opt) {
           if(opt==0){
             if (ActivityCompat.checkSelfPermission(GetInfo.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-              ActivityCompat.requestPermissions(GetInfo.this,new String[]{Manifest.permission.CAMERA},CAMERA_PERMIT);
+                ActivityCompat.requestPermissions(GetInfo.this,new String[]{Manifest.permission.CAMERA},CAMERA_PERMIT);
             }
+            selectOpt = 0;
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent,RQ_CAPTURE);
           }else if(opt==1){
@@ -90,6 +97,7 @@ public class GetInfo extends AppCompatActivity implements View.OnClickListener{
               ActivityCompat.requestPermissions(GetInfo.this,new String[]{Manifest.permission.MANAGE_DOCUMENTS},MANAGE_DOC_PERMIT);
               ActivityCompat.requestPermissions(GetInfo.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},READ_EX_PERMIT);
             }
+            selectOpt = 1;
             Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(galleryIntent,RQ_GALLERY_REQUEST);
           }
@@ -103,6 +111,14 @@ public class GetInfo extends AppCompatActivity implements View.OnClickListener{
       if(Validate.ContainOnlyLetters(fnameTxt.getText().toString())) {
         if(Validate.ContainOnlyLetters(lnameTxt.getText().toString())) {
           Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
+          intent.putExtra("selectOpt",selectOpt);
+            if(selectOpt==0){
+              intent.putExtra("profilepic",sendBitmap);
+          }else if(selectOpt==1){
+              intent.putExtra("profilepic",sendProPicURI.toString());
+          }
+          intent.putExtra("firstname",fnameTxt.getText().toString());
+          intent.putExtra("lastname",lnameTxt.getText().toString());
           startActivity(intent);
         }else{
           lnameTxt.setError("Invalid last name");
@@ -121,15 +137,16 @@ public class GetInfo extends AppCompatActivity implements View.OnClickListener{
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     if(requestCode==RQ_CAPTURE&&resultCode==RESULT_OK){
       Bundle extras = data.getExtras();
-      Bitmap rawImage  = (Bitmap)extras.get("data");
+      sendBitmap = (Bitmap)extras.get("data");
 
-      RoundedBitmapDrawable round = RoundedBitmapDrawableFactory.create(getResources(),rawImage);
+
+      round = RoundedBitmapDrawableFactory.create(getResources(),sendBitmap);
       round.setCircular(true);
       imageButton.setImageDrawable(round);
     }else if(requestCode==RQ_GALLERY_REQUEST&&resultCode==RESULT_OK){
       Uri imageUri = data.getData();
+      sendProPicURI = imageUri;
 
-      RoundedBitmapDrawable round = null;
       try {
         round = RoundedBitmapDrawableFactory.create(getResources(), MediaStore.Images.Media.getBitmap(this.getContentResolver(),imageUri));
       } catch (IOException e) {

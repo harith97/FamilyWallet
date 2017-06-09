@@ -1,10 +1,13 @@
 package ccpe001.familywallet;
 
+import android.*;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +40,8 @@ public class ExportData extends Fragment implements View.OnClickListener,CheckBo
     private boolean exelChecked;
     private boolean csvChecked;
     private boolean mailChecked;
+    private static final int EXTERNAL_READ_PERMIT = 3;
+    private static final int EXTERNAL_WRITE_PERMIT = 4;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,6 +68,13 @@ public class ExportData extends Fragment implements View.OnClickListener,CheckBo
         if(view.getId()==R.id.createBtn){
             if (Validate.fileValidate(fileName.getText())) {
                 filename = fileName.getText().toString();
+
+                if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED||
+                        ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},EXTERNAL_READ_PERMIT);
+                    requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},EXTERNAL_WRITE_PERMIT);
+                }
+
                 try {
                     if ((!csvChecked)&&(!exelChecked)){
                         Toast.makeText(getContext(),"Check at least one option",Toast.LENGTH_SHORT).show();

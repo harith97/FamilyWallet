@@ -17,6 +17,7 @@
         <item>USD</item>
         <item>Rs(Convert)</item>
     </string-array>
+    <string name="fb_APP_ID">1505482392855831</string>
 
     <string-array name="IncomeCategory">
         <item>Car</item>
@@ -42,12 +43,12 @@
     </string-array>
 
     <string-array name="ExpenseCategory">
-    <item>Loan</item>
-    <item>Business</item>
-    <item>Gift</item>
-    <item>Salary</item>
-    <item>Extra Income</item>
-    <item>Other</item>
+        <item>Loan</item>
+        <item>Business</item>
+        <item>Gift</item>
+        <item>Salary</item>
+        <item>Extra Income</item>
+        <item>Other</item>
     </string-array>
 
     <string-array name="spinnerDateFor">

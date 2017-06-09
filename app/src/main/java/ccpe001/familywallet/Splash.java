@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 import com.github.orangegangsters.lollipin.lib.PinCompatActivity;
+import com.google.zxing.integration.android.IntentIntegrator;
 
 import static java.lang.Thread.sleep;
 
@@ -45,15 +46,16 @@ public class Splash extends PinCompatActivity {
         });
         t1.start();
 
-        //displaing status icon
 
+        //displaing status icon
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,new Intent(),0);
+
         notification = new Notification.Builder(this)
-                .setTicker("dfdf")
-                .setContentTitle("dfdfdf")
+                .setTicker("Ticker")
+                .setContentTitle("Family Wallet")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .addAction(R.mipmap.email,"Scan bill",pendingIntent)
-                .addAction(R.mipmap.email,"Scan bill",pendingIntent)
+                .addAction(R.mipmap.email,"Add member",pendingIntent)
                 .setContentIntent(pendingIntent).getNotification();
 
         nm = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
