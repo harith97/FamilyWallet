@@ -1,11 +1,17 @@
 package ccpe001.familywallet;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,16 +22,20 @@ import android.view.MenuItem;
 import android.view.View;
 
 
+import android.widget.TextView;
 import ccpe001.familywallet.budget.BudgetHandling;
 import ccpe001.familywallet.budget.accUpdate;
 import ccpe001.familywallet.budget.addAccount;
 import ccpe001.familywallet.budget.budgetList;
 import ccpe001.familywallet.summary.sumMain;
 import ccpe001.familywallet.transaction.Transaction_main;
+import com.facebook.Profile;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.Target;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
+
+import java.io.IOException;
 
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener{
@@ -35,6 +45,7 @@ public class Dashboard extends AppCompatActivity
     private DrawerLayout drawerLayout = null;
     private FloatingActionButton circleButton;
     private ShowcaseView showcaseView;
+    private TextView navUserDetTxt;
 
     int count;
     private Target t1,t2;
@@ -50,11 +61,12 @@ public class Dashboard extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         //initialize dashboard fragment 1st
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        //CoMMENT CUZ java.lang.NumberFormatException: Invalid int: "null" ERROR
+        /*android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Transaction_main transaction = new Transaction_main();
         fragmentTransaction.replace(R.id.fragmentContainer1,transaction);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -62,12 +74,48 @@ public class Dashboard extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        Intent signUpIntent = getIntent();
+
+
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header_navigation_drawer);
+        navUserDetTxt = (TextView) headerView.findViewById(R.id.navUserDet);
         circleButton = (FloatingActionButton) headerView.findViewById(R.id.loggedUsrImg);
         circleButton.setOnClickListener(this);
+
+        navUserDetTxt.setText(signUpIntent.getStringExtra("firstname")+" "+
+                signUpIntent.getStringExtra("lastname"));
+
+
+        try{
+
+            RoundedBitmapDrawable round = null;
+            if (signUpIntent.getIntExtra("selectOpt",1)==1) {
+
+                try {
+                    round = RoundedBitmapDrawableFactory.create(getResources(),
+                            MediaStore.Images.Media.getBitmap(this.getContentResolver(),
+                                    Uri.parse(signUpIntent.getStringExtra("profilepic"))));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }else if(signUpIntent.getIntExtra("selectOpt",-1)==0) {
+
+                round = RoundedBitmapDrawableFactory.create(getResources(),
+                        (Bitmap) signUpIntent.getParcelableExtra("profilepic"));
+
+            }
+
+
+            round.setCircular(true);
+            circleButton.setImageDrawable(round);
+
+        }catch (Exception e){
+
+        }
 
         /*Point ts = ;
         showcaseView = new ShowcaseView.Builder(this)

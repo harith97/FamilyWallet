@@ -22,6 +22,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="-3dp"
             android:layout_centerInParent="true"
+            android:scaleType="fitXY"
 
             android:layout_height="100dp"
             android:clickable="true"
@@ -33,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:id="@+id/navUserDet"
             android:textAlignment="center"
             android:text="User Name"
     />
