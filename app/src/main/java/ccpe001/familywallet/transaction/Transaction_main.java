@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +43,6 @@ public class Transaction_main extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.transaction_main, container, false);
-
-
         if (savedInstanceState == null) {
             Bundle extras = getActivity().getIntent().getExtras();
             if(extras == null) {
@@ -60,7 +57,6 @@ public class Transaction_main extends Fragment {
                 title = extras.getString("title");
                 date = extras.getString("date");
                 amount = extras.getString("amount");
-
 
 
 
@@ -81,8 +77,6 @@ public class Transaction_main extends Fragment {
                 Integer[] imgid = {
                         Integer.parseInt(categoryID)
                 };
-
-
 
 
                 TransactionListAdapter adapter = new TransactionListAdapter(getActivity(), Title, Category, Date, Amount, imgid);
@@ -159,7 +153,7 @@ public class Transaction_main extends Fragment {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent("ccpe001.familywallet.add_transaction");
-                            intent.putExtra("type","income");
+                            intent.putExtra("category","income");
                             startActivity(intent);
                         }
                     });
@@ -167,7 +161,7 @@ public class Transaction_main extends Fragment {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent("ccpe001.familywallet.add_transaction");
-                            intent.putExtra("type","expense");
+                            intent.putExtra("category","expense");
                             startActivity(intent);
                         }
                     });
