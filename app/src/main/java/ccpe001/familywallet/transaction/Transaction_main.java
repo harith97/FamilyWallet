@@ -43,39 +43,45 @@ public class Transaction_main extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.transaction_main, container, false);
-        if (savedInstanceState == null) {
-            Bundle extras = getActivity().getIntent().getExtras();
-            if(extras == null) {
-            } else {
-                categoryName = extras.getString("categoryName");
-                categoryID = extras.getString("categoryID");
-                title = extras.getString("title");
-                date = extras.getString("date");
-                amount = extras.getString("amount");
+        try {
+            if (savedInstanceState == null) {
+                Bundle extras = getActivity().getIntent().getExtras();
+                if(extras == null) {
+                } else {
+                    categoryName = extras.getString("categoryName");
+                    categoryID = extras.getString("categoryID");
+                    title = extras.getString("title");
+                    date = extras.getString("date");
+                    amount = extras.getString("amount");
 
-                final String[] Title = {
-                        title
-                };
-                final String[] Category = {
-                        categoryName
-                };
-                final String[] Date = {
-                        date
-                };
-                final String[] Amount = {
-                        amount
-                };
+                    final String[] Title = {
+                            title
+                    };
+                    final String[] Category = {
+                            categoryName
+                    };
+                    final String[] Date = {
+                            date
+                    };
+                    final String[] Amount = {
+                            amount
+                    };
 
-                Integer[] imgid = {
-                        Integer.parseInt(categoryID)
-                };
+                    Integer[] imgid = {
+                            Integer.parseInt(categoryID)
+                    };
 
 
-                TransactionListAdapter adapter = new TransactionListAdapter(getActivity(), Title, Category, Date, Amount, imgid);
-                list = (ListView) view.findViewById(R.id.transactionList);
-                list.setAdapter(adapter);
+                    TransactionListAdapter adapter = new TransactionListAdapter(getActivity(), Title, Category, Date, Amount, imgid);
+                    list = (ListView) view.findViewById(R.id.transactionList);
+                    list.setAdapter(adapter);
+                }
             }
+        }catch (Exception ex){
+
         }
+
+
 
 
         txtExpense = (TextView) view.findViewById(R.id.txtExpense);
