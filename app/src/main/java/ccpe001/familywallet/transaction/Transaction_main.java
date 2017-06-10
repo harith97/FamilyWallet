@@ -46,20 +46,12 @@ public class Transaction_main extends Fragment {
         if (savedInstanceState == null) {
             Bundle extras = getActivity().getIntent().getExtras();
             if(extras == null) {
-                categoryName = null;
-                categoryID = null;
-                title = null;
-                date = null;
-                amount = null;
             } else {
                 categoryName = extras.getString("categoryName");
                 categoryID = extras.getString("categoryID");
                 title = extras.getString("title");
                 date = extras.getString("date");
                 amount = extras.getString("amount");
-
-
-
 
                 final String[] Title = {
                         title
@@ -83,25 +75,6 @@ public class Transaction_main extends Fragment {
                 list = (ListView) view.findViewById(R.id.transactionList);
                 list.setAdapter(adapter);
             }
-        } else {
-            categoryName = (String) savedInstanceState.getSerializable("categoryName");
-            categoryID = (String) savedInstanceState.getSerializable("categoryID");
-            title = (String) savedInstanceState.getSerializable("title");
-            date = (String) savedInstanceState.getSerializable("date");
-            amount = (String) savedInstanceState.getSerializable("amount");
-
-
-            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view,
-                                        int position, long id) {
-                    // TODO Auto-generated method stub
-                    Toast.makeText(getActivity(), "Hello", Toast.LENGTH_SHORT).show();
-
-                }
-            });
         }
 
 
@@ -153,7 +126,7 @@ public class Transaction_main extends Fragment {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent("ccpe001.familywallet.add_transaction");
-                            intent.putExtra("category","income");
+                            intent.putExtra("transactionType","Income");
                             startActivity(intent);
                         }
                     });
@@ -161,7 +134,7 @@ public class Transaction_main extends Fragment {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent("ccpe001.familywallet.add_transaction");
-                            intent.putExtra("category","expense");
+                            intent.putExtra("transactionType","Expense");
                             startActivity(intent);
                         }
                     });
@@ -174,8 +147,8 @@ public class Transaction_main extends Fragment {
 
 
 
-            return view;
-        }
+        return view;
+    }
 
 
 

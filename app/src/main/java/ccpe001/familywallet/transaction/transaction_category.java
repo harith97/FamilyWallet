@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
 import ccpe001.familywallet.R;
 
@@ -26,15 +27,23 @@ public class transaction_category extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private Toolbar categoryToolbar;
+    String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.transaction_category);
 
+        if (savedInstanceState == null) {
+            Bundle extras = this.getIntent().getExtras();
+            if(extras == null) {
+            } else {
+                type = extras.getString("transactionType");
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+            }
+        }
+
+
 
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -45,18 +54,16 @@ public class transaction_category extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
 
         categoryToolbar = (Toolbar) findViewById(R.id.categoryToolbar);
-        categoryToolbar.setTitle("Category");
+        if (type.equals("Income")) {
+
+            categoryToolbar.setTitle("Income Categories");
+        } else if (type.equals("Expense")) {
+
+            categoryToolbar.setTitle("Expense Categories");
+        }
         setSupportActionBar(categoryToolbar);
         ActionBar ab = getSupportActionBar();
 
@@ -103,32 +110,39 @@ public class transaction_category extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
 
-            switch (position){
-                case 0:
-                    CategoryTab01 tab1 = new CategoryTab01();
-                    return tab1;
-                case 1:
-                    CategoryTab02 tab2 = new CategoryTab02();
-                    return  tab2;
-                default:
-                    return null;
+            if (type.equals("Income")) {
+                switch (position) {
+                    case 0:
+                        CategoryTab01 tab1 = new CategoryTab01();
+                        return tab1;
+                    default:
+                        return null;
+                }
+            } else if (type.equals("Expense")) {
+                switch (position) {
+                    case 0:
+                        CategoryTab02 tab2 = new CategoryTab02();
+                        return tab2;
+                    default:
+                        return null;
+                }
             }
+            return null;
 
         }
 
         @Override
         public int getCount() {
-            // Show 2 total pages.
-            return 2;
+            // Show 1 total pages.
+            return 1;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
+
             switch (position) {
                 case 0:
                     return "ALL";
-                case 1:
-                    return "RECENT";
             }
             return null;
         }

@@ -62,11 +62,11 @@ public class Dashboard extends AppCompatActivity
 
         //initialize dashboard fragment 1st
         //CoMMENT CUZ java.lang.NumberFormatException: Invalid int: "null" ERROR
-        /*android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Transaction_main transaction = new Transaction_main();
         fragmentTransaction.replace(R.id.fragmentContainer1,transaction);
-        fragmentTransaction.commit();*/
+        fragmentTransaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

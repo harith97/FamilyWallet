@@ -31,7 +31,7 @@ public class add_transaction extends AppCompatActivity {
     private Spinner spinCurrency, spinAccount;
     int PLACE_PICKER_REQUEST=1;
     private EditText txtAmount, txtDate, txtTime, txtTitle;
-    String categoryName, categoryID, title, date, amount,currency,time,location;
+    String categoryName, categoryID, title, date, amount,currency,time,location,type;
     Integer currencyIndex, accountIndex;
     @SuppressLint("WrongViewCast")
     @Override
@@ -67,6 +67,8 @@ public class add_transaction extends AppCompatActivity {
                 currencyIndex = null;
                 accountIndex = null;
                 location = null;
+                type = null;
+
             } else {
                 categoryName = extras.getString("categoryName");
                 categoryID = extras.getString("categoryID");
@@ -77,6 +79,7 @@ public class add_transaction extends AppCompatActivity {
                 location = extras.getString("location");
                 currencyIndex = extras.getInt("currencyIndex");
                 accountIndex = extras.getInt("accountIndex");
+                type=extras.getString("transactionType");
                 txtTitle.setText(title);
                 txtAmount.setText(amount);
                 txtDate.setText(date);
@@ -98,7 +101,7 @@ public class add_transaction extends AppCompatActivity {
             location = (String) savedInstanceState.getSerializable("location");
             currencyIndex = (Integer) savedInstanceState.getSerializable("currencyIndex");
             accountIndex = (Integer) savedInstanceState.getSerializable("accountIndex");
-
+            type = (String) savedInstanceState.getSerializable("transactionType");
 
 
         }
@@ -121,6 +124,7 @@ public class add_transaction extends AppCompatActivity {
                 intent.putExtra("location",location);
                 intent.putExtra("currencyIndex",currencyIndex);
                 intent.putExtra("accountIndex",accountIndex);
+                intent.putExtra("transactionType",type);
                 startActivity(intent);
             }
         });
@@ -158,6 +162,10 @@ public class add_transaction extends AppCompatActivity {
             String timeString = stf.format(Cdate);
             txtTime.setText(timeString);
         }
+        if (type!=null){
+            getSupportActionBar().setTitle(type);
+        }
+
 
     }
 
@@ -199,7 +207,7 @@ public class add_transaction extends AppCompatActivity {
 
         @Override
         public CharSequence filter(CharSequence source, int start, int end, Spanned dest,
-                int dstart, int dend) {
+                                   int dstart, int dend) {
 
             String result =
                     dest.subSequence(0, dstart) + source.toString() + dest.subSequence(dend, dest.length());
@@ -221,9 +229,9 @@ public class add_transaction extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    DateDialog dialog = new DateDialog(v);
-                    android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    dialog.show(ft,"DatePicker");
+                DateDialog dialog = new DateDialog(v);
+                android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+                dialog.show(ft,"DatePicker");
 
             }
         });
