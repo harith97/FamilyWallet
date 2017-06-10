@@ -63,6 +63,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".budget.accDetail"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="ccpe001.familywallet.budget.accDetail" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".budget.budgetUpdate"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
