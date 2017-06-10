@@ -16,7 +16,7 @@
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textStyle="bold"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="65dp"
         android:layout_alignParentTop="true"
         android:layout_alignEnd="@+id/accOwn"
         android:layout_marginEnd="24dp"/>
@@ -25,13 +25,14 @@
         android:id="@+id/accAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tranAmount"
+        android:layout_marginTop="20dp"
         android:layout_x="-2dp"
         android:layout_y="158dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/tranAmount"
-        android:layout_alignParentStart="true"/>
+        android:textAlignment="textStart"/>
 
     <TextView
         android:id="@+id/accOwn"
@@ -81,10 +82,10 @@
         android:layout_y="468dp"
         android:background="@color/success_color"
         android:text="Transfer"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="36dp"
         android:layout_below="@+id/transTo"
-        android:layout_alignStart="@+id/accOther"
-        android:layout_marginTop="10dp"/>
+        android:layout_alignStart="@+id/accOther"/>
 
     <Spinner
         android:id="@+id/transFrom"

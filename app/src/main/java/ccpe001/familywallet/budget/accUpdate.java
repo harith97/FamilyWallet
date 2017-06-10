@@ -35,7 +35,7 @@ public class accUpdate extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent newInt2 = new Intent(getContext(),accDetail.class);
+                Intent newInt2 = new Intent("ccpe001.familywallet.budget.accDetail");
                 startActivity(newInt2);
             }
         });
@@ -58,7 +58,7 @@ public class accUpdate extends Fragment {
                     }
                 });
 
-                builder.setNegativeButton("NO | View History", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Cancel | View History", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
