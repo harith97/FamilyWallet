@@ -7,17 +7,21 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.*;
-import android.widget.*;
-import ccpe001.familywallet.R;
-import ccpe001.familywallet.Validate;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
+import ccpe001.familywallet.R;
+import ccpe001.familywallet.Validate;
 
 /**
  * Created by harithaperera on 4/30/17.
@@ -77,7 +81,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     progressDialog.dismiss();
                                     if(task.isSuccessful()){
-                                        saveSession(mAuth.getCurrentUser().getEmail());
+                                        saveSession(emailTxt.getText().toString());
                                         finish();
                                         Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
                                         startActivity(intent);
@@ -113,6 +117,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         SharedPreferences prefs = getSharedPreferences("Session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("userMail",email);
+        editor.commit();
     }
 
     @Override

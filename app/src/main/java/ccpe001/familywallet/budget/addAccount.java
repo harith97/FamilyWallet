@@ -1,6 +1,8 @@
 package ccpe001.familywallet.budget;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -21,11 +23,19 @@ import ccpe001.familywallet.R;
 
 public class addAccount extends Fragment  {
     String m_txt="";
+
     private String[] arraySpinner;
+    public String getUserEmail() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("Session", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("userMail", "");
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         Toast.makeText(getContext(),"Wallet",Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(),getUserEmail(),Toast.LENGTH_LONG).show();
         this.arraySpinner = new String[] {
                 "Wallet", "Bank account"
         };
