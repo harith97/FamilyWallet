@@ -1,7 +1,9 @@
 package ccpe001.familywallet.admin;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -75,6 +77,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     progressDialog.dismiss();
                                     if(task.isSuccessful()){
+                                        saveSession(mAuth.getCurrentUser().getEmail());
                                         finish();
                                         Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
                                         startActivity(intent);
@@ -104,6 +107,12 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
             Intent intent = new Intent(this,Forgot.class);
             startActivity(intent);
         }
+    }
+
+    private void saveSession(String email) {
+        SharedPreferences prefs = getSharedPreferences("Session", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("userMail",email);
     }
 
     @Override
