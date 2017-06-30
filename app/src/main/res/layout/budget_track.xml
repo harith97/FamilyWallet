@@ -12,13 +12,13 @@
         android:id="@+id/budName"
         android:layout_width="244dp"
         android:layout_height="32dp"
-        android:layout_x="20dp"
-        android:layout_y="38dp"
-        android:text=" Budget Name"
-        android:textSize="18sp"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/textView12"
-        android:layout_marginTop="24dp"/>
+        android:layout_marginTop="24dp"
+        android:layout_x="20dp"
+        android:layout_y="38dp"
+        android:text="Travel"
+        android:textSize="18sp"/>
 
     <ProgressBar
         android:id="@+id/progressBar3"
@@ -67,21 +67,23 @@
         android:id="@+id/spentNum"
         android:layout_width="144dp"
         android:layout_height="28dp"
+        android:layout_alignStart="@+id/budAmount"
+        android:layout_below="@+id/budAmount"
+        android:layout_marginTop="19dp"
         android:layout_x="196dp"
         android:layout_y="220dp"
-        android:layout_marginTop="19dp"
-        android:layout_below="@+id/budAmount"
-        android:layout_alignStart="@+id/budAmount"/>
+        android:text="7200"/>
 
     <TextView
         android:id="@+id/budAmount"
         android:layout_width="144dp"
         android:layout_height="28dp"
+        android:layout_alignEnd="@+id/switch1"
+        android:layout_below="@+id/budName"
+        android:layout_marginTop="44dp"
         android:layout_x="199dp"
         android:layout_y="254dp"
-        android:layout_marginTop="44dp"
-        android:layout_below="@+id/budName"
-        android:layout_alignEnd="@+id/switch1"/>
+        android:text="9000"/>
 
     <TextView
         android:id="@+id/strDate"

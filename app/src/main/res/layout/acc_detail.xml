@@ -11,15 +11,16 @@
         android:id="@+id/accId"
         android:layout_width="116dp"
         android:layout_height="45dp"
-        android:layout_x="40dp"
-        android:layout_y="174dp"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textStyle="bold"
         android:layout_alignBaseline="@+id/textView7"
         android:layout_alignBottom="@+id/textView7"
         android:layout_alignEnd="@+id/spinner"
-        android:layout_alignStart="@+id/spinner"/>
+        android:layout_alignStart="@+id/spinner"
+        android:layout_x="40dp"
+        android:layout_y="174dp"
+        android:text="19190026"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textView7"
@@ -82,29 +83,31 @@
         android:id="@+id/accStat"
         android:layout_width="116dp"
         android:layout_height="45dp"
+        android:layout_alignEnd="@+id/accAmount"
+        android:layout_alignStart="@+id/accAmount"
+        android:layout_alignTop="@+id/textView11"
+        android:layout_marginTop="13dp"
         android:layout_x="187dp"
         android:layout_y="48dp"
+        android:text="Reserved"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textStyle="bold"
-        android:layout_marginTop="13dp"
-        android:layout_alignTop="@+id/textView11"
-        android:layout_alignStart="@+id/accAmount"
-        android:layout_alignEnd="@+id/accAmount"/>
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/accDate"
         android:layout_width="116dp"
         android:layout_height="45dp"
+        android:layout_alignEnd="@+id/accAmount"
+        android:layout_alignStart="@+id/accStat"
+        android:layout_below="@+id/accStat"
+        android:layout_marginTop="19dp"
         android:layout_x="188dp"
         android:layout_y="116dp"
+        android:text="2017/05/05"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textStyle="bold"
-        android:layout_marginTop="19dp"
-        android:layout_below="@+id/accStat"
-        android:layout_alignStart="@+id/accStat"
-        android:layout_alignEnd="@+id/accAmount"/>
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/btnDel"
@@ -144,7 +147,9 @@
         android:layout_alignEnd="@+id/accId"
         android:layout_alignStart="@+id/accId"
         android:ems="10"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:text="8000.00"
+        android:textAlignment="center"/>
 
     <Button
         android:id="@+id/btnUpdate"

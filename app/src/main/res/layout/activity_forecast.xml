@@ -28,11 +28,11 @@
 
     <TextView
         android:id="@+id/viAvg1"
-        android:layout_width="166dp"
+        android:layout_width="164dp"
         android:layout_height="69dp"
-        android:layout_x="187dp"
+        android:layout_x="189dp"
         android:layout_y="413dp"
-        android:text="TextView"
+        android:text="8000.00"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textStyle="bold"/>
