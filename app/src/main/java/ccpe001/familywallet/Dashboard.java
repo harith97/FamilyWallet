@@ -17,6 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +26,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import ccpe001.familywallet.admin.SignIn;
+import ccpe001.familywallet.admin.UserData;
 import ccpe001.familywallet.budget.BudgetHandling;
 import ccpe001.familywallet.budget.accUpdate;
 import ccpe001.familywallet.budget.addAccount;
@@ -39,6 +42,9 @@ import com.github.amlcurran.showcaseview.targets.Target;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.*;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 
@@ -49,13 +55,17 @@ public class Dashboard extends AppCompatActivity
     private NavigationView navigationView = null;
     private DrawerLayout drawerLayout = null;
     private FloatingActionButton circleButton;
-    private ShowcaseView showcaseView;
     private Spinner navUserDetTxt;
     private FirebaseAuth mAuth;
     private String[] arrSpinner;
+    private Intent signUpIntent;
 
-    int count;
-    private Target t1,t2;
+    public String fullname;
+    private Uri propic;
+    private DatabaseReference databaseReference;
+    private StorageReference storageReference;
+    private FirebaseUser firebaseUser;
+    private UserData userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +76,42 @@ public class Dashboard extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
+        signUpIntent = getIntent();
+
 
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        firebaseUser = mAuth.getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        storageReference = FirebaseStorage.getInstance().getReference();
 
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String uid = firebaseUser.getUid();
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    userData = new UserData();
+                    userData.setFirstName(ds.child(uid).getValue(UserData.class).getFirstName());
+                    userData.setLastName(ds.child(uid).getValue(UserData.class).getLastName());
+                    fullname = userData.getFirstName()+" "+userData.getLastName();
+                }
+
+                if(signUpIntent.getStringExtra("firstname")!=null
+                        &&signUpIntent.getStringExtra("lastname")!=null){
+
+                    fullname = signUpIntent.getStringExtra("firstname")+" "+
+                            signUpIntent.getStringExtra("lastname");
+                }
+
+                arrSpinner = new String[]{fullname};//add more elems dynamically
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplication(),android.R.layout.simple_spinner_item,arrSpinner);
+                navUserDetTxt.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         //initialize dashboard fragment 1st
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
@@ -84,7 +126,6 @@ public class Dashboard extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        Intent signUpIntent = getIntent();
 
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -97,16 +138,9 @@ public class Dashboard extends AppCompatActivity
 
 
 
-        arrSpinner = new String[]{signUpIntent.getStringExtra("firstname")+" "+
-                signUpIntent.getStringExtra("lastname")};//add more elems dynamically
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,arrSpinner);
-        navUserDetTxt.setAdapter(adapter);
-
 
 
         try{
-
             RoundedBitmapDrawable round = null;
 
             try {
@@ -124,17 +158,9 @@ public class Dashboard extends AppCompatActivity
 
         }
 
-        /*Point ts = ;
-        showcaseView = new ShowcaseView.Builder(this)
-                .setTarget(new Target(headerView.findViewById(R.id.loggedUsrImg)).getPoint())
-                .setContentTitle("Help Menu")
-                .setContentText("descdf")
-                .hideOnTouchOutside()
-                .build();
-        showcaseView.setButtonText("Next");
-
-        //t1 =headerView.findViewById(R.id.loggedUsrImg)*/
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -145,6 +171,8 @@ public class Dashboard extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
+    //load deta on login normal
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -169,7 +197,7 @@ public class Dashboard extends AppCompatActivity
         if (id == R.id.transactionFrag) {
              android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
              android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            Transaction_main dashboard = new Transaction_main();
+             Transaction_main dashboard = new Transaction_main();
              fragmentTransaction.replace(R.id.fragmentContainer1,dashboard);
              fragmentTransaction.commit();
         } else if (id == R.id.reportsFrag) {

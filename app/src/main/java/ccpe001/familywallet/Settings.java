@@ -26,6 +26,8 @@ import com.github.orangegangsters.lollipin.lib.managers.LockManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import net.rdrei.android.dirchooser.DirectoryChooserActivity;
@@ -64,13 +66,19 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
 
     private FirebaseAuth mAuth;
     private GoogleApiClient mGoogleApiClient;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.setting, container, false);
         init(view);
 
         mAuth = FirebaseAuth.getInstance();
-
+        if(mAuth.getCurrentUser() == null){
+            getActivity().finish();
+            Intent intent = new Intent(getActivity(),SignIn.class);
+            startActivity(intent);
+        }
 
         return view;
     }
@@ -169,15 +177,18 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         super.onStart();
     }
 
+
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.signOutBtn){
-            mAuth.signOut();//normal sign out
+            mAuth.signOut();
             Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+
             getActivity().finish();
             sessionClear();
             Intent intent = new Intent("ccpe001.familywallet.SIGNIN");
             startActivity(intent);
+
         }else if(view.getId()==R.id.selectLangRow){
             langBuilder.show();
         }else if(view.getId()==R.id.selectCurrRow){
@@ -272,7 +283,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 34){
+        if (requestCode == DIR_CHOOSER){
             if (resultCode == DirectoryChooserActivity.RESULT_CODE_DIR_SELECTED){
                 data.getStringExtra(DirectoryChooserActivity.RESULT_SELECTED_DIR);
             }

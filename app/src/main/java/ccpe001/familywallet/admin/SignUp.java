@@ -13,8 +13,6 @@ import android.view.View;
 import android.widget.*;
 import ccpe001.familywallet.R;
 import ccpe001.familywallet.Validate;
-import com.facebook.*;
-import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -34,8 +32,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import java.io.IOException;
 
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener,GoogleApiClient.OnConnectionFailedListener{
@@ -62,11 +58,12 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener,Go
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
         storageReference = FirebaseStorage.getInstance().getReference();
-        /*if(mAuth.getCurrentUser() != null){
+
+        if(mAuth.getCurrentUser() != null){
             finish();
             Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
             startActivity(intent);
-        }for normal sigiup*/
+        }
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -141,7 +138,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener,Go
                                 }
                             });
                 }else{
-
                     passTxt.setError("Invalid password");
                 }
             }else {
@@ -195,7 +191,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener,Go
                         saveData(acct.getFamilyName(),acct.getDisplayName());
                         try {
                             intent.putExtra("profilepic", acct.getPhotoUrl().toString());
-                            uploadImg(acct.getFamilyName(),acct.getDisplayName(),acct.getPhotoUrl());
+                            uploadImg(acct.getPhotoUrl());
                         }catch (Exception e){
 
                         }
@@ -205,11 +201,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener,Go
     }
 
     private void saveData(String fname,String lname) {
-        UserData userData = new UserData(fname,lname);
-        databaseReference.child("UserInfo").setValue(userData);
+        UserData userData = new UserData(fname,lname, mAuth.getCurrentUser().getUid());
+        databaseReference.child("UserInfo").child(mAuth.getCurrentUser().getUid()).setValue(userData);
     }
 
-    private void uploadImg(String fname,String lname,Uri sendProPicURI){
+    private void uploadImg(Uri sendProPicURI){
 
         if(sendProPicURI != null) {
 
@@ -217,7 +213,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener,Go
             progressDialog.setTitle("Setting up..");
             progressDialog.show();
 
-            StorageReference reference = storageReference.child("images/"+fname+"_"+lname+".jpg");
+            StorageReference reference = storageReference.child("UserPics/"+mAuth.getCurrentUser().getUid()+".jpg");
             reference.putFile(sendProPicURI)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
