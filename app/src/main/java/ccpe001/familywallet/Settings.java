@@ -1,6 +1,7 @@
 package ccpe001.familywallet;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -18,8 +20,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import ccpe001.familywallet.admin.SignIn;
 import com.github.orangegangsters.lollipin.lib.managers.AppLock;
 import com.github.orangegangsters.lollipin.lib.managers.LockManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import net.rdrei.android.dirchooser.DirectoryChooserActivity;
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 import net.rdrei.android.dirchooser.DirectoryChooserFragment;
@@ -52,22 +60,24 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     private String[] langArr,currArr,dateForArr;
 
     private boolean pinStatus,mode,appNoty,appIcon,appSync,appBackUp;
-    private String pin;
-    private String preferedLang;
-    private String preferedDateFor;
-    private String preferedCurr;
-    private String remTime;
-    private String appbackUpPath;
+    private String pin,preferedLang,preferedDateFor,preferedCurr,remTime,appbackUpPath;
+
+    private FirebaseAuth mAuth;
+    private GoogleApiClient mGoogleApiClient;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.setting, container, false);
         init(view);
+
+        mAuth = FirebaseAuth.getInstance();
+
 
         return view;
     }
 
     private void init(View v){
         //((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Settings");
+
         c = Calendar.getInstance();
         langArr = getActivity().getResources().getStringArray(R.array.spinnerLanguage);
         currArr = getActivity().getResources().getStringArray(R.array.spinnerCurrency);
@@ -146,15 +156,25 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
 
     }
 
+    @Override
+    public void onStart() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
 
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        mGoogleApiClient.connect();
+        super.onStart();
+    }
 
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.signOutBtn){
-            prefs = getContext().getSharedPreferences("First Time",Context.MODE_PRIVATE);
-            editor = prefs.edit();
-            editor.putBoolean("isFirst",true);
-            editor.commit();
+            mAuth.signOut();//normal sign out
+            Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+            getActivity().finish();
             Intent intent = new Intent("ccpe001.familywallet.SIGNIN");
             startActivity(intent);
         }else if(view.getId()==R.id.selectLangRow){
@@ -362,8 +382,6 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         editor.putBoolean("appSync",appSync);
         editor.putBoolean("appBackUp",appBackUp);
         editor.putString("appBackUpPath", appbackUpPath);
-
-
 
         editor.commit();
     }

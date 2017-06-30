@@ -1,13 +1,19 @@
 package ccpe001.familywallet.admin;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.widget.*;
 import ccpe001.familywallet.R;
 import ccpe001.familywallet.Validate;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -19,6 +25,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
     private Button signIn,scannerBtn;
     private TextView toSignUp,forgotTxt;
     private EditText emailTxt,passTxt;
+    private ProgressDialog progressDialog;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +48,14 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         scannerBtn.setOnClickListener(this);
         toSignUp.setOnClickListener(this);
         forgotTxt.setOnClickListener(this);
-        emailTxt.setText("testmail@gmail.com");
-        passTxt.setText("testpw123");
+        progressDialog = new ProgressDialog(this);
+
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null){
+            finish();
+            Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
+            startActivity(intent);
+        }
     }
 
 
@@ -50,10 +64,25 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if(view.getId()== R.id.signInBtn){
-            if(Validate.anyValidMail(emailTxt.getText().toString())) {
-                if(Validate.anyValidPass(passTxt.getText().toString())){
-                    Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
-                    startActivity(intent);
+            if(Validate.anyValidMail(emailTxt.getText().toString().trim())) {
+                if(Validate.anyValidPass(passTxt.getText().toString().trim())){
+                    progressDialog.setMessage("Wait..");
+                    progressDialog.show();
+                    mAuth.signInWithEmailAndPassword(emailTxt.getText().toString().trim(),
+                            passTxt.getText().toString().trim())
+                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    progressDialog.dismiss();
+                                    if(task.isSuccessful()){
+                                        finish();
+                                        Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
+                                        startActivity(intent);
+                                    }else{
+                                        Toast.makeText(SignIn.this,"Sign In Error",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                 }else{
                     passTxt.setError("Invalid password");
                 }
@@ -70,9 +99,9 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
             intentIntegrator.setBarcodeImageEnabled(false);
             intentIntegrator.initiateScan();
         }else if(view.getId()== R.id.textView2){
-            startActivity(new Intent(this,SignUp.class));//this to sign in
+            startActivity(new Intent(this,SignUp.class));
         }else if(view.getId()== R.id.textView){
-            Intent intent = new Intent("ccpe001.familywallet.FORGOT");
+            Intent intent = new Intent(this,Forgot.class);
             startActivity(intent);
         }
     }

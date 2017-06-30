@@ -22,7 +22,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
+import ccpe001.familywallet.admin.SignIn;
 import ccpe001.familywallet.budget.BudgetHandling;
 import ccpe001.familywallet.budget.accUpdate;
 import ccpe001.familywallet.budget.addAccount;
@@ -34,6 +37,8 @@ import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.Target;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 
@@ -45,7 +50,9 @@ public class Dashboard extends AppCompatActivity
     private DrawerLayout drawerLayout = null;
     private FloatingActionButton circleButton;
     private ShowcaseView showcaseView;
-    private TextView navUserDetTxt;
+    private Spinner navUserDetTxt;
+    private FirebaseAuth mAuth;
+    private String[] arrSpinner;
 
     int count;
     private Target t1,t2;
@@ -60,8 +67,11 @@ public class Dashboard extends AppCompatActivity
 
         setSupportActionBar(toolbar);
 
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+
         //initialize dashboard fragment 1st
-        //CoMMENT CUZ java.lang.NumberFormatException: Invalid int: "null" ERROR
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Transaction_main transaction = new Transaction_main();
@@ -81,34 +91,31 @@ public class Dashboard extends AppCompatActivity
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header_navigation_drawer);
-        navUserDetTxt = (TextView) headerView.findViewById(R.id.navUserDet);
+        navUserDetTxt = (Spinner) headerView.findViewById(R.id.navUserDet);
         circleButton = (FloatingActionButton) headerView.findViewById(R.id.loggedUsrImg);
         circleButton.setOnClickListener(this);
 
-        navUserDetTxt.setText(signUpIntent.getStringExtra("firstname")+" "+
-                signUpIntent.getStringExtra("lastname"));
+
+
+        arrSpinner = new String[]{signUpIntent.getStringExtra("firstname")+" "+
+                signUpIntent.getStringExtra("lastname")};//add more elems dynamically
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,arrSpinner);
+        navUserDetTxt.setAdapter(adapter);
+
 
 
         try{
 
             RoundedBitmapDrawable round = null;
-            if (signUpIntent.getIntExtra("selectOpt",1)==1) {
 
-                try {
-                    round = RoundedBitmapDrawableFactory.create(getResources(),
-                            MediaStore.Images.Media.getBitmap(this.getContentResolver(),
-                                    Uri.parse(signUpIntent.getStringExtra("profilepic"))));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }else if(signUpIntent.getIntExtra("selectOpt",-1)==0) {
-
+            try {
                 round = RoundedBitmapDrawableFactory.create(getResources(),
-                        (Bitmap) signUpIntent.getParcelableExtra("profilepic"));
-
+                        MediaStore.Images.Media.getBitmap(this.getContentResolver(),
+                                Uri.parse(signUpIntent.getStringExtra("profilepic"))));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
 
             round.setCircular(true);
             circleButton.setImageDrawable(round);
@@ -141,30 +148,22 @@ public class Dashboard extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navigation_drawer, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.transactionFrag) {

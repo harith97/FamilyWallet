@@ -42,17 +42,6 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".Forgot"
-                android:screenOrientation="portrait"
-                android:parentActivityName=".admin.SignIn"
-                android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="ccpe001.familywallet.FORGOT" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".budget.BudgetHandling"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
@@ -145,6 +134,17 @@
             </intent-filter>
         </activity>
         <activity
+                android:name=".admin.Forgot"
+                android:parentActivityName=".admin.SignIn"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="ccpe001.familywallet.FORGOT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".Splash"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -165,7 +165,6 @@
             </intent-filter>
         </activity>
 
-        /*Transaction activity*/
         <activity android:name=".transaction.add_transaction"
             android:screenOrientation="portrait"
             android:parentActivityName=".Dashboard">

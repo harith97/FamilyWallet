@@ -5,7 +5,6 @@
                 android:focusable="true"
               android:focusableInTouchMode="true"
               android:orientation="vertical"
-              android:background="#b2beb5"
               android:fitsSystemWindows="true"
               android:layout_width="match_parent"
               android:layout_height="match_parent" android:weightSum="1">
@@ -64,45 +63,11 @@
             android:layout_height="47dp"
             android:id="@+id/signupBtn"/>
 
-    <Button
-            android:text="Sign up via Google+"
-            android:background="@drawable/roundbutton"
-            android:drawableLeft="@mipmap/gxxxdhdpi"
-            android:gravity="center_vertical"
-            android:textAlignment="center"
-
+    <com.google.android.gms.common.SignInButton
+            android:id="@+id/googleOptBtn"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp"
-            android:layout_width="match_parent"
-            android:textAllCaps="false"
             android:layout_height="wrap_content"
-            android:id="@+id/googleOptBtn"/>
-
-
-    <com.facebook.login.widget.LoginButton
-            android:text="Sign up via Facebook"
-            android:gravity="center_vertical"
-            android:textAlignment="center"
-            android:background="@drawable/roundbutton"
-            android:drawableLeft="@mipmap/fbicon"
-            android:layout_width="match_parent"
-            android:textAllCaps="false"
-
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="wrap_content" android:id="@+id/fbOptBtn"
-    />
-
-    <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView"/>
-    <TextView
-            android:id="@+id/t"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/hello_blank_fragment"/>
+            android:layout_width="wrap_content"/>
 
 </LinearLayout>

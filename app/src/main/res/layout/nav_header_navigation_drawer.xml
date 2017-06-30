@@ -30,13 +30,14 @@
             app:srcCompat="@android:drawable/ic_input_add"
             android:id="@+id/loggedUsrImg"/>
 
-    <TextView
+
+
+    <Spinner
+            android:textAlignment="center"
+            android:layout_gravity="center"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/navUserDet"
-            android:textAlignment="center"
-            android:text="User Name"
-    />
+            android:id="@+id/navUserDet"/>
 
 </LinearLayout>
