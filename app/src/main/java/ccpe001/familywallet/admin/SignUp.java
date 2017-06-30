@@ -1,7 +1,9 @@
 package ccpe001.familywallet.admin;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -129,6 +131,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener,Go
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     progressBar.dismiss();
                                     if(task.isSuccessful()){
+                                        saveSession(mAuth.getCurrentUser().getEmail());
                                         Toast.makeText(SignUp.this,"Registration successful",Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent("ccpe001.familywallet.GETINFO");
                                         startActivity(intent);
@@ -138,6 +141,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener,Go
                                 }
                             });
                 }else{
+
                     passTxt.setError("Invalid password");
                 }
             }else {
@@ -150,6 +154,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener,Go
         }
     }
 
+    private void saveSession(String email) {
+        SharedPreferences prefs = getSharedPreferences("Session", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("userMail",email);
+    }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
@@ -197,7 +206,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener,Go
 
     private void saveData(String fname,String lname) {
         UserData userData = new UserData(fname,lname);
-        FirebaseUser firebaseUser = mAuth.getCurrentUser();
         databaseReference.child("UserInfo").setValue(userData);
     }
 

@@ -175,6 +175,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
             mAuth.signOut();//normal sign out
             Auth.GoogleSignInApi.signOut(mGoogleApiClient);
             getActivity().finish();
+            sessionClear();
             Intent intent = new Intent("ccpe001.familywallet.SIGNIN");
             startActivity(intent);
         }else if(view.getId()==R.id.selectLangRow){
@@ -441,6 +442,12 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         mDialog.dismiss();
     }
 
+    private void sessionClear(){
+        prefs = getContext().getSharedPreferences("Session",Context.MODE_PRIVATE);
+        editor = prefs.edit();
+        editor.clear();
+        editor.commit();
+    }
 
 }
 
