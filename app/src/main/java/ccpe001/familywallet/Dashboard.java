@@ -125,7 +125,6 @@ public class Dashboard extends AppCompatActivity
 
                 //cannot use one method for this call are asynchrous
                 if (signUpIntent.getStringExtra("profilepic") != null) {
-                    Log.d("dff","me ran 1"+signUpIntent.getStringExtra("profilepic"));
                     Picasso.with(getApplication())
                             .load(Uri.parse(signUpIntent.getStringExtra("profilepic")))
                             .transform(new CircleTransform())

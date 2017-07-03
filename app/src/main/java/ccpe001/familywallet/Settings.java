@@ -15,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -184,15 +185,16 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.signOutBtn){
+            if(mAuth.getCurrentUser().getProviders().toString().equals("[facebook.com]")){
+                LoginManager.getInstance().logOut();
+            }else if(mAuth.getCurrentUser().getProviders().toString().equals("[google.com]")){
+                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+            }
             mAuth.signOut();
-            Auth.GoogleSignInApi.signOut(mGoogleApiClient);
-            LoginManager.getInstance().logOut();
-
             getActivity().finish();
             sessionClear();
             Intent intent = new Intent("ccpe001.familywallet.SIGNIN");
             startActivity(intent);
-
         }else if(view.getId()==R.id.selectLangRow){
             langBuilder.show();
         }else if(view.getId()==R.id.selectCurrRow){
