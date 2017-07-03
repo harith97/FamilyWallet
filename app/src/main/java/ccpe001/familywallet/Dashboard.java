@@ -1,13 +1,12 @@
 package ccpe001.familywallet;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Point;
+import android.graphics.*;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
@@ -27,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import ccpe001.familywallet.admin.CircleTransform;
 import ccpe001.familywallet.admin.SignIn;
 import ccpe001.familywallet.admin.UserData;
 import ccpe001.familywallet.budget.BudgetHandling;
@@ -40,11 +40,17 @@ import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.Target;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.io.IOException;
 
@@ -61,7 +67,7 @@ public class Dashboard extends AppCompatActivity
     private Intent signUpIntent;
 
     public String fullname;
-    private Uri propic;
+    public String propicUrl;
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
     private FirebaseUser firebaseUser;
@@ -84,27 +90,68 @@ public class Dashboard extends AppCompatActivity
         databaseReference = FirebaseDatabase.getInstance().getReference();
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+
+            databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 String uid = firebaseUser.getUid();
-                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     userData = new UserData();
-                    userData.setFirstName(ds.child(uid).getValue(UserData.class).getFirstName());
-                    userData.setLastName(ds.child(uid).getValue(UserData.class).getLastName());
-                    fullname = userData.getFirstName()+" "+userData.getLastName();
+                    if (ds.getKey().equals("PropicUrl")) {
+                        try {
+                            userData.setProPic(ds.child(uid).getValue(UserData.class).getProPic());
+                            propicUrl = userData.getProPic();
+                        } catch (Exception e) {
+
+                        }
+                    } else if (ds.getKey().equals("UserInfo")) {
+                        userData.setFirstName(ds.child(uid).getValue(UserData.class).getFirstName());
+                        userData.setLastName(ds.child(uid).getValue(UserData.class).getLastName());
+                        fullname = userData.getFirstName() + " " + userData.getLastName();
+                    }
                 }
 
-                if(signUpIntent.getStringExtra("firstname")!=null
-                        &&signUpIntent.getStringExtra("lastname")!=null){
+                if (signUpIntent.getStringExtra("firstname") != null
+                        && signUpIntent.getStringExtra("lastname") != null) {
 
-                    fullname = signUpIntent.getStringExtra("firstname")+" "+
+                    fullname = signUpIntent.getStringExtra("firstname") + " " +
                             signUpIntent.getStringExtra("lastname");
                 }
 
                 arrSpinner = new String[]{fullname};//add more elems dynamically
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplication(),android.R.layout.simple_spinner_item,arrSpinner);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplication(), android.R.layout.simple_spinner_item, arrSpinner);
                 navUserDetTxt.setAdapter(adapter);
+
+                //cannot use one method for this call are asynchrous
+                if (signUpIntent.getStringExtra("profilepic") != null) {
+                    Log.d("dff","me ran 1"+signUpIntent.getStringExtra("profilepic"));
+                    Picasso.with(getApplication())
+                            .load(Uri.parse(signUpIntent.getStringExtra("profilepic")))
+                            .transform(new CircleTransform())
+                            .into(circleButton);
+
+                }else if(mAuth.getCurrentUser().getProviders().toString().equals("[facebook.com]")
+                        ||mAuth.getCurrentUser().getProviders().toString().equals("[google.com]")){
+                    Log.d("dff","me ran 2"+propicUrl);
+
+                    Picasso.with(getApplication())
+                            .load(propicUrl)
+                            .transform(new CircleTransform())
+                            .into(circleButton);
+                }else{
+                    storageReference.child("UserPics/" + firebaseUser.getUid() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Log.d("dff","me ran 3"+uri.toString());
+                            Picasso.with(getApplication())
+                                    .load(uri)
+                                    .transform(new CircleTransform())
+                                    .into(circleButton);
+                        }
+                    });
+                }
+
             }
 
             @Override
@@ -112,6 +159,7 @@ public class Dashboard extends AppCompatActivity
 
             }
         });
+
 
         //initialize dashboard fragment 1st
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
@@ -135,28 +183,6 @@ public class Dashboard extends AppCompatActivity
         navUserDetTxt = (Spinner) headerView.findViewById(R.id.navUserDet);
         circleButton = (FloatingActionButton) headerView.findViewById(R.id.loggedUsrImg);
         circleButton.setOnClickListener(this);
-
-
-
-
-
-        try{
-            RoundedBitmapDrawable round = null;
-
-            try {
-                round = RoundedBitmapDrawableFactory.create(getResources(),
-                        MediaStore.Images.Media.getBitmap(this.getContentResolver(),
-                                Uri.parse(signUpIntent.getStringExtra("profilepic"))));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            round.setCircular(true);
-            circleButton.setImageDrawable(round);
-
-        }catch (Exception e){
-
-        }
 
     }
 

@@ -1,5 +1,7 @@
 package ccpe001.familywallet.admin;
 
+import java.security.PublicKey;
+
 /**
  * Created by harithaperera on 6/26/17.
  */
@@ -9,9 +11,24 @@ public class UserData {
     public String firstName;
     public String lastName;
     public String userId;
+    public String proPic;
+
+
+    public void setProPic(String proPic) {
+        this.proPic = proPic;
+    }
+
+    public String getProPic() {
+        return proPic;
+    }
 
     public UserData(){
 
+    }
+
+
+    public UserData(String p){
+        this.proPic = p;
     }
 
     public UserData(String f, String l, String u) {

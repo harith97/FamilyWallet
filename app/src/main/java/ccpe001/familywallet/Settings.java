@@ -21,6 +21,8 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import ccpe001.familywallet.admin.SignIn;
+import com.facebook.CallbackManager;
+import com.facebook.login.LoginManager;
 import com.github.orangegangsters.lollipin.lib.managers.AppLock;
 import com.github.orangegangsters.lollipin.lib.managers.LockManager;
 import com.google.android.gms.auth.api.Auth;
@@ -68,7 +70,6 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.setting, container, false);
         init(view);
@@ -79,6 +80,8 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
             Intent intent = new Intent(getActivity(),SignIn.class);
             startActivity(intent);
         }
+
+
 
         return view;
     }
@@ -183,6 +186,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         if(view.getId()==R.id.signOutBtn){
             mAuth.signOut();
             Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+            LoginManager.getInstance().logOut();
 
             getActivity().finish();
             sessionClear();

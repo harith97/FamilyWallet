@@ -57,6 +57,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         progressDialog = new ProgressDialog(this);
 
         mAuth = FirebaseAuth.getInstance();
+        //mAuth.signOut();
         if(mAuth.getCurrentUser() != null){//if user already logged in
             finish();
             Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
