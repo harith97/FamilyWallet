@@ -1,8 +1,10 @@
 package ccpe001.familywallet.transaction;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -14,10 +16,14 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Locale;
 
 import ccpe001.familywallet.R;
 
@@ -43,7 +49,47 @@ public class Transaction_main extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.transaction_main, container, false);
+
+        String[] Amount ;
+        String[] Title ;
+        String[] Category ;
+        String[] Date ;
+        Integer[] imgid;
+
+        DatabaseOps dbOps = new DatabaseOps(getActivity());
+        //ArrayList<String> listData = new ArrayList<>();
         try {
+            Cursor data = dbOps.getData();
+
+            final int size = data.getCount();
+            Amount = new String[size];
+            Title = new String[size];
+            Category = new String[size];
+            Date = new String[size];
+            imgid = new Integer[size];
+
+            if (data.moveToFirst()) {
+                int i = 0;
+                do {
+                    Amount[i] = data.getString(0);
+                    Title[i] = data.getString(1);
+                    Category[i] = data.getString(2);
+                    Date[i] = data.getString(3);
+                    imgid[i] = data.getInt(4);
+                    i++;
+                } while (data.moveToNext());
+
+
+            }
+            TransactionListAdapter adapter = new TransactionListAdapter(getActivity(), Title, Category, Date, Amount, imgid);
+            list = (ListView) view.findViewById(R.id.transactionList);
+            list.setAdapter(adapter);
+
+        }catch (Exception e){
+
+        }
+        //String[] Amount = listData.toArray(new String[0]);
+        /*try {
             if (savedInstanceState == null) {
                 Bundle extras = getActivity().getIntent().getExtras();
                 if(extras == null) {
@@ -54,17 +100,17 @@ public class Transaction_main extends Fragment {
                     date = extras.getString("date");
                     amount = extras.getString("amount");
 
-                    final String[] Title = {
-                            title
+                     String[] Title = {
+                            title,
                     };
-                    final String[] Category = {
-                            categoryName
+                     String[] Category = {
+                            categoryName,
                     };
-                    final String[] Date = {
-                            date
+                     String[] Date = {
+                             date,
                     };
-                    final String[] Amount = {
-                            amount
+                     String[] Amount = {
+                             amount
                     };
 
                     Integer[] imgid = {
@@ -72,14 +118,12 @@ public class Transaction_main extends Fragment {
                     };
 
 
-                    TransactionListAdapter adapter = new TransactionListAdapter(getActivity(), Title, Category, Date, Amount, imgid);
-                    list = (ListView) view.findViewById(R.id.transactionList);
-                    list.setAdapter(adapter);
+
                 }
             }
         }catch (Exception ex){
 
-        }
+        }*/
 
 
 

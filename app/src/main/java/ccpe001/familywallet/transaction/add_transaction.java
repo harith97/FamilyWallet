@@ -1,6 +1,7 @@
 package ccpe001.familywallet.transaction;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ public class add_transaction extends AppCompatActivity {
     private EditText txtAmount, txtDate, txtTime, txtTitle;
     String categoryName, categoryID, title, date, amount,currency,time,location,type;
     Integer currencyIndex, accountIndex;
+    Context cnt = this;
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class add_transaction extends AppCompatActivity {
                 startPlacePickerActivity();
             }
         });
+
 
         if (savedInstanceState == null) {
             Bundle extras = this.getIntent().getExtras();
@@ -269,6 +273,9 @@ public class add_transaction extends AppCompatActivity {
             Toast.makeText(this, "Set the Amount first", Toast.LENGTH_SHORT).show();
         }
         else {
+            DatabaseOps dbOp = new DatabaseOps(cnt);
+            dbOp.addData(amount, title, categoryName, date, Integer.parseInt(categoryID) );
+            Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
             Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
             intent.putExtra("categoryID", categoryID);
             intent.putExtra("categoryName", categoryName);
