@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
+import com.github.orangegangsters.lollipin.lib.PinActivity;
 import com.github.orangegangsters.lollipin.lib.PinCompatActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 
@@ -17,7 +18,7 @@ import static java.lang.Thread.sleep;
 /**
  * Created by harithaperera on 4/29/17.
  */
-public class Splash extends PinCompatActivity {
+public class Splash extends PinActivity {
 
     private Notification notification;
     private NotificationManager nm;

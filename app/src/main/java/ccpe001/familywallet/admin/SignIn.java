@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.orangegangsters.lollipin.lib.PinActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,7 +27,7 @@ import ccpe001.familywallet.Validate;
 /**
  * Created by harithaperera on 4/30/17.
  */
-public class SignIn extends AppCompatActivity implements View.OnClickListener{
+public class SignIn extends PinActivity implements View.OnClickListener{
 
     private Button signIn,scannerBtn;
     private TextView toSignUp,forgotTxt;
@@ -42,7 +43,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void init() {
-        getSupportActionBar().setTitle(R.string.signin_title);
+        setTitle(R.string.signin_title);
         signIn= (Button)findViewById(R.id.signInBtn);
         scannerBtn= (Button)findViewById(R.id.qrscannerBtn);
         toSignUp = (TextView)findViewById(R.id.textView2);

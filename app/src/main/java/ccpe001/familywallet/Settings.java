@@ -3,10 +3,7 @@ package ccpe001.familywallet;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,6 +30,8 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import net.rdrei.android.dirchooser.DirectoryChooserActivity;
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 import net.rdrei.android.dirchooser.DirectoryChooserFragment;
@@ -69,14 +68,18 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
 
     private FirebaseAuth mAuth;
     private GoogleApiClient mGoogleApiClient;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference db;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.setting, container, false);
         init(view);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance().getReference();
+            Log.d("dsfdsf","dfgdsf"+db);
+
         if(mAuth.getCurrentUser() == null){
+
             getActivity().finish();
             Intent intent = new Intent(getActivity(),SignIn.class);
             startActivity(intent);
@@ -253,11 +256,14 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     Intent intent = new Intent(getContext(),CustomPinActivity.class);
                     if(b){
+                        //enable lock
                         Toast.makeText(getContext(),"FamilyWallet Backups",Toast.LENGTH_LONG).show();
                         LockManager<CustomPinActivity> lockManager = LockManager.getInstance();
                         lockManager.enableAppLock(getContext(),CustomPinActivity.class);
+                        lockManager.getAppLock().setTimeout(5000000);
                         startActivityForResult(intent, ENABLE_PIN);
                     }else{
+                        //disanle lock
                         LockManager<CustomPinActivity> lockManager = LockManager.getInstance();
                         lockManager.disableAppLock();
                     }
@@ -274,13 +280,25 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
 
         }else if(view.getId()==R.id.feedbackRow){
             Intent intent = new Intent(Intent.ACTION_SEND);
-            intent.setData(Uri.parse("mailto:"));
-            intent.putExtra(Intent.EXTRA_EMAIL,"ccpe_001@gmail.com");
-            intent.putExtra(Intent.EXTRA_SUBJECT,"Customer Feedback");
+            intent.setAction(Intent.ACTION_SEND);
             intent.setType("message/rfc882");
+            intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"ccpe_001@gmail.com"});
+            intent.putExtra(Intent.EXTRA_SUBJECT,"Customer Feedback");
             intent.createChooser(intent,"Send email");
             startActivity(intent);
         }else if(view.getId()==R.id.rateRow){
+            //need to release app for this feature..
+            Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            try {
+                startActivity(goToMarket);
+            } catch (ActivityNotFoundException e) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://play.google.com/store/apps/details?id=" + getActivity().getPackageName())));
+            }
         }
 
 
@@ -335,9 +353,12 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
             if(b) {
                 appSync = true;
                 storePWSharedPref();
+                //db.keepSynced(true);
+
             }else{
                 appSync = false;
                 storePWSharedPref();
+                //db.keepSynced(false);
             }
         }else if(switchs.getId()==R.id.autoBackUpSwitch){
             if(b) {
