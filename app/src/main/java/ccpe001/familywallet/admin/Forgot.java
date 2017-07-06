@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import ccpe001.familywallet.R;
 import ccpe001.familywallet.Validate;
+import com.github.orangegangsters.lollipin.lib.PinActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -17,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 /**
  * Created by harithaperera on 5/28/17.
  */
-public class Forgot extends AppCompatActivity implements View.OnClickListener {
+public class Forgot extends PinActivity implements View.OnClickListener {
 
     private Button sendBtn;
     private TextView textForTxt;

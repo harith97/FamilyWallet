@@ -165,14 +165,15 @@ public class ExportData extends Fragment implements View.OnClickListener,CheckBo
             }
         }
 
-
         Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_EMAIL,"ccpe_001@gmail.com");
-        intent.putExtra(Intent.EXTRA_SUBJECT,"Family Wallet Backup");
+        intent.setAction(Intent.ACTION_SEND_MULTIPLE);
+        intent.setType("message/rfc882");
         intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM,uriArr);
+        intent.putExtra(Intent.EXTRA_SUBJECT,"Family Wallet Backup");
         intent.createChooser(intent,"Send email");
         startActivity(intent);
+
+
     }
 
     @Override
