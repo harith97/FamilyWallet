@@ -1,5 +1,6 @@
 package ccpe001.familywallet.transaction;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import ccpe001.familywallet.R;
@@ -17,8 +19,11 @@ import ccpe001.familywallet.R;
  */
 
 public class CategoryTab02 extends Fragment {
-    GridView grid;
 
+    GridView grid;
+    TextView txtCategory;
+    String categoryID, categoryName, title, date, time, amount, location, type;
+    int currencyIndex, accountIndex;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,7 +48,36 @@ public class CategoryTab02 extends Fragment {
                                     int position, long id) {
                 // TODO Auto-generated method stub
                 String Slecteditem = itemname[+position];
-                Toast.makeText(getActivity(), Slecteditem, Toast.LENGTH_SHORT).show();
+                txtCategory = (TextView) view.findViewById(R.id.txtCategory);
+
+                Bundle extras = getActivity().getIntent().getExtras();
+
+                categoryName = extras.getString("categoryName");
+                categoryID = extras.getString("categoryID");
+                title = extras.getString("title");
+                date = extras.getString("date");
+                time = extras.getString("time");
+                amount = extras.getString("amount");
+                location = extras.getString("location");
+                currencyIndex = extras.getInt("currencyIndex");
+                accountIndex = extras.getInt("accountIndex");
+                type = extras.getString("transactionType");
+
+                String category = itemname[+position];
+                String categoryID = Integer.toString(imgid[+position]);
+                Intent intent = new Intent("ccpe001.familywallet.add_transaction");
+                intent.putExtra("categoryName",category);
+                intent.putExtra("categoryID",categoryID);
+                intent.putExtra("title",title);
+                intent.putExtra("amount",amount);
+                intent.putExtra("date",date);
+                intent.putExtra("time",time);
+                intent.putExtra("location",location);
+                intent.putExtra("currencyIndex",currencyIndex);
+                intent.putExtra("accountIndex",accountIndex);
+                intent.putExtra("transactionType",type);
+                getActivity().finish();
+                startActivity(intent);
 
             }
         });

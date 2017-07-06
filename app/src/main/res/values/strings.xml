@@ -14,7 +14,7 @@
 
     <string-array name="spinnerCurrency">
         <item>Rs.</item>
-        <item>USD</item>
+        <item>US $ </item>
         <item>Rs(Convert)</item>
     </string-array>
     <string name="fb_APP_ID">1505482392855831</string>

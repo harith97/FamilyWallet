@@ -19,4 +19,5 @@
 
     <style name="Theme.Material.NoActionBar.Light.NoActionBar.TestTheme" parent="android:Theme.Material.NoActionBar" />
 
+    <color name="blue">#009FE3</color>
 </resources>

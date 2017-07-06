@@ -8,21 +8,15 @@ import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
-
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import ccpe001.familywallet.R;
 
 public class add_transaction extends AppCompatActivity {
@@ -32,7 +26,7 @@ public class add_transaction extends AppCompatActivity {
     private Spinner spinCurrency, spinAccount;
     int PLACE_PICKER_REQUEST=1;
     private EditText txtAmount, txtDate, txtTime, txtTitle;
-    String categoryName, categoryID, title, date, amount,currency,time,location,type;
+    String categoryName, categoryID, title, date, amount,currency,time,location, account,type;
     Integer currencyIndex, accountIndex;
     Context cnt = this;
 
@@ -260,9 +254,11 @@ public class add_transaction extends AppCompatActivity {
     public void saveTransaction(View view) {
         amount = txtAmount.getText().toString();
         date = txtDate.getText().toString();
+        time = txtTime.getText().toString();
         title = txtTitle.getText().toString();
         currency = spinCurrency.getSelectedItem().toString();
         location = txtLocation.getText().toString();
+        account = spinAccount.getSelectedItem().toString();
 
         if (categoryName==null){
             categoryName = "Other";
@@ -274,15 +270,9 @@ public class add_transaction extends AppCompatActivity {
         }
         else {
             DatabaseOps dbOp = new DatabaseOps(cnt);
-            dbOp.addData(amount, title, categoryName, date, Integer.parseInt(categoryID) );
+            dbOp.addData(amount, title, categoryName, date, Integer.parseInt(categoryID), time, account, location, type, currency, "uID");
             Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
             Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
-            intent.putExtra("categoryID", categoryID);
-            intent.putExtra("categoryName", categoryName);
-            intent.putExtra("title", title);
-            intent.putExtra("amount", currency + " " + amount);
-            intent.putExtra("date", date);
-            intent.putExtra("location",location);
             startActivity(intent);
         }
     }

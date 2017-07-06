@@ -10,11 +10,16 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -49,15 +54,15 @@ public class Transaction_main extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.transaction_main, container, false);
-
+        list = (ListView) view.findViewById(R.id.transactionList);
         String[] Amount ;
         String[] Title ;
         String[] Category ;
         String[] Date ;
         Integer[] imgid;
+        String[] Currency ;
 
         DatabaseOps dbOps = new DatabaseOps(getActivity());
-        //ArrayList<String> listData = new ArrayList<>();
         try {
             Cursor data = dbOps.getData();
 
@@ -71,59 +76,82 @@ public class Transaction_main extends Fragment {
             if (data.moveToFirst()) {
                 int i = 0;
                 do {
-                    Amount[i] = data.getString(0);
-                    Title[i] = data.getString(1);
-                    Category[i] = data.getString(2);
-                    Date[i] = data.getString(3);
-                    imgid[i] = data.getInt(4);
+                    Amount[i] = data.getString(10)+data.getString(1);
+                    Title[i] = data.getString(2);
+                    Category[i] = data.getString(3);
+                    Date[i] = data.getString(4);
+                    imgid[i] = data.getInt(5);
                     i++;
                 } while (data.moveToNext());
 
 
             }
             TransactionListAdapter adapter = new TransactionListAdapter(getActivity(), Title, Category, Date, Amount, imgid);
-            list = (ListView) view.findViewById(R.id.transactionList);
             list.setAdapter(adapter);
 
+            dbOps.close();
         }catch (Exception e){
 
         }
-        //String[] Amount = listData.toArray(new String[0]);
-        /*try {
-            if (savedInstanceState == null) {
-                Bundle extras = getActivity().getIntent().getExtras();
-                if(extras == null) {
-                } else {
-                    categoryName = extras.getString("categoryName");
-                    categoryID = extras.getString("categoryID");
-                    title = extras.getString("title");
-                    date = extras.getString("date");
-                    amount = extras.getString("amount");
 
-                     String[] Title = {
-                            title,
-                    };
-                     String[] Category = {
-                            categoryName,
-                    };
-                     String[] Date = {
-                             date,
-                    };
-                     String[] Amount = {
-                             amount
-                    };
-
-                    Integer[] imgid = {
-                            Integer.parseInt(categoryID)
-                    };
-
-
-
-                }
+        list.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                list.setItemChecked(position, true);
+                view.setSelected(true);
+                return true;
             }
-        }catch (Exception ex){
+        });
+        list.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
-        }*/
+            @Override
+            public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+                int checkedItems = list.getCheckedItemCount();
+                mode.setTitle(String.valueOf(checkedItems)+ " Selected");
+            }
+
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                MenuInflater inflater = mode.getMenuInflater();
+                inflater.inflate(R.menu.transaction_main, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                switch (item.getItemId()){
+                    case  R.id.delete_id:
+                }
+                return false;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+
+            }
+        });
+//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                                        @Override
+//                                        public void onItemClick(AdapterView<?> parent, View view,
+//                                                                int position, long id) {
+//                                            // TODO Auto-generated method stub
+//                                            Toast.makeText(getActivity(), "HEllo", Toast.LENGTH_SHORT).show();
+//                                            view.setSelected(true);
+//                                            list.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
+//                                        }
+//
+//
+//                                    });
+
+
+
+
 
 
 
@@ -192,6 +220,7 @@ public class Transaction_main extends Fragment {
 
             }
         });
+
 
 
 

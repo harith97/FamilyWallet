@@ -54,6 +54,7 @@ public class TransactionListAdapter extends ArrayAdapter<String> {
         imageView.setImageResource(imgid[position]);
         return rowView;
 
+
     }
 
 }
