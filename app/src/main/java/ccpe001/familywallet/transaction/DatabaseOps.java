@@ -49,6 +49,7 @@ public class DatabaseOps extends SQLiteOpenHelper {
     public String addData(String amount, String title, String category, String date, Integer imgId,String time, String account, String location, String type, String currency, String userid){
         String ex="";
         try {
+
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues contVal = new ContentValues();
             contVal.put(COL1,amount);
@@ -63,7 +64,6 @@ public class DatabaseOps extends SQLiteOpenHelper {
             contVal.put(COL10,currency);
             contVal.put(COL11,userid);
             db.insert(TABLE_NAME, null, contVal);
-
 
         }catch (Exception e){
             ex=""+e;

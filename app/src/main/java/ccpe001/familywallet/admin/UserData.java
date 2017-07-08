@@ -22,19 +22,18 @@ public class UserData {
         return proPic;
     }
 
+
+
+
     public UserData(){
 
     }
 
-
-    public UserData(String p){
-        this.proPic = p;
-    }
-
-    public UserData(String f, String l, String u) {
+    public UserData(String f, String l, String u,String p) {
         this.lastName = l;
         this.firstName = f;
         this.userId = u;
+        this.proPic = p;
     }
 
     public String getFirstName() {

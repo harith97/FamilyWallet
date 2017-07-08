@@ -87,28 +87,34 @@ public class Dashboard extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        storageReference = FirebaseStorage.getInstance().getReference();
 
+        //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(firebaseUser.getUid());
+        databaseReference.keepSynced(true);
+
+
+        storageReference = FirebaseStorage.getInstance().getReference();
 
             databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-                String uid = firebaseUser.getUid();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     userData = new UserData();
-                    if (ds.getKey().equals("PropicUrl")) {
+                    if (ds.getKey().equals("firstName")){
+                        userData.setFirstName(ds.getValue().toString());
+                        fullname = userData.getFirstName();
+                    }
+                    else if(ds.getKey().equals("lastName")) {
+                        userData.setLastName(ds.getValue().toString());
+                        fullname = fullname + " "+userData.getLastName();
+                    }
+                    else if(ds.getKey().equals("proPic")) {
                         try {
-                            userData.setProPic(ds.child(uid).getValue(UserData.class).getProPic());
+                            userData.setProPic(ds.getValue().toString());
                             propicUrl = userData.getProPic();
                         } catch (Exception e) {
 
                         }
-                    } else if (ds.getKey().equals("UserInfo")) {
-                        userData.setFirstName(ds.child(uid).getValue(UserData.class).getFirstName());
-                        userData.setLastName(ds.child(uid).getValue(UserData.class).getLastName());
-                        fullname = userData.getFirstName() + " " + userData.getLastName();
                     }
                 }
 

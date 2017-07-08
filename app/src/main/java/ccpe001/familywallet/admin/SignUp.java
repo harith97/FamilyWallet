@@ -230,10 +230,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener,Go
     }
 
     private void saveData(String fname, String lname, String proPic) {
-        UserData userData = new UserData(fname,lname, mAuth.getCurrentUser().getUid());
+        UserData userData = new UserData(fname,lname, mAuth.getCurrentUser().getUid(),proPic);
         databaseReference.child("UserInfo").child(mAuth.getCurrentUser().getUid()).setValue(userData);
-        UserData userData2 = new UserData(proPic);
-        databaseReference.child("PropicUrl").child(mAuth.getCurrentUser().getUid()).setValue(userData2);
     }
 
 

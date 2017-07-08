@@ -75,17 +75,12 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         init(view);
 
         mAuth = FirebaseAuth.getInstance();
-        db = FirebaseDatabase.getInstance().getReference();
-            Log.d("dsfdsf","dfgdsf"+db);
 
         if(mAuth.getCurrentUser() == null){
-
             getActivity().finish();
             Intent intent = new Intent(getActivity(),SignIn.class);
             startActivity(intent);
         }
-
-
 
         return view;
     }
@@ -350,15 +345,16 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
                 storePWSharedPref();
             }
         }else if(switchs.getId()==R.id.autoSyncSwitch){
+            db = FirebaseDatabase.getInstance().getReference();
             if(b) {
                 appSync = true;
                 storePWSharedPref();
-                //db.keepSynced(true);
+                db.keepSynced(true);
 
             }else{
                 appSync = false;
                 storePWSharedPref();
-                //db.keepSynced(false);
+                db.keepSynced(false);
             }
         }else if(switchs.getId()==R.id.autoBackUpSwitch){
             if(b) {
