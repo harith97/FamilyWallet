@@ -1,15 +1,14 @@
 package ccpe001.familywallet.transaction;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,14 +20,19 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.List;
 
 import ccpe001.familywallet.R;
 
@@ -43,11 +47,19 @@ public class Transaction_main extends Fragment {
     TextView txtIncome,txtExpense;
     boolean isOpen = false;
     String categoryID, categoryName, title, date, amount;
+    private DatabaseReference mDatabase;
 
     public Transaction_main() {
         // Required empty public constructor
     }
 
+        ArrayList<String> Amount ;
+        ArrayList<String> Title ;
+        ArrayList<String> Category ;
+        ArrayList<String> Date ;
+        ArrayList<Integer> imgid;
+        ArrayList<String> Currency ;
+        List<TransactionDetails> tdList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,44 +67,28 @@ public class Transaction_main extends Fragment {
 
         View view = inflater.inflate(R.layout.transaction_main, container, false);
         list = (ListView) view.findViewById(R.id.transactionList);
-        String[] Amount ;
-        String[] Title ;
-        String[] Category ;
-        String[] Date ;
-        Integer[] imgid;
-        String[] Currency ;
+        tdList = new ArrayList<>();
+        mDatabase = FirebaseDatabase.getInstance().getReference("Transactions");
 
-        DatabaseOps dbOps = new DatabaseOps(getActivity());
-        try {
-            Cursor data = dbOps.getData();
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tdList.clear();
+                for(DataSnapshot tdSnapshot : dataSnapshot.getChildren()){
+                    TransactionDetails td = tdSnapshot.getValue(TransactionDetails.class);
+                    tdList.add(td);
+                }
 
-            final int size = data.getCount();
-            Amount = new String[size];
-            Title = new String[size];
-            Category = new String[size];
-            Date = new String[size];
-            imgid = new Integer[size];
+                TransactionListAdapter adapter = new TransactionListAdapter(getActivity(),tdList);
+                list.setAdapter(adapter);
+            }
 
-            if (data.moveToFirst()) {
-                int i = 0;
-                do {
-                    Amount[i] = data.getString(10)+data.getString(1);
-                    Title[i] = data.getString(2);
-                    Category[i] = data.getString(3);
-                    Date[i] = data.getString(4);
-                    imgid[i] = data.getInt(5);
-                    i++;
-                } while (data.moveToNext());
-
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
-            TransactionListAdapter adapter = new TransactionListAdapter(getActivity(), Title, Category, Date, Amount, imgid);
-            list.setAdapter(adapter);
+        });
 
-            dbOps.close();
-        }catch (Exception e){
-
-        }
 
         list.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -148,12 +144,6 @@ public class Transaction_main extends Fragment {
 //
 //
 //                                    });
-
-
-
-
-
-
 
 
         txtExpense = (TextView) view.findViewById(R.id.txtExpense);

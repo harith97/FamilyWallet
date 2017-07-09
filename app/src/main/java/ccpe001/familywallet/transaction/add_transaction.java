@@ -12,8 +12,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,6 +33,8 @@ public class add_transaction extends AppCompatActivity {
     String categoryName, categoryID, title, date, amount,currency,time,location, account,type;
     Integer currencyIndex, accountIndex;
     Context cnt = this;
+    private DatabaseReference mDatabase;
+
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -44,6 +50,8 @@ public class add_transaction extends AppCompatActivity {
         txtCategory = (TextView) findViewById(R.id.txtCategory);
         spinCurrency = (Spinner) findViewById(R.id.spinCurrency);
         spinAccount = (Spinner) findViewById(R.id.spinAccount);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         txtLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,6 +170,9 @@ public class add_transaction extends AppCompatActivity {
         }
         if (type!=null){
             getSupportActionBar().setTitle(type);
+            if (type.equals("Income")){
+
+            }
         }
 
 
@@ -252,6 +263,7 @@ public class add_transaction extends AppCompatActivity {
 
 
     public void saveTransaction(View view) {
+        TransactionDetails td;
         amount = txtAmount.getText().toString();
         date = txtDate.getText().toString();
         time = txtTime.getText().toString();
@@ -271,7 +283,9 @@ public class add_transaction extends AppCompatActivity {
         else {
             DatabaseOps dbOp = new DatabaseOps(cnt);
             dbOp.addData(amount, title, categoryName, date, Integer.parseInt(categoryID), time, account, location, type, currency, "uID");
-            Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
+            td = new TransactionDetails("uid",amount, title, categoryName, date, Integer.parseInt(categoryID), time, account, location, type, currency);
+            mDatabase.child("Transactions").push().setValue(td);
+            //Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
             Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
             startActivity(intent);
         }
