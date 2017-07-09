@@ -43,7 +43,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".Splash$Notification_Receiver"/>
+        <receiver android:name=".admin.Notification$Notification_Receiver"/>
 
 
         <activity

@@ -212,7 +212,7 @@
                           android:layout_height="match_parent"
                           android:padding="10dp">
                     <Switch
-                            android:text="Show icon in status bar"
+                            android:text="Show widget in status bar"
                             android:layout_weight="1"
 
                             android:layout_width="match_parent"

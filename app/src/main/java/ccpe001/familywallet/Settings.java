@@ -1,6 +1,7 @@
 package ccpe001.familywallet;
 
 import android.Manifest;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.*;
@@ -39,6 +40,7 @@ import net.rdrei.android.dirchooser.DirectoryChooserFragment;
 import java.util.Calendar;
 
 import static ccpe001.familywallet.transaction.TimeDialog.pad;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by harithaperera on 5/8/17.
@@ -55,6 +57,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     private static final int SET_PIN = 0;
     private static final int ENABLE_PIN = 1;
     private static final int DIR_CHOOSER = 2;
+    private final static int PERMENT_NOT = 0;
     private static final int EXTERNAL_READ_PERMIT = 3;
     private static final int EXTERNAL_WRITE_PERMIT = 4;
     private SharedPreferences prefs;
@@ -203,15 +206,12 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
             new TimePickerDialog(getContext(),new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker timePicker, int hr, int min) {
-                    String am_pm = (hr < 12) ? "AM" : "PM";
-                    if (hr==0)
-                        hr=12;
-                    String time1 = pad(hr) + ":" + pad(min)+" "+am_pm;
-                    dailyRemText.setText(time1);
-                    remTime = time1;
+                    remTime = pad(hr) + ":" + pad(min);
+                    dailyRemText.setText(remTime);
                     storePWSharedPref();
+                    new ccpe001.familywallet.admin.Notification().dailyReminder(getActivity());
                 }
-            },c.get(Calendar.HOUR_OF_DAY),c.get(Calendar.MINUTE),false).show();
+            },c.get(Calendar.HOUR_OF_DAY),c.get(Calendar.MINUTE),true).show();
         }else if(view.getId()==R.id.backupLocRow) {
 
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED||
@@ -337,12 +337,16 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
                 storePWSharedPref();
             }
         }else if(switchs.getId()==R.id.statusIconSwitch){
-            if(b) {
+            if(!b) {
                 appIcon = true;
                 storePWSharedPref();
+                NotificationManager mNotificationManager = (NotificationManager)getActivity().getSystemService(Context
+                        .NOTIFICATION_SERVICE);
+                mNotificationManager.cancel(PERMENT_NOT);
             }else{
                 appIcon = false;
                 storePWSharedPref();
+                new ccpe001.familywallet.admin.Notification().statusIcon(getActivity());
             }
         }else if(switchs.getId()==R.id.autoSyncSwitch){
             db = FirebaseDatabase.getInstance().getReference();
@@ -482,6 +486,8 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         editor.clear();
         editor.commit();
     }
+
+
 
 }
 
