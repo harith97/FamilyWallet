@@ -57,7 +57,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     private static final int SET_PIN = 0;
     private static final int ENABLE_PIN = 1;
     private static final int DIR_CHOOSER = 2;
-    private final static int PERMENT_NOT = 0;
+    private final static int PERMENT_NOT = 33;
     private static final int EXTERNAL_READ_PERMIT = 3;
     private static final int EXTERNAL_WRITE_PERMIT = 4;
     private SharedPreferences prefs;

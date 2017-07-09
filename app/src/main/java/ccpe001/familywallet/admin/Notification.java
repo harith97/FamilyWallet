@@ -14,6 +14,7 @@ import android.util.Log;
 import ccpe001.familywallet.Dashboard;
 import ccpe001.familywallet.R;
 import ccpe001.familywallet.Splash;
+import ccpe001.familywallet.transaction.add_transaction;
 
 import java.util.Calendar;
 
@@ -28,7 +29,8 @@ public class Notification {
     private SharedPreferences.Editor editor;
     private android.app.Notification.Builder notification;
     private NotificationManager nm;
-    private final static int PERMENT_NOT = 0;
+    private final static int PERMENT_NOT = 33;
+    private final static int DAILY_REMINDER = 11;
 
     public void dailyReminder(Context c){
         prefs = c.getSharedPreferences("App Settings", c.MODE_PRIVATE);
@@ -43,22 +45,22 @@ public class Notification {
         calendar.set(Calendar.MINUTE,Integer.parseInt(arr[1]));
         calendar.set(Calendar.SECOND,00);
         Intent intent = new Intent(c,Notification_Receiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(c,100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(c,DAILY_REMINDER,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) c.getSystemService(ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
     }
 
     public void statusIcon(Context c){
         //displaing status icon
-        PendingIntent scanBill = PendingIntent.getActivity(c,PERMENT_NOT,new Intent(c,SignIn.class),PERMENT_NOT);//update here
-        PendingIntent addMem = PendingIntent.getActivity(c,PERMENT_NOT,new Intent(c,SignUp.class),PERMENT_NOT);//update here
+        PendingIntent addExpense = PendingIntent.getActivity(c,PERMENT_NOT,new Intent(c, add_transaction.class),PERMENT_NOT);//update here
+        PendingIntent scanBill = PendingIntent.getActivity(c,PERMENT_NOT,new Intent(c,SignUp.class),PERMENT_NOT);//update here
         notification = new android.app.Notification.Builder(c)
                 .setContentTitle("Family Wallet")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setPriority(android.app.Notification.PRIORITY_MIN)
                 .setOngoing(true)
-                .addAction(R.mipmap.email,"Scan bill",scanBill)
-                .addAction(R.mipmap.email,"Add member",addMem);
+                .addAction(R.mipmap.email,"Add expense",addExpense)
+                .addAction(R.mipmap.email,"Scan Bill",scanBill);
 
         nm = (NotificationManager)c.getSystemService(Context.NOTIFICATION_SERVICE);
         nm.notify(PERMENT_NOT,notification.build());
@@ -74,7 +76,7 @@ public class Notification {
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             Intent newAct = new Intent(context,Dashboard.class);
             newAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context,100,newAct,PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context,DAILY_REMINDER,newAct,PendingIntent.FLAG_UPDATE_CURRENT);
 
             Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
@@ -86,7 +88,7 @@ public class Notification {
                     .setTicker("Daily reminder")
                     .setContentTitle("Family Wallet")
                     .setContentText("Add your daily transactions to the wallet..");
-            notificationManager.notify(100,builder.build());
+            notificationManager.notify(DAILY_REMINDER,builder.build());
         }
     }
 }
