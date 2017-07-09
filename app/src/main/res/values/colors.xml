@@ -5,5 +5,7 @@
     <color name="colorAccent">#2a3cc6</color>
     <color name="pressed_color">#4d90fe</color>
     <color name="default_color">#ffffff</color>
+    <color name="income">#249726</color>
+    <color name="expense">#d62121</color>
 
 </resources>

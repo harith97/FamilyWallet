@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -60,12 +61,12 @@ public class Transaction_main extends Fragment {
         ArrayList<Integer> imgid;
         ArrayList<String> Currency ;
         List<TransactionDetails> tdList;
-
+        TransactionListAdapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.transaction_main, container, false);
+        final View view = inflater.inflate(R.layout.transaction_main, container, false);
         list = (ListView) view.findViewById(R.id.transactionList);
         tdList = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference("Transactions");
@@ -78,8 +79,7 @@ public class Transaction_main extends Fragment {
                     TransactionDetails td = tdSnapshot.getValue(TransactionDetails.class);
                     tdList.add(td);
                 }
-
-                TransactionListAdapter adapter = new TransactionListAdapter(getActivity(),tdList);
+                adapter = new TransactionListAdapter(getActivity(),tdList);
                 list.setAdapter(adapter);
             }
 
@@ -91,14 +91,6 @@ public class Transaction_main extends Fragment {
 
 
         list.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
-        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                list.setItemChecked(position, true);
-                view.setSelected(true);
-                return true;
-            }
-        });
         list.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
             @Override
@@ -121,29 +113,34 @@ public class Transaction_main extends Fragment {
 
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                switch (item.getItemId()){
-                    case  R.id.delete_id:
+                switch (item.getItemId()) {
+                    case R.id.delete_id:
+                        // Calls getSelectedIds method from ListViewAdapter Class
+                        //SparseBooleanArray selected = adapter.getSelectedIds();
+                        // Captures all selected ids with a loop
+//                        for (int i = (selected.size() - 1); i >= 0; i--) {
+//                            if (selected.valueAt(i)) {
+//                                tdList selecteditem = adapter.getItem(selected.keyAt(i));
+//                                Remove selected items following the ids
+//                                adapter.remove(selecteditem);
+//                            }
+//                        }
+                        // Close CAB
+                        mode.finish();
+                        return true;
+                    default:
+                        return false;
                 }
-                return false;
             }
 
             @Override
             public void onDestroyActionMode(ActionMode mode) {
 
             }
+
+
         });
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                                        @Override
-//                                        public void onItemClick(AdapterView<?> parent, View view,
-//                                                                int position, long id) {
-//                                            // TODO Auto-generated method stub
-//                                            Toast.makeText(getActivity(), "HEllo", Toast.LENGTH_SHORT).show();
-//                                            view.setSelected(true);
-//                                            list.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
-//                                        }
-//
-//
-//                                    });
+
 
 
         txtExpense = (TextView) view.findViewById(R.id.txtExpense);
