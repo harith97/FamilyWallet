@@ -65,7 +65,7 @@ public class CategoryTab02 extends Fragment {
 
                 String category = itemname[+position];
                 String categoryID = Integer.toString(imgid[+position]);
-                Intent intent = new Intent("ccpe001.familywallet.add_transaction");
+                Intent intent = new Intent("ccpe001.familywallet.AddTransaction");
                 intent.putExtra("categoryName",category);
                 intent.putExtra("categoryID",categoryID);
                 intent.putExtra("title",title);

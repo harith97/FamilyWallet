@@ -18,7 +18,8 @@
             android:id="@+id/layout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:attr/activatedBackgroundIndicator">
+            android:background="?android:attr/activatedBackgroundIndicator"
+            android:drawable="@android:color/transparent">
 
             <TextView
                 android:id="@+id/txtTitle"

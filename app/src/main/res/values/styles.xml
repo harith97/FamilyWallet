@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/bg_key</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -19,5 +20,5 @@
 
     <style name="Theme.Material.NoActionBar.Light.NoActionBar.TestTheme" parent="android:Theme.Material.NoActionBar" />
 
-    <color name="blue">#009FE3</color>
+
 </resources>

@@ -40,7 +40,7 @@ import ccpe001.familywallet.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Transaction_main extends Fragment {
+public class TransactionMain extends Fragment {
 
     ListView list;
     FloatingActionButton fab_income, fab_expense,fab_main;
@@ -50,7 +50,7 @@ public class Transaction_main extends Fragment {
     String categoryID, categoryName, title, date, amount;
     private DatabaseReference mDatabase;
 
-    public Transaction_main() {
+    public TransactionMain() {
         // Required empty public constructor
     }
 
@@ -190,7 +190,7 @@ public class Transaction_main extends Fragment {
                     fab_income.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent("ccpe001.familywallet.add_transaction");
+                            Intent intent = new Intent("ccpe001.familywallet.AddTransaction");
                             intent.putExtra("transactionType","Income");
                             startActivity(intent);
                         }
@@ -198,7 +198,7 @@ public class Transaction_main extends Fragment {
                     fab_expense.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent("ccpe001.familywallet.add_transaction");
+                            Intent intent = new Intent("ccpe001.familywallet.AddTransaction");
                             intent.putExtra("transactionType","Expense");
                             startActivity(intent);
                         }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F0F4F5"
     android:orientation="horizontal"
-    tools:context="ccpe001.familywallet.transaction.Transaction_main">
+    tools:context="ccpe001.familywallet.transaction.TransactionMain">
 
     <ListView
         android:id="@+id/transactionList"

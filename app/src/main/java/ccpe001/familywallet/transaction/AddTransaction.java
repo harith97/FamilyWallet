@@ -27,7 +27,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import ccpe001.familywallet.R;
 
-public class add_transaction extends AppCompatActivity {
+public class AddTransaction extends AppCompatActivity {
 
 
     private TextView txtLocation,txtCategory;
@@ -126,7 +126,7 @@ public class add_transaction extends AppCompatActivity {
                 currencyIndex = spinCurrency.getSelectedItemPosition();
                 accountIndex = spinCurrency.getSelectedItemPosition();
                 location = txtLocation.getText().toString();
-                Intent intent = new Intent(add_transaction.this,ccpe001.familywallet.transaction.transaction_category.class);
+                Intent intent = new Intent(AddTransaction.this,TransactionCategory.class);
                 intent.putExtra("title",title);
                 intent.putExtra("amount",amount);
                 intent.putExtra("date",date);

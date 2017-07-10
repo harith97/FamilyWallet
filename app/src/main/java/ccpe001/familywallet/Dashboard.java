@@ -1,27 +1,14 @@
 package ccpe001.familywallet;
 
-import android.app.AlarmManager;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.*;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -31,37 +18,23 @@ import android.view.View;
 
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+
 import ccpe001.familywallet.admin.CircleTransform;
-import ccpe001.familywallet.admin.SignIn;
 import ccpe001.familywallet.admin.UserData;
-import ccpe001.familywallet.budget.BudgetHandling;
 import ccpe001.familywallet.budget.accUpdate;
 import ccpe001.familywallet.budget.addAccount;
 import ccpe001.familywallet.budget.budgetList;
 import ccpe001.familywallet.summary.sumMain;
-import ccpe001.familywallet.transaction.Transaction_main;
-import com.facebook.Profile;
-import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
-import com.github.amlcurran.showcaseview.targets.Target;
-import com.github.amlcurran.showcaseview.targets.ViewTarget;
-import com.google.android.gms.tasks.OnFailureListener;
+import ccpe001.familywallet.transaction.TransactionMain;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.kobakei.ratethisapp.RateThisApp;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
-
-import java.io.IOException;
-import java.util.Calendar;
 
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener{
@@ -178,7 +151,7 @@ public class Dashboard extends AppCompatActivity
         //initialize dashboard fragment 1st
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Transaction_main transaction = new Transaction_main();
+        TransactionMain transaction = new TransactionMain();
         fragmentTransaction.replace(R.id.fragmentContainer1,transaction);
         fragmentTransaction.commit();
 
@@ -238,7 +211,7 @@ public class Dashboard extends AppCompatActivity
         if (id == R.id.transactionFrag) {
              android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
              android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-             Transaction_main dashboard = new Transaction_main();
+             TransactionMain dashboard = new TransactionMain();
              fragmentTransaction.replace(R.id.fragmentContainer1,dashboard);
              fragmentTransaction.commit();
         } else if (id == R.id.reportsFrag) {

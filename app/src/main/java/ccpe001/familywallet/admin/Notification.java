@@ -13,8 +13,7 @@ import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import ccpe001.familywallet.Dashboard;
 import ccpe001.familywallet.R;
-import ccpe001.familywallet.Splash;
-import ccpe001.familywallet.transaction.add_transaction;
+import ccpe001.familywallet.transaction.AddTransaction;
 
 import java.util.Calendar;
 
@@ -52,7 +51,7 @@ public class Notification {
 
     public void statusIcon(Context c){
         //displaing status icon
-        PendingIntent addExpense = PendingIntent.getActivity(c,PERMENT_NOT,new Intent(c, add_transaction.class).putExtra("transactionType","Expense"),PERMENT_NOT);//update here
+        PendingIntent addExpense = PendingIntent.getActivity(c,PERMENT_NOT,new Intent(c, AddTransaction.class).putExtra("transactionType","Expense"),PERMENT_NOT);//update here
         PendingIntent scanBill = PendingIntent.getActivity(c,PERMENT_NOT,new Intent(c,SignUp.class),PERMENT_NOT);//update here
         notification = new android.app.Notification.Builder(c)
                 .setContentTitle("Family Wallet")

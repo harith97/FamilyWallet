@@ -169,7 +169,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".transaction.add_transaction"
+        <activity android:name=".transaction.AddTransaction"
             android:screenOrientation="portrait"
             android:parentActivityName=".Dashboard">
             <intent-filter>
@@ -182,10 +182,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".transaction.transaction_category"
+            android:name=".transaction.TransactionCategory"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".transaction.add_transaction">
+            android:parentActivityName=".transaction.AddTransaction">
 
             <intent-filter>
                 <action android:name="ccpe001.familywallet.transaction.transaction_category" />
@@ -193,7 +193,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ccpe001.familywallet.transaction.add_transaction"/>
+                    android:value=".ccpe001.familywallet.transaction.AddTransaction"/>
             </intent-filter>
 
         </activity>

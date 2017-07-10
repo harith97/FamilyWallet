@@ -19,7 +19,7 @@ import android.widget.ListView;
 
 import ccpe001.familywallet.R;
 
-public class transaction_category extends AppCompatActivity {
+public class TransactionCategory extends AppCompatActivity {
 
 
     private SectionsPagerAdapter mSectionsPagerAdapter;

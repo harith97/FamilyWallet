@@ -6,7 +6,7 @@ import ccpe001.familywallet.R;
  * Created by Knight on 5/30/2017.
  */
 
-public class Temp_Data {
+public class TempData {
 
     final String[] Title = {
             "Lunch",
