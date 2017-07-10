@@ -212,7 +212,6 @@ public class Dashboard extends AppCompatActivity
         }
     }
 
-    //load deta on login normal
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -223,7 +222,9 @@ public class Dashboard extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_notification) {
+            return true;
+        }else if(id == R.id.action_search) {
             return true;
         }
         return super.onOptionsItemSelected(item);
