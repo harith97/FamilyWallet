@@ -282,18 +282,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
             intent.createChooser(intent,"Send email");
             startActivity(intent);
         }else if(view.getId()==R.id.rateRow){
-            //need to release app for this feature..
-            Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
-            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
-                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
-                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-            try {
-                startActivity(goToMarket);
-            } catch (ActivityNotFoundException e) {
-                startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://play.google.com/store/apps/details?id=" + getActivity().getPackageName())));
-            }
+            gotoStore();
         }
 
 
@@ -487,7 +476,18 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         editor.commit();
     }
 
-
+    private void gotoStore(){
+        Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + getActivity().getPackageName())));
+        }
+    }
 
 }
 

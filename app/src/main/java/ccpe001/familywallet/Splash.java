@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import ccpe001.familywallet.admin.SignIn;
 import ccpe001.familywallet.admin.SignUp;
 import com.github.orangegangsters.lollipin.lib.PinActivity;
+import com.kobakei.ratethisapp.RateThisApp;
 
 import java.util.Calendar;
 
@@ -37,6 +38,7 @@ public class Splash extends PinActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
+
 
 
         Thread t1 = new Thread(new Runnable() {

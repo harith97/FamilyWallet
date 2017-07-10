@@ -52,7 +52,6 @@ public class Notification {
 
     public void statusIcon(Context c){
         //displaing status icon
-
         PendingIntent addExpense = PendingIntent.getActivity(c,PERMENT_NOT,new Intent(c, add_transaction.class).putExtra("transactionType","Expense"),PERMENT_NOT);//update here
         PendingIntent scanBill = PendingIntent.getActivity(c,PERMENT_NOT,new Intent(c,SignUp.class),PERMENT_NOT);//update here
         notification = new android.app.Notification.Builder(c)

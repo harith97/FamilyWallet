@@ -55,6 +55,7 @@ import com.google.firebase.database.*;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.kobakei.ratethisapp.RateThisApp;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -99,6 +100,7 @@ public class Dashboard extends AppCompatActivity
         databaseReference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(firebaseUser.getUid());
         databaseReference.keepSynced(true);
 
+        rateApi();
 
         storageReference = FirebaseStorage.getInstance().getReference();
 
@@ -295,6 +297,30 @@ public class Dashboard extends AppCompatActivity
         }
     }
 
+    private void rateApi(){
+        RateThisApp.Config config = new RateThisApp.Config(3, 8);
+        /*config.setTitle(R.string.my_own_title);
+        config.setMessage(R.string.my_own_message);
+        config.setYesButtonText(R.string.my_own_rate);
+        config.setNoButtonText(R.string.my_own_thanks);
+        config.setCancelButtonText(R.string.my_own_cancel);*/
+        config.setUrl("market://details?id=" + getPackageName());
+        RateThisApp.init(config);
+        RateThisApp.onCreate(this);
+        RateThisApp.showRateDialogIfNeeded(this);
 
+        RateThisApp.setCallback(new RateThisApp.Callback() {
+            @Override
+            public void onYesClicked() {}
+
+            @Override
+            public void onNoClicked() {
+                RateThisApp.stopRateDialog(getApplication());
+            }
+
+            @Override
+            public void onCancelClicked() {}
+        });
+    }
 
 }
