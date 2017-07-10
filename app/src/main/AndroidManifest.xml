@@ -173,7 +173,7 @@
             android:screenOrientation="portrait"
             android:parentActivityName=".Dashboard">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.add_transaction" />
+                <action android:name="ccpe001.familywallet.AddTransaction" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <meta-data
@@ -188,7 +188,7 @@
             android:parentActivityName=".transaction.AddTransaction">
 
             <intent-filter>
-                <action android:name="ccpe001.familywallet.transaction.transaction_category" />
+                <action android:name="ccpe001.familywallet.transaction.TransactionCategory" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <meta-data

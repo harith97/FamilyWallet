@@ -34,11 +34,6 @@ public class TransactionListAdapter extends ArrayAdapter<TransactionDetails> {
 
         this.context = context;
         this.tdList = tdList;
-//        this.title = title;
-//        this.category = category;
-//        this.date = date;
-//        this.amount = amount;
-//        this.imgid = imgid;
     }
 
     public View getView(int position, View view, ViewGroup parent) {

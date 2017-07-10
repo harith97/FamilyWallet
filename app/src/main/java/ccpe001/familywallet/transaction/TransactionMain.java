@@ -59,8 +59,8 @@ public class TransactionMain extends Fragment {
         ArrayList<String> Category ;
         ArrayList<String> Date ;
         ArrayList<Integer> imgid;
-        ArrayList<String> Currency ;
         List<TransactionDetails> tdList;
+        List<String> keys;
         TransactionListAdapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,15 +69,20 @@ public class TransactionMain extends Fragment {
         final View view = inflater.inflate(R.layout.transaction_main, container, false);
         list = (ListView) view.findViewById(R.id.transactionList);
         tdList = new ArrayList<>();
+        keys = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference("Transactions");
+        mDatabase.keepSynced(true);
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 tdList.clear();
+                ///keys.clear();
                 for(DataSnapshot tdSnapshot : dataSnapshot.getChildren()){
                     TransactionDetails td = tdSnapshot.getValue(TransactionDetails.class);
                     tdList.add(td);
+                    keys.add(tdSnapshot.getKey());
+
                 }
                 adapter = new TransactionListAdapter(getActivity(),tdList);
                 list.setAdapter(adapter);
@@ -97,6 +102,7 @@ public class TransactionMain extends Fragment {
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 int checkedItems = list.getCheckedItemCount();
                 mode.setTitle(String.valueOf(checkedItems)+ " Selected");
+
             }
 
             @Override

@@ -279,6 +279,7 @@ public class AddTransaction extends AppCompatActivity {
 
 
     public void saveTransaction(View view) {
+
         TransactionDetails td;
         amount = txtAmount.getText().toString();
         date = txtDate.getText().toString();
@@ -297,8 +298,8 @@ public class AddTransaction extends AppCompatActivity {
             Toast.makeText(this, "Set the Amount first", Toast.LENGTH_SHORT).show();
         }
         else {
-            DatabaseOps dbOp = new DatabaseOps(cnt);
-            dbOp.addData(amount, title, categoryName, date, Integer.parseInt(categoryID), time, account, location, type, currency, "uID");
+            //DatabaseOps dbOp = new DatabaseOps(cnt);
+            //dbOp.addData(amount, title, categoryName, date, Integer.parseInt(categoryID), time, account, location, type, currency, "uID");
             td = new TransactionDetails("uid",amount, title, categoryName, date, Integer.parseInt(categoryID), time, account, location, type, currency);
             mDatabase.child("Transactions").push().setValue(td);
             //Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
