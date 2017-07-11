@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import ccpe001.familywallet.Dashboard;
+import ccpe001.familywallet.NotificationDetails;
 import ccpe001.familywallet.R;
 import ccpe001.familywallet.transaction.AddTransaction;
 
@@ -25,11 +26,29 @@ import static android.content.Context.ALARM_SERVICE;
 public class Notification {
 
     private SharedPreferences prefs;
-    private SharedPreferences.Editor editor;
     private android.app.Notification.Builder notification;
     private NotificationManager nm;
     private final static int PERMENT_NOT = 33;
     private final static int DAILY_REMINDER = 11;
+
+
+
+    public void statusIcon(Context c){
+        //displaing status icon
+        PendingIntent addExpense = PendingIntent.getActivity(c,PERMENT_NOT,new Intent(c, AddTransaction.class).putExtra("transactionType","Expense"),PERMENT_NOT);//update here
+        PendingIntent scanBill = PendingIntent.getActivity(c,PERMENT_NOT,new Intent(c,SignUp.class),PERMENT_NOT);//update here
+        notification = new android.app.Notification.Builder(c)
+                .setContentTitle("Family Wallet")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setPriority(android.app.Notification.PRIORITY_MIN)
+                .setOngoing(true)
+                .addAction(R.mipmap.email,"Add expense",addExpense)
+                .addAction(R.mipmap.email,"Scan Bill",scanBill);
+
+        nm = (NotificationManager)c.getSystemService(Context.NOTIFICATION_SERVICE);
+        nm.notify(PERMENT_NOT,notification.build());
+    }
+
 
     public void dailyReminder(Context c){
         prefs = c.getSharedPreferences("App Settings", c.MODE_PRIVATE);
@@ -49,33 +68,15 @@ public class Notification {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
     }
 
-    public void statusIcon(Context c){
-        //displaing status icon
-        PendingIntent addExpense = PendingIntent.getActivity(c,PERMENT_NOT,new Intent(c, AddTransaction.class).putExtra("transactionType","Expense"),PERMENT_NOT);//update here
-        PendingIntent scanBill = PendingIntent.getActivity(c,PERMENT_NOT,new Intent(c,SignUp.class),PERMENT_NOT);//update here
-        notification = new android.app.Notification.Builder(c)
-                .setContentTitle("Family Wallet")
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setPriority(android.app.Notification.PRIORITY_MIN)
-                .setOngoing(true)
-                .addAction(R.mipmap.email,"Add expense",addExpense)
-                .addAction(R.mipmap.email,"Scan Bill",scanBill);
-
-        nm = (NotificationManager)c.getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.notify(PERMENT_NOT,notification.build());
-    }
-
-
-
     public static class Notification_Receiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("df","dfdf");
 
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             Intent newAct = new Intent(context,Dashboard.class);
             newAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             PendingIntent pendingIntent = PendingIntent.getActivity(context,DAILY_REMINDER,newAct,PendingIntent.FLAG_UPDATE_CURRENT);
+            Log.d("df","dfdf"+pendingIntent);
 
             Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
@@ -88,6 +89,9 @@ public class Notification {
                     .setContentTitle("Family Wallet")
                     .setContentText("Add your daily transactions to the wallet..");
             notificationManager.notify(DAILY_REMINDER,builder.build());
+            new NotificationDetails("","Add your daily transactions to the wallet..","Family Wallet");
         }
     }
 }
+
+

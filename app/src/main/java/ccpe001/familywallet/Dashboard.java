@@ -8,9 +8,11 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -196,7 +198,11 @@ public class Dashboard extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_notification) {
-            return true;
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            NotificationCards noti = new NotificationCards();
+            fragmentTransaction.replace(R.id.fragmentContainer1,noti);
+            fragmentTransaction.commit();
         }else if(id == R.id.action_search) {
             return true;
         }
