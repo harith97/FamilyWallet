@@ -27,6 +27,7 @@ public class TransactionDetails {
     public TransactionDetails(String userID, String amount, String title, String categoryName, String date, Integer categoryID, String time, String account, String location, String type, String currency) {
         this.userID = userID;
         this.amount = amount;
+        this.title = title;
         this.categoryName = categoryName;
         this.date = date;
         this.categoryID = categoryID;

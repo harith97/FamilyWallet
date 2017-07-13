@@ -6,7 +6,9 @@
     <color name="pressed_color">#4d90fe</color>
     <color name="default_color">#ffffff</color>
     <color name="income">#249726</color>
+    <color name="incomeDark">#208722</color>
     <color name="expense">#d62121</color>
+    <color name="expenseDark">#bf1e1e</color>
     <color name="lightBlue">#5400ddff</color>
     <color name="DarkerBlue">#c000ddff</color>
 

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -55,7 +56,7 @@ public class AddTransaction extends AppCompatActivity {
         spinCurrency = (Spinner) findViewById(R.id.spinCurrency);
         spinAccount = (Spinner) findViewById(R.id.spinAccount);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
         txtLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,7 +181,7 @@ public class AddTransaction extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
                     Window window = getWindow();
                     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                    window.setStatusBarColor(getResources().getColor(R.color.income));
+                    window.setStatusBarColor(getResources().getColor(R.color.incomeDark));
                 }
             }
             else if(type.equals("Expense")){
@@ -188,7 +189,7 @@ public class AddTransaction extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
                     Window window = getWindow();
                     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                    window.setStatusBarColor(getResources().getColor(R.color.expense));
+                    window.setStatusBarColor(getResources().getColor(R.color.expenseDark));
                 }
             }
         }
@@ -280,7 +281,7 @@ public class AddTransaction extends AppCompatActivity {
 
     public void saveTransaction(View view) {
 
-        TransactionDetails td;
+
         amount = txtAmount.getText().toString();
         date = txtDate.getText().toString();
         time = txtTime.getText().toString();
@@ -300,9 +301,17 @@ public class AddTransaction extends AppCompatActivity {
         else {
             //DatabaseOps dbOp = new DatabaseOps(cnt);
             //dbOp.addData(amount, title, categoryName, date, Integer.parseInt(categoryID), time, account, location, type, currency, "uID");
-            td = new TransactionDetails("uid",amount, title, categoryName, date, Integer.parseInt(categoryID), time, account, location, type, currency);
-            mDatabase.child("Transactions").push().setValue(td);
             //Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
+            try {
+                FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                TransactionDetails td;
+                td = new TransactionDetails("uid",amount, title, categoryName, date, Integer.parseInt(categoryID), time, account, location, type, currency);
+                mDatabase.child("Transactions").push().setValue(td);
+
+            }catch (Exception e){
+                Log.i("hellowrld",""+e);
+            }
             Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
             startActivity(intent);
         }
