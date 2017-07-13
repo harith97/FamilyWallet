@@ -1,15 +1,14 @@
 package ccpe001.familywallet.transaction;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.util.SparseBooleanArray;
+import android.support.v7.app.AlertDialog;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,12 +19,11 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,29 +45,25 @@ public class TransactionMain extends Fragment {
     Animation fabOpen, fabClose, fabClockwise, fabAntiClockwise;
     TextView txtIncome,txtExpense;
     boolean isOpen = false;
-    String categoryID, categoryName, title, date, amount;
     private DatabaseReference mDatabase;
 
     public TransactionMain() {
         // Required empty public constructor
     }
 
-        ArrayList<String> Amount ;
-        ArrayList<String> Title ;
-        ArrayList<String> Category ;
-        ArrayList<String> Date ;
-        ArrayList<Integer> imgid;
         List<TransactionDetails> tdList;
         List<String> keys;
+        List<String> checkedPosition;
         TransactionListAdapter adapter;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.transaction_main, container, false);
         list = (ListView) view.findViewById(R.id.transactionList);
         tdList = new ArrayList<>();
         keys = new ArrayList<>();
+        checkedPosition = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference("Transactions");
         mDatabase.keepSynced(true);
 
@@ -97,18 +91,34 @@ public class TransactionMain extends Fragment {
 
         list.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
         list.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+            MenuItem deleteIcon, editIcon;
+
 
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 int checkedItems = list.getCheckedItemCount();
                 mode.setTitle(String.valueOf(checkedItems)+ " Selected");
+                if (checked==true) {
+                    checkedPosition.add(String.valueOf(position));
+                }
+                else if (checked==false) {
+                    checkedPosition.remove(String.valueOf(position));
 
+                }
+                if (checkedPosition.size()>1)
+                    editIcon.setVisible(false);
+                else
+                    editIcon.setVisible(true);
             }
 
             @Override
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 MenuInflater inflater = mode.getMenuInflater();
                 inflater.inflate(R.menu.transaction_main, menu);
+
+                deleteIcon = menu.findItem(R.id.delete_id);
+                editIcon = menu.findItem(R.id.edit_id);
+                checkedPosition.clear();
                 return true;
             }
 
@@ -120,20 +130,24 @@ public class TransactionMain extends Fragment {
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.delete_id:
-                        // Calls getSelectedIds method from ListViewAdapter Class
-                        //SparseBooleanArray selected = adapter.getSelectedIds();
-                        // Captures all selected ids with a loop
-//                        for (int i = (selected.size() - 1); i >= 0; i--) {
-//                            if (selected.valueAt(i)) {
-//                                tdList selecteditem = adapter.getItem(selected.keyAt(i));
-//                                Remove selected items following the ids
-//                                adapter.remove(selecteditem);
-//                            }
-//                        }
-                        // Close CAB
+                    case R.id.delete_id: new AlertDialog.Builder(getActivity())
+                            .setTitle("Delete")
+                            .setMessage("Do you really want to Delete this?")
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    for (String checkedKey : checkedPosition){
+                                        deleteTransaction(keys.get(Integer.parseInt(checkedKey)));
+                                        Toast.makeText(getActivity(), keys.get(Integer.parseInt(checkedKey)), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }})
+                            .setNegativeButton(android.R.string.no, null).show();
+
                         mode.finish();
                         return true;
+                    case R.id.edit_id:
                     default:
                         return false;
                 }
@@ -149,6 +163,7 @@ public class TransactionMain extends Fragment {
 
 
 
+
         txtExpense = (TextView) view.findViewById(R.id.txtExpense);
         txtIncome = (TextView) view.findViewById(R.id.txtIncome);
         fab_main = (FloatingActionButton) view.findViewById(R.id.fabMain);
@@ -158,6 +173,7 @@ public class TransactionMain extends Fragment {
         fabClose = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.fab_close);
         fabClockwise = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.rotate_clockwise);
         fabAntiClockwise = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.rotate_anticlockwise);
+
         fab_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -175,7 +191,6 @@ public class TransactionMain extends Fragment {
                     fab_income.setClickable(false);
                     fab_expense.setClickable(false);
                     isOpen = false;
-
                 }
                 else {
                     fab_income.startAnimation(fabOpen);
@@ -191,7 +206,6 @@ public class TransactionMain extends Fragment {
                     fab_expense.setClickable(true);
                     isOpen = true;
                 }
-
                 if (isOpen) {
                     fab_income.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -210,7 +224,6 @@ public class TransactionMain extends Fragment {
                         }
                     });
                 }
-
             }
         });
 
@@ -222,6 +235,9 @@ public class TransactionMain extends Fragment {
         return view;
     }
 
-
+    private void deleteTransaction(String key){
+        DatabaseReference transaction = FirebaseDatabase.getInstance().getReference("Transactions").child(key);
+        transaction.removeValue();
+    }
 
 }
