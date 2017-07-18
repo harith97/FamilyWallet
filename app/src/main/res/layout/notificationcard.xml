@@ -13,42 +13,48 @@
         android:foreground="?selectableItemBackground"
         android:clickable="true" >
 
-    <TextView
-            android:text="Title"
-            android:textSize="20dp"
-            android:maxLines="1"
-            android:layout_width="21dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/noti_title"
-    />
+
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp" >
-
+        <TextView
+                android:text="Title"
+                android:textSize="15dp"
+                android:maxLines="1"
+                android:textAllCaps="true"
+                android:layout_width="111dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:id="@+id/noti_title"
+        />
         <TextView
                 android:text="desc"
+                android:textSize="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/noti_desc"
-                android:layout_below="@+id/noti_date"/>
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"/>
         <TextView
                 android:text="2007/12/2"
+                android:textSize="7dp"
+                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/noti_date"
-                android:layout_marginEnd="12dp" android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"/>
+
+                android:layout_marginEnd="12dp" />
         <ImageButton
                 android:layout_width="50dp"
-                android:src="@android:drawable/ic_delete"
+                android:src="@android:drawable/ic_input_delete"
                 android:layout_height="30dp"
                 android:clickable="true"
-                android:foregroundGravity="right"
-                android:layout_gravity="center_horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
                 android:id="@+id/noti_delBtn"
-                android:layout_marginRight="40dp"
-                android:layout_below="@+id/noti_date" android:layout_alignEnd="@+id/noti_date"/>
+
+                />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

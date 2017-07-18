@@ -45,7 +45,6 @@
 
         <receiver android:name=".admin.Notification$Notification_Receiver"/>
 
-
         <activity
             android:name=".budget.BudgetHandling"
             android:screenOrientation="portrait"

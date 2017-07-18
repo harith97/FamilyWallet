@@ -19,8 +19,10 @@ import android.view.View;
 
 
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
+import android.widget.TextView;
 import ccpe001.familywallet.admin.CircleTransform;
 import ccpe001.familywallet.admin.UserData;
 import ccpe001.familywallet.budget.accUpdate;
@@ -35,6 +37,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.joanzapata.iconify.widget.IconButton;
 import com.kobakei.ratethisapp.RateThisApp;
 import com.squareup.picasso.Picasso;
 
@@ -56,6 +59,7 @@ public class Dashboard extends AppCompatActivity
     private StorageReference storageReference;
     private FirebaseUser firebaseUser;
     private UserData userData;
+    private static int badgeCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,8 @@ public class Dashboard extends AppCompatActivity
 
         setSupportActionBar(toolbar);
         signUpIntent = getIntent();
+
+        badgeCount = new SQLiteHelper(getApplication()).viewNoti().size();
 
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
@@ -144,9 +150,7 @@ public class Dashboard extends AppCompatActivity
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) {}
         });
 
 
@@ -176,7 +180,6 @@ public class Dashboard extends AppCompatActivity
     }
 
 
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -191,19 +194,36 @@ public class Dashboard extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.navigation_drawer, menu);
+
+        MenuItem itemMessages = menu.findItem(R.id.action_notification);
+        RelativeLayout badgeLayout = (RelativeLayout) itemMessages.getActionView();
+        TextView itemMessagesBadgeTextView = (TextView) badgeLayout.findViewById(R.id.badge_textView);
+        IconButton iconButtonMessages = (IconButton) badgeLayout.findViewById(R.id.badge_icon_button);
+        Log.d("fg",""+badgeCount);
+        if(badgeCount<=0) {
+            itemMessagesBadgeTextView.setVisibility(View.GONE); // initially hidden
+        }else {
+            itemMessagesBadgeTextView.setVisibility(View.VISIBLE);
+            itemMessagesBadgeTextView.setText(" "+badgeCount);
+        }
+
+        iconButtonMessages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                NotificationCards noti = new NotificationCards();
+                fragmentTransaction.replace(R.id.fragmentContainer1,noti);
+                fragmentTransaction.commit();
+            }
+        });
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_notification) {
-            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            NotificationCards noti = new NotificationCards();
-            fragmentTransaction.replace(R.id.fragmentContainer1,noti);
-            fragmentTransaction.commit();
-        }else if(id == R.id.action_search) {
+        if(id == R.id.action_search) {
             return true;
         }
         return super.onOptionsItemSelected(item);

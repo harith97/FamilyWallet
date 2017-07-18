@@ -70,6 +70,50 @@ public class TransactionDetails {
         return account;
     }
 
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setCategoryID(Integer categoryID) {
+        this.categoryID = categoryID;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     public String getLocation() {
         return location;
     }

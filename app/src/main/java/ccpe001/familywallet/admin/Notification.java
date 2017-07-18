@@ -12,10 +12,12 @@ import android.net.Uri;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import ccpe001.familywallet.Dashboard;
-import ccpe001.familywallet.NotificationDetails;
+import ccpe001.familywallet.NotificationCards;
 import ccpe001.familywallet.R;
+import ccpe001.familywallet.SQLiteHelper;
 import ccpe001.familywallet.transaction.AddTransaction;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 
 import static android.content.Context.ALARM_SERVICE;
@@ -89,7 +91,10 @@ public class Notification {
                     .setContentTitle("Family Wallet")
                     .setContentText("Add your daily transactions to the wallet..");
             notificationManager.notify(DAILY_REMINDER,builder.build());
-            new NotificationDetails("","Add your daily transactions to the wallet..","Family Wallet");
+            new SQLiteHelper(context).addNoti("Family Wallet","34","Add your daily transactions to the wallet..");
+            NotificationCards.badgeCount++;
+            Log.d("bad Onrec",""+NotificationCards.badgeCount);
+
         }
     }
 }

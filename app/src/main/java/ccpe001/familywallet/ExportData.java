@@ -7,17 +7,35 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import ccpe001.familywallet.admin.CircleTransform;
+import ccpe001.familywallet.admin.UserData;
+import ccpe001.familywallet.transaction.TransactionDetails;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.*;
+import com.google.firebase.storage.FirebaseStorage;
 import com.opencsv.CSVWriter;
+import com.squareup.picasso.Picasso;
+import jxl.*;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,6 +43,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by harithaperera on 5/28/17.
@@ -42,11 +61,25 @@ public class ExportData extends Fragment implements View.OnClickListener,CheckBo
     private boolean mailChecked;
     private static final int EXTERNAL_READ_PERMIT = 3;
     private static final int EXTERNAL_WRITE_PERMIT = 4;
+    private DatabaseReference databaseReference;
+    private FirebaseUser firebaseUser;
+    private TransactionDetails tdata;
+    private CSVWriter writer;
+    private WritableWorkbook workbook;
+    private File file;
+    private WritableSheet sheet;
+    private boolean isGranted = true;
+
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.exportdata, container, false);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Transactions");
+        databaseReference.keepSynced(true);
         init(view);
         return view;
     }
@@ -64,29 +97,47 @@ public class ExportData extends Fragment implements View.OnClickListener,CheckBo
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == EXTERNAL_READ_PERMIT||requestCode == EXTERNAL_WRITE_PERMIT){
+            if(grantResults[0]==PackageManager.PERMISSION_GRANTED||grantResults[1]==PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(getActivity(),"Permission granted",Toast.LENGTH_SHORT).show();
+            }else {
+                checkPermit();
+            }
+        }
+    }
+
+    private boolean checkPermit(){
+        return ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED&&
+                ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
     public void onClick(View view) {
         if(view.getId()==R.id.createBtn){
             if (Validate.fileValidate(fileName.getText())) {
                 filename = fileName.getText().toString();
 
-                if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED||
-                        ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (!checkPermit()) {
                     requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},EXTERNAL_READ_PERMIT);
                     requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},EXTERNAL_WRITE_PERMIT);
-                }
+                }else {
 
-                try {
-                    if ((!csvChecked)&&(!exelChecked)){
-                        Toast.makeText(getContext(),"Check at least one option",Toast.LENGTH_SHORT).show();
-                    }else {
-                        export();
-                        Toast.makeText(getContext(),"Backups created",Toast.LENGTH_SHORT).show();
-                        if (mailChecked) {
-                            createMail();
+
+                    try {
+                        if ((!csvChecked) && (!exelChecked)) {
+                            Toast.makeText(getContext(), "Check at least one option", Toast.LENGTH_SHORT).show();
+                        } else {
+                            export();
+                            Toast.makeText(getContext(), "Backups created", Toast.LENGTH_SHORT).show();
+                            if (mailChecked) {
+                                isMailCreator();
+                            }
                         }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }else{
                 fileName.setError("Invalid filename");
@@ -99,66 +150,93 @@ public class ExportData extends Fragment implements View.OnClickListener,CheckBo
         finalLoc = prefs.getString("appBackUpPath","/storage/emulated/0/");
         finalLoc += filename;
 
-        if (csvChecked){
-            CSVWriter writer = new CSVWriter(new FileWriter(finalLoc+".csv"));
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int countRow = 0;
 
-            //change from here//2 sem
-            List<String[]> data = new ArrayList<>();
-            data.add(new String[]{"dfd", "dsfdfdsf"});
-            data.add(new String[]{"1", "4"});
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        if (csvChecked) {
 
-            writer.writeAll(data);
-            writer.close();
-        }
+                            if(writer ==null) {
+                                String[] nameArr = {"Id", "Type", "UserId", "DateTime", "Category", "Amount", "Account", "Currency", "Location"};
+                                try {
+                                    writer = new CSVWriter(new FileWriter(finalLoc + ".csv"));
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                writer.writeNext(nameArr);
+                            }
+                            tdata = ds.getValue(TransactionDetails.class);
+                            String[] data = {ds.getKey(), tdata.getType(), tdata.getUserID(), tdata.getDate() + " " + tdata.getTime(),
+                                    tdata.getCategoryName(), tdata.getAmount(), tdata.getAccount(), tdata.getCurrency(), tdata.getLocation()};
+                            writer.writeNext(data);
 
-        if(exelChecked){
-            Workbook wb = new HSSFWorkbook();
-            Cell c = null;
+                        }
+                        if(exelChecked){
+                            try {
+                                if (file == null) {
+                                    file = new File(finalLoc + ".xls");
+                                    WorkbookSettings wbSettings = new WorkbookSettings();
+                                    wbSettings.setLocale(new Locale("en", "EN"));
+                                    workbook = jxl.Workbook.createWorkbook(file, wbSettings);
+                                    sheet = workbook.createSheet("Transaction Backup", 0);
+                                    sheet.addCell(new Label(0, 0, "Id"));
+                                    sheet.addCell(new Label(1, 0, "Type"));
+                                    sheet.addCell(new Label(2, 0, "UserId"));
+                                    sheet.addCell(new Label(3, 0, "DateTime"));
+                                    sheet.addCell(new Label(4, 0, "Category"));
+                                    sheet.addCell(new Label(5, 0, "Amount"));
+                                    sheet.addCell(new Label(6, 0, "Account"));
+                                    sheet.addCell(new Label(7, 0, "Currency"));
+                                    sheet.addCell(new Label(8, 0, "Location"));
+                                }
 
-            //cell style for heder row
-            CellStyle cs = wb.createCellStyle();
-            cs.setFillForegroundColor(HSSFColor.LIME.index);
-            cs.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+                                countRow++;
+                                tdata = ds.getValue(TransactionDetails.class);
+                                sheet.addCell(new Label(0, countRow, ds.getKey()));
+                                sheet.addCell(new Label(1, countRow, tdata.getType()));
+                                sheet.addCell(new Label(2, countRow, tdata.getUserID()));
+                                sheet.addCell(new Label(3, countRow, tdata.getDate() + " " + tdata.getTime()));
+                                sheet.addCell(new Label(4, countRow, tdata.getCategoryName()));
+                                sheet.addCell(new Label(5, countRow, tdata.getAmount()));
+                                sheet.addCell(new Label(6, countRow, tdata.getAccount()));
+                                sheet.addCell(new Label(7, countRow, tdata.getCurrency()));
+                                sheet.addCell(new Label(8, countRow, tdata.getLocation()));
 
-            //new sheet
-            Sheet sheet1 = null;
-            sheet1 = wb.createSheet("SheetNametest");
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
 
-            //generate column headings
-            Row row = sheet1.createRow(0);
+                    try {
+                        if (exelChecked){
+                            workbook.write();
+                            workbook.close();
+                        }
+                        if (csvChecked)
+                            writer.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
-            c = row.createCell(0);
-            c.setCellValue("Cell One");
-            c.setCellStyle(cs);
+                }
 
-            c = row.createCell(1);
-            c.setCellValue("Cell Two");
-            c.setCellStyle(cs);
-
-            sheet1.setColumnWidth(0,(15*500));
-            sheet1.setColumnWidth(1,(15*500));
-
-            File file = new File(finalLoc+".xls");
-            FileOutputStream fOut = null;
-
-            try {
-                fOut = new FileOutputStream(file);
-                wb.write(fOut);
-            }catch (Exception e){
-
-            }finally {
-                fOut.close();
-            }
-        }
-
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
     }
 
-    private void createMail(){
+
+    private void isMailCreator(){
         String attchArr[] = {(finalLoc+".csv"),(finalLoc+".xls")};
 
         ArrayList<Uri> uriArr = new ArrayList<>();
         for(String file : attchArr){
             File fIn = new File(file);
+            Log.d("sdf",finalLoc+".csv"+" "+fIn.exists());
             if(fIn.exists()) {
                 Uri uri = Uri.fromFile(fIn);
                 uriArr.add(uri);
@@ -172,8 +250,6 @@ public class ExportData extends Fragment implements View.OnClickListener,CheckBo
         intent.putExtra(Intent.EXTRA_SUBJECT,"Family Wallet Backup");
         intent.createChooser(intent,"Send email");
         startActivity(intent);
-
-
     }
 
     @Override

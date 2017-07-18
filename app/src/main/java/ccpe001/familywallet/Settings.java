@@ -21,6 +21,7 @@ import android.widget.*;
 
 import ccpe001.familywallet.admin.SignIn;
 import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.github.orangegangsters.lollipin.lib.managers.AppLock;
 import com.github.orangegangsters.lollipin.lib.managers.LockManager;
@@ -75,6 +76,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.setting, container, false);
+        FacebookSdk.sdkInitialize(getActivity());
         init(view);
 
         mAuth = FirebaseAuth.getInstance();
@@ -374,7 +376,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         preferedCurr = prefs.getString("appCurr",currArr[0]);
         appNoty = prefs.getBoolean("appNoty",true);
         appIcon = prefs.getBoolean("appIcon",true);
-        remTime = prefs.getString("appDailyRem","09:00 AM");
+        remTime = prefs.getString("appDailyRem","09:00");
         appSync = prefs.getBoolean("appSync",true);
         appBackUp = prefs.getBoolean("appBackUp",false);
         appbackUpPath = prefs.getString("appBackUpPath","/storage/emulated/0/");
@@ -421,7 +423,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         preferedLang = langArr[1];
         preferedDateFor = dateForArr[0];
         preferedCurr = currArr[0];
-        remTime = "09:00 AM";
+        remTime = "09:00";
         appBackUp = false;
         appSync = true;
         appbackUpPath = "/storage/emulated/0/";
@@ -458,10 +460,9 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         mDialog.setTargetFragment(getActivity().getFragmentManager().findFragmentById(R.id.settingFrag),DIR_CHOOSER);
         //mDialog.show(getActivity().getFragmentManager(),null);
         mDialog.dismiss();
-
-        appbackUpPath = path;
+        appbackUpPath = path.concat("/");//fixed minor issue
         storePWSharedPref();
-        backupLocText.setText(path);
+        backupLocText.setText(appbackUpPath);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package ccpe001.familywallet;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -14,17 +16,26 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import ccpe001.familywallet.admin.Notification;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import me.leolin.shortcutbadger.ShortcutBadger;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by harithaperera on 7/10/17.
  */
 public class NotificationCards extends Fragment {
 
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
-    RecyclerView.Adapter adapter;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.Adapter adapter;
+    private SQLiteHelper db;
+    public static int badgeCount = 0;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,28 +52,9 @@ public class NotificationCards extends Fragment {
 
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-        NotificationDetails notificationDetais = new NotificationDetails();
-
-        private String[] titles = {notificationDetais.getNotiTitle(),
-                "Chapter Two",
-                "Chapter Three",
-                "Chapter Four",
-                "Chapter Five",
-                "Chapter Six",
-                "Chapter Seven",
-                "Chapter Eight"};
-
-        private String[] details = {notificationDetais.getNotiDesc(),
-                "Item two details", "Item three details",
-                "Item four details", "Item file details",
-                "Item six details", "Item seven details",
-                "Item eight details"};
-
-
 
         class ViewHolder extends RecyclerView.ViewHolder{
 
-            public int currentItem;
             public ImageButton noti_delBtn;
             public TextView noti_date,noti_desc,noti_title;
 
@@ -72,17 +64,6 @@ public class NotificationCards extends Fragment {
                 noti_date = (TextView)itemView.findViewById(R.id.noti_date);
                 noti_desc = (TextView)itemView.findViewById(R.id.noti_desc);
                 noti_title = (TextView)itemView.findViewById(R.id.noti_title);
-
-                noti_delBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override public void onClick(View v) {
-                        int position = getAdapterPosition();
-
-                        Snackbar.make(v, "Click detected on item " + position,
-                                Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-
-                    }
-                });
             }
         }
 
@@ -90,20 +71,44 @@ public class NotificationCards extends Fragment {
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
             View v = LayoutInflater.from(viewGroup.getContext())
                     .inflate(R.layout.notificationcard, viewGroup, false);
-            ViewHolder viewHolder = new ViewHolder(v);
-            return viewHolder;
+            return(new ViewHolder(v));
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            viewHolder.noti_title.setText(titles[i]);
-            viewHolder.noti_desc.setText(details[i]);
+        public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
+            db = new SQLiteHelper(getActivity());
+            final List<SQLiteHelper.DAO> daoList = db.viewNoti();
+            final SQLiteHelper.DAO dao = daoList.get(i);
+
+            //load data to fields
+            viewHolder.noti_title.setText(dao.title);
+            viewHolder.noti_desc.setText(dao.desc);
+            viewHolder.noti_date.setText(dao.date);
+
+            viewHolder.noti_delBtn.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+
+                    db.deleteNoti(dao.id);
+                    daoList.remove(dao);
+                    badgeCount--;
+                    Log.d("bad del",""+badgeCount);
+
+                    //load data to fields
+                    viewHolder.noti_title.setText(dao.title);
+                    viewHolder.noti_desc.setText(dao.desc);
+                    viewHolder.noti_date.setText(dao.date);
+
+                    Snackbar.make(v, "Notification deleted ", Snackbar.LENGTH_SHORT).show();
+
+                }
+            });
 
         }
 
         @Override
         public int getItemCount() {
-            return titles.length;
+            db = new SQLiteHelper(getActivity());
+            return db.viewNoti().size();
         }
     }
 }
