@@ -302,14 +302,24 @@
 
                 <TableRow android:layout_width="match_parent"
                           android:layout_height="match_parent"
+                          android:id="@+id/backupRemRow"
                           android:padding="10dp" >
 
-                    <Switch
+                    <TextView
                             android:text="Auto backups"
-                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:layout_weight="12"
 
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" android:id="@+id/autoBackUpSwitch"/>
+                            android:layout_height="wrap_content" />
+
+                    <TextView
+                            android:text="TextView"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:textAlignment="textEnd"
+                            android:gravity="center"
+                            android:layout_height="wrap_content" android:id="@+id/backupRemText"/>
                 </TableRow>
             </TableLayout>
 

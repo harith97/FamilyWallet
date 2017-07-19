@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import ccpe001.familywallet.admin.GetInfo;
 import ccpe001.familywallet.admin.SignIn;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
@@ -38,6 +39,7 @@ import net.rdrei.android.dirchooser.DirectoryChooserActivity;
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 import net.rdrei.android.dirchooser.DirectoryChooserFragment;
 
+import java.util.Arrays;
 import java.util.Calendar;
 
 import static ccpe001.familywallet.transaction.TimeDialog.pad;
@@ -48,11 +50,11 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  */
 public class Settings extends Fragment implements View.OnClickListener,Switch.OnCheckedChangeListener,DirectoryChooserFragment.OnFragmentInteractionListener{
 
-    private Switch localMode,statusIcon,autoSync,autoBackUp,appNotySwitch,enDisPinSwitch;
+    private Switch localMode,statusIcon,autoSync,appNotySwitch,enDisPinSwitch;
     private Button signOutBtn,setPinBtn;
-    private TextView langText,currText,dateForText,dailyRemText,backupLocText,appPwText;
+    private TextView langText,currText,dateForText,dailyRemText,backupLocText,appPwText,backupRemText;
     private AlertDialog.Builder langBuilder,currBuilder,dateForBuilder,enterPinBuilder;
-    private TableRow langRow,currRow,dateForRow,dailyRemRow,backupLocRow,appPassRow,feedBackRow,rateRow;
+    private TableRow langRow,currRow,dateForRow,dailyRemRow,backupLocRow,appPassRow,feedBackRow,rateRow,backupRemRow;
     private Calendar c;
     private DirectoryChooserFragment mDialog;
     private static final int SET_PIN = 0;
@@ -67,8 +69,8 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
 
     private String[] langArr,currArr,dateForArr;
 
-    private boolean pinStatus,mode,appNoty,appIcon,appSync,appBackUp;
-    private String pin,preferedLang,preferedDateFor,preferedCurr,remTime,appbackUpPath;
+    private boolean pinStatus,mode,appNoty,appIcon,appSync;
+    private String pin,preferedLang,preferedDateFor,preferedCurr,remTime,appbackUpPath,appBackUp;
 
     private FirebaseAuth mAuth;
     private GoogleApiClient mGoogleApiClient;
@@ -104,6 +106,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         localMode.setOnCheckedChangeListener(this);
         langRow = (TableRow) v.findViewById(R.id.selectLangRow);
         langRow.setOnClickListener(this);
+        backupRemText = (TextView) v.findViewById(R.id.backupRemText);
         langText = (TextView) v.findViewById(R.id.statusLang);
         dateForRow = (TableRow) v.findViewById(R.id.selectDateRow);
         dateForRow.setOnClickListener(this);
@@ -115,10 +118,11 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         statusIcon.setOnCheckedChangeListener(this);
         dailyRemRow = (TableRow) v.findViewById(R.id.remTimeRow);
         dailyRemRow.setOnClickListener(this);
+        backupRemRow = (TableRow) v.findViewById(R.id.backupRemRow);
+        backupRemRow.setOnClickListener(this);
         dailyRemText = (TextView) v.findViewById(R.id.startRem);
         autoSync = (Switch) v.findViewById(R.id.autoSyncSwitch);
         autoSync.setOnCheckedChangeListener(this);
-        autoBackUp = (Switch) v.findViewById(R.id.autoBackUpSwitch);
         autoSync.setOnCheckedChangeListener(this);
         backupLocRow = (TableRow) v.findViewById(R.id.backupLocRow);
         backupLocRow.setOnClickListener(this);
@@ -185,15 +189,37 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     }
 
 
+    private boolean checkPermit(){
+        return ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED&&
+                ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == EXTERNAL_READ_PERMIT||requestCode == EXTERNAL_WRITE_PERMIT) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getActivity(), "Permission granted", Toast.LENGTH_SHORT).show();
+            } else {
+                checkPermit();
+            }
+        }
+    }
+
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.signOutBtn){
+            //sign out
             if(mAuth.getCurrentUser().getProviders().toString().equals("[facebook.com]")){
                 LoginManager.getInstance().logOut();
             }else if(mAuth.getCurrentUser().getProviders().toString().equals("[google.com]")){
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient);
             }
             mAuth.signOut();
+
+            //delete notification if available)(TO DO)
+
+
             getActivity().finish();
             sessionClear();
             Intent intent = new Intent("ccpe001.familywallet.SIGNIN");
@@ -216,20 +242,20 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
             },c.get(Calendar.HOUR_OF_DAY),c.get(Calendar.MINUTE),true).show();
         }else if(view.getId()==R.id.backupLocRow) {
 
-            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED||
-                    ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (!checkPermit()) {
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},EXTERNAL_READ_PERMIT);
                 requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},EXTERNAL_WRITE_PERMIT);
+            }else {
+
+                final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
+                        .allowNewDirectoryNameModification(true)
+                        .newDirectoryName("FamilyWallet Backups")
+                        .build();
+
+                mDialog = DirectoryChooserFragment.newInstance(config);
+                mDialog.show(getActivity().getFragmentManager(), null);
+                mDialog.setDirectoryChooserListener(this);
             }
-
-            final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
-                    .allowNewDirectoryNameModification(true)
-                    .newDirectoryName("FamilyWallet Backups")
-                    .build();
-
-            mDialog = DirectoryChooserFragment.newInstance(config);
-            mDialog.show(getActivity().getFragmentManager(),null);
-            mDialog.setDirectoryChooserListener(this);
 
         }else if(view.getId()==R.id.appPasswordRow){
             enterPinBuilder = new AlertDialog.Builder(getActivity());
@@ -285,6 +311,19 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
             startActivity(intent);
         }else if(view.getId()==R.id.rateRow){
             gotoStore();
+        }else if(view.getId()==R.id.backupRemRow) {
+            final String[] items = {"Daily", "Weekly", "Monthly","Annually","No Auto Backups"};
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Select");
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    backupRemText.setText(items[item]);
+                    appBackUp = items[item];
+                    storePWSharedPref();
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
         }
 
 
@@ -351,17 +390,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
                 storePWSharedPref();
                 db.keepSynced(false);
             }
-        }else if(switchs.getId()==R.id.autoBackUpSwitch){
-            if(b) {
-                appBackUp = true;
-                storePWSharedPref();
-            }else{
-                appBackUp = false;
-                storePWSharedPref();
-            }
         }
-
-
     }
 
     private void retrievePWSharedPref(){
@@ -378,7 +407,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         appIcon = prefs.getBoolean("appIcon",true);
         remTime = prefs.getString("appDailyRem","09:00");
         appSync = prefs.getBoolean("appSync",true);
-        appBackUp = prefs.getBoolean("appBackUp",false);
+        appBackUp = prefs.getString("appBackUp","Weekly");
         appbackUpPath = prefs.getString("appBackUpPath","/storage/emulated/0/");
 
 
@@ -390,7 +419,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         statusIcon.setChecked(appIcon);
         dailyRemText.setText(remTime);
         autoSync.setChecked(appSync);
-        autoBackUp.setChecked(appBackUp);
+        backupRemText.setText(appBackUp);
         backupLocText.setText(appbackUpPath);
         appPwText.setText(String.valueOf(pinStatus));
     }
@@ -410,7 +439,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         editor.putBoolean("appIcon",appIcon);
         editor.putString("appDailyRem",remTime);
         editor.putBoolean("appSync",appSync);
-        editor.putBoolean("appBackUp",appBackUp);
+        editor.putString("appBackUp",appBackUp);
         editor.putString("appBackUpPath", appbackUpPath);
 
         editor.commit();
@@ -424,7 +453,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         preferedDateFor = dateForArr[0];
         preferedCurr = currArr[0];
         remTime = "09:00";
-        appBackUp = false;
+        appBackUp = "Weekly";
         appSync = true;
         appbackUpPath = "/storage/emulated/0/";
         pinStatus = false;
@@ -437,7 +466,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         statusIcon.setChecked(appNoty);
         dailyRemText.setText(remTime);
         autoSync.setChecked(appSync);
-        autoBackUp.setChecked(appBackUp);
+        backupRemText.setText(appBackUp);
         backupLocText.setText(appbackUpPath);
         appPwText.setText(String.valueOf(pinStatus));
     }
