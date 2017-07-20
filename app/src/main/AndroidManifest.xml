@@ -1,139 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="ccpe001.familywallet">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="ccpe001.familywallet">
 
     <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true" />
+            android:name="android.hardware.camera"
+            android:required="true"/>
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
-
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:ignore="ManifestResource"
-        tools:replace="android:theme">
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-                   android:value="@string/fb_APP_ID"/>
-        <activity android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity" />
-        <activity android:name="com.facebook.FacebookActivity"
-                  android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
-                  android:label="@string/app_name"/>
-        <activity
-            android:name=".CustomPinActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="ccpe001.familywallet.CUSTOMPINACTIVITY" />
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme"
+            tools:ignore="ManifestResource"
+            tools:replace="android:theme">
+        <meta-data
+                android:name="com.facebook.sdk.ApplicationId"
+                android:value="@string/fb_APP_ID"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+        <activity android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity"/>
+        <activity
+                android:name="com.facebook.FacebookActivity"
+                android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+                android:label="@string/app_name"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity
+                android:name=".CustomPinActivity"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="ccpe001.familywallet.CUSTOMPINACTIVITY"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
         <receiver android:name=".admin.Notification$Notification_Receiver"/>
 
         <activity
-            android:name=".budget.BudgetHandling"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
+                android:name=".budget.BudgetHandling"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.BudgetHandling" />
+                <action android:name="ccpe001.familywallet.BudgetHandling"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".budget.accDetail"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
+                android:name=".budget.accDetail"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.budget.accDetail" />
+                <action android:name="ccpe001.familywallet.budget.accDetail"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".budget.budgetUpdate"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
+                android:name=".budget.budgetUpdate"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.budget.budgetUpdate" />
+                <action android:name="ccpe001.familywallet.budget.budgetUpdate"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".budget.budgetTrack"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
+                android:name=".budget.budgetTrack"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.budget.budgetTrack" />
+                <action android:name="ccpe001.familywallet.budget.budgetTrack"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".budget.forecast"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
+                android:name=".budget.forecast"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.budget.forecast" />
+                <action android:name="ccpe001.familywallet.budget.forecast"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".Dashboard"
-            android:label="@string/title_activity_navigation_drawer"
-            android:theme="@style/AppTheme.NoActionBar">
+                android:name=".Dashboard"
+                android:label="@string/title_activity_navigation_drawer"
+                android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.DASHBOARD" />
+                <action android:name="ccpe001.familywallet.DASHBOARD"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".admin.SignUp"
-            android:parentActivityName=".admin.SignIn"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
+                android:name=".admin.SignUp"
+                android:parentActivityName=".admin.SignIn"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.LOGIN" />
+                <action android:name="ccpe001.familywallet.LOGIN"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".admin.GetInfo"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
+                android:name=".admin.GetInfo"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.GETINFO" />
+                <action android:name="ccpe001.familywallet.GETINFO"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".admin.SignIn"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
+                android:name=".admin.SignIn"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.SIGNIN" />
+                <action android:name="ccpe001.familywallet.SIGNIN"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity
@@ -142,19 +145,19 @@
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.FORGOT" />
+                <action android:name="ccpe001.familywallet.FORGOT"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".Splash"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+                android:name=".Splash"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
@@ -162,45 +165,54 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.INTRODUCTIONPAGE" />
+                <action android:name="ccpe001.familywallet.INTRODUCTIONPAGE"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".transaction.AddTransaction"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Dashboard">
-            <intent-filter>
-                <action android:name="ccpe001.familywallet.AddTransaction" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ccpe001.familywallet.DASHBOARD"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".transaction.TransactionCategory"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".transaction.AddTransaction">
-
+                android:name=".transaction.AddTransaction"
+                android:parentActivityName=".Dashboard"
+                android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="ccpe001.familywallet.transaction.TransactionCategory" />
+                <action android:name="ccpe001.familywallet.AddTransaction"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
+
                 <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ccpe001.familywallet.transaction.AddTransaction"/>
+                        android:name="android.support.PARENT_ACTIVITY"
+                        android:value=".ccpe001.familywallet.DASHBOARD"/>
             </intent-filter>
+        </activity>
+        <activity
+                android:name=".transaction.TransactionCategory"
+                android:parentActivityName=".transaction.AddTransaction"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="ccpe001.familywallet.transaction.TransactionCategory"/>
 
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <meta-data
+                        android:name="android.support.PARENT_ACTIVITY"
+                        android:value=".ccpe001.familywallet.transaction.AddTransaction"/>
+            </intent-filter>
         </activity>
 
         <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDwIsPHS1-FJer8-92cEOyZ9VERehechRg" />
+                android:name="com.google.android.geo.API_KEY"
+                android:value="AIzaSyDwIsPHS1-FJer8-92cEOyZ9VERehechRg"/>
 
+        <service
+                android:name=".PeriodicBackupCaller"
+                android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE"
+                android:enabled="true"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

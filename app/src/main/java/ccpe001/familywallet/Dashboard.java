@@ -1,6 +1,8 @@
 package ccpe001.familywallet;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -31,6 +33,8 @@ import ccpe001.familywallet.budget.budgetList;
 import ccpe001.familywallet.summary.sumMain;
 import ccpe001.familywallet.transaction.TransactionMain;
 
+import com.google.android.gms.gcm.GcmNetworkManager;
+import com.google.android.gms.gcm.PeriodicTask;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -60,6 +64,8 @@ public class Dashboard extends AppCompatActivity
     private FirebaseUser firebaseUser;
     private UserData userData;
     private static int badgeCount;
+    private SharedPreferences prefs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +88,11 @@ public class Dashboard extends AppCompatActivity
         databaseReference.keepSynced(true);
 
         rateApi();
+
+        //getting backup reminder data
+        prefs = getSharedPreferences("App Settings", Context.MODE_PRIVATE);
+        PeriodicBackupCaller.backupRunner(getApplication(),prefs.getString("appBackUp","Weekly"));
+
 
         storageReference = FirebaseStorage.getInstance().getReference();
 

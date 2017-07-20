@@ -325,8 +325,6 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
             AlertDialog alert = builder.create();
             alert.show();
         }
-
-
     }
 
 

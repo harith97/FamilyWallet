@@ -62,13 +62,12 @@ public class ExportData extends Fragment implements View.OnClickListener,CheckBo
     private static final int EXTERNAL_READ_PERMIT = 3;
     private static final int EXTERNAL_WRITE_PERMIT = 4;
     private DatabaseReference databaseReference;
-    private FirebaseUser firebaseUser;
     private TransactionDetails tdata;
     private CSVWriter writer;
     private WritableWorkbook workbook;
     private File file;
     private WritableSheet sheet;
-    private boolean isGranted = true;
+    private SharedPreferences prefs;
 
 
 
@@ -76,7 +75,6 @@ public class ExportData extends Fragment implements View.OnClickListener,CheckBo
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.exportdata, container, false);
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Transactions");
         databaseReference.keepSynced(true);
@@ -146,7 +144,7 @@ public class ExportData extends Fragment implements View.OnClickListener,CheckBo
     }
 
     public void export() throws IOException {
-        SharedPreferences prefs = getContext().getSharedPreferences("App Settings", Context.MODE_PRIVATE);
+        prefs = getContext().getSharedPreferences("App Settings", Context.MODE_PRIVATE);
         finalLoc = prefs.getString("appBackUpPath","/storage/emulated/0/");
         finalLoc += filename;
 
