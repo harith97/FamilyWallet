@@ -138,7 +138,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         rateRow.setOnClickListener(this);
 
         langBuilder = new AlertDialog.Builder(getContext());
-        langBuilder.setTitle("Language");
+        langBuilder.setTitle("Languages");
         langBuilder.setSingleChoiceItems(R.array.spinnerLanguage, 1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {

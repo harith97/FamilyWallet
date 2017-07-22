@@ -54,7 +54,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         database = getWritableDatabase();
         database.delete(SQLiteHelper.TABLE_NOTIFICATION, SQLiteHelper.COLUMN_NOTIID
                 + " = " + notiId, null);
-        //database.close();
+        database.close();
     }
 
     public long addNoti(String title,String date,String desc){
@@ -63,9 +63,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put(SQLiteHelper.COLUMN_NOTITITLE, title);
         values.put(SQLiteHelper.COLUMN_NOTIDESC, desc);
         values.put(SQLiteHelper.COLUMN_NOTIDATE, date);
-        //database.close();
-        return(database.insert(SQLiteHelper.TABLE_NOTIFICATION, null,
-                values));
+        long temo = database.insert(SQLiteHelper.TABLE_NOTIFICATION, null,
+                values);
+        database.close();
+        return temo;
     }
 
     public List<DAO> viewNoti(){
@@ -81,7 +82,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             cursor.moveToNext();
         }
         cursor.close();
-
+        database.close();
         return dao;
     }
 

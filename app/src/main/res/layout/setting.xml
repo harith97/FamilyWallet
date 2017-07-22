@@ -235,7 +235,7 @@
 
 
                     <TextView
-                            android:text="Daily reminder time"
+                            android:text="Daily reminder time (24 Hour)"
                             android:clickable="true"
                             android:layout_weight="12"
 

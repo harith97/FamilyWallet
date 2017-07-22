@@ -7,10 +7,7 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
 import ccpe001.familywallet.transaction.TransactionDetails;
-import com.google.android.gms.gcm.GcmNetworkManager;
-import com.google.android.gms.gcm.GcmTaskService;
-import com.google.android.gms.gcm.PeriodicTask;
-import com.google.android.gms.gcm.TaskParams;
+import com.google.android.gms.gcm.*;
 import com.google.firebase.database.*;
 import com.opencsv.CSVWriter;
 import jxl.WorkbookSettings;
@@ -49,9 +46,12 @@ public class PeriodicBackupCaller extends GcmTaskService {
     }
 
     public static void backupRunner(Context c,String runTime){
+        Log.d("backuo runner","d");
 
         if(timeConverter(runTime)==0){
-            //gcmNetworkManager.cancelTask("backupTask",PeriodicBackupCaller.class);
+            if(gcmNetworkManager!=null) {
+                gcmNetworkManager.cancelTask("backupTask", PeriodicBackupCaller.class);
+            }
             return;
         }else {
             gcmNetworkManager = GcmNetworkManager.getInstance(c);
@@ -59,7 +59,7 @@ public class PeriodicBackupCaller extends GcmTaskService {
                     .setService(PeriodicBackupCaller.class)
                     .setPeriod(timeConverter(runTime))
                     .setFlex(30)
-                    //.setRequiresCharging(true)//save battery
+                    .setRequiresCharging(true)//save battery
                     .setTag("backupTask")
                     .build();
             gcmNetworkManager.schedule(task);

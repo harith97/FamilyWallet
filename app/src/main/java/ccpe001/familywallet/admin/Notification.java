@@ -18,7 +18,9 @@ import ccpe001.familywallet.SQLiteHelper;
 import ccpe001.familywallet.transaction.AddTransaction;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -30,15 +32,17 @@ public class Notification {
     private SharedPreferences prefs;
     private android.app.Notification.Builder notification;
     private NotificationManager nm;
-    private final static int PERMENT_NOT = 33;
+    private final static int STATUS_ICON = 33;
     private final static int DAILY_REMINDER = 11;
+    private final static int NOTI_PPROTOTYPE = 22;
 
+    private Calendar calendar;
 
 
     public void statusIcon(Context c){
         //displaing status icon
-        PendingIntent addExpense = PendingIntent.getActivity(c,PERMENT_NOT,new Intent(c, AddTransaction.class).putExtra("transactionType","Expense"),PERMENT_NOT);//update here
-        PendingIntent scanBill = PendingIntent.getActivity(c,PERMENT_NOT,new Intent(c,SignUp.class),PERMENT_NOT);//update here
+        PendingIntent addExpense = PendingIntent.getActivity(c,STATUS_ICON,new Intent(c, AddTransaction.class).putExtra("transactionType","Expense"),STATUS_ICON);//update here
+        PendingIntent scanBill = PendingIntent.getActivity(c,STATUS_ICON,new Intent(c,SignUp.class),STATUS_ICON);//update here
         notification = new android.app.Notification.Builder(c)
                 .setContentTitle("Family Wallet")
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -48,9 +52,24 @@ public class Notification {
                 .addAction(R.mipmap.email,"Scan Bill",scanBill);
 
         nm = (NotificationManager)c.getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.notify(PERMENT_NOT,notification.build());
+        nm.notify(STATUS_ICON,notification.build());
     }
 
+
+    //This method returns true if notification successfully created and added to DB
+    public boolean addNotification(Context context,String title,String body){
+        NotificationCompat.Builder notiBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(context)
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(title)
+                .setContentText(body);
+
+        nm = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+        nm.notify(NOTI_PPROTOTYPE,notiBuilder.build());
+        new SQLiteHelper(context).addNoti(title,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(GregorianCalendar.getInstance().getTime()),body);
+        NotificationCards.badgeCount++;
+        return true;
+    }
 
     public void dailyReminder(Context c){
         prefs = c.getSharedPreferences("App Settings", c.MODE_PRIVATE);
@@ -60,7 +79,7 @@ public class Notification {
         String[] arr = remTime.split(":");
         Log.d("df","dfdf"+Integer.parseInt(arr[0])+Integer.parseInt(arr[1]));
 
-        Calendar calendar = Calendar.getInstance();
+        calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(arr[0]));
         calendar.set(Calendar.MINUTE,Integer.parseInt(arr[1]));
         calendar.set(Calendar.SECOND,00);
@@ -91,7 +110,7 @@ public class Notification {
                     .setContentTitle("Family Wallet")
                     .setContentText("Add your daily transactions to the wallet..");
             notificationManager.notify(DAILY_REMINDER,builder.build());
-            new SQLiteHelper(context).addNoti("Family Wallet","34","Add your daily transactions to the wallet..");
+            new SQLiteHelper(context).addNoti("Family Wallet",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(GregorianCalendar.getInstance().getTime()),"Add your daily transactions to the wallet..");
             NotificationCards.badgeCount++;
             Log.d("bad Onrec",""+NotificationCards.badgeCount);
 

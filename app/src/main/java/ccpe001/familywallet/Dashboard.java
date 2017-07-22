@@ -89,7 +89,7 @@ public class Dashboard extends AppCompatActivity
 
         rateApi();
 
-        //getting backup reminder data
+        //getting backup reminder data ###########put in a goog position(not working after setting change)
         prefs = getSharedPreferences("App Settings", Context.MODE_PRIVATE);
         PeriodicBackupCaller.backupRunner(getApplication(),prefs.getString("appBackUp","Weekly"));
 
