@@ -302,16 +302,14 @@ public class AddTransaction extends AppCompatActivity {
             //DatabaseOps dbOp = new DatabaseOps(cnt);
             //dbOp.addData(amount, title, categoryName, date, Integer.parseInt(categoryID), time, account, location, type, currency, "uID");
             //Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
-            try {
-                FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
+                //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
                 mDatabase = FirebaseDatabase.getInstance().getReference();
                 TransactionDetails td;
                 td = new TransactionDetails("uid",amount, title, categoryName, date, Integer.parseInt(categoryID), time, account, location, type, currency);
                 mDatabase.child("Transactions").push().setValue(td);
 
-            }catch (Exception e){
-                Log.i("hellowrld",""+e);
-            }
+
             Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
             startActivity(intent);
         }

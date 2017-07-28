@@ -139,7 +139,6 @@ public class TransactionMain extends Fragment {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     for (String checkedKey : checkedPosition){
                                         deleteTransaction(keys.get(Integer.parseInt(checkedKey)));
-                                        Toast.makeText(getActivity(), keys.get(Integer.parseInt(checkedKey)), Toast.LENGTH_SHORT).show();
                                     }
 
                                 }})
@@ -147,7 +146,20 @@ public class TransactionMain extends Fragment {
 
                         mode.finish();
                         return true;
-                    case R.id.edit_id:
+                    case R.id.edit_id:new AlertDialog.Builder(getActivity())
+                            .setTitle("Edit")
+                            .setMessage("Do you really want to Edit this?")
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int whichButton) {
+
+
+                                }})
+                            .setNegativeButton(android.R.string.no, null).show();
+
+                        mode.finish();
+                        return true;
                     default:
                         return false;
                 }
@@ -239,5 +251,8 @@ public class TransactionMain extends Fragment {
         DatabaseReference transaction = FirebaseDatabase.getInstance().getReference("Transactions").child(key);
         transaction.removeValue();
     }
+    private void editTransaction(String key){
+        DatabaseReference transaction = FirebaseDatabase.getInstance().getReference("Transactions").child(key);
 
+    }
 }

@@ -82,8 +82,11 @@ public class Dashboard extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
+        try {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        }catch (Exception e){
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        }
         databaseReference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(firebaseUser.getUid());
         databaseReference.keepSynced(true);
 
