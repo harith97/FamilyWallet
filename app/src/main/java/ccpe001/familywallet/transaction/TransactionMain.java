@@ -28,12 +28,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import ccpe001.familywallet.R;
+import ccpe001.familywallet.Validate;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,16 +61,13 @@ public class TransactionMain extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-
         final View view = inflater.inflate(R.layout.transaction_main, container, false);
         list = (ListView) view.findViewById(R.id.transactionList);
         tdList = new ArrayList<>();
         keys = new ArrayList<>();
         checkedPosition = new ArrayList<>();
-        mDatabase = FirebaseDatabase.getInstance().getReference("Transactions");
-        mDatabase.keepSynced(true);
-
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        Query query = FirebaseDatabase.getInstance().getReference("Transactions").orderByChild("date");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 tdList.clear();
@@ -78,8 +78,25 @@ public class TransactionMain extends Fragment {
                     keys.add(tdSnapshot.getKey());
 
                 }
+                Collections.reverse(tdList);
                 adapter = new TransactionListAdapter(getActivity(),tdList);
                 list.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        mDatabase = FirebaseDatabase.getInstance().getReference("Transactions");
+        mDatabase.keepSynced(true);
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+
             }
 
             @Override
@@ -153,7 +170,9 @@ public class TransactionMain extends Fragment {
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                 public void onClick(DialogInterface dialog, int whichButton) {
-
+                                    for (String checkedKey : checkedPosition){
+                                        editTransaction(keys.get(Integer.parseInt(checkedKey)));
+                                    }
 
                                 }})
                             .setNegativeButton(android.R.string.no, null).show();
@@ -224,6 +243,7 @@ public class TransactionMain extends Fragment {
                         public void onClick(View v) {
                             Intent intent = new Intent("ccpe001.familywallet.AddTransaction");
                             intent.putExtra("transactionType","Income");
+                            intent.putExtra("Update","False");
                             startActivity(intent);
                         }
                     });
@@ -232,6 +252,7 @@ public class TransactionMain extends Fragment {
                         public void onClick(View v) {
                             Intent intent = new Intent("ccpe001.familywallet.AddTransaction");
                             intent.putExtra("transactionType","Expense");
+                            intent.putExtra("Update","False");
                             startActivity(intent);
                         }
                     });
@@ -251,8 +272,33 @@ public class TransactionMain extends Fragment {
         DatabaseReference transaction = FirebaseDatabase.getInstance().getReference("Transactions").child(key);
         transaction.removeValue();
     }
-    private void editTransaction(String key){
+    private void editTransaction(final String key){
+        final Validate v = new Validate();
         DatabaseReference transaction = FirebaseDatabase.getInstance().getReference("Transactions").child(key);
+        transaction.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                TransactionDetails td = dataSnapshot.getValue(TransactionDetails.class);
+                Intent intent = new Intent("ccpe001.familywallet.AddTransaction");
+                intent.putExtra("Update","True");
+                intent.putExtra("key",key);
+                intent.putExtra("title",td.getTitle());
+                intent.putExtra("amount",td.getAmount());
+                intent.putExtra("date",v.valueToDate(td.getDate()));
+                intent.putExtra("time",td.getTime());
+                intent.putExtra("categoryName",td.getCategoryName());
+                intent.putExtra("categoryID",td.getCategoryID());
+                intent.putExtra("location",td.getLocation());
+                intent.putExtra("currencyIndex",td.getCurrency());
+                intent.putExtra("accountIndex",td.getAccount());
+                intent.putExtra("transactionType",td.getType());
+                startActivity(intent);
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

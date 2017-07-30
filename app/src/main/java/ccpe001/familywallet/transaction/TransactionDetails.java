@@ -1,5 +1,10 @@
 package ccpe001.familywallet.transaction;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Knight on 7/9/2017.
  */
@@ -36,6 +41,25 @@ public class TransactionDetails {
         this.location = location;
         this.type = type;
         this.currency = currency;
+    }
+
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("userID", userID);
+        result.put("amount", amount);
+        result.put("title", title);
+        result.put("categoryName", categoryName);
+        result.put("categoryID", categoryID);
+        result.put("date", date);
+        result.put("time", time);
+        result.put("account", account);
+        result.put("location", location);
+        result.put("type", type);
+        result.put("currency", currency);
+
+        return result;
     }
 
     public String getUserID() {

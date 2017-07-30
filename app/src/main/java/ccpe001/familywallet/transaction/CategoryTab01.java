@@ -21,8 +21,8 @@ public class CategoryTab01 extends Fragment {
 
     GridView grid;
     TextView txtCategory;
-    String categoryID, categoryName, title, date, time, amount, location, type;
-    int currencyIndex, accountIndex;
+    String  categoryName, title, date, time, amount, location, type, update, key;
+    int currencyIndex, accountIndex, categoryID;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class CategoryTab01 extends Fragment {
                 Bundle extras = getActivity().getIntent().getExtras();
 
                 categoryName = extras.getString("categoryName");
-                categoryID = extras.getString("categoryID");
+                categoryID = extras.getInt("categoryID");
                 title = extras.getString("title");
                 date = extras.getString("date");
                 time = extras.getString("time");
@@ -63,11 +63,13 @@ public class CategoryTab01 extends Fragment {
                 currencyIndex = extras.getInt("currencyIndex");
                 accountIndex = extras.getInt("accountIndex");
                 type = extras.getString("transactionType");
+                update = extras.getString("Update");
+                key = extras.getString("key");
 
-                String category = itemname[+position];
-                String categoryID = Integer.toString(imgid[+position]);
+                categoryName = itemname[+position];
+                categoryID = imgid[+position];
                 Intent intent = new Intent("ccpe001.familywallet.AddTransaction");
-                intent.putExtra("categoryName",category);
+                intent.putExtra("categoryName",categoryName);
                 intent.putExtra("categoryID",categoryID);
                 intent.putExtra("title",title);
                 intent.putExtra("amount",amount);
@@ -77,6 +79,8 @@ public class CategoryTab01 extends Fragment {
                 intent.putExtra("currencyIndex",currencyIndex);
                 intent.putExtra("accountIndex",accountIndex);
                 intent.putExtra("transactionType",type);
+                intent.putExtra("Update",update);
+                intent.putExtra("key",key);
                 getActivity().finish();
                 startActivity(intent);
 

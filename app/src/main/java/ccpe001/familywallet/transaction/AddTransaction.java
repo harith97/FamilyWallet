@@ -24,9 +24,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import ccpe001.familywallet.R;
+import ccpe001.familywallet.Validate;
 
 public class AddTransaction extends AppCompatActivity {
 
@@ -35,9 +38,8 @@ public class AddTransaction extends AppCompatActivity {
     private Spinner spinCurrency, spinAccount;
     int PLACE_PICKER_REQUEST=1;
     private EditText txtAmount, txtDate, txtTime, txtTitle;
-    String categoryName, categoryID, title, date, amount,currency,time,location, account,type;
-    Integer currencyIndex, accountIndex;
-    Context cnt = this;
+    String categoryName,  title, date, amount,currency,time,location, account,type,update,key;
+    Integer currencyIndex, accountIndex, categoryID;
     private DatabaseReference mDatabase;
 
 
@@ -69,20 +71,10 @@ public class AddTransaction extends AppCompatActivity {
         if (savedInstanceState == null) {
             Bundle extras = this.getIntent().getExtras();
             if(extras == null) {
-                categoryName = null;
-                categoryID = null;
-                title = null;
-                date = null;
-                amount = null;
-                time = null;
-                currencyIndex = null;
-                accountIndex = null;
-                location = null;
-                type = null;
 
             } else {
                 categoryName = extras.getString("categoryName");
-                categoryID = extras.getString("categoryID");
+                categoryID = extras.getInt("categoryID");
                 title = extras.getString("title");
                 date = extras.getString("date");
                 time = extras.getString("time");
@@ -90,7 +82,10 @@ public class AddTransaction extends AppCompatActivity {
                 location = extras.getString("location");
                 currencyIndex = extras.getInt("currencyIndex");
                 accountIndex = extras.getInt("accountIndex");
-                type=extras.getString("transactionType");
+                type = extras.getString("transactionType");
+                update = extras.getString("Update");
+                key = extras.getString("key");
+
                 txtTitle.setText(title);
                 txtAmount.setText(amount);
                 txtDate.setText(date);
@@ -99,21 +94,7 @@ public class AddTransaction extends AppCompatActivity {
                 spinAccount.setSelection(accountIndex);
                 spinCurrency.setSelection(currencyIndex);
 
-
-
             }
-
-        } else {
-            categoryName = (String) savedInstanceState.getSerializable("categoryName");
-            categoryID = (String) savedInstanceState.getSerializable("categoryID");
-            title = (String) savedInstanceState.getSerializable("title");
-            date = (String) savedInstanceState.getSerializable("date");
-            amount = (String) savedInstanceState.getSerializable("amount");
-            location = (String) savedInstanceState.getSerializable("location");
-            currencyIndex = (Integer) savedInstanceState.getSerializable("currencyIndex");
-            accountIndex = (Integer) savedInstanceState.getSerializable("accountIndex");
-            type = (String) savedInstanceState.getSerializable("transactionType");
-
 
         }
 
@@ -136,23 +117,12 @@ public class AddTransaction extends AppCompatActivity {
                 intent.putExtra("currencyIndex",currencyIndex);
                 intent.putExtra("accountIndex",accountIndex);
                 intent.putExtra("transactionType",type);
+                intent.putExtra("Update",update);
+                intent.putExtra("key",key);
                 startActivity(intent);
             }
         });
 
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                categoryName = null;
-                categoryID = null;
-            } else {
-                categoryName = extras.getString("categoryName");
-                categoryID = extras.getString("categoryID");
-            }
-        } else {
-            categoryName = (String) savedInstanceState.getSerializable("categoryName");
-            categoryID = (String) savedInstanceState.getSerializable("categoryID");
-        }
 
         if (categoryName!=null){
             txtCategory.setText(categoryName);
@@ -281,9 +251,10 @@ public class AddTransaction extends AppCompatActivity {
 
     public void saveTransaction(View view) {
 
-
+        final Validate v = new Validate();
         amount = txtAmount.getText().toString();
         date = txtDate.getText().toString();
+        date = v.dateToValue(date);
         time = txtTime.getText().toString();
         title = txtTitle.getText().toString();
         currency = spinCurrency.getSelectedItem().toString();
@@ -292,7 +263,7 @@ public class AddTransaction extends AppCompatActivity {
 
         if (categoryName==null){
             categoryName = "Other";
-            categoryID = Integer.toString(R.drawable.cat_other);
+            categoryID = (R.drawable.cat_other);
         }
 
         if (amount.isEmpty()) {
@@ -304,10 +275,25 @@ public class AddTransaction extends AppCompatActivity {
             //Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
 
                 //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-                mDatabase = FirebaseDatabase.getInstance().getReference();
-                TransactionDetails td;
-                td = new TransactionDetails("uid",amount, title, categoryName, date, Integer.parseInt(categoryID), time, account, location, type, currency);
-                mDatabase.child("Transactions").push().setValue(td);
+            TransactionDetails td;
+               try {
+                   if (update.equals("False")){
+                       mDatabase = FirebaseDatabase.getInstance().getReference();
+                       td = new TransactionDetails("uid",amount, title, categoryName, date, categoryID, time, account, location, type, currency);
+                       mDatabase.child("Transactions").push().setValue(td);
+                       Toast.makeText(this, "New Transaction Successfully Added", Toast.LENGTH_LONG).show();
+                   }
+                   else if (update.equals("True")){
+                       mDatabase = FirebaseDatabase.getInstance().getReference("Transactions");
+                       td = new TransactionDetails("uid",amount, title, categoryName, date, categoryID, time, account, location, type, currency);
+                       Map<String, Object> postValues = td.toMap();
+                       mDatabase.child(key).updateChildren(postValues);
+                       Toast.makeText(this, "Successfully Updated", Toast.LENGTH_LONG).show();
+                   }
+               }catch (Exception e){
+
+               }
+
 
 
             Intent intent = new Intent("ccpe001.familywallet.DASHBOARD");
