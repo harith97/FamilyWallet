@@ -9,21 +9,24 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import ccpe001.familywallet.admin.Notification;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.joanzapata.iconify.widget.IconButton;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static ccpe001.familywallet.Dashboard.badgeCount;
+import static ccpe001.familywallet.Dashboard.setBadgeCount;
 
 /**
  * Created by harithaperera on 7/10/17.
@@ -34,11 +37,12 @@ public class NotificationCards extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
     private SQLiteHelper db;
-    public static int badgeCount = 0;
+    private TextView itemMessagesBadgeTextView;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setHasOptionsMenu(true);//to enable onPrepareOptionsMenu in frag
         View view = inflater.inflate(R.layout.notificationtab, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(getActivity());
@@ -48,6 +52,14 @@ public class NotificationCards extends Fragment {
         return view;
     }
 
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem itemMessages = menu.findItem(R.id.action_notification);
+        RelativeLayout badgeLayout = (RelativeLayout) itemMessages.getActionView();
+        itemMessagesBadgeTextView = (TextView) badgeLayout.findViewById(R.id.badge_textView);
+        Log.d("badcount"," bind view del"+itemMessagesBadgeTextView);
+    }
 
 
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
@@ -74,6 +86,7 @@ public class NotificationCards extends Fragment {
             return(new ViewHolder(v));
         }
 
+
         @Override
         public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
             db = new SQLiteHelper(getActivity());
@@ -91,7 +104,8 @@ public class NotificationCards extends Fragment {
                     db.deleteNoti(dao.id);
                     daoList.remove(dao);
                     badgeCount--;
-                    Log.d("bad del",""+badgeCount);
+                    setBadgeCount(badgeCount,itemMessagesBadgeTextView);
+
 
                     //load data to fields
                     viewHolder.noti_title.setText(dao.title);
@@ -104,6 +118,7 @@ public class NotificationCards extends Fragment {
             });
 
         }
+
 
         @Override
         public int getItemCount() {

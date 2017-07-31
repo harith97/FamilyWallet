@@ -11,6 +11,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
+import android.widget.TextView;
 import ccpe001.familywallet.Dashboard;
 import ccpe001.familywallet.NotificationCards;
 import ccpe001.familywallet.R;
@@ -23,6 +24,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static android.content.Context.ALARM_SERVICE;
+import static ccpe001.familywallet.Dashboard.badgeCount;
 
 /**
  * Created by harithaperera on 7/9/17.
@@ -37,6 +39,8 @@ public class Notification {
     private final static int NOTI_PPROTOTYPE = 22;
 
     private Calendar calendar;
+    private TextView itemMessagesBadgeTextView;
+
 
 
     public void statusIcon(Context c){
@@ -67,7 +71,7 @@ public class Notification {
         nm = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         nm.notify(NOTI_PPROTOTYPE,notiBuilder.build());
         new SQLiteHelper(context).addNoti(title,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(GregorianCalendar.getInstance().getTime()),body);
-        NotificationCards.badgeCount++;
+        badgeCount++;
         return true;
     }
 
@@ -77,7 +81,7 @@ public class Notification {
         String remTime = prefs.getString("appDailyRem", "09:00");
 
         String[] arr = remTime.split(":");
-        Log.d("df","dfdf"+Integer.parseInt(arr[0])+Integer.parseInt(arr[1]));
+        Log.d("badcount","dfdf"+Integer.parseInt(arr[0])+Integer.parseInt(arr[1]));
 
         calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(arr[0]));
@@ -97,7 +101,6 @@ public class Notification {
             Intent newAct = new Intent(context,Dashboard.class);
             newAct.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             PendingIntent pendingIntent = PendingIntent.getActivity(context,DAILY_REMINDER,newAct,PendingIntent.FLAG_UPDATE_CURRENT);
-            Log.d("df","dfdf"+pendingIntent);
 
             Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
@@ -110,9 +113,9 @@ public class Notification {
                     .setContentTitle("Family Wallet")
                     .setContentText("Add your daily transactions to the wallet..");
             notificationManager.notify(DAILY_REMINDER,builder.build());
-            new SQLiteHelper(context).addNoti("Family Wallet",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(GregorianCalendar.getInstance().getTime()),"Add your daily transactions to the wallet..");
-            NotificationCards.badgeCount++;
-            Log.d("bad Onrec",""+NotificationCards.badgeCount);
+            new SQLiteHelper(context).addNoti("We missing you",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(GregorianCalendar.getInstance().getTime()),"Add your daily transactions to the wallet..");
+            badgeCount++;
+            Log.d("badcount","add on noti rec"+badgeCount);
 
         }
     }

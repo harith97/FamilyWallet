@@ -26,6 +26,7 @@ import android.widget.Spinner;
 
 import android.widget.TextView;
 import ccpe001.familywallet.admin.CircleTransform;
+import ccpe001.familywallet.admin.Notification;
 import ccpe001.familywallet.admin.UserData;
 import ccpe001.familywallet.budget.accUpdate;
 import ccpe001.familywallet.budget.addAccount;
@@ -45,6 +46,7 @@ import com.joanzapata.iconify.widget.IconButton;
 import com.kobakei.ratethisapp.RateThisApp;
 import com.squareup.picasso.Picasso;
 
+
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener{
 
@@ -63,8 +65,9 @@ public class Dashboard extends AppCompatActivity
     private StorageReference storageReference;
     private FirebaseUser firebaseUser;
     private UserData userData;
-    private static int badgeCount;
     private SharedPreferences prefs;
+    public static int badgeCount = 0;
+
 
 
     @Override
@@ -78,7 +81,7 @@ public class Dashboard extends AppCompatActivity
         setSupportActionBar(toolbar);
         signUpIntent = getIntent();
 
-        badgeCount = new SQLiteHelper(getApplication()).viewNoti().size();
+        badgeCount = new SQLiteHelper(getApplication()).viewNoti().size();//LOAD ONCE
 
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
@@ -204,6 +207,15 @@ public class Dashboard extends AppCompatActivity
         }
     }
 
+    public static void setBadgeCount(int badgeCount,TextView tVw){
+        if(badgeCount<=0) {
+            tVw.setVisibility(View.GONE); // initially hidden
+        }else {
+            tVw.setVisibility(View.VISIBLE);
+            tVw.setText(" "+badgeCount);
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -213,13 +225,8 @@ public class Dashboard extends AppCompatActivity
         RelativeLayout badgeLayout = (RelativeLayout) itemMessages.getActionView();
         TextView itemMessagesBadgeTextView = (TextView) badgeLayout.findViewById(R.id.badge_textView);
         IconButton iconButtonMessages = (IconButton) badgeLayout.findViewById(R.id.badge_icon_button);
-        Log.d("fg",""+badgeCount);
-        if(badgeCount<=0) {
-            itemMessagesBadgeTextView.setVisibility(View.GONE); // initially hidden
-        }else {
-            itemMessagesBadgeTextView.setVisibility(View.VISIBLE);
-            itemMessagesBadgeTextView.setText(" "+badgeCount);
-        }
+        Log.d("badgeCount","onCreateOptionsMenu"+badgeCount);
+        setBadgeCount(badgeCount,itemMessagesBadgeTextView);
 
         iconButtonMessages.setOnClickListener(new View.OnClickListener() {
             @Override
