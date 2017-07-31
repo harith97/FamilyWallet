@@ -14,7 +14,6 @@ import java.util.regex.Pattern;
  */
 public class Validate {
 
-    //kalin project wala validate function thyenawa nm daapalla meekata
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public static boolean fileValidate(Editable text) {
         if (!text.toString().isEmpty()) {

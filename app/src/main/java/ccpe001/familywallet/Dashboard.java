@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -34,6 +35,9 @@ import ccpe001.familywallet.budget.budgetList;
 import ccpe001.familywallet.summary.sumMain;
 import ccpe001.familywallet.transaction.TransactionMain;
 
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.Target;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.PeriodicTask;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -67,7 +71,8 @@ public class Dashboard extends AppCompatActivity
     private UserData userData;
     private SharedPreferences prefs;
     public static int badgeCount = 0;
-
+    private int animateCounter = 0;
+    private ShowcaseView showcaseView;
 
 
     @Override
@@ -297,11 +302,24 @@ public class Dashboard extends AppCompatActivity
             ExportData backup = new ExportData();
             fragmentTransaction.replace(R.id.fragmentContainer1,backup);
             fragmentTransaction.commit();
+        }else if(id == R.id.helpFrag){
+            animateMenu();
         }
 
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    private void animateMenu(){
+        showcaseView = new ShowcaseView.Builder(this)
+                .setTarget(Target.NONE)
+                .setContentTitle("Dashboard Help")
+                .setContentText("You don't always need a target to showcase")
+                .setOnClickListener(this)
+                .build();
+        showcaseView.setButtonText("Next");
     }
 
 
@@ -316,7 +334,49 @@ public class Dashboard extends AppCompatActivity
             //Close nav drawer here
             drawerLayout.closeDrawer(GravityCompat.START);
         }
+
+
+        //for each click on btn
+        ViewTarget navigationButtonViewTarget = null;
+        try {
+            navigationButtonViewTarget = ViewTargets.navigationButtonViewTarget(toolbar);
+        } catch (ViewTargets.MissingViewException e) {
+            e.printStackTrace();
+        }
+        switch (animateCounter) {
+            case 0:
+                showcaseView.setShowcase(navigationButtonViewTarget, true);
+                showcaseView.setContentTitle("Navigation Drawer");
+                showcaseView.setContentText("You don't always need a target to showcase");
+                break;
+
+            case 1:
+                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.action_notification)), true);
+                showcaseView.setContentTitle("Notification Badge");
+                showcaseView.setContentText("You don't always need a target to showcase");
+                break;
+
+            case 2:
+                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.action_search)), true);
+                showcaseView.setContentTitle("Search Bar");
+                showcaseView.setContentText("You don't always need a target to showcase");
+                break;
+
+            case 3:
+                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.fabMain)), true);
+                showcaseView.setContentTitle("Add transaction");
+                showcaseView.setContentText("You don't always need a target to showcase");
+                showcaseView.setButtonText("Close");
+                break;
+
+            case 4:
+                showcaseView.hide();
+                animateCounter = 0;
+                break;
+        }
+        animateCounter++;
     }
+
 
     private void rateApi(){
         RateThisApp.Config config = new RateThisApp.Config(3, 8);
