@@ -32,14 +32,13 @@ public class IntoductionPage extends AppCompatActivity implements ViewPager.OnPa
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        setFirstTime();
 
-        if (!isFirstInstalled()){
+        pref = getSharedPreferences("First Time",Context.MODE_PRIVATE);
+        if (!pref.getBoolean("isFirst",true)){
             Intent intent = new Intent("ccpe001.familywallet.SIGNIN");
             startActivity(intent);
         }
 
-        setFirst(false);
         setContentView(R.layout.introcontainer);
         init();
     }
@@ -59,20 +58,6 @@ public class IntoductionPage extends AppCompatActivity implements ViewPager.OnPa
     }
 
 
-
-    public void setFirstTime(){
-        pref = getSharedPreferences("First Time",Context.MODE_PRIVATE);
-        editor = pref.edit();
-    }
-
-    public void setFirst(boolean isFirst){
-        editor.putBoolean("isFirst",isFirst);
-        editor.commit();
-    }
-
-    private boolean isFirstInstalled(){
-        return pref.getBoolean("isFirst",true);//for the first time setting true
-    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

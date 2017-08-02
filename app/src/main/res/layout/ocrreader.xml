@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:paddingBottom="15dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                android:layout_height="match_parent">
+
+    <ImageView
+            android:id="@+id/cropImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+    />
+
+    <TextView android:text="NO TEXT"
+              android:textColor="@android:color/white"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/bill_data"/>
+</RelativeLayout>

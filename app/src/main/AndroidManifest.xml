@@ -28,6 +28,7 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/fb_APP_ID" />
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"/>
 
         <activity android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity" />
         <activity
@@ -64,6 +65,16 @@
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="ccpe001.familywallet.budget.accDetail" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".OCRReader"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="ccpe001.familywallet.OCRReader" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -213,7 +224,7 @@
                 <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY" />
             </intent-filter>
         </service>
-
+    <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES" android:value="ocr"/>
     </application>
 
 </manifest>

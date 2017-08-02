@@ -34,6 +34,7 @@ public class PeriodicBackupCaller extends GcmTaskService {
     private String finalLoc;
 
 
+
     @Override
     public int onRunTask(TaskParams taskParams) {
         Log.d("I ran","sd");
@@ -46,14 +47,14 @@ public class PeriodicBackupCaller extends GcmTaskService {
     }
 
     public static void backupRunner(Context c,String runTime){
-        Log.d("backuo runner","d");
-
         if(timeConverter(runTime)==0){
             if(gcmNetworkManager!=null) {
                 gcmNetworkManager.cancelTask("backupTask", PeriodicBackupCaller.class);
             }
             return;
         }else {
+            Log.d("backuo runner","d");
+
             gcmNetworkManager = GcmNetworkManager.getInstance(c);
             PeriodicTask task = new PeriodicTask.Builder()
                     .setService(PeriodicBackupCaller.class)

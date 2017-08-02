@@ -35,6 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.kobakei.ratethisapp.RateThisApp;
 import net.rdrei.android.dirchooser.DirectoryChooserActivity;
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 import net.rdrei.android.dirchooser.DirectoryChooserFragment;
@@ -203,6 +204,12 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
             } else {
                 checkPermit();
             }
+        }else if(requestCode == EXTERNAL_READ_PERMIT||requestCode == EXTERNAL_WRITE_PERMIT){
+            if(grantResults[0]==PackageManager.PERMISSION_GRANTED||grantResults[1]==PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(getActivity(),"Permission granted",Toast.LENGTH_SHORT).show();
+            }else {
+                ExportData.checkPermitBackup(getActivity());
+            }
         }
     }
 
@@ -310,20 +317,31 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
             intent.createChooser(intent,"Send email");
             startActivity(intent);
         }else if(view.getId()==R.id.rateRow){
-            gotoStore();
+            //explicitly show dialog
+            RateThisApp.Config config = new RateThisApp.Config();
+            config.setUrl("market://details?id=" + getActivity().getPackageName());
+            RateThisApp.init(config);
+            RateThisApp.showRateDialog(getActivity());
         }else if(view.getId()==R.id.backupRemRow) {
-            final String[] items = {"Daily", "Weekly", "Monthly","Annually","No Auto Backups"};
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Select");
-            builder.setItems(items, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int item) {
-                    backupRemText.setText(items[item]);
-                    appBackUp = items[item];
-                    storePWSharedPref();
-                }
-            });
-            AlertDialog alert = builder.create();
-            alert.show();
+
+            if(!ExportData.checkPermitBackup(getActivity())){
+                requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},EXTERNAL_READ_PERMIT);
+                requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},EXTERNAL_WRITE_PERMIT);
+            }else{
+                final String[] items = {"Daily", "Weekly", "Monthly","Annually","No Auto Backups"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Select");
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+                        backupRemText.setText(items[item]);
+                        appBackUp = items[item];
+                        storePWSharedPref();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+
         }
     }
 
@@ -405,7 +423,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         appIcon = prefs.getBoolean("appIcon",true);
         remTime = prefs.getString("appDailyRem","09:00");
         appSync = prefs.getBoolean("appSync",true);
-        appBackUp = prefs.getString("appBackUp","Weekly");
+        appBackUp = prefs.getString("appBackUp","No Auto Backups");
         appbackUpPath = prefs.getString("appBackUpPath","/storage/emulated/0/");
 
 
@@ -451,7 +469,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         preferedDateFor = dateForArr[0];
         preferedCurr = currArr[0];
         remTime = "09:00";
-        appBackUp = "Weekly";
+        appBackUp = "No Auto Backups";
         appSync = true;
         appbackUpPath = "/storage/emulated/0/";
         pinStatus = false;
@@ -504,18 +522,6 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         editor.commit();
     }
 
-    private void gotoStore(){
-        Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
-        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
-                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
-                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-        try {
-            startActivity(goToMarket);
-        } catch (ActivityNotFoundException e) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + getActivity().getPackageName())));
-        }
-    }
 
 }
 

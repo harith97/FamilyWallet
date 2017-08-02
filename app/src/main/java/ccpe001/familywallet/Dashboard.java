@@ -73,6 +73,8 @@ public class Dashboard extends AppCompatActivity
     public static int badgeCount = 0;
     private int animateCounter = 0;
     private ShowcaseView showcaseView;
+    private SharedPreferences.Editor editor;
+    private SharedPreferences pref;
 
 
     @Override
@@ -86,6 +88,14 @@ public class Dashboard extends AppCompatActivity
         setSupportActionBar(toolbar);
         signUpIntent = getIntent();
 
+        //display help menu if app first installed
+        pref = getSharedPreferences("First Time",Context.MODE_PRIVATE);
+        if(pref.getBoolean("isFirst",true)){
+            animateMenu();
+        }
+        setFirst(false);
+
+
         badgeCount = new SQLiteHelper(getApplication()).viewNoti().size();//LOAD ONCE
 
         mAuth = FirebaseAuth.getInstance();
@@ -98,11 +108,10 @@ public class Dashboard extends AppCompatActivity
         databaseReference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(firebaseUser.getUid());
         databaseReference.keepSynced(true);
 
-        rateApi();
 
         //getting backup reminder data ###########put in a goog position(not working after setting change)
         prefs = getSharedPreferences("App Settings", Context.MODE_PRIVATE);
-        PeriodicBackupCaller.backupRunner(getApplication(),prefs.getString("appBackUp","Weekly"));
+        PeriodicBackupCaller.backupRunner(getApplication(),prefs.getString("appBackUp","No Auto Backups"));
 
 
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -202,15 +211,7 @@ public class Dashboard extends AppCompatActivity
     }
 
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
+
 
     public static void setBadgeCount(int badgeCount,TextView tVw){
         if(badgeCount<=0) {
@@ -377,31 +378,11 @@ public class Dashboard extends AppCompatActivity
         animateCounter++;
     }
 
-
-    private void rateApi(){
-        RateThisApp.Config config = new RateThisApp.Config(3, 8);
-        /*config.setTitle(R.string.my_own_title);
-        config.setMessage(R.string.my_own_message);
-        config.setYesButtonText(R.string.my_own_rate);
-        config.setNoButtonText(R.string.my_own_thanks);
-        config.setCancelButtonText(R.string.my_own_cancel);*/
-        config.setUrl("market://details?id=" + getPackageName());
-        RateThisApp.init(config);
-        RateThisApp.onCreate(this);
-        RateThisApp.showRateDialogIfNeeded(this);
-
-        RateThisApp.setCallback(new RateThisApp.Callback() {
-            @Override
-            public void onYesClicked() {}
-
-            @Override
-            public void onNoClicked() {
-                RateThisApp.stopRateDialog(getApplication());
-            }
-
-            @Override
-            public void onCancelClicked() {}
-        });
+    private void setFirst(boolean isFirst){
+        editor = pref.edit();
+        editor.putBoolean("isFirst",isFirst);
+        editor.commit();
     }
+
 
 }

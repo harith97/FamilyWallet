@@ -1,6 +1,5 @@
 package ccpe001.familywallet;
 
-import android.*;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,34 +14,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-import ccpe001.familywallet.admin.CircleTransform;
-import ccpe001.familywallet.admin.UserData;
 import ccpe001.familywallet.transaction.TransactionDetails;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
-import com.google.firebase.storage.FirebaseStorage;
 import com.opencsv.CSVWriter;
-import com.squareup.picasso.Picasso;
 import jxl.*;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
-import jxl.write.biff.RowsExceededException;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 /**
@@ -101,14 +84,14 @@ public class ExportData extends Fragment implements View.OnClickListener,CheckBo
             if(grantResults[0]==PackageManager.PERMISSION_GRANTED||grantResults[1]==PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(getActivity(),"Permission granted",Toast.LENGTH_SHORT).show();
             }else {
-                checkPermit();
+                checkPermitBackup(getActivity());
             }
         }
     }
 
-    private boolean checkPermit(){
-        return ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED&&
-                ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+    protected static boolean checkPermitBackup(Context c){
+        return ActivityCompat.checkSelfPermission(c, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED&&
+                ActivityCompat.checkSelfPermission(c, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
@@ -117,7 +100,7 @@ public class ExportData extends Fragment implements View.OnClickListener,CheckBo
             if (Validate.fileValidate(fileName.getText())) {
                 filename = fileName.getText().toString();
 
-                if (!checkPermit()) {
+                if (!checkPermitBackup(getActivity())) {
                     requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},EXTERNAL_READ_PERMIT);
                     requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},EXTERNAL_WRITE_PERMIT);
                 }else {

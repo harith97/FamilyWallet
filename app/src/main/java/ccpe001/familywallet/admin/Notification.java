@@ -12,10 +12,7 @@ import android.net.Uri;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.widget.TextView;
-import ccpe001.familywallet.Dashboard;
-import ccpe001.familywallet.NotificationCards;
-import ccpe001.familywallet.R;
-import ccpe001.familywallet.SQLiteHelper;
+import ccpe001.familywallet.*;
 import ccpe001.familywallet.transaction.AddTransaction;
 
 import java.sql.SQLException;
@@ -46,7 +43,7 @@ public class Notification {
     public void statusIcon(Context c){
         //displaing status icon
         PendingIntent addExpense = PendingIntent.getActivity(c,STATUS_ICON,new Intent(c, AddTransaction.class).putExtra("transactionType","Expense"),STATUS_ICON);//update here
-        PendingIntent scanBill = PendingIntent.getActivity(c,STATUS_ICON,new Intent(c,SignUp.class),STATUS_ICON);//update here
+        PendingIntent scanBill = PendingIntent.getActivity(c,STATUS_ICON,new Intent(c, OCRReader.class),STATUS_ICON);//update here
         notification = new android.app.Notification.Builder(c)
                 .setContentTitle("Family Wallet")
                 .setSmallIcon(R.mipmap.ic_launcher)
