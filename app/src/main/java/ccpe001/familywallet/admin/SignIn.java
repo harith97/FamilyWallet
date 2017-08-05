@@ -93,15 +93,15 @@ public class SignIn extends PinActivity implements View.OnClickListener{
                                 }
                             });
                 }else{
-                    passTxt.setError("Invalid password");
+                    passTxt.setError(getString(R.string.signup_onclick_passerr));
                 }
             }else {
-                emailTxt.setError("Invalid email");
+                emailTxt.setError(getString(R.string.signup_onclick_emailerr));
             }
         }else if(view.getId()== R.id.qrscannerBtn){
             IntentIntegrator intentIntegrator = new IntentIntegrator(this);
             intentIntegrator.setDesiredBarcodeFormats(intentIntegrator.QR_CODE_TYPES);
-            intentIntegrator.setPrompt("Scan");
+            intentIntegrator.setPrompt(getString(R.string.signin_scan_setpromt));
             intentIntegrator.setCameraId(0);
             intentIntegrator.setOrientationLocked(true);
             intentIntegrator.setBeepEnabled(false);
@@ -127,7 +127,7 @@ public class SignIn extends PinActivity implements View.OnClickListener{
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
         if(result != null){
             if (result.getContents()== null){
-                Toast.makeText(this,"You cancelled..!",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,R.string.signup_cancel_toast,Toast.LENGTH_LONG).show();
             }else {
                 Toast.makeText(this,result.getContents(),Toast.LENGTH_LONG).show();
             }

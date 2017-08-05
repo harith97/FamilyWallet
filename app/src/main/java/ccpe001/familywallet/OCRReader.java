@@ -2,6 +2,7 @@ package ccpe001.familywallet;
 
 import android.*;
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -46,20 +47,29 @@ public class OCRReader extends AppCompatActivity {
     private ImageView cropImageView;
     private CameraSource cameraSource;
     private static final int CAMERA_PERMIT = 55;
+    private static final int EXTERNAL_READ_PERMIT = 3;
+    private static final int EXTERNAL_WRITE_PERMIT = 4;
     private StorageReference storageReference;
     private Uri billImageUri;
     private FirebaseAuth mAuth;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ocrreader);
         cropImageView = (ImageView) findViewById(R.id.cropImageView);
 
-        CropImage.activity()
-                .setGuidelines(CropImageView.Guidelines.ON)
-                .start(this);
+        if(!checkPermit()){
+            requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},EXTERNAL_READ_PERMIT);
+            requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},EXTERNAL_WRITE_PERMIT);
+            requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},CAMERA_PERMIT);
+        }else {
+            CropImage.activity()
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .start(this);
+        }
 
         mAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference().child("ScannedBills").child(mAuth.getCurrentUser().getUid());
@@ -157,11 +167,11 @@ public class OCRReader extends AppCompatActivity {
         }
     }
 
-    /*@RequiresApi(api = Build.VERSION_CODES.M)
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode==CAMERA_PERMIT){
+        /*if(requestCode==CAMERA_PERMIT){
             if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
                 if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.CAMERA},CAMERA_PERMIT);
@@ -172,10 +182,21 @@ public class OCRReader extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+        }*/
+        if(requestCode == EXTERNAL_READ_PERMIT||requestCode == EXTERNAL_WRITE_PERMIT||requestCode==CAMERA_PERMIT){
+            if(grantResults[0]==PackageManager.PERMISSION_GRANTED||grantResults[1]==PackageManager.PERMISSION_GRANTED||grantResults[2]==PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(getApplicationContext(),"Permission granted",Toast.LENGTH_SHORT).show();
+            }else {
+                checkPermit();
+            }
         }
     }
 
-    private boolean checkPermit(){
-        return ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
-    }*/
+
+
+    protected  boolean checkPermit(){
+        return ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED&&
+                ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED&&
+                ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
+    }
 }

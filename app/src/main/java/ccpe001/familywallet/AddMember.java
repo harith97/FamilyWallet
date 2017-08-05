@@ -41,7 +41,7 @@ public class AddMember extends Fragment  implements View.OnClickListener{
     }
 
     private void init(View v) {
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Add member");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.addmember_title);
         random = new Random();//security problems
         randomNo = String.valueOf(random.nextInt(1000000));
         cautionText = (TextView) v.findViewById(R.id.editText10);
@@ -71,6 +71,5 @@ public class AddMember extends Fragment  implements View.OnClickListener{
         } catch (WriterException e) {
             e.printStackTrace();
         }
-        Toast.makeText(getContext(),"Try now",Toast.LENGTH_SHORT).show();
     }
 }

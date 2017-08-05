@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
+import cat.ereza.customactivityoncrash.config.CaocConfig;
 import ccpe001.familywallet.R;
 import ccpe001.familywallet.Validate;
 import com.facebook.*;
@@ -117,7 +118,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener,Go
         }).addOnFailureListener(this, new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("df",""+e);
+//                Toast.makeText(SignUp.this,getString(R.string.signup_fbhandle_onfail_toast)+,Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -129,7 +130,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener,Go
 
             if(Validate.anyValidMail(emailTxt.getText().toString().trim())) {
                 if(Validate.anyValidPass(passTxt.getText().toString().trim())){
-                    progressBar.setMessage("Registering user");
+                    progressBar.setMessage(getString(R.string.signup_onclickprogressbar_msg));
                     progressBar.show();
                     mAuth.createUserWithEmailAndPassword(emailTxt.getText().toString().trim(),
                                                         passTxt.getText().toString().trim())
@@ -139,19 +140,19 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener,Go
                                     progressBar.dismiss();
                                     if(task.isSuccessful()){
                                         saveSession(mAuth.getCurrentUser().getEmail());
-                                        Toast.makeText(SignUp.this,"Registration successful",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SignUp.this,R.string.signup_oncomplete_sucesstoast,Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent("ccpe001.familywallet.GETINFO");
                                         startActivity(intent);
                                     }else{
-                                        Toast.makeText(SignUp.this,"Registration Error",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SignUp.this,R.string.signin_onclick_elsetoast,Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
                 }else{
-                    passTxt.setError("Invalid password");
+                    passTxt.setError(getString(R.string.signup_onclick_passerr));
                 }
             }else {
-                emailTxt.setError("Invalid email");
+                emailTxt.setError(getString(R.string.signup_onclick_emailerr));
             }
 
         }else if(view.getId()== R.id.googleOptBtn){
@@ -166,7 +167,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener,Go
 
                 @Override
                 public void onCancel() {
-                    Toast.makeText(getApplication(),"You cancelled",Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplication(),R.string.signup_cancel_toast,Toast.LENGTH_SHORT).show();
                 }
 
                 @Override

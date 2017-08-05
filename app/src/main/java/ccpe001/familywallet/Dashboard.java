@@ -50,6 +50,8 @@ import com.joanzapata.iconify.widget.IconButton;
 import com.kobakei.ratethisapp.RateThisApp;
 import com.squareup.picasso.Picasso;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener{
@@ -159,7 +161,6 @@ public class Dashboard extends AppCompatActivity
 
                 }else if(mAuth.getCurrentUser().getProviders().toString().equals("[facebook.com]")
                         ||mAuth.getCurrentUser().getProviders().toString().equals("[google.com]")){
-                    Log.d("dff","me ran 2"+propicUrl);
 
                     Picasso.with(getApplication())
                             .load(propicUrl)
@@ -169,7 +170,6 @@ public class Dashboard extends AppCompatActivity
                     storageReference.child("UserPics/" + firebaseUser.getUid() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            Log.d("dff","me ran 3"+uri.toString());
                             Picasso.with(getApplication())
                                     .load(uri)
                                     .transform(new CircleTransform())
@@ -316,11 +316,11 @@ public class Dashboard extends AppCompatActivity
     private void animateMenu(){
         showcaseView = new ShowcaseView.Builder(this)
                 .setTarget(Target.NONE)
-                .setContentTitle("Dashboard Help")
-                .setContentText("You don't always need a target to showcase")
+                .setContentTitle(R.string.dashboard_animatemenu_setcontitle)
+                .setContentText(R.string.dashboard_animatemenu_setcontext)
                 .setOnClickListener(this)
                 .build();
-        showcaseView.setButtonText("Next");
+        showcaseView.setButtonText(getString(R.string.intropage_onPageSelected_else_setext));
     }
 
 
@@ -347,27 +347,27 @@ public class Dashboard extends AppCompatActivity
         switch (animateCounter) {
             case 0:
                 showcaseView.setShowcase(navigationButtonViewTarget, true);
-                showcaseView.setContentTitle("Navigation Drawer");
-                showcaseView.setContentText("You don't always need a target to showcase");
+                showcaseView.setContentTitle(getString(R.string.dashboard_onclick_0_setcontitle));
+                showcaseView.setContentText(getString(R.string.dashboard_onclick_0_setconttext));
                 break;
 
             case 1:
                 showcaseView.setShowcase(new ViewTarget(findViewById(R.id.action_notification)), true);
-                showcaseView.setContentTitle("Notification Badge");
-                showcaseView.setContentText("You don't always need a target to showcase");
+                showcaseView.setContentTitle(getString(R.string.dashboard_onclick_1_setcontitle));
+                showcaseView.setContentText(getString(R.string.dashboard_onclick_1_setconttext));
                 break;
 
             case 2:
                 showcaseView.setShowcase(new ViewTarget(findViewById(R.id.action_search)), true);
-                showcaseView.setContentTitle("Search Bar");
-                showcaseView.setContentText("You don't always need a target to showcase");
+                showcaseView.setContentTitle(getString(R.string.dashboard_onclick_2_setcontitle));
+                showcaseView.setContentText(getString(R.string.dashboard_onclick_2_setconttext));
                 break;
 
             case 3:
                 showcaseView.setShowcase(new ViewTarget(findViewById(R.id.fabMain)), true);
-                showcaseView.setContentTitle("Add transaction");
-                showcaseView.setContentText("You don't always need a target to showcase");
-                showcaseView.setButtonText("Close");
+                showcaseView.setContentTitle(getString(R.string.dashboard_onclick_3_setcontitle));
+                showcaseView.setContentText(getString(R.string.dashboard_onclick_3_setconttext));
+                showcaseView.setButtonText(getString(R.string.dashboard_onclick_3_setbtntext));
                 break;
 
             case 4:

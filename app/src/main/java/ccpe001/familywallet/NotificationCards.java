@@ -64,7 +64,6 @@ public class NotificationCards extends Fragment {
 
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-
         class ViewHolder extends RecyclerView.ViewHolder{
 
             public ImageButton noti_delBtn;
@@ -112,7 +111,7 @@ public class NotificationCards extends Fragment {
                     viewHolder.noti_desc.setText(dao.desc);
                     viewHolder.noti_date.setText(dao.date);
 
-                    Snackbar.make(v, "Notification deleted ", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, R.string.noticards_onBindViewHolder_snackbar, Snackbar.LENGTH_SHORT).show();
 
                 }
             });

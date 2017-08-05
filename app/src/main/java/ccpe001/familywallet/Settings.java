@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.*;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -42,6 +44,7 @@ import net.rdrei.android.dirchooser.DirectoryChooserFragment;
 
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Locale;
 
 import static ccpe001.familywallet.transaction.TimeDialog.pad;
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -66,7 +69,6 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
     private static final int EXTERNAL_WRITE_PERMIT = 4;
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
-
 
     private String[] langArr,currArr,dateForArr;
 
@@ -139,7 +141,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         rateRow.setOnClickListener(this);
 
         langBuilder = new AlertDialog.Builder(getContext());
-        langBuilder.setTitle("Languages");
+        langBuilder.setTitle(R.string.setting_langbuilder_settitle);
         langBuilder.setSingleChoiceItems(R.array.spinnerLanguage, 1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -147,10 +149,25 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
                 storePWSharedPref();
                 langText.setText(langArr[i]);
                 dialogInterface.dismiss();
+
+                Locale locale = null;
+
+                switch (i){
+                    case 0:
+                        locale = new Locale("sin");
+                        break;
+                    case 1:
+                        locale = new Locale("en");
+                        break;
+                }
+
+                setLanguage(locale);
+                getActivity().finish();
+                startActivity(new Intent(getActivity(),Splash.class));
             }
         });
         currBuilder = new AlertDialog.Builder(getContext());
-        currBuilder.setTitle("Currency");
+        currBuilder.setTitle(R.string.setting_currbuilder_settitle);
         currBuilder.setSingleChoiceItems(R.array.spinnerCurrency, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -158,10 +175,11 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
                 storePWSharedPref();
                 currText.setText(currArr[i]);
                 dialogInterface.dismiss();
+
             }
         });
         dateForBuilder = new AlertDialog.Builder(getContext());
-        dateForBuilder.setTitle("Date format");
+        dateForBuilder.setTitle(R.string.setting_datebuilder_settitle);
         dateForBuilder.setSingleChoiceItems(R.array.spinnerDateFor, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -175,6 +193,14 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         retrievePWSharedPref();
 
     }
+
+    public void setLanguage(Locale locale) {
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+    }
+
 
     @Override
     public void onStart() {
@@ -200,13 +226,13 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == EXTERNAL_READ_PERMIT||requestCode == EXTERNAL_WRITE_PERMIT) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(getActivity(), "Permission granted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.permitgranted, Toast.LENGTH_SHORT).show();
             } else {
                 checkPermit();
             }
         }else if(requestCode == EXTERNAL_READ_PERMIT||requestCode == EXTERNAL_WRITE_PERMIT){
             if(grantResults[0]==PackageManager.PERMISSION_GRANTED||grantResults[1]==PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(getActivity(),"Permission granted",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),R.string.permitgranted,Toast.LENGTH_SHORT).show();
             }else {
                 ExportData.checkPermitBackup(getActivity());
             }
@@ -266,7 +292,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
 
         }else if(view.getId()==R.id.appPasswordRow){
             enterPinBuilder = new AlertDialog.Builder(getActivity());
-            enterPinBuilder.setTitle("Enter PIN");
+            enterPinBuilder.setTitle(R.string.setting_pinbuilder_settitle);
             LayoutInflater inflater = getActivity().getLayoutInflater();
             View alertDiaView = inflater.inflate(R.layout.passwordsetter,null);
             enterPinBuilder.setView(alertDiaView);
@@ -299,7 +325,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
                     }
                 }
             });
-            enterPinBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            enterPinBuilder.setNegativeButton(R.string.setting_pinbuilder_negbtn, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.dismiss();
@@ -310,12 +336,15 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
 
         }else if(view.getId()==R.id.feedbackRow){
             Intent intent = new Intent(Intent.ACTION_SEND);
-            intent.setAction(Intent.ACTION_SEND);
-            intent.setType("message/rfc882");
+            intent.setType("message/rfc822");
             intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"ccpe_001@gmail.com"});
             intent.putExtra(Intent.EXTRA_SUBJECT,"Customer Feedback");
-            intent.createChooser(intent,"Send email");
-            startActivity(intent);
+            Intent.createChooser(intent,"Send email");
+            try{
+                startActivity(intent);
+            } catch (ActivityNotFoundException ex) {
+                Toast.makeText(getActivity(), R.string.settings_feedbackmail_elsetoast, Toast.LENGTH_SHORT).show();
+            }
         }else if(view.getId()==R.id.rateRow){
             //explicitly show dialog
             RateThisApp.Config config = new RateThisApp.Config();
@@ -330,7 +359,7 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
             }else{
                 final String[] items = {"Daily", "Weekly", "Monthly","Annually","No Auto Backups"};
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Select");
+                builder.setTitle(R.string.setting_reminderbuilder_settitle);
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         backupRemText.setText(items[item]);
@@ -354,11 +383,9 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
             }
         }else if(requestCode == ENABLE_PIN){
             Toast.makeText(getContext(),"enabled pin",Toast.LENGTH_LONG).show();
-
         }
         else if(requestCode == SET_PIN){
             Toast.makeText(getContext(),"set pin",Toast.LENGTH_LONG).show();
-
         }
     }
 

@@ -47,7 +47,7 @@ public class Forgot extends PinActivity implements View.OnClickListener {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
-                                    Toast.makeText(getApplicationContext(),textForTxt.getText().toString().trim()+"Reset link send to your mail",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),textForTxt.getText().toString().trim()+R.string.forgot_oncomplete_toast,Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -57,7 +57,7 @@ public class Forgot extends PinActivity implements View.OnClickListener {
                     }
                 });
             }else {
-                textForTxt.setError("Invalid email");
+                textForTxt.setError(getString(R.string.forgot_emailerr));
             }
 
         }

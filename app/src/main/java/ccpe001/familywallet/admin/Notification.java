@@ -45,12 +45,12 @@ public class Notification {
         PendingIntent addExpense = PendingIntent.getActivity(c,STATUS_ICON,new Intent(c, AddTransaction.class).putExtra("transactionType","Expense"),STATUS_ICON);//update here
         PendingIntent scanBill = PendingIntent.getActivity(c,STATUS_ICON,new Intent(c, OCRReader.class),STATUS_ICON);//update here
         notification = new android.app.Notification.Builder(c)
-                .setContentTitle("Family Wallet")
+                .setContentTitle(c.getString(R.string.noti_statusicon_setcontenttitle))
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setPriority(android.app.Notification.PRIORITY_MIN)
                 .setOngoing(true)
-                .addAction(R.mipmap.email,"Add expense",addExpense)
-                .addAction(R.mipmap.email,"Scan Bill",scanBill);
+                .addAction(R.mipmap.email,c.getString(R.string.noti_statusicon_setaction_expense),addExpense)
+                .addAction(R.mipmap.email,c.getString(R.string.noti_statusicon_setaction_scanbill),scanBill);
 
         nm = (NotificationManager)c.getSystemService(Context.NOTIFICATION_SERVICE);
         nm.notify(STATUS_ICON,notification.build());
@@ -106,11 +106,11 @@ public class Notification {
                     .setSound(soundUri)
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setAutoCancel(true)
-                    .setTicker("Daily reminder")
-                    .setContentTitle("Family Wallet")
-                    .setContentText("Add your daily transactions to the wallet..");
+                    .setTicker(context.getString(R.string.noti_onrecieve_setticker))
+                    .setContentTitle(context.getString(R.string.noti_onrecieve_setcontenttitle))
+                    .setContentText(context.getString(R.string.noti_onrecieve_setcontenttext));
             notificationManager.notify(DAILY_REMINDER,builder.build());
-            new SQLiteHelper(context).addNoti("We missing you",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(GregorianCalendar.getInstance().getTime()),"Add your daily transactions to the wallet..");
+            new SQLiteHelper(context).addNoti(context.getString(R.string.noti_onrecieve_setcontenttitle),new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(GregorianCalendar.getInstance().getTime()),context.getString(R.string.noti_onrecieve_setcontenttext));
             badgeCount++;
             Log.d("badcount","add on noti rec"+badgeCount);
 

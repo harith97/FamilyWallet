@@ -67,10 +67,10 @@ public class IntoductionPage extends AppCompatActivity implements ViewPager.OnPa
     @Override
     public void onPageSelected(int position) {
         if(position==layouts.length-1){
-            nextBtn.setText("Welcome");
+            nextBtn.setText(R.string.intropage_onPageSelected_setext);
             skipBtn.setVisibility(View.GONE);
         }else {
-            nextBtn.setText("Next");
+            nextBtn.setText(R.string.intropage_onPageSelected_else_setext);
             skipBtn.setVisibility(View.VISIBLE);
         }
     }
