@@ -12,6 +12,7 @@ public class UserData {
     public String lastName;
     public String userId;
     public String proPic;
+    public String familyId;
 
 
     public void setProPic(String proPic) {
@@ -35,6 +36,7 @@ public class UserData {
         this.userId = u;
         this.proPic = p;
     }
+
 
     public String getFirstName() {
         return firstName;

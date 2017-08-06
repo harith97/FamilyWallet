@@ -64,6 +64,7 @@ public class Splash extends PinActivity {
         ccpe001.familywallet.admin.Notification noti = new ccpe001.familywallet.admin.Notification();
         noti.statusIcon(getApplication());
 
+        //add .err before .apply to set cutom image
         CaocConfig.Builder.create().apply();
                 //.errorDrawable(R.drawable.ic_custom_drawable) //default: bug image
 
