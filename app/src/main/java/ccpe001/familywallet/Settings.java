@@ -55,7 +55,6 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  */
 public class Settings extends Fragment implements View.OnClickListener,Switch.OnCheckedChangeListener,DirectoryChooserFragment.OnFragmentInteractionListener{
 
-    private TableLayout appNotySwitchLay;
     private Switch localMode,statusIcon,autoSync,appNotySwitch,enDisPinSwitch;
     private Button signOutBtn,setPinBtn;
     private TextView langText,currText,dateForText,dailyRemText,backupLocText,appPwText,backupRemText;
@@ -107,7 +106,6 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         currArr = getActivity().getResources().getStringArray(R.array.spinnerCurrency);
         dateForArr = getActivity().getResources().getStringArray(R.array.spinnerDateFor);
 
-        appNotySwitchLay = (TableLayout) v.findViewById(R.id.appNotySwitchLay);
         appNotySwitch = (Switch) v.findViewById(R.id.appNotySwitch);
         appNotySwitch.setOnCheckedChangeListener(this);
         localMode = (Switch) v.findViewById(R.id.localModeSwitch);
@@ -146,7 +144,6 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
         rateRow.setOnClickListener(this);
 
         retrievePWSharedPref();
-
     }
 
     public void setLanguage(Locale locale) {
@@ -172,8 +169,10 @@ public class Settings extends Fragment implements View.OnClickListener,Switch.On
 
 
     private boolean checkPermit(){
-        return ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED&&
-                ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+        return ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED&&
+                ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        == PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
