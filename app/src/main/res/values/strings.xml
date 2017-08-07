@@ -14,7 +14,7 @@
 
     <string-array name="spinnerCurrency">
         <item>Rs.</item>
-        <item>US $ </item>
+        <item>US $</item>
         <item>Rs(Convert)</item>
     </string-array>
     <string name="fb_APP_ID">1505482392855831</string>
@@ -134,6 +134,15 @@
     <string name="noti_onrecieve_setticker">Daily reminder</string>
     <string name="noti_onrecieve_setcontenttitle">We missing you</string>
     <string name="noti_onrecieve_setcontenttext">Add your daily transactions to the wallet..</string>
+    <string name="setting_setlangBuilderOpener_positive">Yes</string>
+    <string name="setting_langBuilderOpener_setmsg">This will restart your app. Sure you want to continue?</string>
+    <string name="setting_langBuilderOpener_settitle">Alert</string>
+    <string name="setting_setNegativeButton">No</string>
+    <string name="setting_onCheckedChanged_langBuilderOpener_setmsg">This will change your applications
+        dateformat,language and currency to local. It will restart your app. Sure you want to continue?
+    </string>
+    <string name="setting_appnotiswitch_on_toast">All app notifications are turned on including daily reminders.
+    </string>
 
 
 </resources>
